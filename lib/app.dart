@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/presentation/intro.dart';
+import 'package:melbook/presentation/screens/auth/sign_in.dart';
 import 'package:melbook/presentation/screens/home_screen.dart';
 
 bool haveUserAccount = false;
@@ -8,8 +10,12 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: haveUserAccount? const HomeScreen() : const IntroScreen(),
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: haveUserAccount? const IntroScreen() : const SignIn(),
+      ),
     );
   }
 }
