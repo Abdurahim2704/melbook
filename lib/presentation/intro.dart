@@ -48,38 +48,38 @@ class _IntroScreenState extends State<IntroScreen> {
                   width: double.infinity,
                   child: ListView(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    padding: EdgeInsets.symmetric(horizontal: 50),
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(horizontal: 50),
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 60,
                       ),
                       Text(
                         titles[i],
-                        style: TextStyle(color: Colors.white, fontSize: 16),
+                        style: const TextStyle(color: Colors.white, fontSize: 16),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       SizedBox(
                         height: 94,
                         width: 94,
                         child: CustomPaint(
-                          size: Size(94, 94),
+                          size: const Size(94, 94),
                           painter: IntroPainter(currentPage: i),
                           child: Padding(
-                            padding: EdgeInsets.all(15),
+                            padding: const EdgeInsets.all(15),
                             child: GestureDetector(
                               onTap: () {
                                 i != 2
                                     ? controller.animateToPage(i + 1,
-                                        duration: Duration(milliseconds: 500),
+                                        duration: const Duration(milliseconds: 500),
                                         curve: Curves.fastOutSlowIn)
                                     : Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => SignIn(),
+                                          builder: (context) => const SignIn(),
                                         ),
                                         (route) => false);
                                 setState(() {});

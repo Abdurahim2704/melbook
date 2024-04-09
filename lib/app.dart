@@ -9,7 +9,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: haveUserAccount? HomeScreen() : IntroScreen(),
+      home: haveUserAccount? const HomeScreen() : const IntroScreen(),
     );
   }
 }
