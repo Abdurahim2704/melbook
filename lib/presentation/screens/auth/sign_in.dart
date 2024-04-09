@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
 import 'package:melbook/shared/widgets/auth_textfield.dart';
+import 'package:melbook/shared/widgets/auth_textfield_header.dart';
 import 'package:melbook/shared/widgets/primary_yellow_elevated_button.dart';
 
 class SignIn extends StatelessWidget {
@@ -31,14 +32,9 @@ class SignIn extends StatelessWidget {
               ),
             ),
             SizedBox(height: 40.h),
-            Text(
-              "Foydalanuvchi nomi",
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                color: const Color(0xFF201A21),
-                fontSize: 16.sp,
-              ),
-            ),
+
+            /// #TextField Header
+            buildTextFieldHeaderText("Foydalanuvchi nomi"),
             SizedBox(height: 12.h),
 
             /// #TextField Username
@@ -47,17 +43,13 @@ class SignIn extends StatelessWidget {
               textInputAction: TextInputAction.next,
             ),
             SizedBox(height: 20.h),
-            Text(
-              "Parol",
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                color: const Color(0xFF201A21),
-                fontSize: 16.sp,
-              ),
-            ),
+
+            /// #TextField Header
+            buildTextFieldHeaderText("Parol"),
+
+            SizedBox(height: 12.h),
 
             /// #TextField Password
-            SizedBox(height: 12.h),
             const AuthTextField(
               hinText: "12345mkl",
               keyboardType: TextInputType.visiblePassword,
@@ -77,4 +69,6 @@ class SignIn extends StatelessWidget {
       ),
     );
   }
+
+
 }

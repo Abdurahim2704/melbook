@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/presentation/intro.dart';
-import 'package:melbook/presentation/screens/auth/sign_in.dart';
-import 'package:melbook/presentation/screens/home_screen.dart';
+import 'package:melbook/presentation/screens/auth/sign_up.dart';
 
 bool haveUserAccount = false;
+
 class App extends StatelessWidget {
   const App({super.key});
 
@@ -14,7 +14,7 @@ class App extends StatelessWidget {
       designSize: const Size(375, 812),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: haveUserAccount? const IntroScreen() : const SignIn(),
+        home: haveUserAccount ? const IntroScreen() : const SignUp(),
       ),
     );
   }
