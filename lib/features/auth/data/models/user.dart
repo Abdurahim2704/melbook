@@ -32,14 +32,15 @@ class User {
     final userLevel = json["user_level"] as int;
 
     return User(
-        id: id,
-        name: name,
-        surname: surname,
-        phoneNumber: phoneNumber,
-        password: password,
-        version: version,
-        userLevel: userLevel,
-        userName: userName);
+      id: id,
+      name: name,
+      surname: surname,
+      phoneNumber: phoneNumber,
+      password: password,
+      version: version,
+      userLevel: userLevel,
+      userName: userName,
+    );
   }
 
   String toJson() {
