@@ -7,21 +7,66 @@ import 'package:melbook/features/auth/data/models/user.dart';
 import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
 
 class AuthService extends AuthRepository {
+  String _token = "";
+  User? _user;
   @override
   Future<DataSource> editData(
-      {required String? username,
-      required String? name,
-      required String? phoneNumber,
-      required String? surname,
-      required String? password}) {
-    // TODO: implement editData
-    throw UnimplementedError();
+      {String? username,
+      String? name,
+      String? phoneNumber,
+      String? surname,
+      String? password}) async {
+    final body = {
+      "username": username ?? _user!.userName,
+      "name": name ?? _user!.name,
+      "surname": surname ?? _user!.surname,
+      "phone_number": phoneNumber ?? _user!.phoneNumber,
+      "password": password ?? _user!.password
+    };
+    final response = await http.put(
+      Uri.parse(
+        "${AppConstants.baseUrl}${AppConstants.apiEditUser}",
+      ),
+      body: jsonEncode(body),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': 'Bearer $token',
+      },
+    );
+    if (response.statusCode != 200) {
+      return DataFailure(
+          message:
+              (jsonDecode(response.body) as Map<String, dynamic>)["message"]);
+    }
+    final user = User.fromJson((jsonDecode(response.body)
+        as Map<String, dynamic>)["data"] as Map<String, Object?>);
+    _user = user;
+    return DataSuccess<User>(
+        data: user, message: jsonDecode(response.body)["message"]);
   }
 
   @override
-  Future<DataSource> getMe({required String token}) {
-    // TODO: implement getMe
-    throw UnimplementedError();
+  Future<DataSource> getMe() async {
+    final data = await http.get(
+      Uri.parse("${AppConstants.baseUrl}${AppConstants.apiGetMe}"),
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (data.statusCode == 401) {
+      print(_user);
+      loginUser(username: _user!.userName, password: _user!.password);
+      return await getMe();
+    } else if (data.statusCode != 200) {
+      return DataFailure(message: jsonDecode(data.body)["message"]);
+    }
+    final user = User.fromJson((jsonDecode(data.body)
+        as Map<String, dynamic>)["data"] as Map<String, Object?>);
+
+    return DataSuccess<User>(
+        data: user, message: jsonDecode(data.body)["message"]);
   }
 
   @override
@@ -36,8 +81,13 @@ class AuthService extends AuthRepository {
     if (data.statusCode != 200) {
       return DataFailure(message: jsonDecode(data.body)["message"]);
     }
+    print(data.body);
+    _token = jsonDecode(data.body)["data"]["token"];
+
     final user = User.fromJson((jsonDecode(data.body)
         as Map<String, dynamic>)["data"]["user"] as Map<String, Object?>);
+    _user = user;
+    print(_user);
     return DataSuccess<User>(
         data: user, message: jsonDecode(data.body)["message"]);
   }
@@ -65,9 +115,17 @@ class AuthService extends AuthRepository {
     if (data.statusCode == 400 || data.statusCode == 404) {
       return DataFailure(message: jsonDecode(data.body)["message"]);
     }
+    _token = jsonDecode(data.body)["data"]["token"];
     final user = User.fromJson((jsonDecode(data.body)
         as Map<String, dynamic>)["data"]["user"] as Map<String, Object?>);
+    _user = user;
+    print(_user);
     return DataSuccess<User>(
         data: user, message: jsonDecode(data.body)["message"]);
+  }
+
+  @override
+  String get token {
+    return _token;
   }
 }
