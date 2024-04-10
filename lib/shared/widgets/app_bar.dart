@@ -48,8 +48,8 @@ class CustomAppBar extends StatelessWidget {
               ),
             ),
             SizedBox(width: 80.w),
-            SvgPicture.asset(
-              trailingIconPath ?? "",
+            if(trailingIconPath != null)SvgPicture.asset(
+              trailingIconPath!,
               height: trailingIconHeight,
               width: trailingIconWidth,
             ),

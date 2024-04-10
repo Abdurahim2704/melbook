@@ -2,25 +2,26 @@ import 'package:flutter/material.dart';
 
 class HomePage1 extends StatefulWidget {
   final List<String> images = [
-    'images/ingliztili.png',
-    'images/ingliztili.png',
-    'images/ingliztili.png',
-    'images/ingliztili.png',
-    'images/ingliztili.png',
-    'images/ingliztili.png',
+    'assets/images/ingliztili.png',
+    'assets/images/ingliztili.png',
+    'assets/images/ingliztili.png',
+    'assets/images/ingliztili.png',
+    'assets/images/ingliztili.png',
+    'assets/images/ingliztili.png',
+
   ];
   final List<String> secondimages = [
-    'images/bookforcover.png',
-    'images/bookforcover.png',
-    'images/bookforcover.png',
-    'images/bookforcover.png',
-    'images/bookforcover.png',
+    "assets/images/bookforcover.png",
+    "assets/images/bookforcover.png",
+    "assets/images/bookforcover.png",
+    "assets/images/bookforcover.png",
+    "assets/images/bookforcover.png",
   ];
 
-  HomePage1({Key? key}) : super(key: key);
+  HomePage1({super.key});
 
   @override
-  _HomePage1State createState() => _HomePage1State();
+  State<HomePage1> createState() => _HomePage1State();
 }
 
 class _HomePage1State extends State<HomePage1> {
@@ -79,7 +80,7 @@ class _HomePage1State extends State<HomePage1> {
                       Align(
                         alignment: Alignment.topCenter,
                         child: Image.asset(
-                          'images/first.png',
+                          'assets/images/first.png',
                           fit: BoxFit.fitWidth,
                         ),
                       ),
@@ -107,7 +108,7 @@ class _HomePage1State extends State<HomePage1> {
                                     width: 169,
                                     decoration: BoxDecoration(
                                       image: const DecorationImage(
-                                          image: AssetImage('images/frame1.png')),
+                                          image: AssetImage('assets/images/frame1.png')),
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(8),
                                     ),
@@ -118,7 +119,7 @@ class _HomePage1State extends State<HomePage1> {
                                     width: 138,
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
-                                          image: AssetImage('images/frame2.png')),
+                                          image: AssetImage('assets/images/frame2.png')),
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(8),
                                     ),
