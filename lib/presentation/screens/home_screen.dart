@@ -2,25 +2,26 @@ import 'package:flutter/material.dart';
 
 class HomePage1 extends StatefulWidget {
   final List<String> images = [
-    'images/ingliztili.png',
-    'images/ingliztili.png',
-    'images/ingliztili.png',
-    'images/ingliztili.png',
-    'images/ingliztili.png',
-    'images/ingliztili.png',
+    'assets/images/ingliztili.png',
+    'assets/images/ingliztili.png',
+    'assets/images/ingliztili.png',
+    'assets/images/ingliztili.png',
+    'assets/images/ingliztili.png',
+    'assets/images/ingliztili.png',
   ];
   final List<String> secondimages = [
-    'images/bookforcover.png',
-    'images/bookforcover.png',
-    'images/bookforcover.png',
-    'images/bookforcover.png',
-    'images/bookforcover.png',
+    'assets/images/bookforcover.png',
+    'assets/images/bookforcover.png',
+    'assets/images/bookforcover.png',
+    'assets/images/bookforcover.png',
+    'assets/images/bookforcover.png',
+
   ];
 
-  HomePage1({Key? key}) : super(key: key);
+  HomePage1({super.key});
 
   @override
-  _HomePage1State createState() => _HomePage1State();
+  State<HomePage1> createState() => _HomePage1State();
 }
 
 class _HomePage1State extends State<HomePage1> {
