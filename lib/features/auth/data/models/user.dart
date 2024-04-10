@@ -22,6 +22,7 @@ class User {
   });
 
   factory User.fromJson(Map<String, Object?> json) {
+    print(json);
     final id = json["_id"] as String;
     final name = json["name"] as String;
     final surname = json["surname"] as String;
