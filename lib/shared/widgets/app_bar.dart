@@ -7,6 +7,7 @@ class CustomAppBar extends StatelessWidget {
   final String? trailingIconPath;
   final double? trailingIconHeight;
   final double? trailingIconWidth;
+  final bool? isLeadingIconVisible;
 
   const CustomAppBar({
     super.key,
@@ -14,6 +15,7 @@ class CustomAppBar extends StatelessWidget {
     this.trailingIconPath,
     this.trailingIconHeight,
     this.trailingIconWidth,
+    this.isLeadingIconVisible,
   });
 
   @override
@@ -33,11 +35,16 @@ class CustomAppBar extends StatelessWidget {
         child: Row(
           children: [
             SizedBox(width: 20.w),
-            SvgPicture.asset(
-              "assets/icons/ic_back.svg",
-              height: 26.h,
-              width: 26.w,
-            ),
+          if(isLeadingIconVisible ==null)  GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: SvgPicture.asset(
+                "assets/icons/ic_back.svg",
+                height: 26.h,
+                width: 26.w,
+              ),
+          ),
             SizedBox(width: 75.w),
             Text(
               displayText,

@@ -15,7 +15,6 @@ class HomePage1 extends StatefulWidget {
     'assets/images/bookforcover.png',
     'assets/images/bookforcover.png',
     'assets/images/bookforcover.png',
-
   ];
 
   HomePage1({super.key});
@@ -42,19 +41,19 @@ class _HomePage1State extends State<HomePage1> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: Container(
-          margin: EdgeInsets.all(10),
+          margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: Colors.grey,
             borderRadius: BorderRadius.circular(100),
           ),
           child: IconButton(
-            icon: Icon(Icons.person),
+            icon: const Icon(Icons.person),
             onPressed: () {},
           ),
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
             onPressed: () {},
           ),
         ],
@@ -80,11 +79,11 @@ class _HomePage1State extends State<HomePage1> {
                       Align(
                         alignment: Alignment.topCenter,
                         child: Image.asset(
-                          'images/first.png',
+                          'assets/images/img_homeslide.png',
                           fit: BoxFit.fitWidth,
                         ),
                       ),
-                      SizedBox(height: 18),
+                      const SizedBox(height: 18),
                       Container(
                         height: 529,
                         width: 385,
@@ -107,8 +106,8 @@ class _HomePage1State extends State<HomePage1> {
                                     height: 47,
                                     width: 169,
                                     decoration: BoxDecoration(
-                                      image: const DecorationImage(
-                                          image: AssetImage('images/frame1.png')),
+                                      // image: const DecorationImage(
+                                      //     image: AssetImage('images/frame1.png')),
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(8),
                                     ),
@@ -118,17 +117,17 @@ class _HomePage1State extends State<HomePage1> {
                                     height: 47,
                                     width: 138,
                                     decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: AssetImage('images/frame2.png')),
+                                      // image: const DecorationImage(
+                                      //     image: AssetImage('images/frame2.png')),
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                               Container(
-                                margin: EdgeInsets.only(left: 18),
+                                margin: const EdgeInsets.only(left: 18),
                                 alignment: Alignment.centerLeft,
                                 child: const Text(
                                   'Tavsiyalar',
@@ -139,7 +138,7 @@ class _HomePage1State extends State<HomePage1> {
                                 ),
                               ),
                               const SizedBox(height: 12),
-                              Container(
+                              SizedBox(
                                 height: 150,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
@@ -148,7 +147,7 @@ class _HomePage1State extends State<HomePage1> {
                                     return Container(
                                       height: 150,
                                       width: 106,
-                                      margin: EdgeInsets.all(10),
+                                      margin: const EdgeInsets.all(10),
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(16),
                                           image: DecorationImage(
@@ -159,9 +158,9 @@ class _HomePage1State extends State<HomePage1> {
                                   },
                                 ),
                               ),
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                               Container(
-                                margin: EdgeInsets.only(left: 18),
+                                margin: const EdgeInsets.only(left: 18),
                                 alignment: Alignment.centerLeft,
                                 child: const Text(
                                   'Kitoblar',
@@ -171,17 +170,17 @@ class _HomePage1State extends State<HomePage1> {
                                       letterSpacing: 1.3),
                                 ),
                               ),
-                              SizedBox(height: 12),
-                              Container(
+                              const SizedBox(height: 12),
+                              SizedBox(
                                 height: 150,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   itemCount: widget.secondimages.length,
                                   itemBuilder: (context, index) {
                                     return Container(
-                                      width: 250,
+                                      width: 260,
                                       height: 114,
-                                      margin: EdgeInsets.all(10),
+                                      margin: const EdgeInsets.all(10),
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.circular(8),
@@ -194,7 +193,7 @@ class _HomePage1State extends State<HomePage1> {
                                             height: 100,
                                             fit: BoxFit.cover,
                                           ),
-                                          SizedBox(width: 10),
+                                          const SizedBox(width: 10),
                                           const Column(
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,11 +215,11 @@ class _HomePage1State extends State<HomePage1> {
                                               ),
                                             ],
                                           ),
-                                          Spacer(),
+                                          const Spacer(),
                                           GestureDetector(
                                             onTap: () {},
                                             child: Container(
-                                              padding: EdgeInsets.all(7),
+                                              padding: const EdgeInsets.all(7),
                                               decoration: const BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 color: Colors.blue,
