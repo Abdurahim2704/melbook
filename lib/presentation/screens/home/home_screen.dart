@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:melbook/features/auth/data/service/local_service.dart';
 import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
 import 'package:melbook/locator.dart';
+import 'package:melbook/presentation/screens/notification/notification_screen.dart';
 
 class HomePage1 extends StatefulWidget {
   final List<String> images = [
@@ -54,20 +57,28 @@ class _HomePage1State extends State<HomePage1> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: Container(
-          margin: const EdgeInsets.all(10),
+          margin: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: Colors.grey,
             borderRadius: BorderRadius.circular(100),
           ),
-          child: IconButton(
-            icon: const Icon(Icons.person),
-            onPressed: () {},
-          ),
+          child: const Icon(Icons.person),
         ),
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.notifications),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NotificationScreen(),
+                ),
+              );
+            },
+            icon: SvgPicture.asset(
+              "assets/icons/ic_notification.svg",
+              height: 24.h,
+              width: 24.h,
+            ),
           ),
         ],
       ),

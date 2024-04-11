@@ -10,7 +10,7 @@ import 'package:melbook/shared/widgets/primary_yellow_elevated_button.dart';
 import 'bloc/auth_bloc/auth_bloc.dart';
 
 class SignIn extends StatefulWidget {
-  SignIn({super.key});
+  const SignIn({super.key});
 
   @override
   State<SignIn> createState() => _SignInState();

@@ -28,7 +28,7 @@ class App extends StatelessWidget {
               ? const IntroScreen()
               : getIt<AuthRepository>().isSignedIn
                   ? HomePage1()
-                  : SignUp(),
+                  : const SignUp(),
         ),
       ),
     );
