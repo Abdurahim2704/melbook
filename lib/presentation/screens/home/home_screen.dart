@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-
 class HomePage1 extends StatefulWidget {
   final List<String> images = [
     'assets/images/ingliztili.png',
-    'assets/images/ingliztili.png',
-    'assets/images/ingliztili.png',
-    'assets/images/ingliztili.png',
-    'assets/images/ingliztili.png',
-    'assets/images/ingliztili.png',
+    'assets/images/rustili.jpg',
+    'assets/images/koreystili.jpg',
+    'assets/images/arabtili.jpg',
   ];
   final List<String> secondimages = [
     'assets/images/bookforcover.png',
@@ -24,6 +21,7 @@ class HomePage1 extends StatefulWidget {
 }
 
 class _HomePage1State extends State<HomePage1> {
+  int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,8 +104,8 @@ class _HomePage1State extends State<HomePage1> {
                                     height: 47,
                                     width: 169,
                                     decoration: BoxDecoration(
-                                      // image: const DecorationImage(
-                                      //     image: AssetImage('images/frame1.png')),
+                                       image: DecorationImage(
+                                           image: AssetImage('assets/images/frame1.png')),
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(8),
                                     ),
@@ -117,8 +115,8 @@ class _HomePage1State extends State<HomePage1> {
                                     height: 47,
                                     width: 138,
                                     decoration: BoxDecoration(
-                                      // image: const DecorationImage(
-                                      //     image: AssetImage('images/frame2.png')),
+                                       image: DecorationImage(
+                                           image: AssetImage('assets/images/frame2.png')),
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(8),
                                     ),
@@ -251,29 +249,41 @@ class _HomePage1State extends State<HomePage1> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.book, color: Colors.black),
+            icon: Icon(Icons.book),
             label: 'Kitoblar',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat, color: Colors.black),
+            icon: Icon(Icons.chat),
             label: 'Chat',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.circle_notifications, color: Colors.black),
+            icon: Icon(Icons.circle_notifications),
             label: 'Asosiy',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.card_giftcard, color: Colors.black),
+            icon: Icon(Icons.card_giftcard),
             label: 'Saqlangan',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person, color: Colors.black),
+            icon: Icon(Icons.person),
             label: 'Profil',
           ),
         ],
+        currentIndex: _selectedIndex, // Control the active item
         selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey, // Start icons in grey
+        showUnselectedLabels: true,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
+        elevation: 10.0,
+        onTap: _onItemTapped, // Update the index upon tab selection
       ),
     );
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 }
