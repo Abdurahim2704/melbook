@@ -271,12 +271,12 @@ class _HomePage1State extends State<HomePage1> {
         ],
         currentIndex: _selectedIndex, // Control the active item
         selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey, // Start icons in grey
+        unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
         elevation: 10.0,
-        onTap: _onItemTapped, // Update the index upon tab selection
+        onTap: _onItemTapped,
       ),
     );
   }
