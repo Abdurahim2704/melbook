@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
-
 class HomePage1 extends StatefulWidget {
   final List<String> images = [
-    'images/ingliztili.png',
-    'images/ingliztili.png',
-    'images/ingliztili.png',
-    'images/ingliztili.png',
-    'images/ingliztili.png',
-    'images/ingliztili.png',
+    'assets/images/ingliztili.png',
+    'assets/images/rustili.jpg',
+    'assets/images/koreystili.jpg',
+    'assets/images/arabtili.jpg',
   ];
   final List<String> secondimages = [
-    'images/bookforcover.png',
-    'images/bookforcover.png',
-    'images/bookforcover.png',
-    'images/bookforcover.png',
-    'images/bookforcover.png',
+    'assets/images/bookforcover.png',
+    'assets/images/bookforcover.png',
+    'assets/images/bookforcover.png',
+    'assets/images/bookforcover.png',
+    'assets/images/bookforcover.png',
   ];
 
-  HomePage1({Key? key}) : super(key: key);
+  HomePage1({super.key});
 
   @override
-  _HomePage1State createState() => _HomePage1State();
+  State<HomePage1> createState() => _HomePage1State();
 }
 
 class _HomePage1State extends State<HomePage1> {
+  int _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,19 +39,19 @@ class _HomePage1State extends State<HomePage1> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: Container(
-          margin: EdgeInsets.all(10),
+          margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: Colors.grey,
             borderRadius: BorderRadius.circular(100),
           ),
           child: IconButton(
-            icon: Icon(Icons.person),
+            icon: const Icon(Icons.person),
             onPressed: () {},
           ),
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
             onPressed: () {},
           ),
         ],
@@ -79,11 +77,11 @@ class _HomePage1State extends State<HomePage1> {
                       Align(
                         alignment: Alignment.topCenter,
                         child: Image.asset(
-                          'images/first.png',
+                          'assets/images/img_homeslide.png',
                           fit: BoxFit.fitWidth,
                         ),
                       ),
-                      SizedBox(height: 18),
+                      const SizedBox(height: 18),
                       Container(
                         height: 529,
                         width: 385,
@@ -106,8 +104,8 @@ class _HomePage1State extends State<HomePage1> {
                                     height: 47,
                                     width: 169,
                                     decoration: BoxDecoration(
-                                      image: const DecorationImage(
-                                          image: AssetImage('images/frame1.png')),
+                                       image: DecorationImage(
+                                           image: AssetImage('assets/images/frame1.png')),
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(8),
                                     ),
@@ -117,17 +115,17 @@ class _HomePage1State extends State<HomePage1> {
                                     height: 47,
                                     width: 138,
                                     decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: AssetImage('images/frame2.png')),
+                                       image: DecorationImage(
+                                           image: AssetImage('assets/images/frame2.png')),
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                               Container(
-                                margin: EdgeInsets.only(left: 18),
+                                margin: const EdgeInsets.only(left: 18),
                                 alignment: Alignment.centerLeft,
                                 child: const Text(
                                   'Tavsiyalar',
@@ -138,7 +136,7 @@ class _HomePage1State extends State<HomePage1> {
                                 ),
                               ),
                               const SizedBox(height: 12),
-                              Container(
+                              SizedBox(
                                 height: 150,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
@@ -147,7 +145,7 @@ class _HomePage1State extends State<HomePage1> {
                                     return Container(
                                       height: 150,
                                       width: 106,
-                                      margin: EdgeInsets.all(10),
+                                      margin: const EdgeInsets.all(10),
                                       decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(16),
                                           image: DecorationImage(
@@ -158,9 +156,9 @@ class _HomePage1State extends State<HomePage1> {
                                   },
                                 ),
                               ),
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                               Container(
-                                margin: EdgeInsets.only(left: 18),
+                                margin: const EdgeInsets.only(left: 18),
                                 alignment: Alignment.centerLeft,
                                 child: const Text(
                                   'Kitoblar',
@@ -170,17 +168,17 @@ class _HomePage1State extends State<HomePage1> {
                                       letterSpacing: 1.3),
                                 ),
                               ),
-                              SizedBox(height: 12),
-                              Container(
+                              const SizedBox(height: 12),
+                              SizedBox(
                                 height: 150,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   itemCount: widget.secondimages.length,
                                   itemBuilder: (context, index) {
                                     return Container(
-                                      width: 250,
+                                      width: 260,
                                       height: 114,
-                                      margin: EdgeInsets.all(10),
+                                      margin: const EdgeInsets.all(10),
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.circular(8),
@@ -193,7 +191,7 @@ class _HomePage1State extends State<HomePage1> {
                                             height: 100,
                                             fit: BoxFit.cover,
                                           ),
-                                          SizedBox(width: 10),
+                                          const SizedBox(width: 10),
                                           const Column(
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -215,11 +213,11 @@ class _HomePage1State extends State<HomePage1> {
                                               ),
                                             ],
                                           ),
-                                          Spacer(),
+                                          const Spacer(),
                                           GestureDetector(
                                             onTap: () {},
                                             child: Container(
-                                              padding: EdgeInsets.all(7),
+                                              padding: const EdgeInsets.all(7),
                                               decoration: const BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 color: Colors.blue,
@@ -251,29 +249,41 @@ class _HomePage1State extends State<HomePage1> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.book, color: Colors.black),
+            icon: Icon(Icons.book),
             label: 'Kitoblar',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat, color: Colors.black),
+            icon: Icon(Icons.chat),
             label: 'Chat',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.circle_notifications, color: Colors.black),
+            icon: Icon(Icons.circle_notifications),
             label: 'Asosiy',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.card_giftcard, color: Colors.black),
+            icon: Icon(Icons.card_giftcard),
             label: 'Saqlangan',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person, color: Colors.black),
+            icon: Icon(Icons.person),
             label: 'Profil',
           ),
         ],
+        currentIndex: _selectedIndex, // Control the active item
         selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey,
+        showUnselectedLabels: true,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
+        elevation: 10.0,
+        onTap: _onItemTapped,
       ),
     );
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 }

@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AuthTextField extends StatelessWidget {
-  final String hinText;
+  final String? hinText;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  final List<TextInputFormatter>? inputFormatters;
+  final int? maxLength;
 
   const AuthTextField({
     super.key,
-    required this.hinText,
+    this.hinText,
     this.keyboardType,
-    this.textInputAction, this.prefixIcon,
+    this.textInputAction,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.inputFormatters,
+    this.maxLength,
   });
 
   @override
@@ -23,12 +31,17 @@ class AuthTextField extends StatelessWidget {
         fontSize: 16.sp,
         color: const Color(0xFF201A21),
       ),
+      inputFormatters: inputFormatters,
+      maxLength: maxLength,
+      maxLines: null,
       decoration: InputDecoration(
+        counterText: "",
         prefixIcon: prefixIcon,
         contentPadding: EdgeInsets.symmetric(
           horizontal: 24.w,
           vertical: 17.h,
         ),
+        suffixIcon: suffixIcon,
         filled: true,
         fillColor: const Color(0xFFF5F5F5),
         focusedBorder: const OutlineInputBorder(

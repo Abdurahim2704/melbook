@@ -14,7 +14,7 @@ class App extends StatelessWidget {
       designSize: const Size(375, 812),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: haveUserAccount ? const IntroScreen() : const SignUp(),
+        home: haveUserAccount == false ? const IntroScreen() : const SignUp(),
       ),
     );
   }
