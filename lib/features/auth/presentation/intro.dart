@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:melbook/features/auth/data/service/local_service.dart';
 import 'package:melbook/features/auth/presentation/sign_up.dart';
-
 
 class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});
@@ -28,6 +28,7 @@ class _IntroScreenState extends State<IntroScreen> {
 
   @override
   Widget build(BuildContext context) {
+    LocalDBService.setShowIntro(false);
     return Scaffold(
       backgroundColor: const Color(0xff201A21),
       body: PageView(
@@ -57,7 +58,8 @@ class _IntroScreenState extends State<IntroScreen> {
                       ),
                       Text(
                         titles[i],
-                        style: const TextStyle(color: Colors.white, fontSize: 16),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 16),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(
@@ -75,12 +77,13 @@ class _IntroScreenState extends State<IntroScreen> {
                               onTap: () {
                                 i != 2
                                     ? controller.animateToPage(i + 1,
-                                        duration: const Duration(milliseconds: 500),
+                                        duration:
+                                            const Duration(milliseconds: 500),
                                         curve: Curves.fastOutSlowIn)
                                     : Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => const SignUp(),
+                                          builder: (context) => SignUp(),
                                         ),
                                         (route) => false);
                                 setState(() {});
@@ -120,7 +123,7 @@ class IntroPainter extends CustomPainter {
           Rect.fromCircle(
               center: Offset(width / 2, height / 2), radius: size.width / 7.2),
           0,
-          pi / 1.505+currentPage*pi/1.505,
+          pi / 1.505 + currentPage * pi / 1.505,
           false);
     canvas.drawPath(path, paint);
   }

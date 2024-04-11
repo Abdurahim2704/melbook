@@ -9,6 +9,7 @@ import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
 class AuthService extends AuthRepository {
   String _token = "";
   User? _user;
+
   @override
   Future<DataSource> editData(
       {String? username,
@@ -56,7 +57,6 @@ class AuthService extends AuthRepository {
     );
 
     if (data.statusCode == 401) {
-      print(_user);
       loginUser(username: _user!.userName, password: _user!.password);
       return await getMe();
     } else if (data.statusCode != 200) {
@@ -81,13 +81,10 @@ class AuthService extends AuthRepository {
     if (data.statusCode != 200) {
       return DataFailure(message: jsonDecode(data.body)["message"]);
     }
-    print(data.body);
     _token = jsonDecode(data.body)["data"]["token"];
-
     final user = User.fromJson((jsonDecode(data.body)
         as Map<String, dynamic>)["data"]["user"] as Map<String, Object?>);
     _user = user;
-    print(_user);
     return DataSuccess<User>(
         data: user, message: jsonDecode(data.body)["message"]);
   }
@@ -119,7 +116,6 @@ class AuthService extends AuthRepository {
     final user = User.fromJson((jsonDecode(data.body)
         as Map<String, dynamic>)["data"]["user"] as Map<String, Object?>);
     _user = user;
-    print(_user);
     return DataSuccess<User>(
         data: user, message: jsonDecode(data.body)["message"]);
   }
@@ -128,4 +124,7 @@ class AuthService extends AuthRepository {
   String get token {
     return _token;
   }
+
+  @override
+  bool get isSignedIn => _user != null;
 }

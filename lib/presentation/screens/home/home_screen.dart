@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:melbook/features/auth/data/service/local_service.dart';
+import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
+import 'package:melbook/locator.dart';
+
 class HomePage1 extends StatefulWidget {
   final List<String> images = [
     'assets/images/ingliztili.png',
@@ -21,7 +25,18 @@ class HomePage1 extends StatefulWidget {
 }
 
 class _HomePage1State extends State<HomePage1> {
+  @override
+  void initState() {
+    super.initState();
+    LocalDBService.getPassword().then((value) => print("password: $value"));
+    LocalDBService.getUsername().then((value) => print("username: $value"));
+    LocalDBService.getShowIntro().then((value) => print("show intro: $value"));
+    print("Token: ${getIt<AuthRepository>().token}");
+    print("isSignedIn: ${getIt<AuthRepository>().isSignedIn}");
+  }
+
   int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,8 +119,9 @@ class _HomePage1State extends State<HomePage1> {
                                     height: 47,
                                     width: 169,
                                     decoration: BoxDecoration(
-                                       image: DecorationImage(
-                                           image: AssetImage('assets/images/frame1.png')),
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'assets/images/frame1.png')),
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(8),
                                     ),
@@ -115,8 +131,9 @@ class _HomePage1State extends State<HomePage1> {
                                     height: 47,
                                     width: 138,
                                     decoration: BoxDecoration(
-                                       image: DecorationImage(
-                                           image: AssetImage('assets/images/frame2.png')),
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'assets/images/frame2.png')),
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(8),
                                     ),
@@ -147,9 +164,11 @@ class _HomePage1State extends State<HomePage1> {
                                       width: 106,
                                       margin: const EdgeInsets.all(10),
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(16),
+                                          borderRadius:
+                                              BorderRadius.circular(16),
                                           image: DecorationImage(
-                                            image: AssetImage(widget.images[index]),
+                                            image: AssetImage(
+                                                widget.images[index]),
                                             fit: BoxFit.cover,
                                           )),
                                     );
@@ -193,8 +212,10 @@ class _HomePage1State extends State<HomePage1> {
                                           ),
                                           const SizedBox(width: 10),
                                           const Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 'English Vocabulary\nIN USE',
@@ -204,11 +225,16 @@ class _HomePage1State extends State<HomePage1> {
                                               ),
                                               Row(
                                                 children: [
-                                                  Icon(Icons.star, color: Colors.yellow),
-                                                  Icon(Icons.star, color: Colors.yellow),
-                                                  Icon(Icons.star, color: Colors.yellow),
-                                                  Icon(Icons.star, color: Colors.yellow),
-                                                  Icon(Icons.star, color: Colors.yellow),
+                                                  Icon(Icons.star,
+                                                      color: Colors.yellow),
+                                                  Icon(Icons.star,
+                                                      color: Colors.yellow),
+                                                  Icon(Icons.star,
+                                                      color: Colors.yellow),
+                                                  Icon(Icons.star,
+                                                      color: Colors.yellow),
+                                                  Icon(Icons.star,
+                                                      color: Colors.yellow),
                                                 ],
                                               ),
                                             ],
@@ -269,7 +295,8 @@ class _HomePage1State extends State<HomePage1> {
             label: 'Profil',
           ),
         ],
-        currentIndex: _selectedIndex, // Control the active item
+        currentIndex: _selectedIndex,
+        // Control the active item
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,

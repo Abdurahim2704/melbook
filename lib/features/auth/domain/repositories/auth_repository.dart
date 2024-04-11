@@ -2,6 +2,7 @@ import 'package:melbook/config/datasource.dart';
 
 abstract class AuthRepository {
   String get token;
+
   Future<DataSource> registerUser({
     required String username,
     required String name,
@@ -9,6 +10,8 @@ abstract class AuthRepository {
     required String phoneNumber,
     required String password,
   });
+
+  bool get isSignedIn;
 
   Future<DataSource> loginUser(
       {required String username, required String password});

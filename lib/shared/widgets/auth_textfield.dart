@@ -10,7 +10,7 @@ class AuthTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final List<TextInputFormatter>? inputFormatters;
   final int? maxLength;
-  final TextStyle style;
+  final TextEditingController controller;
 
   const AuthTextField({
     super.key,
@@ -21,15 +21,19 @@ class AuthTextField extends StatelessWidget {
     this.suffixIcon,
     this.inputFormatters,
     this.maxLength,
-    required this.style,
+    required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       textInputAction: textInputAction,
       keyboardType: keyboardType,
-      style: style,
+      style: TextStyle(
+        fontSize: 16.sp,
+        color: const Color(0xFF201A21),
+      ),
       inputFormatters: inputFormatters,
       maxLength: maxLength,
       maxLines: null,

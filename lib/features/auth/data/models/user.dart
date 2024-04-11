@@ -28,7 +28,8 @@ class User {
   factory User.fromJson(Map<String, Object?> json) {
     debugPrint(json.toString());
     final id = json["_id"] as String;
-    final boughtBooks = (json["boughtBooks"] ?? []) as List<String>;
+    final boughtBooks =
+        ((json["boughtBooks"] ?? []) as List).map((e) => e.toString()).toList();
     final name = json["name"] as String;
     final surname = json["surname"] as String;
     final phoneNumber = json["phone_number"] as String;
