@@ -4,8 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
 import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:melbook/features/auth/presentation/sign_up.dart';
+import 'package:melbook/features/main/presentation/bloc/main_bloc.dart';
+import 'package:melbook/features/main/presentation/main_screen.dart';
 import 'package:melbook/locator.dart';
-import 'package:melbook/presentation/screens/home/home_screen.dart';
 
 import 'features/auth/presentation/intro.dart';
 
@@ -20,6 +21,9 @@ class App extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (context) => AuthBloc(),
+          ),
+          BlocProvider(
+            create: (context) => MainBloc(),
           )
         ],
         child: MaterialApp(
@@ -27,8 +31,8 @@ class App extends StatelessWidget {
           home: showIntro
               ? const IntroScreen()
               : getIt<AuthRepository>().isSignedIn
-                  ? HomePage1()
-                  : SignUp(),
+                  ? const MainScreen()
+                  : const SignUp(),
         ),
       ),
     );

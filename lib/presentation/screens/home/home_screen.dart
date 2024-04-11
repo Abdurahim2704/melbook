@@ -18,6 +18,16 @@ class HomePage1 extends StatefulWidget {
     'assets/images/bookforcover.png',
   ];
 
+  final List<String> titles = [
+    'Ingliz tilini o\'rganish',
+    'Rus tilini o\'rganish',
+    'Korey tilini o\'rganish',
+    'Arab tilini o\'rganish',
+  ];
+
+final List<IconData> bottomIcons = [
+  Icons.menu_book
+];
   HomePage1({super.key});
 
   @override
@@ -272,45 +282,7 @@ class _HomePage1State extends State<HomePage1> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            label: 'Kitoblar',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: 'Chat',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.circle_notifications),
-            label: 'Asosiy',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.card_giftcard),
-            label: 'Saqlangan',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        // Control the active item
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-        showUnselectedLabels: true,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        elevation: 10.0,
-        onTap: _onItemTapped,
-      ),
     );
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 }
