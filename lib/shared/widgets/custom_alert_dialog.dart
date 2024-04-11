@@ -48,7 +48,7 @@ class CustomAlertDialog extends StatelessWidget {
                 color: const Color(0xFFFFFFFF),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

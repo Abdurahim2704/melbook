@@ -74,12 +74,15 @@ class SignIn extends StatelessWidget {
         child: PrimaryYellowElevatedButton(
           displayText: "Tizimga kirish",
           onPressed: () {
-            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomePage1(),), (route) => false);
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomePage1(),
+                ),
+                (route) => false);
           },
         ),
       ),
     );
   }
-
-
 }
