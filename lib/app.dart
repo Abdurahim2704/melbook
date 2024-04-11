@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:melbook/presentation/intro.dart';
-import 'package:melbook/presentation/screens/auth/sign_up.dart';
 
 bool haveUserAccount = false;
 
