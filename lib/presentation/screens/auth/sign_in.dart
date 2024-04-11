@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:melbook/presentation/screens/home/home_screen.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
 import 'package:melbook/shared/widgets/auth_textfield.dart';
 import 'package:melbook/shared/widgets/auth_textfield_header.dart';
@@ -64,7 +65,9 @@ class SignIn extends StatelessWidget {
         padding: EdgeInsets.only(bottom: 40.0.h, left: 20.w, right: 20.w),
         child: PrimaryYellowElevatedButton(
           displayText: "Tizimga kirish",
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomePage1(),), (route) => false);
+          },
         ),
       ),
     );

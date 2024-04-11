@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:melbook/presentation/screens/auth/sign_in.dart';
+import 'package:melbook/presentation/screens/auth/sign_up.dart';
 
 class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});
@@ -79,7 +80,7 @@ class _IntroScreenState extends State<IntroScreen> {
                                     : Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => const SignIn(),
+                                          builder: (context) => const SignUp(),
                                         ),
                                         (route) => false);
                                 setState(() {});

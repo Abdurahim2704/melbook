@@ -9,7 +9,7 @@ sealed class AppConstants {
 
   static const apiGetMe = "/user/get-me";
 
-  static const apiEditUser = "/user/65f7868a1e258f11d31ab0fa";
+  static const apiEditUser = "/user";
 
   static const apiUploadFile = "http://localhost:3001/api/upload";
 
