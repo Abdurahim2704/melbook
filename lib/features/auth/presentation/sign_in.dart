@@ -39,9 +39,13 @@ class SignIn extends StatelessWidget {
             SizedBox(height: 12.h),
 
             /// #TextField Username
-            const AuthTextField(
+            AuthTextField(
               hinText: "Foydalanuvchi nomini kiriting",
               textInputAction: TextInputAction.next,
+              style: TextStyle(
+                fontSize: 16.sp,
+                color: const Color(0xFF201A21),
+              ),
             ),
             SizedBox(height: 20.h),
 
@@ -51,10 +55,14 @@ class SignIn extends StatelessWidget {
             SizedBox(height: 12.h),
 
             /// #TextField Password
-            const AuthTextField(
+            AuthTextField(
               hinText: "12345mkl",
               keyboardType: TextInputType.visiblePassword,
               textInputAction: TextInputAction.done,
+              style: TextStyle(
+                fontSize: 16.sp,
+                color: const Color(0xFF201A21),
+              ),
             ),
           ],
         ),

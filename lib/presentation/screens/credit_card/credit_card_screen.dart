@@ -27,9 +27,13 @@ class CreditCardScreen extends StatelessWidget {
             SizedBox(height: 30.h),
             buildTextFieldHeaderText("Karta egasining ismi"),
             SizedBox(height: 12.h),
-            const AuthTextField(
+            AuthTextField(
               hinText: "Foydalanuvchi nomini kiriting",
               textInputAction: TextInputAction.next,
+              style: TextStyle(
+                fontSize: 16.sp,
+                color: const Color(0xFF201A21),
+              ),
             ),
             SizedBox(height: 20.h),
             buildTextFieldHeaderText("Karta raqami"),
@@ -40,6 +44,10 @@ class CreditCardScreen extends StatelessWidget {
               keyboardType: TextInputType.number,
               inputFormatters: [CardNumberFormatter()],
               maxLength: 19,
+              style: TextStyle(
+                fontSize: 16.sp,
+                color: const Color(0xFF201A21),
+              ),
             ),
             SizedBox(height: 30.h),
             buildTextFieldHeaderText("Amal qilish muddati"),
@@ -52,6 +60,10 @@ class CreditCardScreen extends StatelessWidget {
               suffixIcon: IconButton(
                 onPressed: () {},
                 icon: SvgPicture.asset("assets/icons/ic_calendar.svg"),
+              ),
+              style: TextStyle(
+                fontSize: 16.sp,
+                color: const Color(0xFF201A21),
               ),
             ),
           ],

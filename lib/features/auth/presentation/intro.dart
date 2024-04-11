@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:melbook/presentation/screens/auth/sign_in.dart';
-import 'package:melbook/presentation/screens/auth/sign_up.dart';
+import 'package:melbook/features/auth/presentation/sign_up.dart';
+
 
 class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});

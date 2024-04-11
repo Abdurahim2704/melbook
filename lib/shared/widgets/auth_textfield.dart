@@ -10,6 +10,7 @@ class AuthTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final List<TextInputFormatter>? inputFormatters;
   final int? maxLength;
+  final TextStyle style;
 
   const AuthTextField({
     super.key,
@@ -20,6 +21,7 @@ class AuthTextField extends StatelessWidget {
     this.suffixIcon,
     this.inputFormatters,
     this.maxLength,
+    required this.style,
   });
 
   @override
@@ -27,10 +29,7 @@ class AuthTextField extends StatelessWidget {
     return TextField(
       textInputAction: textInputAction,
       keyboardType: keyboardType,
-      style: TextStyle(
-        fontSize: 16.sp,
-        color: const Color(0xFF201A21),
-      ),
+      style: style,
       inputFormatters: inputFormatters,
       maxLength: maxLength,
       maxLines: null,

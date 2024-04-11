@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:melbook/presentation/screens/auth/sign_in.dart';
+import 'package:melbook/features/auth/presentation/sign_in.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
 import 'package:melbook/shared/widgets/auth_textfield.dart';
 import 'package:melbook/shared/widgets/auth_textfield_header.dart';
@@ -30,23 +30,35 @@ class SignUp extends StatelessWidget {
               SizedBox(height: 30.h),
               buildTextFieldHeaderText("Foydalanuvchi nomi"),
               SizedBox(height: 12.h),
-              const AuthTextField(
+              AuthTextField(
                 hinText: "Taxallusingizni kiriting",
                 textInputAction: TextInputAction.next,
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  color: const Color(0xFF201A21),
+                ),
               ),
               SizedBox(height: 15.h),
               buildTextFieldHeaderText("Ism"),
               SizedBox(height: 12.h),
-              const AuthTextField(
+              AuthTextField(
                 hinText: "Ismingizni kiriting",
                 textInputAction: TextInputAction.next,
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  color: const Color(0xFF201A21),
+                ),
               ),
               SizedBox(height: 15.h),
               buildTextFieldHeaderText("Familiya"),
               SizedBox(height: 12.h),
-              const AuthTextField(
+              AuthTextField(
                 hinText: "Familiyangizni kiriting",
                 textInputAction: TextInputAction.next,
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  color: const Color(0xFF201A21),
+                ),
               ),
               SizedBox(height: 15.h),
               buildTextFieldHeaderText("Telefon raqam"),
@@ -61,26 +73,43 @@ class SignUp extends StatelessWidget {
                     "assets/icons/ic_phone.svg",
                   ),
                 ),
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  color: const Color(0xFF201A21),
+                ),
               ),
               SizedBox(height: 15.h),
               buildTextFieldHeaderText("Parol"),
               SizedBox(height: 12.h),
-              const AuthTextField(
+              AuthTextField(
                 hinText: "12345mkl",
                 textInputAction: TextInputAction.next,
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  color: const Color(0xFF201A21),
+                ),
               ),
               SizedBox(height: 15.h),
               buildTextFieldHeaderText("Parolni takrorlang"),
               SizedBox(height: 12.h),
-              const AuthTextField(
+              AuthTextField(
                 hinText: "12345mkl",
                 textInputAction: TextInputAction.done,
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  color: const Color(0xFF201A21),
+                ),
               ),
               SizedBox(height: 30.h),
               PrimaryYellowElevatedButton(
                 displayText: "Ro’yxatdan o’tish",
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const SignIn(),));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SignIn(),
+                    ),
+                  );
                 },
               ),
             ],
