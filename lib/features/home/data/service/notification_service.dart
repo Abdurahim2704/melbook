@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:melbook/config/core/constants/app_constants.dart';
-import 'package:melbook/features/auth/data/models/notification.dart';
+import 'package:melbook/features/home/data/models/notification.dart';
 
 class NotificationService {
   /// GET All Notifications

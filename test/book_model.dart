@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:melbook/features/auth/data/models/book.dart';
+import 'package:melbook/features/home/data/models/book.dart';
 
 void main() {
   group("Book model", () {

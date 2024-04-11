@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
+
 class User {
   final String id;
   final String name;
@@ -8,6 +10,7 @@ class User {
   final String phoneNumber;
   final String password;
   final int version;
+  final List<String> boughtBooks;
   final int userLevel;
 
   const User({
@@ -19,11 +22,13 @@ class User {
     required this.password,
     required this.version,
     required this.userLevel,
+    required this.boughtBooks,
   });
 
   factory User.fromJson(Map<String, Object?> json) {
-    print(json);
+    debugPrint(json.toString());
     final id = json["_id"] as String;
+    final boughtBooks = (json["boughtBooks"] ?? []) as List<String>;
     final name = json["name"] as String;
     final surname = json["surname"] as String;
     final phoneNumber = json["phone_number"] as String;
@@ -33,15 +38,15 @@ class User {
     final userLevel = json["user_level"] as int;
 
     return User(
-      id: id,
-      name: name,
-      surname: surname,
-      phoneNumber: phoneNumber,
-      password: password,
-      version: version,
-      userLevel: userLevel,
-      userName: userName,
-    );
+        id: id,
+        name: name,
+        surname: surname,
+        phoneNumber: phoneNumber,
+        password: password,
+        version: version,
+        userLevel: userLevel,
+        userName: userName,
+        boughtBooks: boughtBooks);
   }
 
   String toJson() {
@@ -53,6 +58,7 @@ class User {
       "username": userName,
       "password": password,
       "__v": version,
+      "boughtBooks": boughtBooks,
       "user_level": userLevel,
     });
   }

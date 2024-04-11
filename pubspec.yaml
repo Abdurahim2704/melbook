@@ -19,6 +19,7 @@ dependencies:
   lottie: ^3.1.0
   http: ^1.2.1
   get_it: ^7.6.8
+  just_audio: ^0.9.37
 #splash screen ning parametrlari
 flutter_native_splash:
   android: true

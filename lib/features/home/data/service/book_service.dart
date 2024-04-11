@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:melbook/config/core/constants/app_constants.dart';
-import 'package:melbook/features/auth/data/models/book.dart';
+
+import '../models/bookdata.dart';
 
 class BookService {
   /// #GET All Books
