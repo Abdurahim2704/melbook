@@ -27,6 +27,7 @@ class _CodeAuthScreenState extends State<CodeAuthScreen> {
     yield* secundomer(seconds - 1);
   }
 
+  TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +58,7 @@ class _CodeAuthScreenState extends State<CodeAuthScreen> {
                 letterSpacing: 30,
                 color: const Color(0xFF000000),
                 fontWeight: FontWeight.w600,
-              ),
+              ), controller: controller,
             ),
             SizedBox(height: 30.h),
             Center(child: buildTextFieldHeaderText("Kod kelmadimi?")),

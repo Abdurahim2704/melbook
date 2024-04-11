@@ -8,9 +8,19 @@ import 'package:melbook/shared/widgets/auth_textfield_header.dart';
 import 'package:melbook/shared/widgets/primary_yellow_elevated_button.dart';
 import 'package:melbook/utils.dart';
 
-class CreditCardScreen extends StatelessWidget {
+class CreditCardScreen extends StatefulWidget {
   const CreditCardScreen({super.key});
 
+  @override
+  State<CreditCardScreen> createState() => _CreditCardScreenState();
+}
+
+class _CreditCardScreenState extends State<CreditCardScreen> {
+  List<TextEditingController> controllers = [
+    TextEditingController(),
+    TextEditingController(),
+    TextEditingController(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +44,7 @@ class CreditCardScreen extends StatelessWidget {
                 fontSize: 16.sp,
                 color: const Color(0xFF201A21),
               ),
+              controller: controllers[0],
             ),
             SizedBox(height: 20.h),
             buildTextFieldHeaderText("Karta raqami"),
@@ -43,6 +54,7 @@ class CreditCardScreen extends StatelessWidget {
               textInputAction: TextInputAction.next,
               keyboardType: TextInputType.number,
               inputFormatters: [CardNumberFormatter()],
+              controller: controllers[1],
               maxLength: 19,
               style: TextStyle(
                 fontSize: 16.sp,
@@ -64,7 +76,7 @@ class CreditCardScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16.sp,
                 color: const Color(0xFF201A21),
-              ),
+              ), controller: controllers[2],
             ),
           ],
         ),
