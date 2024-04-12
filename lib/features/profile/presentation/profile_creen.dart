@@ -15,7 +15,8 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   int current = 0;
   List<String> titles = ["Foydalanuvchi nomi", "Ism", "Telefon raqam"];
-  List<String> subTitles = ["Ismoilov", "Zafar", "+998936353855"];
+
+  // List<String> subTitles = ["Ismoilov", "Zafar", "+998936353855"];
   List<String> trailing = ["", "Familiya", "To'lov turi"];
   List<String> trailingSub = ["", "Ismoilov", "PayMe"];
 
@@ -26,7 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         preferredSize: Size(double.infinity, 90),
         child: Stack(
           children: [
-            CustomAppBar(
+            const CustomAppBar(
               displayText: "Profile",
             ),
             Align(
@@ -82,32 +83,81 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
               const SizedBox(height: 20),
-              if (current == 0)
-                for (int i = 0; i < 3; i++)
-                  ListTile(
-                    shape: Border(
-                        top: BorderSide(
-                            color: Colors.grey.withOpacity(0.3), width: 1)),
-                    title: Text(
-                      titles[i],
-                      style: TextStyle(
-                          fontSize: 14.sp, fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(
-                      subTitles[i],
-                      style: TextStyle(fontSize: 14.sp),
-                    ),
-                    trailing: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(trailing[i],
-                            style: TextStyle(
-                                fontSize: 14.sp, fontWeight: FontWeight.bold)),
-                        Text(trailingSub[i], style: TextStyle(fontSize: 14.sp)),
-                      ],
-                    ),
+              if (current == 0) ...[
+                ListTile(
+                  shape: Border(
+                      top: BorderSide(
+                          color: Colors.grey.withOpacity(0.3), width: 1)),
+                  title: Text(
+                    titles[0],
+                    style:
+                        TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
                   ),
+                  subtitle: Text(
+                    state.user!.userName,
+                    style: TextStyle(fontSize: 14.sp),
+                  ),
+                  // trailing: Column(
+                  //   crossAxisAlignment: CrossAxisAlignment.end,
+                  //   mainAxisSize: MainAxisSize.min,
+                  //   children: [
+                  //     Text(trailing[i],
+                  //         style: TextStyle(
+                  //             fontSize: 14.sp, fontWeight: FontWeight.bold)),
+                  //     Text(trailingSub[i], style: TextStyle(fontSize: 14.sp)),
+                  //   ],
+                  // ),
+                ),
+                ListTile(
+                  shape: Border(
+                      top: BorderSide(
+                          color: Colors.grey.withOpacity(0.3), width: 1)),
+                  title: Text(
+                    titles[1],
+                    style:
+                        TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(
+                    state.user!.name,
+                    style: TextStyle(fontSize: 14.sp),
+                  ),
+                  trailing: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(trailing[1],
+                          style: TextStyle(
+                              fontSize: 14.sp, fontWeight: FontWeight.bold)),
+                      Text(state.user!.surname,
+                          style: TextStyle(fontSize: 14.sp)),
+                    ],
+                  ),
+                ),
+                ListTile(
+                  shape: Border(
+                      top: BorderSide(
+                          color: Colors.grey.withOpacity(0.3), width: 1)),
+                  title: Text(
+                    titles[2],
+                    style:
+                        TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(
+                    state.user!.phoneNumber,
+                    style: TextStyle(fontSize: 14.sp),
+                  ),
+                  trailing: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(trailing[2],
+                          style: TextStyle(
+                              fontSize: 14.sp, fontWeight: FontWeight.bold)),
+                      Text(trailingSub[2], style: TextStyle(fontSize: 14.sp)),
+                    ],
+                  ),
+                ),
+              ],
               if (current == 1)
                 ListTile(
                   shape: Border(

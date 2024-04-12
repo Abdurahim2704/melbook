@@ -47,9 +47,10 @@ class _HomePage1State extends State<HomePage1> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
-          "Xush kelibsiz",
+        title: Text(
+          "Xush kelibsiz ${getIt<AuthRepository>().user?.userName ?? ""}",
           style: TextStyle(
+            fontSize: 18.sp,
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
