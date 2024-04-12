@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lottie/lottie.dart';
 import 'package:melbook/features/home/data/models/notification.dart' as notif;
 import 'package:melbook/locator.dart';
 import 'package:melbook/presentation/screens/notification/notification_detail_screen.dart';
@@ -69,10 +70,14 @@ class _NotificationScreenState extends State<NotificationScreen> {
         future: _notificationFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Scaffold(
+            return Scaffold(
               backgroundColor: Colors.white,
               body: Center(
-                child: CircularProgressIndicator.adaptive(),
+                child: Lottie.asset(
+                  "assets/lottie/loading_animation.json",
+                  height: 145.h,
+                  width: 145.w,
+                ),
               ),
             );
           } else if (snapshot.hasError ||
