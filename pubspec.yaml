@@ -30,6 +30,7 @@ dependencies:
   path_provider: ^2.1.3
   dio: ^5.4.2+1
   equatable: ^2.0.5
+  flutter_carousel_widget: ^2.2.0
 #splash screen ning parametrlari
 flutter_native_splash:
   android: true

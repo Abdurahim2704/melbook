@@ -3,18 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String displayText;
-  final String? trailingIconPath;
-  final double? trailingIconHeight;
-  final double? trailingIconWidth;
-  final bool? isLeadingIconVisible;
 
   const CustomAppBar({
     super.key,
     required this.displayText,
-    this.trailingIconPath,
-    this.trailingIconHeight,
-    this.trailingIconWidth,
-    this.isLeadingIconVisible,
   });
 
   @override
@@ -30,14 +22,14 @@ class CustomAppBar extends StatelessWidget {
       height: 110.h,
       width: double.infinity,
       child: Padding(
-        padding: EdgeInsets.only(top: 22.h, left: 10.w, right: 10.w),
+        padding: EdgeInsets.only(top: 15.h, left: 10.w, right: 10.w),
         child: Center(
           child: Text(
             displayText,
             style: TextStyle(
               fontWeight: FontWeight.w600,
               color: const Color(0xFF201A21),
-              fontSize: 19.sp,
+              fontSize: 18.sp,
             ),
           ),
         ),

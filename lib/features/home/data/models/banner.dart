@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-class Banner {
+class BannerModel {
   final String id;
   final String photoUrl;
   final String createdAt;
   final String updatedAt;
   final int v;
 
-  Banner({
+  BannerModel({
     required this.id,
     required this.photoUrl,
     required this.createdAt,
@@ -15,14 +15,14 @@ class Banner {
     required this.v,
   });
 
-  factory Banner.fromJson(Map<String, dynamic> json) {
+  factory BannerModel.fromJson(Map<String, dynamic> json) {
     final id = json['_id'] as String;
     final photoUrl = json['photo_url'] as String;
     final createdAt = json['createdAt'] as String;
     final updatedAt = json['updatedAt'] as String;
     final v = json['__v'] as int;
 
-    return Banner(
+    return BannerModel(
       id: id,
       photoUrl: photoUrl,
       createdAt: createdAt,

@@ -6,16 +6,24 @@ import 'package:melbook/features/home/data/models/notification.dart';
 
 class NotificationService {
   /// GET All Notifications
-  Future<List<Notification>> getAllNotifications({
+  /// GET All Notifications
+  Future<List<NotificationModel>> getAllNotifications({
+    required String token,
     String domain = AppConstants.baseUrl,
     String endpoint = AppConstants.apiGetNotifications,
   }) async {
     try {
-      final response = await http.get(Uri.parse("$domain$endpoint"));
+      final response = await http.get(
+        Uri.parse("$domain$endpoint"),
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': 'Bearer $token',
+        },
+      );
       if (response.statusCode == 200 || response.statusCode == 201) {
         final List<dynamic> jsonList = json.decode(response.body)['data'];
-        final List<Notification> notifications =
-            jsonList.map((json) => Notification.fromJson(json)).toList();
+        final List<NotificationModel> notifications =
+            jsonList.map((json) => NotificationModel.fromJson(json)).toList();
         return notifications;
       } else {
         throw Exception(
@@ -27,22 +35,24 @@ class NotificationService {
   }
 
   /// POST Mark Notification as Read
-  Future<Notification> markNotificationAsRead({
+  Future<NotificationModel> markNotificationAsRead({
     required String notificationId,
+    required String token,
     String domain = AppConstants.baseUrl,
     String endpoint = AppConstants.apiGetNotifications,
   }) async {
     try {
       final response = await http.post(
         Uri.parse("$domain$endpoint/$notificationId/read"),
-        headers: <String, String>{
+        headers: {
           'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $token',
         },
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         final Map<String, dynamic> jsonData =
             json.decode(response.body)['data'];
-        final Notification notification = Notification.fromJson(jsonData);
+        final NotificationModel notification = NotificationModel.fromJson(jsonData);
         return notification;
       } else {
         throw Exception(

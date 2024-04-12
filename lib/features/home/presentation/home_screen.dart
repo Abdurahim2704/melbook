@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:melbook/features/auth/data/models/user.dart';
+import 'package:melbook/features/home/widgets/header_carousel.dart';
+import 'package:melbook/presentation/screens/notification/notification_screen.dart';
 
 class HomePage1 extends StatefulWidget {
   HomePage1({super.key});
@@ -40,6 +42,7 @@ class _HomePage1State extends State<HomePage1> {
     double containerWidth = screenWidth * 0.95;
     double imageWidth = screenWidth * 0.25;
     double bookImageWidth = screenWidth * 0.6;
+    CarouselController carouselController = CarouselController();
     return Scaffold(
       backgroundColor: Colors.black38,
       extendBodyBehindAppBar: true,
@@ -72,7 +75,14 @@ class _HomePage1State extends State<HomePage1> {
               height: 20.sp,
               width: 20.sp,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NotificationScreen(),
+                ),
+              );
+            },
           ),
           const SizedBox(width: 2),
         ],
@@ -97,25 +107,8 @@ class _HomePage1State extends State<HomePage1> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       // Display sliding images at the top of the column
-                      SizedBox(
-                        height: 200,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: widget.slideimages.length,
-                          itemBuilder: (context, index) {
-                            return Align(
-                              alignment: Alignment.topCenter,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Image.asset(
-                                  widget.slideimages[index],
-                                  width: screenWidth,
-                                  fit: BoxFit.fitWidth,
-                                ),
-                              ),
-                            );
-                          },
-                        ),
+                      CarouselDemo(
+                        carouselController: carouselController,
                       ),
                       const SizedBox(height: 18),
                       Container(
@@ -273,11 +266,11 @@ class _HomePage1State extends State<HomePage1> {
                                               padding: const EdgeInsets.all(7),
                                               decoration: const BoxDecoration(
                                                 shape: BoxShape.circle,
-                                                color: Colors.blue,
+                                                color: Color(0xFFF2F2F2),
                                               ),
                                               child: const Icon(
                                                 Icons.play_arrow,
-                                                color: Colors.white,
+                                                color: Colors.black,
                                               ),
                                             ),
                                           ),
