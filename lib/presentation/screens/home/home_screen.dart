@@ -28,9 +28,8 @@ class HomePage1 extends StatefulWidget {
     'Arab tilini o\'rganish',
   ];
 
-final List<IconData> bottomIcons = [
-  Icons.menu_book
-];
+  final List<IconData> bottomIcons = [Icons.menu_book];
+
   HomePage1({super.key});
 
   @override
@@ -140,9 +139,10 @@ class _HomePage1State extends State<HomePage1> {
                                     height: 47,
                                     width: 169,
                                     decoration: BoxDecoration(
-                                      image: DecorationImage(
+                                      image: const DecorationImage(
                                           image: AssetImage(
-                                              'assets/images/frame1.png')),
+                                        'assets/images/frame1.png',
+                                      )),
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(8),
                                     ),
@@ -152,7 +152,7 @@ class _HomePage1State extends State<HomePage1> {
                                     height: 47,
                                     width: 138,
                                     decoration: BoxDecoration(
-                                      image: DecorationImage(
+                                      image: const DecorationImage(
                                           image: AssetImage(
                                               'assets/images/frame2.png')),
                                       color: Colors.white,
@@ -295,5 +295,4 @@ class _HomePage1State extends State<HomePage1> {
       ),
     );
   }
-
 }

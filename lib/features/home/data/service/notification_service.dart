@@ -52,4 +52,27 @@ class NotificationService {
       throw Exception('Failed to mark notification as read: $e');
     }
   }
+
+  /// POST Mark All Notifications as Read
+  Future<void> markAllNotificationsAsRead({
+    String domain = AppConstants.baseUrl,
+    String endpoint = AppConstants.apiReadAllNotifications,
+  }) async {
+    try {
+      final response = await http.post(
+        Uri.parse("$domain$endpoint"),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        // Notifications Marked As Read successfully
+      } else {
+        throw Exception(
+            'Failed to mark all notifications as read: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Failed to mark all notifications as read: $e');
+    }
+  }
 }
