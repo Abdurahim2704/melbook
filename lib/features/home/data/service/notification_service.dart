@@ -6,12 +6,20 @@ import 'package:melbook/features/home/data/models/notification.dart';
 
 class NotificationService {
   /// GET All Notifications
+  /// GET All Notifications
   Future<List<Notification>> getAllNotifications({
+    required String token,
     String domain = AppConstants.baseUrl,
     String endpoint = AppConstants.apiGetNotifications,
   }) async {
     try {
-      final response = await http.get(Uri.parse("$domain$endpoint"));
+      final response = await http.get(
+        Uri.parse("$domain$endpoint"),
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': 'Bearer $token',
+        },
+      );
       if (response.statusCode == 200 || response.statusCode == 201) {
         final List<dynamic> jsonList = json.decode(response.body)['data'];
         final List<Notification> notifications =
