@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
 import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:melbook/features/auth/presentation/sign_up.dart';
+import 'package:melbook/features/home/presentation/bloc/book/book_bloc.dart';
 import 'package:melbook/features/main/presentation/bloc/main_bloc.dart';
 import 'package:melbook/features/main/presentation/main_screen.dart';
 import 'package:melbook/locator.dart';
@@ -27,6 +28,9 @@ class App extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => MainBloc(),
+          ),
+          BlocProvider(
+            create: (context) => BookBloc(),
           )
         ],
         child: MaterialApp(
