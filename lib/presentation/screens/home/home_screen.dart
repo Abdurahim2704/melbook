@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:melbook/features/auth/data/service/local_service.dart';
 import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
 import 'package:melbook/locator.dart';
+import 'package:melbook/presentation/screens/notification/notification_screen.dart';
 
 class HomePage1 extends StatefulWidget {
   final List<String> images = [
@@ -18,6 +21,16 @@ class HomePage1 extends StatefulWidget {
     'assets/images/bookforcover.png',
   ];
 
+  final List<String> titles = [
+    'Ingliz tilini o\'rganish',
+    'Rus tilini o\'rganish',
+    'Korey tilini o\'rganish',
+    'Arab tilini o\'rganish',
+  ];
+
+final List<IconData> bottomIcons = [
+  Icons.menu_book
+];
   HomePage1({super.key});
 
   @override
@@ -54,20 +67,28 @@ class _HomePage1State extends State<HomePage1> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: Container(
-          margin: const EdgeInsets.all(10),
+          margin: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: Colors.grey,
             borderRadius: BorderRadius.circular(100),
           ),
-          child: IconButton(
-            icon: const Icon(Icons.person),
-            onPressed: () {},
-          ),
+          child: const Icon(Icons.person),
         ),
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.notifications),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const NotificationScreen(),
+                ),
+              );
+            },
+            icon: SvgPicture.asset(
+              "assets/icons/ic_notification.svg",
+              height: 24.h,
+              width: 24.h,
+            ),
           ),
         ],
       ),
@@ -272,45 +293,7 @@ class _HomePage1State extends State<HomePage1> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            label: 'Kitoblar',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: 'Chat',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.circle_notifications),
-            label: 'Asosiy',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.card_giftcard),
-            label: 'Saqlangan',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profil',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        // Control the active item
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-        showUnselectedLabels: true,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.white,
-        elevation: 10.0,
-        onTap: _onItemTapped,
-      ),
     );
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 }
