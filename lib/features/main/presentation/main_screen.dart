@@ -66,6 +66,7 @@ class _MainScreenState extends State<MainScreen> {
             width: double.infinity,
             color: Colors.blue,
           ),
+          Bookpage(),
           HomePage1(),
           Container(
             height: double.infinity,
