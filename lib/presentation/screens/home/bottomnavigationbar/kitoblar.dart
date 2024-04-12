@@ -1,53 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:melbook/features/auth/data/service/local_service.dart';
-import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
-import 'package:melbook/locator.dart';
-import 'package:melbook/presentation/screens/notification/notification_screen.dart';
 
-class HomePage1 extends StatefulWidget {
-  final List<String> images = [
-    'assets/images/ingliztili.png',
-    'assets/images/rustili.jpg',
-    'assets/images/koreystili.jpg',
-    'assets/images/arabtili.jpg',
-  ];
-  final List<String> secondimages = [
-    'assets/images/bookforcover.png',
-    'assets/images/bookforcover.png',
-    'assets/images/bookforcover.png',
-    'assets/images/bookforcover.png',
-    'assets/images/bookforcover.png',
-  ];
-
-  final List<String> titles = [
-    'Ingliz tilini o\'rganish',
-    'Rus tilini o\'rganish',
-    'Korey tilini o\'rganish',
-    'Arab tilini o\'rganish',
-  ];
-
-  final List<IconData> bottomIcons = [Icons.menu_book];
-
-  HomePage1({super.key});
+class KitoblarPage extends StatefulWidget {
+  const KitoblarPage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage1> createState() => _HomePage1State();
+  State<KitoblarPage> createState() => _KitoblarPageState();
 }
 
-class _HomePage1State extends State<HomePage1> {
-  @override
-  void initState() {
-    super.initState();
-    LocalDBService.getPassword().then((value) => print("password: $value"));
-    LocalDBService.getUsername().then((value) => print("username: $value"));
-    LocalDBService.getShowIntro().then((value) => print("show intro: $value"));
-    print("Token: ${getIt<AuthRepository>().token}");
-    print("isSignedIn: ${getIt<AuthRepository>().isSignedIn}");
-  }
+class _KitoblarPageState extends State<KitoblarPage> {
+  int _selectedIndex = 0; // Added this to manage the bottom navigation bar's state
 
-  int _selectedIndex = 0;
+  // Example book data (replace with your actual data source)
+  final List<Map<String, dynamic>> _books = List.generate(
+    10,
+        (index) => {
+      'title': 'Book $index',
+      'rating': List.generate(5, (index) => Icons.star),
+    },
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -66,28 +36,20 @@ class _HomePage1State extends State<HomePage1> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: Container(
-          margin: const EdgeInsets.all(12),
+          margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: Colors.grey,
             borderRadius: BorderRadius.circular(100),
           ),
-          child: const Icon(Icons.person),
+          child: IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () {},
+          ),
         ),
         actions: <Widget>[
           IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const NotificationScreen(),
-                ),
-              );
-            },
-            icon: SvgPicture.asset(
-              "assets/icons/ic_notification.svg",
-              height: 24.h,
-              width: 24.h,
-            ),
+            icon: const Icon(Icons.notifications),
+            onPressed: () {},
           ),
         ],
       ),
@@ -138,23 +100,13 @@ class _HomePage1State extends State<HomePage1> {
                                   Container(
                                     height: 47,
                                     width: 169,
-                                    decoration: BoxDecoration(
-                                      image: const DecorationImage(
-                                          image: AssetImage(
-                                        'assets/images/frame1.png',
-                                      )),
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
                                   ),
                                   const SizedBox(width: 30),
                                   Container(
                                     height: 47,
                                     width: 138,
                                     decoration: BoxDecoration(
-                                      image: const DecorationImage(
-                                          image: AssetImage(
-                                              'assets/images/frame2.png')),
+                                      image: DecorationImage(image: AssetImage('assets/images/frame2.png')),
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(8),
                                     ),
@@ -167,10 +119,7 @@ class _HomePage1State extends State<HomePage1> {
                                 alignment: Alignment.centerLeft,
                                 child: const Text(
                                   'Tavsiyalar',
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 1.3),
+                                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, letterSpacing: 1.3),
                                 ),
                               ),
                               const SizedBox(height: 12),
@@ -178,20 +127,13 @@ class _HomePage1State extends State<HomePage1> {
                                 height: 150,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: widget.images.length,
+                                  itemCount: _books.length, // Adjusted to use example data
                                   itemBuilder: (context, index) {
                                     return Container(
                                       height: 150,
                                       width: 106,
                                       margin: const EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                          image: DecorationImage(
-                                            image: AssetImage(
-                                                widget.images[index]),
-                                            fit: BoxFit.cover,
-                                          )),
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
                                     );
                                   },
                                 ),
@@ -202,10 +144,7 @@ class _HomePage1State extends State<HomePage1> {
                                 alignment: Alignment.centerLeft,
                                 child: const Text(
                                   'Kitoblar',
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 1.3),
+                                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, letterSpacing: 1.3),
                                 ),
                               ),
                               const SizedBox(height: 12),
@@ -213,8 +152,9 @@ class _HomePage1State extends State<HomePage1> {
                                 height: 150,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: widget.secondimages.length,
+                                  itemCount: _books.length, // Adjusted to use example data
                                   itemBuilder: (context, index) {
+                                    final book = _books[index]; // Fetch book from example data
                                     return Container(
                                       width: 260,
                                       height: 114,
@@ -225,38 +165,19 @@ class _HomePage1State extends State<HomePage1> {
                                       ),
                                       child: Row(
                                         children: [
-                                          Image.asset(
-                                            widget.secondimages[index],
-                                            width: 73,
-                                            height: 100,
-                                            fit: BoxFit.cover,
-                                          ),
                                           const SizedBox(width: 10),
-                                          const Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                          Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                'English Vocabulary\nIN USE',
-                                                style: TextStyle(
+                                                book['title'], // Use book title from data
+                                                style: const TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
                                               Row(
-                                                children: [
-                                                  Icon(Icons.star,
-                                                      color: Colors.yellow),
-                                                  Icon(Icons.star,
-                                                      color: Colors.yellow),
-                                                  Icon(Icons.star,
-                                                      color: Colors.yellow),
-                                                  Icon(Icons.star,
-                                                      color: Colors.yellow),
-                                                  Icon(Icons.star,
-                                                      color: Colors.yellow),
-                                                ],
+                                                children: List<Icon>.from(book['rating']), // Use rating icons
                                               ),
                                             ],
                                           ),
@@ -293,6 +214,44 @@ class _HomePage1State extends State<HomePage1> {
           ),
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book),
+            label: 'Kitoblar',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat),
+            label: 'Chat',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.circle_notifications),
+            label: 'Asosiy',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.card_giftcard),
+            label: 'Saqlangan',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profil',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey,
+        showUnselectedLabels: true,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
+        elevation: 10.0,
+        onTap: _onItemTapped,
+      ),
     );
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 }

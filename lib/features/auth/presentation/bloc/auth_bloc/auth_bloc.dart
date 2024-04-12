@@ -11,7 +11,7 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  AuthBloc() : super(const AuthInitial()) {
+  AuthBloc() : super(AuthInitial(user: getIt<AuthRepository>().user)) {
     on<SignUpEvent>(_signUpEvent);
     on<SignInEvent>(_signInEvent);
     on<AutoLogInEvent>(_autologInEvent);
