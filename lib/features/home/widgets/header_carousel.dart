@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,8 +29,11 @@ class _CarouselDemoState extends State<CarouselDemo> {
       future: _bannerFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
+          return Center(
+            child: SizedBox(
+              height: 150.h,
+              child: const CircularProgressIndicator.adaptive(),
+            ),
           );
         } else if (snapshot.hasError) {
           return const Center(
@@ -56,7 +60,7 @@ class _CarouselDemoState extends State<CarouselDemo> {
                   enableInfiniteScroll: true,
                   controller: widget.carouselController,
                   enlargeCenterPage: true,
-                  viewportFraction: 0.8,
+                  viewportFraction: 0.75.w,
                   initialPage: 1,
                 ),
               ),

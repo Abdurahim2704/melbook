@@ -1,4 +1,4 @@
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -47,7 +47,6 @@ class _SignUpState extends State<SignUp> {
         preferredSize: Size(double.infinity, 90),
         child: CustomAppBar(
           displayText: "Ro’yxatdan o’tish",
-          isLeadingIconVisible: true,
         ),
       ),
       backgroundColor: Colors.white,
@@ -116,7 +115,11 @@ class _SignUpState extends State<SignUp> {
               BlocConsumer<AuthBloc, AuthState>(
                 listener: (context, state) {
                   if (state is SignUpSuccessState) {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const SignIn(),));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignIn(),
+                        ));
                   }
                 },
                 builder: (context, state) {

@@ -11,14 +11,11 @@ class NotificationDetailScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
-        preferredSize: const Size(double.infinity, 90),
+        preferredSize: Size(double.infinity, 90.h),
         child: Stack(
           children: [
-            CustomAppBar(
+            const CustomAppBar(
               displayText: "Eslatma",
-              trailingIconPath: "assets/icons/ic_notification_done.svg",
-              trailingIconHeight: 24.h,
-              trailingIconWidth: 24.w,
             ),
             Align(
               alignment: Alignment.centerLeft,
