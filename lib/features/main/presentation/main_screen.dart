@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:melbook/features/home/presentation/bookpage.dart';
 import 'package:melbook/features/main/presentation/bloc/main_bloc.dart';
-import 'package:melbook/features/main/presentation/bloc/main_bloc.dart';
 
 import '../../home/presentation/home_screen.dart';
 

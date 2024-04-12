@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:melbook/features/auth/data/models/user.dart';
 
 class HomePage1 extends StatefulWidget {
+  HomePage1({super.key});
+
   final List<String> images = [
     'assets/images/ingliztili.png',
     'assets/images/rustili.jpg',
@@ -22,15 +27,11 @@ class HomePage1 extends StatefulWidget {
     'assets/images/img_homeslide.png',
   ];
 
-  HomePage1({super.key});
-
   @override
   State<HomePage1> createState() => _HomePage1State();
 }
 
 class _HomePage1State extends State<HomePage1> {
-  int _selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -39,7 +40,6 @@ class _HomePage1State extends State<HomePage1> {
     double containerWidth = screenWidth * 0.95;
     double imageWidth = screenWidth * 0.25;
     double bookImageWidth = screenWidth * 0.6;
-
     return Scaffold(
       backgroundColor: Colors.black38,
       extendBodyBehindAppBar: true,
@@ -67,14 +67,20 @@ class _HomePage1State extends State<HomePage1> {
         ),
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.notifications),
+            icon: SvgPicture.asset(
+              "assets/icons/ic_notification.svg",
+              height: 20.sp,
+              width: 20.sp,
+            ),
             onPressed: () {},
           ),
+          const SizedBox(width: 2),
         ],
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(top: screenHeight * 0.15), // Padding relative to screen height
+          padding: EdgeInsets.only(top: screenHeight * 0.15),
+          // Padding relative to screen height
           child: Column(
             children: [
               Container(
@@ -134,8 +140,9 @@ class _HomePage1State extends State<HomePage1> {
                                     height: 47,
                                     width: screenWidth * 0.4,
                                     decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: AssetImage('assets/images/frame1.png')),
+                                      image: const DecorationImage(
+                                          image: AssetImage(
+                                              'assets/images/frame1.png')),
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(8),
                                     ),
@@ -145,8 +152,9 @@ class _HomePage1State extends State<HomePage1> {
                                     height: 47,
                                     width: screenWidth * 0.3,
                                     decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: AssetImage('assets/images/frame2.png')),
+                                      image: const DecorationImage(
+                                          image: AssetImage(
+                                              'assets/images/frame2.png')),
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(8),
                                     ),
@@ -177,9 +185,11 @@ class _HomePage1State extends State<HomePage1> {
                                       width: imageWidth,
                                       margin: const EdgeInsets.all(10),
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(16),
+                                          borderRadius:
+                                              BorderRadius.circular(16),
                                           image: DecorationImage(
-                                            image: AssetImage(widget.images[index]),
+                                            image: AssetImage(
+                                                widget.images[index]),
                                             fit: BoxFit.cover,
                                           )),
                                     );
@@ -222,27 +232,36 @@ class _HomePage1State extends State<HomePage1> {
                                             fit: BoxFit.cover,
                                           ),
                                           const SizedBox(width: 10),
-                                          Expanded(
+                                          const Expanded(
                                             child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Flexible(
                                                   child: Text(
                                                     'English vocabulary in Use',
                                                     style: TextStyle(
-                                                      fontWeight: FontWeight.bold,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                                   ),
                                                 ),
                                                 Row(
-                                                  mainAxisSize: MainAxisSize.min,
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
                                                   children: [
-                                                    Icon(Icons.star, color: Colors.yellow),
-                                                    Icon(Icons.star, color: Colors.yellow),
-                                                    Icon(Icons.star, color: Colors.yellow),
-                                                    Icon(Icons.star, color: Colors.yellow),
-                                                    Icon(Icons.star, color: Colors.yellow),
+                                                    Icon(Icons.star,
+                                                        color: Colors.yellow),
+                                                    Icon(Icons.star,
+                                                        color: Colors.yellow),
+                                                    Icon(Icons.star,
+                                                        color: Colors.yellow),
+                                                    Icon(Icons.star,
+                                                        color: Colors.yellow),
+                                                    Icon(Icons.star,
+                                                        color: Colors.yellow),
                                                   ],
                                                 ),
                                               ],
@@ -264,7 +283,6 @@ class _HomePage1State extends State<HomePage1> {
                                           ),
                                         ],
                                       ),
-
                                     );
                                   },
                                 ),

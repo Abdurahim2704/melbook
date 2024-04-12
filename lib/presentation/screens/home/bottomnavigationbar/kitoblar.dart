@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class KitoblarPage extends StatefulWidget {
-  const KitoblarPage({Key? key}) : super(key: key);
+  const KitoblarPage({super.key});
 
   @override
   State<KitoblarPage> createState() => _KitoblarPageState();
