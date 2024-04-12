@@ -127,4 +127,7 @@ class AuthService extends AuthRepository {
 
   @override
   bool get isSignedIn => _user != null;
+
+  @override
+  User? get user => _user;
 }

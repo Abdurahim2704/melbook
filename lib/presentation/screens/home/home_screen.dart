@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:melbook/features/auth/data/service/local_service.dart';
 import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
 import 'package:melbook/locator.dart';
 import 'package:melbook/presentation/screens/notification/notification_screen.dart';
+
+import '../../../features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 
 class HomePage1 extends StatefulWidget {
   final List<String> images = [
@@ -28,9 +31,8 @@ class HomePage1 extends StatefulWidget {
     'Arab tilini o\'rganish',
   ];
 
-final List<IconData> bottomIcons = [
-  Icons.menu_book
-];
+  final List<IconData> bottomIcons = [Icons.menu_book];
+
   HomePage1({super.key});
 
   @override
@@ -46,6 +48,7 @@ class _HomePage1State extends State<HomePage1> {
     LocalDBService.getShowIntro().then((value) => print("show intro: $value"));
     print("Token: ${getIt<AuthRepository>().token}");
     print("isSignedIn: ${getIt<AuthRepository>().isSignedIn}");
+    print(context.read<AuthBloc>().state.user);
   }
 
   int _selectedIndex = 0;
@@ -295,5 +298,4 @@ class _HomePage1State extends State<HomePage1> {
       ),
     );
   }
-
 }
