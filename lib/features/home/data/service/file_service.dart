@@ -8,8 +8,8 @@ import 'package:permission_handler/permission_handler.dart';
 
 import 'local_service.dart';
 
-String link =
-    "https://cdn.mel-book.uz/9526d9b0-e61f-11ee-8f75-f9d1644ebbbc.pdf";
+// String link =
+//     "https://cdn.mel-book.uz/9526d9b0-e61f-11ee-8f75-f9d1644ebbbc.pdf";
 String appDocPath2 = "";
 
 class LocalService {
@@ -27,7 +27,7 @@ class LocalService {
   }
 
   Future<Stream<int>> downloadFile(
-      LocalBookService service, String fileName) async {
+      LocalBookService service, String fileName, String link) async {
     final filePath = await getFilePath(fileName);
     final downloadStream = StreamController<int>();
     final file = File(filePath);
@@ -43,7 +43,6 @@ class LocalService {
     if (result.statusCode == 200) {
       final file = File(filePath);
       final size = _getFileSize(file);
-      print("I am here");
       await service.insertLocalBook(
           LocalBook(name: fileName, location: filePath, size: size.toString()));
     }

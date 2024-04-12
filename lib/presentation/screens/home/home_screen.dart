@@ -51,8 +51,6 @@ class _HomePage1State extends State<HomePage1> {
     print(context.read<AuthBloc>().state.user);
   }
 
-  int _selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
