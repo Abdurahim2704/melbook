@@ -1,13 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:melbook/features/auth/data/service/local_service.dart';
-import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
-import 'package:melbook/locator.dart';
-import 'package:melbook/presentation/screens/notification/notification_screen.dart';
-
-import '../../../features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 
 class HomePage1 extends StatefulWidget {
   final List<String> images = [
@@ -16,6 +7,7 @@ class HomePage1 extends StatefulWidget {
     'assets/images/koreystili.jpg',
     'assets/images/arabtili.jpg',
   ];
+
   final List<String> secondimages = [
     'assets/images/bookforcover.png',
     'assets/images/bookforcover.png',
@@ -24,14 +16,11 @@ class HomePage1 extends StatefulWidget {
     'assets/images/bookforcover.png',
   ];
 
-  final List<String> titles = [
-    'Ingliz tilini o\'rganish',
-    'Rus tilini o\'rganish',
-    'Korey tilini o\'rganish',
-    'Arab tilini o\'rganish',
+  final List<String> slideimages = [
+    'assets/images/img_homeslide.png',
+    'assets/images/img_homeslide.png',
+    'assets/images/img_homeslide.png',
   ];
-
-  final List<IconData> bottomIcons = [Icons.menu_book];
 
   HomePage1({super.key});
 
@@ -40,21 +29,17 @@ class HomePage1 extends StatefulWidget {
 }
 
 class _HomePage1State extends State<HomePage1> {
-  @override
-  void initState() {
-    super.initState();
-    LocalDBService.getPassword().then((value) => print("password: $value"));
-    LocalDBService.getUsername().then((value) => print("username: $value"));
-    LocalDBService.getShowIntro().then((value) => print("show intro: $value"));
-    print("Token: ${getIt<AuthRepository>().token}");
-    print("isSignedIn: ${getIt<AuthRepository>().isSignedIn}");
-    print(context.read<AuthBloc>().state.user);
-  }
-
   int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    double containerHeight = screenHeight * 0.8;
+    double containerWidth = screenWidth * 0.95;
+    double imageWidth = screenWidth * 0.25;
+    double bookImageWidth = screenWidth * 0.6;
+
     return Scaffold(
       backgroundColor: Colors.black38,
       extendBodyBehindAppBar: true,
@@ -70,34 +55,26 @@ class _HomePage1State extends State<HomePage1> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: Container(
-          margin: const EdgeInsets.all(12),
+          margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: Colors.grey,
             borderRadius: BorderRadius.circular(100),
           ),
-          child: const Icon(Icons.person),
+          child: IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () {},
+          ),
         ),
         actions: <Widget>[
           IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const NotificationScreen(),
-                ),
-              );
-            },
-            icon: SvgPicture.asset(
-              "assets/icons/ic_notification.svg",
-              height: 24.h,
-              width: 24.h,
-            ),
+            icon: const Icon(Icons.notifications),
+            onPressed: () {},
           ),
         ],
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 110),
+          padding: EdgeInsets.only(top: screenHeight * 0.15), // Padding relative to screen height
           child: Column(
             children: [
               Container(
@@ -109,21 +86,35 @@ class _HomePage1State extends State<HomePage1> {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 22, left: 10, right: 10),
+                  padding: const EdgeInsets.all(10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Image.asset(
-                          'assets/images/img_homeslide.png',
-                          fit: BoxFit.fitWidth,
+                      // Display sliding images at the top of the column
+                      SizedBox(
+                        height: 200,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: widget.slideimages.length,
+                          itemBuilder: (context, index) {
+                            return Align(
+                              alignment: Alignment.topCenter,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Image.asset(
+                                  widget.slideimages[index],
+                                  width: screenWidth,
+                                  fit: BoxFit.fitWidth,
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                       const SizedBox(height: 18),
                       Container(
-                        height: 529,
-                        width: 385,
+                        height: containerHeight,
+                        width: containerWidth,
                         decoration: const BoxDecoration(
                           color: Color(0xFFF2F2F2),
                           borderRadius: BorderRadius.only(
@@ -141,11 +132,10 @@ class _HomePage1State extends State<HomePage1> {
                                 children: [
                                   Container(
                                     height: 47,
-                                    width: 169,
+                                    width: screenWidth * 0.4,
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
-                                          image: AssetImage(
-                                              'assets/images/frame1.png')),
+                                          image: AssetImage('assets/images/frame1.png')),
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(8),
                                     ),
@@ -153,11 +143,10 @@ class _HomePage1State extends State<HomePage1> {
                                   const SizedBox(width: 30),
                                   Container(
                                     height: 47,
-                                    width: 138,
+                                    width: screenWidth * 0.3,
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
-                                          image: AssetImage(
-                                              'assets/images/frame2.png')),
+                                          image: AssetImage('assets/images/frame2.png')),
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(8),
                                     ),
@@ -185,14 +174,12 @@ class _HomePage1State extends State<HomePage1> {
                                   itemBuilder: (context, index) {
                                     return Container(
                                       height: 150,
-                                      width: 106,
+                                      width: imageWidth,
                                       margin: const EdgeInsets.all(10),
                                       decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(16),
+                                          borderRadius: BorderRadius.circular(16),
                                           image: DecorationImage(
-                                            image: AssetImage(
-                                                widget.images[index]),
+                                            image: AssetImage(widget.images[index]),
                                             fit: BoxFit.cover,
                                           )),
                                     );
@@ -219,7 +206,7 @@ class _HomePage1State extends State<HomePage1> {
                                   itemCount: widget.secondimages.length,
                                   itemBuilder: (context, index) {
                                     return Container(
-                                      width: 260,
+                                      width: bookImageWidth,
                                       height: 114,
                                       margin: const EdgeInsets.all(10),
                                       decoration: BoxDecoration(
@@ -235,35 +222,32 @@ class _HomePage1State extends State<HomePage1> {
                                             fit: BoxFit.cover,
                                           ),
                                           const SizedBox(width: 10),
-                                          const Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'English Vocabulary\nIN USE',
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
+                                          Expanded(
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Flexible(
+                                                  child: Text(
+                                                    'English vocabulary in Use',
+                                                    style: TextStyle(
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Icon(Icons.star,
-                                                      color: Colors.yellow),
-                                                  Icon(Icons.star,
-                                                      color: Colors.yellow),
-                                                  Icon(Icons.star,
-                                                      color: Colors.yellow),
-                                                  Icon(Icons.star,
-                                                      color: Colors.yellow),
-                                                  Icon(Icons.star,
-                                                      color: Colors.yellow),
-                                                ],
-                                              ),
-                                            ],
+                                                Row(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: [
+                                                    Icon(Icons.star, color: Colors.yellow),
+                                                    Icon(Icons.star, color: Colors.yellow),
+                                                    Icon(Icons.star, color: Colors.yellow),
+                                                    Icon(Icons.star, color: Colors.yellow),
+                                                    Icon(Icons.star, color: Colors.yellow),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                          const Spacer(),
                                           GestureDetector(
                                             onTap: () {},
                                             child: Container(
@@ -280,6 +264,7 @@ class _HomePage1State extends State<HomePage1> {
                                           ),
                                         ],
                                       ),
+
                                     );
                                   },
                                 ),
