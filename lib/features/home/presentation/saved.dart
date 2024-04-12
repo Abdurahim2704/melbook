@@ -4,14 +4,14 @@ import 'package:melbook/features/home/presentation/views/book_container.dart';
 
 import 'bloc/book/book_bloc.dart';
 
-class Bookpage extends StatefulWidget {
-  const Bookpage({super.key});
+class Saved extends StatefulWidget {
+  const Saved({super.key});
 
   @override
-  State<Bookpage> createState() => _BookpageState();
+  State<Saved> createState() => _SavedState();
 }
 
-class _BookpageState extends State<Bookpage> {
+class _SavedState extends State<Saved> {
 
   @override
   void initState() {

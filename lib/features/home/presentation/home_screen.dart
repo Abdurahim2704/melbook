@@ -209,7 +209,8 @@ class _HomePage1State extends State<HomePage1> {
                                   itemCount: widget.secondimages.length,
                                   itemBuilder: (context, index) {
                                     return Container(
-                                      width: bookImageWidth,
+                                      padding: EdgeInsets.symmetric(horizontal: 10.w),
+                                      width: bookImageWidth.w,
                                       height: 114,
                                       margin: const EdgeInsets.all(10),
                                       decoration: BoxDecoration(
@@ -241,25 +242,10 @@ class _HomePage1State extends State<HomePage1> {
                                                     ),
                                                   ),
                                                 ),
-                                                Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    Icon(Icons.star,
-                                                        color: Colors.yellow),
-                                                    Icon(Icons.star,
-                                                        color: Colors.yellow),
-                                                    Icon(Icons.star,
-                                                        color: Colors.yellow),
-                                                    Icon(Icons.star,
-                                                        color: Colors.yellow),
-                                                    Icon(Icons.star,
-                                                        color: Colors.yellow),
-                                                  ],
-                                                ),
                                               ],
                                             ),
                                           ),
+                                          SizedBox(width: 5.w,),
                                           GestureDetector(
                                             onTap: () {},
                                             child: Container(

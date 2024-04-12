@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Ingliztilipage extends StatefulWidget {
   const Ingliztilipage({super.key});
@@ -27,11 +28,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: const Icon(
-          Icons.last_page_outlined,
-          color: Colors.white,
-          size: 30,
-        ),
+        iconTheme: const IconThemeData(color: Colors.white),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.headphones, size: 30, color: Colors.white),
@@ -45,9 +42,9 @@ class _IngliztilipageState extends State<Ingliztilipage> {
             Padding(
               padding: EdgeInsets.only(top: screenHeight * 0.15),
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
-                  borderRadius: const BorderRadius.only(
+                  borderRadius: BorderRadius.only(
                     topRight: Radius.circular(36),
                     topLeft: Radius.circular(36),
                   ),
@@ -112,10 +109,11 @@ class _IngliztilipageState extends State<Ingliztilipage> {
               ),
             ),
             Container(
-              color: Color(0xFFF2F2F2),
+              color: const Color(0xFFF2F2F2),
               child: ListView.builder(
+                padding: EdgeInsets.zero,
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: 10,
                 itemBuilder: (context, index) => customContainer(context),
               ),
@@ -128,6 +126,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
 
   Widget customContainer(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 8.w),
       height: 130,
       width: 315,
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -135,9 +134,9 @@ class _IngliztilipageState extends State<Ingliztilipage> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Row(
+      child: const Row(
         children: [
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: CircleAvatar(
               radius: 30,
@@ -149,10 +148,11 @@ class _IngliztilipageState extends State<Ingliztilipage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 Text(
                   "Siz Melbook orqali istalgan joyda istalgan tilni o’rganishingiz mumkin",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
                 ),
               ],
             ),

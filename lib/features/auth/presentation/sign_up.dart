@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -136,6 +137,21 @@ class _SignUpState extends State<SignUp> {
                   );
                 },
               ),
+              Center(
+                child: RichText(
+                  text: TextSpan(
+                    text: "Akkauntingiz bormi? ",
+                    style:  TextStyle(
+                      color: Colors.blue, height: 2,
+                      decoration: TextDecoration.underline,
+                      fontSize: 16.sp
+                    ),
+                    recognizer: TapGestureRecognizer()..onTap = () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const SignIn(),));
+                    }
+                  )
+                ),
+              )
             ],
           ),
         ),

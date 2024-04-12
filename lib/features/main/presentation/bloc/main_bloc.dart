@@ -6,7 +6,7 @@ part 'main_event.dart';
 part 'main_state.dart';
 
 class MainBloc extends Bloc<MainEvent, MainState> {
-  MainBloc() : super(MainInitial(currentIndex: 0)) {
+  MainBloc() : super(MainInitial(currentIndex: 1)) {
     on<GetMainEvent>(_getMain);
     on<ChangePageEvent>(_changeIndex);
   }

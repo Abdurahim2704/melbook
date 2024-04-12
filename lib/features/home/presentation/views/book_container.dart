@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
+import 'package:melbook/features/home/presentation/views/ingliztilipage.dart';
 
 class BookContainer extends StatelessWidget {
   final BookData bookData;
@@ -11,17 +12,23 @@ class BookContainer extends StatelessWidget {
     return Container(
       height: 114,
       margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
         children: [
-          Image.network(
-            bookData.photoUrl,
-            width: 73,
-            height: 100,
-            fit: BoxFit.cover,
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Ingliztilipage(),));
+            },
+            child: Image.network(
+              bookData.photoUrl,
+              width: 73,
+              height: 100,
+              fit: BoxFit.cover,
+            ),
           ),
           const SizedBox(width: 10),
           Expanded(

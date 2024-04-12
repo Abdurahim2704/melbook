@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:melbook/features/home/presentation/bookpage.dart';
-import 'package:melbook/features/home/presentation/views/ingliztilipage.dart';
+import 'package:melbook/features/home/presentation/saved.dart';
 import 'package:melbook/features/main/presentation/bloc/main_bloc.dart';
+import 'package:melbook/features/profile/presentation/profile_creen.dart';
 
 import '../../home/presentation/home_screen.dart';
 
@@ -22,7 +23,9 @@ class _MainScreenState extends State<MainScreen> {
     "assets/icons/ic_saved.svg",
     "assets/icons/ic_profile.svg",
   ];
-  PageController pageController = PageController();
+  PageController pageController = PageController(
+    initialPage: 1
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -59,26 +62,13 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ),
       body: PageView(
+        physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
         children: [
-          Container(
-            height: double.infinity,
-            width: double.infinity,
-            color: Colors.blue,
-          ),
-          Bookpage(),
+          const Bookpage(),
           HomePage1(),
-          Ingliztilipage(),
-          Container(
-            height: double.infinity,
-            width: double.infinity,
-            color: Colors.yellow,
-          ),
-          Container(
-            height: double.infinity,
-            width: double.infinity,
-            color: Colors.green,
-          ),
+          const Saved(),
+         const ProfileScreen()
         ],
       ),
     );
