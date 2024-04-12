@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:melbook/features/home/presentation/bookpage.dart';
 import 'package:melbook/features/main/presentation/bloc/main_bloc.dart';
-import 'package:melbook/presentation/screens/home/home_screen.dart';
+
+import '../../home/presentation/home_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -48,7 +50,8 @@ class _MainScreenState extends State<MainScreen> {
                                 state.currentIndex == index
                                     ? Colors.black
                                     : Colors.grey,
-                                BlendMode.srcIn),
+                                BlendMode.srcIn
+                            ),
                           ),
                         )));
           },
@@ -62,6 +65,7 @@ class _MainScreenState extends State<MainScreen> {
             width: double.infinity,
             color: Colors.blue,
           ),
+          Bookpage(),
           HomePage1(),
           Container(
             height: double.infinity,

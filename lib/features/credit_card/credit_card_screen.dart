@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:melbook/presentation/screens/credit_card/code_authorization_screen.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
 import 'package:melbook/shared/widgets/auth_textfield.dart';
 import 'package:melbook/shared/widgets/auth_textfield_header.dart';
 import 'package:melbook/shared/widgets/primary_yellow_elevated_button.dart';
 import 'package:melbook/utils.dart';
+
+import 'code_authorization_screen.dart';
 
 class CreditCardScreen extends StatefulWidget {
   const CreditCardScreen({super.key});
