@@ -266,11 +266,11 @@ class _HomePage1State extends State<HomePage1> {
                                               padding: const EdgeInsets.all(7),
                                               decoration: const BoxDecoration(
                                                 shape: BoxShape.circle,
-                                                color: Colors.blue,
+                                                color: Color(0xFFF2F2F2),
                                               ),
                                               child: const Icon(
                                                 Icons.play_arrow,
-                                                color: Colors.white,
+                                                color: Colors.black,
                                               ),
                                             ),
                                           ),
