@@ -70,7 +70,7 @@ class _MainScreenState extends State<MainScreen> {
             width: double.infinity,
             color: Colors.yellow,
           ),
-        ProfileScreen()
+        const ProfileScreen()
         ],
       ),
     );

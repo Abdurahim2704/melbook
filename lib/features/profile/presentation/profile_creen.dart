@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
+import 'package:melbook/features/profile/presentation/update_profile.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -22,11 +23,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
+      appBar:  PreferredSize(
         preferredSize: Size(double.infinity, 90),
-        child: CustomAppBar(
-          isLeadingIconVisible: true,
-          displayText: "Profile",
+        child: Stack(
+          children: [
+            CustomAppBar(
+              isLeadingIconVisible: true,
+              displayText: "Profile",
+            ),
+            Align(alignment: Alignment.centerRight,
+            child: IconButton(onPressed: () {
+              Navigator.push(context,MaterialPageRoute(builder: (context) => UpdateProfile(),) );
+            }, icon: Icon(Icons.edit)),)
+          ],
         ),
       ),
       body: BlocBuilder<AuthBloc, AuthState>(
