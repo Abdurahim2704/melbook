@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
 import 'package:melbook/features/home/presentation/views/ingliztilipage.dart';
@@ -21,10 +22,14 @@ class BookContainer extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const Ingliztilipage(),));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Ingliztilipage(),
+                  ));
             },
-            child: Image.network(
-              bookData.photoUrl,
+            child: CachedNetworkImage(
+              imageUrl: bookData.photoUrl,
               width: 73,
               height: 100,
               fit: BoxFit.cover,

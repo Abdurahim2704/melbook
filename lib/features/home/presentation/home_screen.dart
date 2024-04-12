@@ -1,27 +1,19 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
+import 'package:melbook/features/home/presentation/views/book_tile.dart';
 import 'package:melbook/features/home/widgets/header_carousel.dart';
+import 'package:melbook/locator.dart';
 import 'package:melbook/presentation/screens/notification/notification_screen.dart';
+
+import 'bloc/book/book_bloc.dart';
 
 class HomePage1 extends StatefulWidget {
   HomePage1({super.key});
-
-  final List<String> images = [
-    'assets/images/ingliztili.png',
-    'assets/images/rustili.jpg',
-    'assets/images/koreystili.jpg',
-    'assets/images/arabtili.jpg',
-  ];
-
-  final List<String> secondimages = [
-    'assets/images/bookforcover.png',
-    'assets/images/bookforcover.png',
-    'assets/images/bookforcover.png',
-    'assets/images/bookforcover.png',
-    'assets/images/bookforcover.png',
-  ];
 
   final List<String> slideimages = [
     'assets/images/img_homeslide.png',
@@ -35,7 +27,14 @@ class HomePage1 extends StatefulWidget {
 
 class _HomePage1State extends State<HomePage1> {
   @override
+  void initState() {
+    super.initState();
+    context.read<BookBloc>().add(GetAllBooks());
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print(getIt<AuthRepository>().token);
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     double containerHeight = screenHeight * 0.8;
@@ -167,27 +166,33 @@ class _HomePage1State extends State<HomePage1> {
                                 ),
                               ),
                               const SizedBox(height: 12),
-                              SizedBox(
-                                height: 150,
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: widget.images.length,
-                                  itemBuilder: (context, index) {
-                                    return Container(
-                                      height: 150,
-                                      width: imageWidth,
-                                      margin: const EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                          image: DecorationImage(
-                                            image: AssetImage(
-                                                widget.images[index]),
-                                            fit: BoxFit.cover,
-                                          )),
-                                    );
-                                  },
-                                ),
+                              BlocBuilder<BookBloc, BookState>(
+                                builder: (context, state) {
+                                  return SizedBox(
+                                    height: 150,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: state.books.length,
+                                      itemBuilder: (context, index) {
+                                        final book = state.books[index];
+                                        return Container(
+                                          height: 150,
+                                          width: imageWidth,
+                                          margin: const EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(16),
+                                              image: DecorationImage(
+                                                image:
+                                                    CachedNetworkImageProvider(
+                                                        book.photoUrl),
+                                                fit: BoxFit.cover,
+                                              )),
+                                        );
+                                      },
+                                    ),
+                                  );
+                                },
                               ),
                               const SizedBox(height: 20),
                               Container(
@@ -202,69 +207,20 @@ class _HomePage1State extends State<HomePage1> {
                                 ),
                               ),
                               const SizedBox(height: 12),
-                              SizedBox(
-                                height: 150,
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: widget.secondimages.length,
-                                  itemBuilder: (context, index) {
-                                    return Container(
-                                      padding: EdgeInsets.symmetric(horizontal: 10.w),
-                                      width: bookImageWidth.w,
-                                      height: 114,
-                                      margin: const EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Image.asset(
-                                            widget.secondimages[index],
-                                            width: 73,
-                                            height: 100,
-                                            fit: BoxFit.cover,
-                                          ),
-                                          const SizedBox(width: 10),
-                                          const Expanded(
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Flexible(
-                                                  child: Text(
-                                                    'English vocabulary in Use',
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          SizedBox(width: 5.w,),
-                                          GestureDetector(
-                                            onTap: () {},
-                                            child: Container(
-                                              padding: const EdgeInsets.all(7),
-                                              decoration: const BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: Color(0xFFF2F2F2),
-                                              ),
-                                              child: const Icon(
-                                                Icons.play_arrow,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ),
+                              BlocBuilder<BookBloc, BookState>(
+                                builder: (context, state) {
+                                  return SizedBox(
+                                    height: 150,
+                                    child: ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: state.books.length,
+                                      itemBuilder: (context, index) {
+                                        final book = state.books[index];
+                                        return BookTile(book: book);
+                                      },
+                                    ),
+                                  );
+                                },
                               ),
                             ],
                           ),

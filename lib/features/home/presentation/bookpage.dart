@@ -12,11 +12,9 @@ class Bookpage extends StatefulWidget {
 }
 
 class _BookpageState extends State<Bookpage> {
-
   @override
   void initState() {
     super.initState();
-    context.read<BookBloc>().add(GetAllBooks());
     context.read<BookBloc>().stream.listen((event) {
       if (event is BookFetchError) {
         ScaffoldMessenger.of(context)

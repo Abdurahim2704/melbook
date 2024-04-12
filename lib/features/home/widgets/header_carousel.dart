@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
@@ -32,7 +33,7 @@ class _CarouselDemoState extends State<CarouselDemo> {
           return Center(
             child: SizedBox(
               height: 150.h,
-              child: const CircularProgressIndicator.adaptive(),
+              child: const CupertinoActivityIndicator(),
             ),
           );
         } else if (snapshot.hasError) {
