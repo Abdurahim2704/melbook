@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class Notification {
+class NotificationModel {
   final String id;
   final String photoUrl;
   final String title;
@@ -11,7 +11,7 @@ class Notification {
   final DateTime updatedAt;
   final int v;
 
-  Notification({
+  NotificationModel({
     required this.id,
     required this.photoUrl,
     required this.title,
@@ -23,8 +23,8 @@ class Notification {
     required this.v,
   });
 
-  factory Notification.fromJson(Map<String, dynamic> json) {
-    return Notification(
+  factory NotificationModel.fromJson(Map<String, dynamic> json) {
+    return NotificationModel(
       id: json['_id'] as String,
       photoUrl: json['photo_url'] as String,
       title: json['title'] as String,

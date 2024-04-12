@@ -17,7 +17,7 @@ class NotificationScreen extends StatefulWidget {
 }
 
 class _NotificationScreenState extends State<NotificationScreen> {
-  late Future<List<notif.Notification>> _notificationFuture;
+  late Future<List<notif.NotificationModel>> _notificationFuture;
 
   @override
   void initState() {
@@ -65,12 +65,15 @@ class _NotificationScreenState extends State<NotificationScreen> {
           ],
         ),
       ),
-      body: FutureBuilder<List<notif.Notification>>(
+      body: FutureBuilder<List<notif.NotificationModel>>(
         future: _notificationFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
+            return const Scaffold(
+              backgroundColor: Colors.white,
+              body: Center(
+                child: CircularProgressIndicator.adaptive(),
+              ),
             );
           } else if (snapshot.hasError ||
               !snapshot.hasData ||
@@ -98,8 +101,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              const NotificationDetailScreen(),
+                          builder: (context) => NotificationDetailScreen(
+                            notificationId: notification.id,
+                          ),
                         ),
                       );
                     },
