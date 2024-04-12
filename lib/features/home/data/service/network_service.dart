@@ -27,7 +27,7 @@ class NetworkService {
   }
 
   /// #GET All Banners
-  Future<List<Banner>> getBanners({
+  Future<List<BannerModel>> getBanners({
     String domain = AppConstants.baseUrl,
     String endpoint = AppConstants.apiGetBanners,
   }) async {
@@ -35,8 +35,8 @@ class NetworkService {
       final response = await http.get(Uri.parse("$domain$endpoint"));
       if (response.statusCode == 200 || response.statusCode == 201) {
         final List<dynamic> jsonList = json.decode(response.body)['data'];
-        final List<Banner> banners =
-            jsonList.map((json) => Banner.fromJson(json)).toList();
+        final List<BannerModel> banners =
+            jsonList.map((json) => BannerModel.fromJson(json)).toList();
         return banners;
       } else {
         throw Exception('Failed to fetch banners: ${response.statusCode}');
