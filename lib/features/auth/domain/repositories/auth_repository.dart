@@ -28,4 +28,6 @@ abstract class AuthRepository {
     String? surname,
     String? password,
   });
+
+  Future<void> resetToken();
 }

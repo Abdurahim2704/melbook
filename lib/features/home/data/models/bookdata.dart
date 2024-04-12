@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
+
 import 'audio.dart';
 import 'category.dart';
 
-class BookData {
+class BookData extends Equatable {
   final String id;
   final String name;
   final String photoUrl;
@@ -11,12 +13,12 @@ class BookData {
   final String author;
   final int price;
   final Category category;
-  final String bookUrl;
+  String? bookUrl;
   final String createdAt;
   final String updatedAt;
   final int v;
   final bool bought;
-  final List<Audio> audios;
+  List<Audio>? audios;
 
   BookData({
     required this.id,
@@ -35,6 +37,8 @@ class BookData {
   });
 
   factory BookData.fromJson(Map<String, Object?> json) {
+    print("??????????");
+    print(json);
     final id = json['_id'] as String;
     final name = json['name'] as String;
     final photoUrl = json['photo_url'] as String;
@@ -43,13 +47,13 @@ class BookData {
     final price = json['price'] as int;
     final category =
         Category.fromJson(json['category'] as Map<String, Object?>);
-    final bookUrl = json['book_url'] as String;
+    final bookUrl = json['book_url'] as String?;
     final createdAt = json['createdAt'] as String;
     final updatedAt = json['updatedAt'] as String;
     final v = json['__v'] as int;
     final bought = json['bought'] as bool;
-    final audios = (json['audios'] as List<dynamic>)
-        .map((e) => Audio.fromJson(e as Map<String, Object?>))
+    final audios = (json['audios'] as List<dynamic>?)
+        ?.map((e) => Audio.fromJson(e as Map<String, Object?>))
         .toList();
 
     return BookData(
@@ -83,7 +87,10 @@ class BookData {
       'updatedAt': updatedAt,
       '__v': v,
       'bought': bought,
-      'audios': audios.map((e) => e.toJson()).toList(),
+      'audios': audios?.map((e) => e.toJson()).toList(),
     });
   }
+
+  @override
+  List<Object?> get props => [id];
 }

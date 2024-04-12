@@ -18,6 +18,12 @@ class _BookpageState extends State<Bookpage> {
   void initState() {
     super.initState();
     context.read<BookBloc>().add(GetAllBooks());
+    context.read<BookBloc>().stream.listen((event) {
+      if (event is BookFetchError) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(event.message)));
+      }
+    });
   }
 
   @override
@@ -28,6 +34,7 @@ class _BookpageState extends State<Bookpage> {
     double containerWidth = screenWidth * 0.95;
     double imageWidth = screenWidth * 0.25;
     double bookImageWidth = screenWidth * 0.6;
+
     return Scaffold(
       backgroundColor: Colors.black38,
       extendBodyBehindAppBar: true,
@@ -109,7 +116,6 @@ class _BookpageState extends State<Bookpage> {
                                     itemCount: state.books.length,
                                     itemBuilder: (context, index) {
                                       final book = state.books[index];
-                                      print(book);
                                       return BookContainer(bookData: book);
                                     },
                                   ),

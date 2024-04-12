@@ -130,4 +130,22 @@ class AuthService extends AuthRepository {
 
   @override
   User? get user => _user;
+
+  @override
+  Future<void> resetToken() async {
+    final body = {"username": _user!.userName, "password": _user!.password};
+    final data = await http.post(
+        Uri.parse("${AppConstants.baseUrl}${AppConstants.apiLoginUser}"),
+        body: jsonEncode(body),
+        headers: {"Content-Type": "application/json"});
+
+    if (data.statusCode != 200) {
+      throw Exception("reset Token failed: ${data.statusCode}");
+    }
+    _token = jsonDecode(data.body)["data"]["token"];
+    final user = User.fromJson((jsonDecode(data.body)
+        as Map<String, dynamic>)["data"]["user"] as Map<String, Object?>);
+    _user = user;
+    return;
+  }
 }
