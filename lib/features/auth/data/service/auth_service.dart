@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:melbook/config/core/constants/app_constants.dart';
@@ -17,6 +18,12 @@ class AuthService extends AuthRepository {
       String? phoneNumber,
       String? surname,
       String? password}) async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {}
+    } on SocketException catch (_) {
+      return const DataFailure(message: "No internet connection");
+    }
     final body = {
       "username": username ?? _user!.userName,
       "name": name ?? _user!.name,
@@ -72,6 +79,13 @@ class AuthService extends AuthRepository {
   @override
   Future<DataSource> loginUser(
       {required String username, required String password}) async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {}
+    } on SocketException catch (_) {
+      return const DataFailure(message: "No internet connection");
+    }
+
     final body = {"username": username, "password": password};
     final data = await http.post(
         Uri.parse("${AppConstants.baseUrl}${AppConstants.apiLoginUser}"),
@@ -97,6 +111,12 @@ class AuthService extends AuthRepository {
     required String phoneNumber,
     required String password,
   }) async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {}
+    } on SocketException catch (_) {
+      return const DataFailure(message: "No internet connection");
+    }
     final body = {
       "username": username,
       "name": name,
@@ -133,6 +153,12 @@ class AuthService extends AuthRepository {
 
   @override
   Future<void> resetToken() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {}
+    } on SocketException catch (_) {
+      return;
+    }
     final body = {"username": _user!.userName, "password": _user!.password};
     final data = await http.post(
         Uri.parse("${AppConstants.baseUrl}${AppConstants.apiLoginUser}"),

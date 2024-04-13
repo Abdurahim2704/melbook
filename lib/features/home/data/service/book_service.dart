@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:melbook/config/core/constants/app_constants.dart';
@@ -14,7 +15,13 @@ class BookService {
     String domain = AppConstants.baseUrl,
     String endpoint = AppConstants.apiGetAllBooks,
   }) async {
-    // try {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {}
+    } on SocketException catch (_) {
+      return const [];
+    }
+
     final token = getIt<AuthRepository>().token;
     final response = await http.get(Uri.parse("$domain$endpoint"), headers: {
       "Content-Type": "application/json",
@@ -32,10 +39,6 @@ class BookService {
     } else {
       throw Exception('Failed to fetch books: ${response.statusCode}');
     }
-    // }
-    // catch (e) {
-    //   throw Exception('Failed to fetch books: $e');
-    // }
   }
 
   /// #GET Book By Id

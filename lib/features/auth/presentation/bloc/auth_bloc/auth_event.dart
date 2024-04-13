@@ -5,13 +5,12 @@ sealed class AuthEvent {
   const AuthEvent();
 }
 
-class SignUpEvent extends AuthEvent{
+class SignUpEvent extends AuthEvent {
   final String name;
   final String username;
   final String surname;
   final String password;
   final String phoneNumber;
-
 
   const SignUpEvent({
     required this.name,
@@ -19,7 +18,7 @@ class SignUpEvent extends AuthEvent{
     required this.surname,
     required this.password,
     required this.phoneNumber,
-});
+  });
 }
 
 class SignInEvent extends AuthEvent {
@@ -29,7 +28,7 @@ class SignInEvent extends AuthEvent {
   const SignInEvent({
     required this.password,
     required this.username,
-});
+  });
 }
 
 class AutoLogInEvent extends AuthEvent {
@@ -39,6 +38,22 @@ class AutoLogInEvent extends AuthEvent {
   const AutoLogInEvent({
     required this.username,
     required this.password,
-});
+  });
 }
+
 class LogOut {}
+
+class EditProfile extends AuthEvent {
+  final String? userName;
+  final String? name;
+  final String? surname;
+  final String? phoneNumber;
+  final String? password;
+
+  const EditProfile(
+      {this.surname,
+      this.name,
+      this.userName,
+      this.phoneNumber,
+      this.password});
+}

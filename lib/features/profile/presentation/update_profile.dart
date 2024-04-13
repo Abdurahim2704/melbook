@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
+import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
 import 'package:melbook/shared/widgets/auth_textfield.dart';
 import 'package:melbook/shared/widgets/auth_textfield_header.dart';
@@ -28,21 +31,29 @@ class _UpdateProfileState extends State<UpdateProfile> {
 
   @override
   void initState() {
+    context.read<AuthBloc>().stream.listen((event) {
+      if (event.message != null) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(event.message!)));
+      }
+    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  const PreferredSize(
+      appBar: const PreferredSize(
         preferredSize: Size(double.infinity, 90),
         child: Stack(
           children: [
             CustomAppBar(
               displayText: "Profile",
             ),
-            Align(alignment: Alignment.centerLeft,
-            child: BackButton(),)
+            Align(
+              alignment: Alignment.centerLeft,
+              child: BackButton(),
+            )
           ],
         ),
       ),
@@ -112,6 +123,15 @@ class _UpdateProfileState extends State<UpdateProfile> {
               PrimaryYellowElevatedButton(
                 displayText: "Saqlash",
                 onPressed: () {
+                  if (confirmPasswordCtrl.text == passwordCtrl.text) {
+                    context.read<AuthRepository>().editData(
+                          username: usernameCtrl.text,
+                          name: nameCtrl.text,
+                          phoneNumber: phoneNumberCtrl.text,
+                          password: passwordCtrl.text,
+                          surname: surnameCtrl.text,
+                        );
+                  }
                 },
               )
             ],

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
+import 'package:melbook/features/auth/data/service/local_service.dart';
 import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:melbook/features/auth/presentation/sign_up.dart';
 import 'package:melbook/features/home/presentation/bloc/book/book_bloc.dart';
@@ -33,14 +33,19 @@ class App extends StatelessWidget {
             create: (context) => BookBloc(),
           )
         ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: showIntro
-              ? const IntroScreen()
-              : getIt<AuthRepository>().isSignedIn
-                  ? const MainScreen()
-                  : const SignUp(),
-        ),
+        child: FutureBuilder<bool>(
+            future: LocalDBService.hasUser(),
+            initialData: false,
+            builder: (context, snapshot) {
+              return MaterialApp(
+                debugShowCheckedModeBanner: false,
+                home: showIntro
+                    ? const IntroScreen()
+                    : snapshot.data!
+                        ? const MainScreen()
+                        : const SignUp(),
+              );
+            }),
       ),
     );
   }

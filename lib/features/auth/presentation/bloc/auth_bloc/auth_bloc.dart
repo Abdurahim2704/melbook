@@ -15,6 +15,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignUpEvent>(_signUpEvent);
     on<SignInEvent>(_signInEvent);
     on<AutoLogInEvent>(_autologInEvent);
+    on<EditProfile>(editProfile);
   }
 
   Future<void> _signUpEvent(SignUpEvent event, Emitter<AuthState> emit) async {
@@ -75,5 +76,25 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     LocalDBService.setUsername(event.username);
     emit(SignInSuccessState(
         user: (result as DataSuccess<User>).data, message: result.message));
+  }
+
+  Future<void> editProfile(EditProfile event, Emitter<AuthState> emit) async {
+    final authService = getIt<AuthRepository>();
+    emit(AuthLoadingState(user: state.user));
+    await authService.resetToken();
+    final result = await authService.editData(
+      username: event.userName,
+      name: event.password,
+      phoneNumber: event.phoneNumber,
+      surname: event.surname,
+      password: event.password,
+    );
+
+    if (result is DataFailure) {
+      emit(AuthErrorState(message: result.message));
+      return;
+    }
+    emit(SignInSuccessState(
+        message: result.message, user: (result as DataSuccess<User>).data));
   }
 }
