@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:melbook/features/inside_book/inside_book.dart';
 
 class Ingliztilipage extends StatefulWidget {
   const Ingliztilipage({super.key});
@@ -29,12 +31,6 @@ class _IngliztilipageState extends State<Ingliztilipage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.headphones, size: 30, color: Colors.white),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -54,9 +50,14 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image.asset(
-                        'assets/images/ingliztili.png',
-                        width: screenWidth * 0.25,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => InsideBook(),));
+                        },
+                        child: Image.asset(
+                          'assets/images/ingliztili.png',
+                          width: screenWidth * 0.25,
+                        ),
                       ),
                       const SizedBox(width: 13),
                       Expanded(
