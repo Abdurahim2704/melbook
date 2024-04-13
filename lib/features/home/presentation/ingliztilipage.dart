@@ -53,7 +53,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: const Icon(Icons.arrow_back),
+                icon:  Icon(Icons.arrow_back, size: 20.sp,),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 60.h),
@@ -84,7 +84,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                             width: screenWidth * 0.25,
                           ),
                         ),
-                        const SizedBox(width: 13),
+                         SizedBox(width: 13.w),
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,8 +124,8 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                 ),
                                 child: Text(
                                   widget.book.bought ? "O'qish" : "Sotib olish",
-                                  style: const TextStyle(
-                                    fontSize: 14,
+                                  style:  TextStyle(
+                                    fontSize: 14.sp,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
@@ -134,10 +134,13 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                             ),
                           ],
                         ),
-                        const CircleAvatar(
-                          radius: 24,
+                         SizedBox(
+                           width: 10.w,
+                         ),
+                         CircleAvatar(
+                          radius: 18.sp,
                           backgroundColor: Color(0xFFF2F2F2),
-                          child: Icon(Icons.share, color: Colors.black),
+                          child: Icon(Icons.share, color: Colors.black, size: 14.sp,),
                         ),
                       ],
                     ),
@@ -171,6 +174,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                           style: TextStyle(
                             color:
                                 _currentPage == 0 ? Colors.white : Colors.black,
+                            fontSize: 14.sp,
                           ),
                         ),
                       ),
@@ -187,6 +191,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                           style: TextStyle(
                             color:
                                 _currentPage == 1 ? Colors.white : Colors.black,
+                            fontSize: 14.sp
                           ),
                         ),
                       ),

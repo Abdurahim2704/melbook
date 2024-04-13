@@ -35,9 +35,9 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size(double.infinity, 90),
-        child: CustomAppBar(displayText: "Tizimga kirish"),
+      appBar:  PreferredSize(
+        preferredSize: Size(double.infinity, 90.h),
+        child: const CustomAppBar(displayText: "Tizimga kirish"),
       ),
       backgroundColor: Colors.white,
       body: Padding(
@@ -63,6 +63,7 @@ class _SignInState extends State<SignIn> {
 
             /// #TextField Username
             AuthTextField(
+              style: TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
               controller: usernameCtrl,
               hinText: "Foydalanuvchi nomini kiriting",
               textInputAction: TextInputAction.next,
@@ -76,6 +77,7 @@ class _SignInState extends State<SignIn> {
 
             /// #TextField Password
             AuthTextField(
+              style: TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
               hinText: "12345mkl",
               controller: passwordCtrl,
               keyboardType: TextInputType.visiblePassword,
