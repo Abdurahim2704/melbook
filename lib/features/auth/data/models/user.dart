@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
-
 class User {
   final String id;
   final String name;
@@ -26,7 +24,6 @@ class User {
   });
 
   factory User.fromJson(Map<String, Object?> json) {
-    debugPrint(json.toString());
     final id = json["_id"] as String;
     final boughtBooks =
         ((json["boughtBooks"] ?? []) as List).map((e) => e.toString()).toList();

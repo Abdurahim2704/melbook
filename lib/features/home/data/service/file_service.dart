@@ -15,7 +15,6 @@ String appDocPath2 = "";
 class LocalService {
   Future<void> requestPermissions() async {
     await Permission.storage.request();
-    print(await Permission.storage.isGranted);
     await Permission.mediaLibrary.request();
   }
 

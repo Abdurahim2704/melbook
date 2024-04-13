@@ -32,7 +32,6 @@ class BookService {
     }
     if (response.statusCode == 200 || response.statusCode == 201) {
       final List<dynamic> jsonList = json.decode(response.body)['data'];
-      print(jsonList.length);
       final List<BookData> books =
           jsonList.map((json) => BookData.fromJson(json)).toList();
       return books;

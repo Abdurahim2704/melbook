@@ -11,12 +11,10 @@ Future<void> setUp() async {
   getIt.registerSingleton<AuthRepository>(AuthService());
   await LocalDBService.init();
   if (await LocalDBService.hasUser()) {
-    print(await LocalDBService.hasUser());
     final username = await LocalDBService.getUsername();
     final password = await LocalDBService.getPassword();
     await getIt<AuthRepository>()
         .loginUser(username: username ?? "", password: password ?? "");
-    print(getIt<AuthRepository>().isSignedIn);
   }
   showIntro = await LocalDBService.getShowIntro();
 }

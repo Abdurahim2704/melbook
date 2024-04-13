@@ -1,9 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:melbook/features/home/data/models/bookdata.dart';
 import 'package:melbook/features/home/presentation/inside_book.dart';
 
 class Ingliztilipage extends StatefulWidget {
-  const Ingliztilipage({super.key});
+  final BookData book;
+
+  const Ingliztilipage({super.key, required this.book});
 
   @override
   State<Ingliztilipage> createState() => _IngliztilipageState();
@@ -20,9 +24,9 @@ class _IngliztilipageState extends State<Ingliztilipage> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
-          "Ingliz tili",
-          style: TextStyle(
+        title: Text(
+          widget.book.name,
+          style: const TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
@@ -57,8 +61,8 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                 builder: (context) => InsideBook(),
                               ));
                         },
-                        child: Image.asset(
-                          'assets/images/ingliztili.png',
+                        child: CachedNetworkImage(
+                          imageUrl: widget.book.photoUrl,
                           width: screenWidth * 0.25,
                         ),
                       ),
@@ -67,9 +71,9 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Ingliz tili",
-                              style: TextStyle(
+                            Text(
+                              widget.book.name,
+                              style: const TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -89,9 +93,9 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                   color: Colors.amber,
                                   borderRadius: BorderRadius.circular(70),
                                 ),
-                                child: const Text(
-                                  "Sotib olish",
-                                  style: TextStyle(
+                                child: Text(
+                                  widget.book.bought ? "O'qish" : "Sotib olish",
+                                  style: const TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
@@ -118,8 +122,9 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                 padding: EdgeInsets.zero,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: 10,
-                itemBuilder: (context, index) => customContainer(context),
+                itemCount: 1,
+                itemBuilder: (context, index) =>
+                    customContainer(context, widget.book.description),
               ),
             ),
           ],
@@ -128,40 +133,25 @@ class _IngliztilipageState extends State<Ingliztilipage> {
     );
   }
 
-  Widget customContainer(BuildContext context) {
+  Widget customContainer(BuildContext context, String data) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 8.w),
-      height: 130,
       width: 315,
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: const Row(
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: CircleAvatar(
-              radius: 30,
-              backgroundColor: Color(0xFFF2F2F2),
-              child: Icon(Icons.line_axis_outlined, color: Colors.black),
-            ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
+        child: Text(
+          data,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
           ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Siz Melbook orqali istalgan joyda istalgan tilni o’rganishingiz mumkin",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-        ],
+          textAlign: TextAlign.start,
+        ),
       ),
     );
   }
