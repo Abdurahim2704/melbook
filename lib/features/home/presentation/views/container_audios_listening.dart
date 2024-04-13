@@ -75,16 +75,35 @@ class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => AudioScreen(
-                                          filePath: state.audios.firstWhere(
-                                              (element) => (element["name"] ==
-                                                  widget.bookData.audios![index]
-                                                      .name))["location"],
-                                        ),
-                                      ));
+                                  state.audios
+                                          .map((e) => e["name"])
+                                          .toList()
+                                          .contains(widget
+                                              .bookData.audios![index].name)
+                                      ? Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => AudioScreen(
+                                              filePath: state.audios.firstWhere(
+                                                  (element) => (element[
+                                                          "name"] ==
+                                                      widget
+                                                          .bookData
+                                                          .audios![index]
+                                                          .name))["location"],
+                                              book: widget.bookData,
+                                            ),
+                                          ),
+                                        )
+                                      : showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              backgroundColor: Colors.white,
+                                              title: Text("Audioni avval yuklab oling!"),
+                                            );
+                                          },
+                                        );
                                 },
                                 child: Container(
                                   padding: EdgeInsets.all(6.sp),
