@@ -26,7 +26,9 @@ class _InsideBookState extends State<InsideBook> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const BackButton(),
+                   IconButton(onPressed: () {
+                     Navigator.pop(context);
+                   }, icon: Icon(Icons.arrow_back, size: 20.sp,)),
                   IconButton(
                     onPressed: () {
                       print("I am here");
@@ -36,7 +38,7 @@ class _InsideBookState extends State<InsideBook> {
                       //       builder: (context) => const AudioScreen(fi),
                       //     ));
                     },
-                    icon: const Icon(Icons.headphones),
+                    icon:  Icon(Icons.headphones, size: 20.sp,),
                   )
                 ],
               ),
