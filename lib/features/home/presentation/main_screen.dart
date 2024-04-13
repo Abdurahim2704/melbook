@@ -29,7 +29,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-        height: 55.sp,
+        height: 55.h,
         elevation: 0,
         color: const Color(0xffffffff),
         shadowColor: Colors.black,
@@ -48,6 +48,7 @@ class _MainScreenState extends State<MainScreen> {
                           },
                           icon: SvgPicture.asset(
                             items[index],
+                            height: 20.h,
                             colorFilter: ColorFilter.mode(
                                 state.currentIndex == index
                                     ? Colors.black

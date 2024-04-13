@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:melbook/features/auth/data/service/local_service.dart';
 import 'package:melbook/features/auth/presentation/sign_up.dart';
@@ -46,30 +47,30 @@ class _IntroScreenState extends State<IntroScreen> {
                   fit: BoxFit.fill,
                 ),
                 SizedBox(
-                  height: 270,
+                  height: 270.h,
                   width: double.infinity,
                   child: ListView(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     padding: const EdgeInsets.symmetric(horizontal: 50),
                     children: [
-                      const SizedBox(
-                        height: 60,
+                       SizedBox(
+                        height: 60.h,
                       ),
                       Text(
                         titles[i],
                         style:
-                            const TextStyle(color: Colors.white, fontSize: 16),
+                             TextStyle(color: Colors.white, fontSize: 14.sp),
                         textAlign: TextAlign.center,
                       ),
-                      const SizedBox(
-                        height: 20,
+                       SizedBox(
+                        height: 20.h,
                       ),
                       SizedBox(
-                        height: 94,
-                        width: 94,
+                        height: 94.h,
+                        width: 94.h,
                         child: CustomPaint(
-                          size: const Size(94, 94),
+                          size:  Size(94.h, 94.h),
                           painter: IntroPainter(currentPage: i),
                           child: Padding(
                             padding: const EdgeInsets.all(15),
@@ -121,7 +122,7 @@ class IntroPainter extends CustomPainter {
     Path path = Path()
       ..arcTo(
           Rect.fromCircle(
-              center: Offset(width / 2, height / 2), radius: size.width / 7.2),
+              center: Offset(width / 2, height / 2), radius: size.height / 2),
           0,
           pi / 1.505 + currentPage * pi / 1.505,
           false);

@@ -55,7 +55,7 @@ class _HomePage1State extends State<HomePage1> {
         title: Text(
           "Xush kelibsiz ${getIt<AuthRepository>().user?.userName ?? ""}",
           style: TextStyle(
-            fontSize: 18.sp,
+            fontSize: 16.sp,
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
@@ -69,7 +69,7 @@ class _HomePage1State extends State<HomePage1> {
             borderRadius: BorderRadius.circular(100),
           ),
           child: IconButton(
-            icon: const Icon(Icons.person),
+            icon:  Icon(Icons.person, size: 16.sp,),
             onPressed: () {},
           ),
         ),
@@ -77,8 +77,8 @@ class _HomePage1State extends State<HomePage1> {
           IconButton(
             icon: SvgPicture.asset(
               "assets/icons/ic_notification.svg",
-              height: 20.sp,
-              width: 20.sp,
+              height: 17.sp,
+              width: 17.sp,
             ),
             onPressed: () {
               Navigator.push(
@@ -121,8 +121,8 @@ class _HomePage1State extends State<HomePage1> {
 
                       /// #Sub Books
                       Container(
-                        height: screenWidth > 795 ? containerHeight * 1.1 : containerHeight,
-                        width: containerWidth,
+                        height: screenWidth > 795 ? (containerHeight * 1.1 ).h: containerHeight.h,
+                        width: containerWidth.w,
                         decoration: const BoxDecoration(
                           color: Color(0xFFF2F2F2),
                           borderRadius: BorderRadius.only(
@@ -151,15 +151,15 @@ class _HomePage1State extends State<HomePage1> {
                                   child: GridView.builder(
                                     primary: false,
                                     padding: EdgeInsets.symmetric(
-                                      horizontal: 12.w,
-                                      vertical: 12.h,
+                                      horizontal: 10.w,
+                                      vertical: 10.h,
                                     ),
                                     gridDelegate:
                                         SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
                                       childAspectRatio: screenWidth > 795 ? 2 / 2.4 : 2 / 3.3,
-                                      crossAxisSpacing: 12.w,
-                                      mainAxisSpacing: 12.w,
+                                      crossAxisSpacing: 10.w,
+                                      mainAxisSpacing: 10.w,
                                     ),
                                     itemCount: state.books.length,
                                     physics:
