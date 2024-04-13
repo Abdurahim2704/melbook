@@ -144,15 +144,13 @@ class _IngliztilipageState extends State<Ingliztilipage> {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
-        child: Expanded(
-          child: Text(
-            data,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-            textAlign: TextAlign.start,
+        child: Text(
+          data,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
           ),
+          textAlign: TextAlign.start,
         ),
       ),
     );
