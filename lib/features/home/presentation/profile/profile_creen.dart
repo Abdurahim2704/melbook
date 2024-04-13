@@ -23,7 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
-        preferredSize: const Size(double.infinity, 90),
+        preferredSize:  Size(double.infinity, 90.h),
         child: Stack(
           children: [
             const CustomAppBar(
@@ -40,7 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     );
                   },
-                  icon: const Icon(Icons.edit)),
+                  icon:  Icon(Icons.edit, size: 18.sp,)),
             )
           ],
         ),
@@ -49,7 +49,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         builder: (context, state) {
           return ListView(
             children: [
-              const SizedBox(height: 20),
+               SizedBox(height: 20.h),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -106,68 +106,93 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     state.user!.userName,
                     style: TextStyle(fontSize: 14.sp),
                   ),
-                  // trailing: Column(
-                  //   crossAxisAlignment: CrossAxisAlignment.end,
-                  //   mainAxisSize: MainAxisSize.min,
-                  //   children: [
-                  //     Text(trailing[i],
-                  //         style: TextStyle(
-                  //             fontSize: 14.sp, fontWeight: FontWeight.bold)),
-                  //     Text(trailingSub[i], style: TextStyle(fontSize: 14.sp)),
-                  //   ],
-                  // ),
                 ),
                 const SizedBox(height: 10),
-                ListTile(
-                  shape: Border(
-                      top: BorderSide(
-                          color: Colors.grey.withOpacity(0.3), width: 1)),
-                  title: Text(
-                    titles[1],
-                    style:
-                        TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                        top: BorderSide(
+                            color: Colors.grey.withOpacity(0.3), width: 1)),
                   ),
-                  subtitle: Text(
-                    state.user!.name,
-                    style: TextStyle(fontSize: 14.sp),
+                  child: Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: 10.0.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              titles[1],
+                              style:
+                              TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              state.user!.name,
+                              style: TextStyle(fontSize: 14.sp),
+                            ),
+                          ],),
+                        Column(crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(trailing[1],
+                                style: TextStyle(
+                                    fontSize: 14.sp, fontWeight: FontWeight.bold)),
+                            Text(
+                              state.user!.name,
+                              style: TextStyle(fontSize: 14.sp),
+                            ),
+                          ],)
+
+                      ],
+                    ),
                   ),
-                  trailing: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(trailing[1],
-                          style: TextStyle(
-                              fontSize: 14.sp, fontWeight: FontWeight.bold)),
-                      Text(state.user!.surname,
-                          style: TextStyle(fontSize: 14.sp)),
-                    ],
-                  ),
+
                 ),
                 const SizedBox(height: 10),
-                ListTile(
-                  shape: Border(
-                      top: BorderSide(
-                          color: Colors.grey.withOpacity(0.3), width: 1)),
-                  title: Text(
-                    titles[2],
-                    style:
-                        TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                        top: BorderSide(
+                            color: Colors.grey.withOpacity(0.3), width: 1)),
                   ),
-                  subtitle: Text(
-                    state.user!.phoneNumber,
-                    style: TextStyle(fontSize: 14.sp),
+                  child: Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: 10.0.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            titles[2],
+                            style:
+                            TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            state.user!.phoneNumber,
+                            style: TextStyle(fontSize: 14.sp),
+                          ),
+                        ],),
+                        Column(crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(trailing[2],
+                                style: TextStyle(
+                                    fontSize: 14.sp, fontWeight: FontWeight.bold)),
+                            Text(
+                              "Click",
+                              style: TextStyle(fontSize: 14.sp),
+                            ),
+                          ],)
+
+                      ],
+                    ),
                   ),
-                  trailing: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(trailing[2],
-                          style: TextStyle(
-                              fontSize: 14.sp, fontWeight: FontWeight.bold)),
-                      Text(trailingSub[2], style: TextStyle(fontSize: 14.sp)),
-                    ],
-                  ),
+
                 ),
+
+
               ],
               if (current == 1)
                 ListTile(

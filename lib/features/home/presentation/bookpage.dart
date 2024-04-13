@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/home/presentation/views/book_container.dart';
 
 import 'bloc/book/book_bloc.dart';
@@ -18,7 +19,7 @@ class _BookpageState extends State<Bookpage> {
     context.read<BookBloc>().stream.listen((event) {
       if (event is BookFetchError) {
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(event.message)));
+            .showSnackBar(SnackBar(content: Text(event.message, style: TextStyle(fontSize: 14.sp),)));
       }
     });
   }
@@ -32,11 +33,12 @@ class _BookpageState extends State<Bookpage> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
+        title:  Text(
           "Kitoblar",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
+            fontSize: 18.sp,
           ),
         ),
         backgroundColor: Colors.transparent,
@@ -61,8 +63,8 @@ class _BookpageState extends State<Bookpage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const SizedBox(
-                        height: 45,
+                       SizedBox(
+                        height: 45.h,
                       ),
                       Container(
                         height: screenHeight,

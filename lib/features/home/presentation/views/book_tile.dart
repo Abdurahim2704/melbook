@@ -34,18 +34,18 @@ class BookTile extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: book.photoUrl,
                 width: double.infinity,
-                height: 150.h,
+                height: 130.h,
                 fit: BoxFit.fitWidth,
               ),
             ),
-            SizedBox(height: 20.h),
+            SizedBox(height: 15.h),
             Column(
               children: [
                 Text(
                   book.name,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 16.sp,
+                    fontSize: 15.sp,
                   ),
                 ),
                 SizedBox(height: 15.h),
@@ -58,15 +58,18 @@ class BookTile extends StatelessWidget {
                       ),
                     );
                   },
+
                   child: Container(
+                    alignment: Alignment.center,
                     height: 40.h,
                     width: 40.w,
-                    padding: const EdgeInsets.all(7),
+                    padding:  EdgeInsets.only(top:6.sp, left: 7.sp, right: 7.sp, bottom: 9.sp),
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Color(0xFFF2F2F2),
                     ),
-                    child: const Icon(
+                    child:  Icon(
+                      size: 16.sp,
                       Icons.play_arrow,
                       color: Colors.black,
                     ),

@@ -63,10 +63,10 @@ class BookContainer extends StatelessWidget {
                     ),
                     child: Text(
                       bookData.bought ? "O'qish" : "Sotib olish",
-                      style: const TextStyle(
+                      style:  TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                        fontSize: 14.sp,
                       ),
                     ),
                   ),
