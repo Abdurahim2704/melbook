@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:melbook/features/audio/presentation/audio.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
 import 'package:melbook/features/home/presentation/bloc/local_storage/local_storage_bloc.dart';
@@ -100,7 +99,23 @@ class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
                                           builder: (context) {
                                             return AlertDialog(
                                               backgroundColor: Colors.white,
-                                              title: Text("Audioni avval yuklab oling!"),
+                                              title: Center(
+                                                child: Text(
+                                                  "Audioni avval yuklab oling!",
+                                                  style: TextStyle(
+                                                    fontSize: 14.sp,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: const Text("Ok"),
+                                                ),
+                                              ],
                                             );
                                           },
                                         );
@@ -146,9 +161,7 @@ class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
                                           .contains(widget
                                               .bookData.audios![index].name)
                                       ? const Icon(Icons.check)
-                                      : SvgPicture.asset(
-                                          "assets/icons/ic_saved.svg",
-                                        ),
+                                      : const Icon(Icons.cloud_download),
                                 ),
                               ),
                             ],
