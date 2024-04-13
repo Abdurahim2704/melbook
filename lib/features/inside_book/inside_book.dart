@@ -1,7 +1,7 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:melbook/features/audio/audio.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
 
 class InsideBook extends StatefulWidget {
@@ -29,7 +29,7 @@ class _InsideBookState extends State<InsideBook> {
                 children: [
                   BackButton(),
                   IconButton(onPressed: () {
-
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => AudioScreen(),));
                   }, icon: Icon(Icons.headphones))
                 ],
               ),

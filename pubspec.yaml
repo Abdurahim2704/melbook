@@ -33,6 +33,9 @@ dependencies:
   flutter_carousel_widget: ^2.2.0
   lottie: ^3.1.0
   cached_network_image: ^3.3.1
+  audio_video_progress_bar: ^2.0.2
+  just_audio_background: ^0.0.1-beta.11
+  rxdart: ^0.27.7
 #splash screen ning parametrlari
 flutter_native_splash:
   android: true
@@ -61,6 +64,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/lottie/
+    - assets/audio/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
