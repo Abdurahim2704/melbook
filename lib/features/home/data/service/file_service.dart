@@ -45,19 +45,19 @@ class LocalService {
     );
     print("Status code: ${result.statusCode}");
     if (result.statusCode == 200) {
-      final file = File(filePath);
-      await LocalAudioService.saveAudio(fileName, filePath, book);
+      // final file = File(filePath);
+      await LocalAudioService.saveAudio(fileName, "$filePath.mp3", book);
       print(result);
     }
 
     return value;
   }
 
-  double _getFileSize(File file) {
-    int sizeInBytes = file.lengthSync();
-    double sizeInMb = sizeInBytes / (1024 * 1024);
-    return sizeInMb;
-  }
+  // double _getFileSize(File file) {
+  //   int sizeInBytes = file.lengthSync();
+  //   double sizeInMb = sizeInBytes / (1024 * 1024);
+  //   return sizeInMb;
+  // }
 
   Future<void> deleteFile(String filePath) async {
     final file = File(filePath);

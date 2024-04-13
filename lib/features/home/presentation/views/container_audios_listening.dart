@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:melbook/features/audio/presentation/audio.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
 import 'package:melbook/features/home/presentation/bloc/local_storage/local_storage_bloc.dart';
 
@@ -73,7 +74,18 @@ class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
                           Row(
                             children: [
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => AudioScreen(
+                                          filePath: state.audios.firstWhere(
+                                              (element) => (element["name"] ==
+                                                  widget.bookData.audios![index]
+                                                      .name))["location"],
+                                        ),
+                                      ));
+                                },
                                 child: Container(
                                   padding: EdgeInsets.all(6.sp),
                                   decoration: const BoxDecoration(

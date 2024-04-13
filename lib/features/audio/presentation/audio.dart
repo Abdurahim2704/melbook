@@ -8,7 +8,9 @@ import 'package:melbook/shared/widgets/app_bar.dart';
 import 'package:rxdart/rxdart.dart';
 
 class AudioScreen extends StatefulWidget {
-  const AudioScreen({super.key});
+  final String filePath;
+
+  const AudioScreen({super.key, required this.filePath});
 
   @override
   State<AudioScreen> createState() => _AudioScreenState();
@@ -32,7 +34,7 @@ class _AudioScreenState extends State<AudioScreen> {
 
   @override
   void initState() {
-    _audioPlayer = AudioPlayer()..setAsset("assets/audio/testing.mp3");
+    _audioPlayer = AudioPlayer()..setFilePath(widget.filePath);
     super.initState();
   }
 
@@ -45,7 +47,7 @@ class _AudioScreenState extends State<AudioScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+        backgroundColor: Colors.white,
         appBar: PreferredSize(
           preferredSize: Size(double.infinity, 80.w),
           child: Stack(
