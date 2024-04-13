@@ -1,25 +1,29 @@
 part of 'local_storage_bloc.dart';
 
 sealed class LocalStorageState {
-  const LocalStorageState();
+  final List<Map<String, dynamic>> audios;
+
+  const LocalStorageState(this.audios);
 }
 
-final class LocalStorageInitial extends LocalStorageState {}
+final class LocalStorageInitial extends LocalStorageState {
+  LocalStorageInitial(super.audios);
+}
 
-class DownloadSuccess extends LocalStorageState {}
+class DownloadSuccess extends LocalStorageState {
+  DownloadSuccess(super.audios);
+}
 
 class DownloadFailed extends LocalStorageState {
   final String message;
 
-  const DownloadFailed({required this.message});
+  const DownloadFailed(super.audios, {required this.message});
 }
 
-class DownloadWaiting extends LocalStorageState {}
+class DownloadWaiting extends LocalStorageState {
+  DownloadWaiting(super.audios);
+}
 
 class GetAllAudiosSuccess extends LocalStorageState {
-  final List<Map<String, dynamic>> audios;
-
-  const GetAllAudiosSuccess({
-    required this.audios,
-  });
+  const GetAllAudiosSuccess(super.audios);
 }

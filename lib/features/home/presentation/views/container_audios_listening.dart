@@ -1,94 +1,136 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
+import 'package:melbook/features/home/presentation/bloc/local_storage/local_storage_bloc.dart';
 
-class ContainerAudiosListening extends StatelessWidget {
+class ContainerAudiosListening extends StatefulWidget {
   final BookData bookData;
 
   const ContainerAudiosListening({super.key, required this.bookData});
 
   @override
+  State<ContainerAudiosListening> createState() =>
+      _ContainerAudiosListeningState();
+}
+
+class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<LocalStorageBloc>().stream.listen((event) {
+      if (event is DownloadSuccess) {
+        print("I am here");
+        print(event.audios);
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: EdgeInsets.only(bottom: 10.h, left: 12.w, right: 12.w),
-      itemCount: bookData.audios?.length,
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: () {},
-          child: Container(
-            height: 114.h,
-            margin: const EdgeInsets.symmetric(vertical: 10),
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              children: [
-                CachedNetworkImage(
-                  imageUrl: bookData.photoUrl,
-                  width: 73.w,
-                  height: 104.h,
-                  fit: BoxFit.fill,
+    return BlocBuilder<LocalStorageBloc, LocalStorageState>(
+      builder: (context, state) {
+        return ListView.builder(
+          padding: EdgeInsets.only(bottom: 10.h, left: 12.w, right: 12.w),
+          itemCount: widget.bookData.audios?.length,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {},
+              child: Container(
+                height: 114.h,
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                SizedBox(width: 20.w),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          bookData.audios?[index].name ?? "",
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 19,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      Row(
+                child: Row(
+                  children: [
+                    CachedNetworkImage(
+                      imageUrl: widget.bookData.photoUrl,
+                      width: 73.w,
+                      height: 104.h,
+                      fit: BoxFit.fill,
+                    ),
+                    SizedBox(width: 20.w),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              padding: const EdgeInsets.all(10),
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Color(0xFFF2F2F2),
-                              ),
-                              child: const Icon(
-                                Icons.play_arrow,
-                                color: Colors.black,
+                          Flexible(
+                            child: Text(
+                              widget.bookData.audios?[index].name ?? "",
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 19,
                               ),
                             ),
                           ),
-                          SizedBox(width: 22.w),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              padding: const EdgeInsets.all(12),
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Color(0xFFF2F2F2),
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              GestureDetector(
+                                onTap: () {},
+                                child: Container(
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Color(0xFFF2F2F2),
+                                  ),
+                                  child: const Icon(
+                                    Icons.play_arrow,
+                                    color: Colors.black,
+                                  ),
+                                ),
                               ),
-                              child: SvgPicture.asset(
-                                "assets/icons/ic_saved.svg",
-                                height: 22.h,
-                                width: 22.w,
+                              SizedBox(width: 22.w),
+                              GestureDetector(
+                                onTap: () {
+                                  print(state.audios);
+                                  print(state.audios
+                                      .map((e) => e["name"])
+                                      .toList());
+                                  context.read<LocalStorageBloc>().add(
+                                        DownloadFileAndSave(
+                                            link: widget.bookData.audios![index]
+                                                .audioUrl,
+                                            name: widget
+                                                .bookData.audios![index].name,
+                                            book: widget.bookData.name),
+                                      );
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(12),
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Color(0xFFF2F2F2),
+                                  ),
+                                  child: state.audios
+                                          .map((e) => e["name"])
+                                          .toList()
+                                          .contains(widget
+                                              .bookData.audios![index].name)
+                                      ? const Icon(Icons.check)
+                                      : SvgPicture.asset(
+                                          "assets/icons/ic_saved.svg",
+                                          height: 22.h,
+                                          width: 22.w,
+                                        ),
+                                ),
                               ),
-                            ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         );
       },
     );

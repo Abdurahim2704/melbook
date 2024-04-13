@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
 import 'package:melbook/features/home/presentation/inside_book.dart';
+import 'package:melbook/features/home/presentation/readingbook/ingliztili/finalview.dart';
 import 'package:melbook/features/home/presentation/views/books_description.dart';
 import 'package:melbook/features/home/presentation/views/container_audios_listening.dart';
 
@@ -93,7 +94,12 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                           ),
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const FinalView()));
+                          },
                           child: Container(
                             padding: const EdgeInsets.all(11),
                             margin: const EdgeInsets.only(top: 10),
@@ -181,7 +187,14 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                     },
                     children: [
                       BookDescriptionContainer(data: widget.book.description),
-                      ContainerAudiosListening(bookData: widget.book),
+                      widget.book.bought
+                          ? ContainerAudiosListening(bookData: widget.book)
+                          : const Center(
+                              child: Text(
+                                "Tinglash uchun kitobni sotib oling",
+                                style: TextStyle(fontSize: 19),
+                              ),
+                            ),
                     ],
                   ),
                 ),
