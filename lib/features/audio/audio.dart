@@ -17,7 +17,10 @@ class AudioScreen extends StatefulWidget {
 
 class _AudioScreenState extends State<AudioScreen> {
   late AudioPlayer _audioPlayer;
-
+///checking
+  ///
+  ///
+  bool isKaraoke = false;
   Stream<PositionData> get _positionDataStream =>
       Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
           _audioPlayer.positionStream,
@@ -56,11 +59,10 @@ class _AudioScreenState extends State<AudioScreen> {
                     const BackButton(),
                     IconButton(
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const KaraokePage(),
-                              ));
+                          isKaraoke = !isKaraoke;
+                          setState(() {
+
+                          });
                         },
                         icon: const Icon(Icons.fullscreen))
                   ],
@@ -78,15 +80,29 @@ class _AudioScreenState extends State<AudioScreen> {
                 SizedBox(
                   height: 30.h,
                 ),
-                Center(
+              if(!isKaraoke)  Center(
                   child: SizedBox(
                     height: 400.h,
                     width: 400.w,
                     child: Image.asset("assets/images/ingliztili.png"),
                   ),
                 ),
+                if(isKaraoke)
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.orange)
+                    ),
+                    height: 420.h,
+                    child: SingleChildScrollView(
+                      child: Text(textAlign: TextAlign.justify,
+                        "The high demand for fairy tale books was further facilitated by the emergence of many new publishing houses during the late 19th and early 20th centuries. Then the onset of World War I brought about inflation, leading to resource rationing and a shortage of paper, consequently leading to a reduced book production.[20] The aftermath of the war, later coupled with the Great Depression, further exacerbated the situation, causing a decline in demand for both fairy tales and books in general.[21] A few years later, fairy tales quickly gained popularity again. In 1937, Walt Disney, being aware of the public's desire for an escape from the turmoil of a war-torn and economically strained world, introduced an era of fairy tale movies.and"
+                            "being aware of the public's desire for an escape from the turmoil of a war-torn and economically strained world, introduced an era of fairy tale movies.and  ",
+                        style: TextStyle(fontSize: 14.sp),),),
+                  ),
                 SizedBox(
-                  height: 40.h,
+                  height:isKaraoke ? 20.h : 40.h,
                 ),
                 const Text(
                   "Ingliz tili",
