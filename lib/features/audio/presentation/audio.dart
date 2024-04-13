@@ -133,7 +133,7 @@ class _AudioScreenState extends State<AudioScreen> {
                 children: [
                   IconButton(
                     onPressed: () {
-                      _audioPlayer.setAsset("assets/audio/testing.mp3");
+                      _audioPlayer.setFilePath(widget.filePath);
                     },
                     icon: const Icon(Icons.repeat),
                   ),
@@ -144,10 +144,9 @@ class _AudioScreenState extends State<AudioScreen> {
                         onPressed: () {},
                         icon: const Icon(Icons.skip_previous_rounded),
                       ),
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.orange,
-                        child: Controls(audioPlayer: _audioPlayer),
+                      Controls(
+                        audioPlayer: _audioPlayer,
+                        filePath: widget.filePath,
                       ),
                       IconButton(
                         onPressed: () {},
@@ -210,8 +209,10 @@ class _AudioScreenState extends State<AudioScreen> {
 
 class Controls extends StatelessWidget {
   final AudioPlayer audioPlayer;
+  final String filePath;
 
-  const Controls({super.key, required this.audioPlayer});
+  const Controls(
+      {super.key, required this.audioPlayer, required this.filePath});
 
   @override
   Widget build(BuildContext context) {
@@ -224,20 +225,27 @@ class Controls extends StatelessWidget {
         if (!(playing ?? false)) {
           return GestureDetector(
             onTap: audioPlayer.play,
-            child: const Icon(Icons.play_arrow_rounded),
+            child: CircleAvatar(
+                backgroundColor: Colors.orange,
+                radius: 30,
+                child: const Icon(Icons.play_arrow_rounded)),
           );
         } else if (processingState != ProcessingState.completed) {
           return GestureDetector(
             onTap: audioPlayer.pause,
-            child: const Icon(
-              Icons.pause_rounded,
-              color: Colors.black,
+            child: CircleAvatar(
+              backgroundColor: Colors.orange,
+              radius: 30,
+              child: const Icon(
+                Icons.pause_rounded,
+                color: Colors.black,
+              ),
             ),
           );
         }
         return GestureDetector(
           onTap: () {
-            audioPlayer.setAsset("assets/audio/testing.mp3");
+            audioPlayer.setFilePath(filePath);
             audioPlayer.play;
           },
           child: const Icon(
