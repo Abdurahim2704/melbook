@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
-import 'package:melbook/features/profile/presentation/update_profile.dart';
+import 'package:melbook/features/home/presentation/profile/update_profile.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -15,8 +15,6 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   int current = 0;
   List<String> titles = ["Foydalanuvchi nomi", "Ism", "Telefon raqam"];
-
-  // List<String> subTitles = ["Ismoilov", "Zafar", "+998936353855"];
   List<String> trailing = ["", "Familiya", "To'lov turi"];
   List<String> trailingSub = ["", "Ismoilov", "PayMe"];
 
@@ -24,7 +22,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size(double.infinity, 90),
+        preferredSize: const Size(double.infinity, 90),
         child: Stack(
           children: [
             const CustomAppBar(

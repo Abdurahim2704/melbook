@@ -9,9 +9,9 @@ import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart
 import 'package:melbook/features/home/presentation/views/book_tile.dart';
 import 'package:melbook/features/home/widgets/header_carousel.dart';
 import 'package:melbook/locator.dart';
-import 'package:melbook/presentation/screens/notification/notification_screen.dart';
 
 import 'bloc/book/book_bloc.dart';
+import 'notification/notification_screen.dart';
 
 class HomePage1 extends StatefulWidget {
   HomePage1({super.key});

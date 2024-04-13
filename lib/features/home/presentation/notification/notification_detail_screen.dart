@@ -5,9 +5,9 @@ import 'package:lottie/lottie.dart';
 import 'package:melbook/features/home/data/models/notification.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
 
-import '../../../features/auth/domain/repositories/auth_repository.dart';
-import '../../../features/home/data/service/notification_service.dart';
-import '../../../locator.dart';
+import '../../../../locator.dart';
+import '../../../auth/domain/repositories/auth_repository.dart';
+import '../../data/service/notification_service.dart';
 
 class NotificationDetailScreen extends StatefulWidget {
   final String notificationId;

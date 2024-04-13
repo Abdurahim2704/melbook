@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
-import 'package:melbook/features/home/presentation/views/ingliztilipage.dart';
+import 'package:melbook/features/home/presentation/ingliztilipage.dart';
 
 class BookContainer extends StatelessWidget {
   final BookData bookData;

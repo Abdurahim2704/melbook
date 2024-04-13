@@ -4,11 +4,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:melbook/features/home/data/models/notification.dart' as notif;
 import 'package:melbook/locator.dart';
-import 'package:melbook/presentation/screens/notification/notification_detail_screen.dart';
 
-import '../../../features/auth/domain/repositories/auth_repository.dart';
-import '../../../features/home/data/service/notification_service.dart';
-import '../../../shared/widgets/app_bar.dart';
+import '../../../../shared/widgets/app_bar.dart';
+import '../../../auth/domain/repositories/auth_repository.dart';
+import '../../data/service/notification_service.dart';
+import 'notification_detail_screen.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});

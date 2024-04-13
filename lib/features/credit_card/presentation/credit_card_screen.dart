@@ -22,6 +22,7 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
     TextEditingController(),
     TextEditingController(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +78,8 @@ class _CreditCardScreenState extends State<CreditCardScreen> {
               style: TextStyle(
                 fontSize: 16.sp,
                 color: const Color(0xFF201A21),
-              ), controller: controllers[2],
+              ),
+              controller: controllers[2],
             ),
           ],
         ),

@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:melbook/features/inside_book/inside_book.dart';
+import 'package:melbook/features/home/presentation/inside_book.dart';
 
 class Ingliztilipage extends StatefulWidget {
   const Ingliztilipage({super.key});
@@ -52,7 +51,11 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => InsideBook(),));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => InsideBook(),
+                              ));
                         },
                         child: Image.asset(
                           'assets/images/ingliztili.png',

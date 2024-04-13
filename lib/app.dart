@@ -6,8 +6,8 @@ import 'package:melbook/features/auth/data/service/local_service.dart';
 import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:melbook/features/auth/presentation/sign_up.dart';
 import 'package:melbook/features/home/presentation/bloc/book/book_bloc.dart';
-import 'package:melbook/features/main/presentation/bloc/main_bloc.dart';
-import 'package:melbook/features/main/presentation/main_screen.dart';
+import 'package:melbook/features/home/presentation/bloc/main_bloc/main_bloc.dart';
+import 'package:melbook/features/home/presentation/main_screen.dart';
 import 'package:melbook/locator.dart';
 
 import 'features/auth/presentation/intro.dart';
