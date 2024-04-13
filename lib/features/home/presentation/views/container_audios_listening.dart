@@ -63,19 +63,19 @@ class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
                           Flexible(
                             child: Text(
                               widget.bookData.audios?[index].name ?? "",
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 19,
+                                fontSize: 12.sp,
                               ),
                             ),
                           ),
-                          const SizedBox(height: 10),
+                          SizedBox(height: 10.h),
                           Row(
                             children: [
                               GestureDetector(
                                 onTap: () {},
                                 child: Container(
-                                  padding: const EdgeInsets.all(10),
+                                  padding: EdgeInsets.all(6.sp),
                                   decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Color(0xFFF2F2F2),
@@ -95,15 +95,16 @@ class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
                                       .toList());
                                   context.read<LocalStorageBloc>().add(
                                         DownloadFileAndSave(
-                                            link: widget.bookData.audios![index]
-                                                .audioUrl,
-                                            name: widget
-                                                .bookData.audios![index].name,
-                                            book: widget.bookData.name),
+                                          link: widget
+                                              .bookData.audios![index].audioUrl,
+                                          name: widget
+                                              .bookData.audios![index].name,
+                                          book: widget.bookData.name,
+                                        ),
                                       );
                                 },
                                 child: Container(
-                                  padding: const EdgeInsets.all(12),
+                                  padding: EdgeInsets.all(6.sp),
                                   decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Color(0xFFF2F2F2),
@@ -116,8 +117,6 @@ class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
                                       ? const Icon(Icons.check)
                                       : SvgPicture.asset(
                                           "assets/icons/ic_saved.svg",
-                                          height: 22.h,
-                                          width: 22.w,
                                         ),
                                 ),
                               ),

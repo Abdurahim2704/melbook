@@ -55,31 +55,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   SizedBox(width: 20.w),
                   TextButton(
-                      style: TextButton.styleFrom(
-                          backgroundColor:
-                              current == 0 ? Colors.black : Colors.transparent),
-                      onPressed: () {
-                        current = 0;
-                        setState(() {});
-                      },
-                      child: Text(
-                        "Asosiy",
-                        style: TextStyle(
-                            color: current == 0 ? Colors.white : Colors.black),
-                      )),
+                    style: TextButton.styleFrom(
+                        backgroundColor:
+                            current == 0 ? Colors.black : Colors.transparent),
+                    onPressed: () {
+                      current = 0;
+                      setState(() {});
+                    },
+                    child: Text(
+                      "Asosiy",
+                      style: TextStyle(
+                        color: current == 0 ? Colors.white : Colors.black,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15.sp,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 20.w),
                   TextButton(
-                      style: TextButton.styleFrom(
-                          backgroundColor:
-                              current == 1 ? Colors.black : Colors.transparent),
-                      onPressed: () {
-                        current = 1;
-                        setState(() {});
-                      },
-                      child: Text(
-                        "To'lov",
-                        style: TextStyle(
-                            color: current == 1 ? Colors.white : Colors.black),
-                      )),
+                    style: TextButton.styleFrom(
+                        backgroundColor:
+                            current == 1 ? Colors.black : Colors.transparent),
+                    onPressed: () {
+                      current = 1;
+                      setState(() {});
+                    },
+                    child: Text(
+                      "To'lov",
+                      style: TextStyle(
+                        color: current == 1 ? Colors.white : Colors.black,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15.sp,
+                      ),
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: 20),
@@ -108,6 +117,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   //   ],
                   // ),
                 ),
+                const SizedBox(height: 10),
                 ListTile(
                   shape: Border(
                       top: BorderSide(
@@ -133,6 +143,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ],
                   ),
                 ),
+                const SizedBox(height: 10),
                 ListTile(
                   shape: Border(
                       top: BorderSide(

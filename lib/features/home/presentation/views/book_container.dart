@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
 import 'package:melbook/features/home/presentation/ingliztilipage.dart';
 
@@ -21,7 +22,7 @@ class BookContainer extends StatelessWidget {
             ));
       },
       child: Container(
-        height: 114,
+        height: 114.h,
         margin: const EdgeInsets.all(10),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
@@ -32,11 +33,11 @@ class BookContainer extends StatelessWidget {
           children: [
             CachedNetworkImage(
               imageUrl: bookData.photoUrl,
-              width: 73,
-              height: 100,
+              width: 73.w,
+              height: 100.h,
               fit: BoxFit.cover,
             ),
-            const SizedBox(width: 10),
+            SizedBox(width: 12.w),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -45,17 +46,17 @@ class BookContainer extends StatelessWidget {
                   Flexible(
                     child: Text(
                       bookData.name,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 19,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16.sp,
                       ),
                     ),
                   ),
                   const SizedBox(height: 10),
                   Container(
                     alignment: Alignment.center,
-                    height: 30,
-                    width: 113,
+                    height: 30.h,
+                    width: 113.w,
                     decoration: BoxDecoration(
                       color: Colors.amber,
                       borderRadius: BorderRadius.circular(24),
@@ -75,7 +76,7 @@ class BookContainer extends StatelessWidget {
             GestureDetector(
               onTap: () {},
               child: Container(
-                padding: const EdgeInsets.all(7),
+                padding: EdgeInsets.all(7.sp),
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.blue,

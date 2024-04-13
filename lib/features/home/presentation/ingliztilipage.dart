@@ -49,11 +49,13 @@ class _IngliztilipageState extends State<Ingliztilipage> {
           Row(
             children: [
               IconButton(
+                iconSize: 20.sp,
                 onPressed: () {
                   Navigator.pop(context);
                 },
                 icon: const Icon(Icons.arrow_back),
               ),
+              SizedBox(width: 10.w),
               Padding(
                 padding: EdgeInsets.only(top: 60.h),
                 child: Container(
@@ -83,7 +85,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                             width: screenWidth * 0.25,
                           ),
                         ),
-                        const SizedBox(width: 13),
+                        SizedBox(width: 13.w),
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,7 +137,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
             ],
           ),
           Container(
-            height: 500.h,
+            height: 520.h,
             color: const Color(0xFFF2F2F2),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -159,6 +161,8 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                         style: TextStyle(
                           color:
                               _currentPage == 0 ? Colors.white : Colors.black,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12.sp,
                         ),
                       ),
                     ),
@@ -175,6 +179,8 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                         style: TextStyle(
                           color:
                               _currentPage == 1 ? Colors.white : Colors.black,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12.sp,
                         ),
                       ),
                     ),
