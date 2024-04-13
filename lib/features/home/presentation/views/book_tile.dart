@@ -16,7 +16,7 @@ class BookTile extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.w),
       width: bookImageWidth.w,
-      height: 114,
+      height: 200.h,
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -26,8 +26,8 @@ class BookTile extends StatelessWidget {
         children: [
           CachedNetworkImage(
             imageUrl: book.photoUrl,
-            width: 73,
-            height: 100,
+            width: 100.w,
+            height: 140.h,
             fit: BoxFit.cover,
           ),
           const SizedBox(width: 10),

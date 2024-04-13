@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
@@ -12,7 +11,6 @@ import 'package:melbook/features/home/widgets/header_carousel.dart';
 import 'package:melbook/locator.dart';
 
 import 'bloc/book/book_bloc.dart';
-import 'notification/notification_screen.dart';
 
 class HomePage1 extends StatefulWidget {
   HomePage1({super.key});
@@ -167,47 +165,6 @@ class _HomePage1State extends State<HomePage1> {
                                 margin: const EdgeInsets.only(left: 18),
                                 alignment: Alignment.centerLeft,
                                 child: const Text(
-                                  'Tavsiyalar',
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 1.3),
-                                ),
-                              ),
-                              const SizedBox(height: 12),
-                              BlocBuilder<BookBloc, BookState>(
-                                builder: (context, state) {
-                                  return SizedBox(
-                                    height: 150,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: state.books.length,
-                                      itemBuilder: (context, index) {
-                                        final book = state.books[index];
-                                        return Container(
-                                          height: 150,
-                                          width: imageWidth,
-                                          margin: const EdgeInsets.all(10),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                              image: DecorationImage(
-                                                image:
-                                                    CachedNetworkImageProvider(
-                                                        book.photoUrl),
-                                                fit: BoxFit.cover,
-                                              )),
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
-                              ),
-                              const SizedBox(height: 20),
-                              Container(
-                                margin: const EdgeInsets.only(left: 18),
-                                alignment: Alignment.centerLeft,
-                                child: const Text(
                                   'Kitoblar',
                                   style: TextStyle(
                                       fontSize: 17,
@@ -219,7 +176,7 @@ class _HomePage1State extends State<HomePage1> {
                               BlocBuilder<BookBloc, BookState>(
                                 builder: (context, state) {
                                   return SizedBox(
-                                    height: 150,
+                                    height: 200.h,
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       itemCount: state.books.length,
