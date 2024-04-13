@@ -37,8 +37,6 @@ class BookData extends Equatable {
   });
 
   factory BookData.fromJson(Map<String, Object?> json) {
-    print("??????????");
-    print(json);
     final id = json['_id'] as String;
     final name = json['name'] as String;
     final photoUrl = json['photo_url'] as String;
