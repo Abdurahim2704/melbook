@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
 import 'package:melbook/features/home/presentation/inside_book.dart';
+import 'package:melbook/features/home/presentation/views/books_description.dart';
+import 'package:melbook/features/home/presentation/views/container_audios_listening.dart';
 
 class Ingliztilipage extends StatefulWidget {
   final BookData book;
@@ -14,32 +16,39 @@ class Ingliztilipage extends StatefulWidget {
 }
 
 class _IngliztilipageState extends State<Ingliztilipage> {
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _changePage(int page) {
+    setState(() {
+      _currentPage = page;
+    });
+    _pageController.animateToPage(
+      page,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.ease,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Colors.black38,
+      backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          widget.book.name,
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.white),
-      ),
-      body: SingleChildScrollView(
+      body: Expanded(
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(top: screenHeight * 0.15),
+              padding: EdgeInsets.only(top: 60.h),
               child: Container(
                 decoration: const BoxDecoration(
                   color: Colors.white,
@@ -56,10 +65,11 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => InsideBook(),
-                              ));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const InsideBook(),
+                            ),
+                          );
                         },
                         child: CachedNetworkImage(
                           imageUrl: widget.book.photoUrl,
@@ -67,44 +77,43 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                         ),
                       ),
                       const SizedBox(width: 13),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.book.name,
-                              style: const TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                              ),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.book.name,
+                            style: TextStyle(
+                              fontSize: 21.sp,
+                              fontWeight: FontWeight.w600,
                             ),
-                            const Text(
-                              "part 1",
-                              style: TextStyle(
-                                fontSize: 18,
-                              ),
+                          ),
+                          Text(
+                            widget.book.author,
+                            style: TextStyle(
+                              fontSize: 15.sp,
                             ),
-                            InkWell(
-                              onTap: () {},
-                              child: Container(
-                                padding: const EdgeInsets.all(11),
-                                margin: const EdgeInsets.only(top: 10),
-                                decoration: BoxDecoration(
-                                  color: Colors.amber,
-                                  borderRadius: BorderRadius.circular(70),
+                          ),
+                          InkWell(
+                            onTap: () {},
+                            child: Container(
+                              padding: const EdgeInsets.all(11),
+                              margin: const EdgeInsets.only(top: 10),
+                              decoration: BoxDecoration(
+                                color: Colors.amber,
+                                borderRadius: BorderRadius.circular(70),
+                              ),
+                              child: Text(
+                                widget.book.bought ? "O'qish" : "Sotib olish",
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
                                 ),
-                                child: Text(
-                                  widget.book.bought ? "O'qish" : "Sotib olish",
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                       const CircleAvatar(
                         radius: 24,
@@ -117,40 +126,71 @@ class _IngliztilipageState extends State<Ingliztilipage> {
               ),
             ),
             Container(
+              height: 580.h,
               color: const Color(0xFFF2F2F2),
-              child: ListView.builder(
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 1,
-                itemBuilder: (context, index) =>
-                    customContainer(context, widget.book.description),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(height: 10.h),
+
+                  /// #Header PageView Buttons
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: _currentPage == 0
+                              ? Colors.black
+                              : Colors.transparent,
+                          fixedSize: Size(170.w, 30.h),
+                        ),
+                        onPressed: () => _changePage(0),
+                        child: Text(
+                          "Batafsil",
+                          style: TextStyle(
+                            color:
+                                _currentPage == 0 ? Colors.white : Colors.black,
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: _currentPage == 1
+                              ? Colors.black
+                              : Colors.transparent,
+                          fixedSize: Size(170.w, 30.h),
+                        ),
+                        onPressed: () => _changePage(1),
+                        child: Text(
+                          "Tinglab o'qish",
+                          style: TextStyle(
+                            color:
+                                _currentPage == 1 ? Colors.white : Colors.black,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  /// #PageView SubContent
+                  Expanded(
+                    child: PageView(
+                      controller: _pageController,
+                      onPageChanged: (page) {
+                        setState(() {
+                          _currentPage = page;
+                        });
+                      },
+                      children: [
+                        BookDescriptionContainer(data: widget.book.description),
+                        ContainerAudiosListening(bookData: widget.book),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget customContainer(BuildContext context, String data) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8.w),
-      width: 315,
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 15),
-        child: Text(
-          data,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
-          textAlign: TextAlign.start,
         ),
       ),
     );

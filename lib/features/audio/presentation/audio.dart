@@ -45,6 +45,7 @@ class _AudioScreenState extends State<AudioScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
         appBar: PreferredSize(
           preferredSize: Size(double.infinity, 80.w),
           child: Stack(
@@ -89,7 +90,7 @@ class _AudioScreenState extends State<AudioScreen> {
                   ),
                 if (isKaraoke)
                   Container(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(color: Colors.orange)),
@@ -134,7 +135,7 @@ class _AudioScreenState extends State<AudioScreen> {
                       children: [
                         IconButton(
                             onPressed: () {},
-                            icon: Icon(Icons.skip_previous_rounded)),
+                            icon: const Icon(Icons.skip_previous_rounded)),
                         CircleAvatar(
                           radius: 30,
                           backgroundColor: Colors.orange,
@@ -142,10 +143,10 @@ class _AudioScreenState extends State<AudioScreen> {
                         ),
                         IconButton(
                             onPressed: () {},
-                            icon: Icon(Icons.skip_next_rounded)),
+                            icon: const Icon(Icons.skip_next_rounded)),
                       ],
                     ),
-                    IconButton(onPressed: () {}, icon: SizedBox())
+                    IconButton(onPressed: () {}, icon: const SizedBox())
                   ],
                 ),
                 SizedBox(

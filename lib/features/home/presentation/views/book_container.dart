@@ -45,7 +45,7 @@ class BookContainer extends StatelessWidget {
                   Flexible(
                     child: Text(
                       bookData.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 19,
                       ),
