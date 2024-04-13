@@ -12,7 +12,6 @@ class Saved extends StatefulWidget {
 }
 
 class _SavedState extends State<Saved> {
-
   @override
   void initState() {
     super.initState();
