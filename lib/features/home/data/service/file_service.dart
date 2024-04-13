@@ -46,7 +46,7 @@ class LocalService {
     print("Status code: ${result.statusCode}");
     if (result.statusCode == 200) {
       final file = File(filePath);
-      await LocalAudioService.saveAudio(fileName, filePath, book);
+      await LocalAudioService.saveAudio(fileName, "$filePath.mp3", book);
       print(result);
     }
 
