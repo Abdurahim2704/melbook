@@ -21,6 +21,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: const Size(double.infinity, 90),
         child: Stack(
@@ -33,12 +34,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: IconButton(
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => UpdateProfile(),
-                        ));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const UpdateProfile(),
+                      ),
+                    );
                   },
-                  icon: Icon(Icons.edit)),
+                  icon: const Icon(Icons.edit)),
             )
           ],
         ),
@@ -178,33 +180,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Padding(
                   padding: const EdgeInsets.all(18.0),
                   child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "To'lovlar",
-                          style: TextStyle(
-                              fontSize: 16.sp, fontWeight: FontWeight.bold),
-                        ),
-                        for (int i = 0; i < 3; i++)
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Arab tili",
-                                style: TextStyle(fontSize: 14.sp, height: 2),
-                              ),
-                              Text(
-                                "12/02/2003",
-                                style: TextStyle(fontSize: 14.sp, height: 2),
-                              ),
-                              Text(
-                                "580 000",
-                                style: TextStyle(fontSize: 14.sp, height: 2),
-                              ),
-                            ],
-                          )
-                      ]),
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "To'lovlar",
+                        style: TextStyle(
+                            fontSize: 16.sp, fontWeight: FontWeight.bold),
+                      ),
+                      for (int i = 0; i < 3; i++)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Arab tili",
+                              style: TextStyle(fontSize: 14.sp, height: 2),
+                            ),
+                            Text(
+                              "12/02/2003",
+                              style: TextStyle(fontSize: 14.sp, height: 2),
+                            ),
+                            Text(
+                              "580 000",
+                              style: TextStyle(fontSize: 14.sp, height: 2),
+                            ),
+                          ],
+                        )
+                    ],
+                  ),
                 )
             ],
           );
