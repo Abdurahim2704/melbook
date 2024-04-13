@@ -5,12 +5,13 @@ import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
+import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:melbook/features/home/presentation/views/book_tile.dart';
 import 'package:melbook/features/home/widgets/header_carousel.dart';
 import 'package:melbook/locator.dart';
-import 'package:melbook/presentation/screens/notification/notification_screen.dart';
 
 import 'bloc/book/book_bloc.dart';
+import 'notification/notification_screen.dart';
 
 class HomePage1 extends StatefulWidget {
   HomePage1({super.key});
@@ -30,6 +31,12 @@ class _HomePage1State extends State<HomePage1> {
   void initState() {
     super.initState();
     context.read<BookBloc>().add(GetAllBooks());
+    context.read<AuthBloc>().stream.listen((event) {
+      if (event.message != null) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(event.message!)));
+      }
+    });
   }
 
   @override

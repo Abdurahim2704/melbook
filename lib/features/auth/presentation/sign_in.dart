@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:melbook/features/main/presentation/main_screen.dart';
+import 'package:melbook/features/home/presentation/main_screen.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
 import 'package:melbook/shared/widgets/auth_textfield.dart';
 import 'package:melbook/shared/widgets/auth_textfield_header.dart';
@@ -89,11 +89,11 @@ class _SignInState extends State<SignIn> {
       bottomNavigationBar: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is SignInSuccessState) {
-            Navigator.pushReplacement(
+            Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const MainScreen(),
-                ));
+                  builder: (context) => const MainScreen()
+                ), (route) => false,);
           }
         },
         builder: (context, state) {
