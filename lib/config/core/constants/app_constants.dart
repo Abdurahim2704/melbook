@@ -27,5 +27,5 @@ sealed class AppConstants {
 
   static const apiCreatePaymentByClick = "/payments//click/create";
 
-  static const apiCheckClickPayment = "/payments//click/153946835";
+  static const apiCheckClickPayment = "/payments//click";
 }

@@ -45,83 +45,92 @@ class _IngliztilipageState extends State<Ingliztilipage> {
       extendBodyBehindAppBar: true,
       body: Column(
         children: [
-          Padding(
-            padding: EdgeInsets.only(top: 60.h),
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(36),
-                  topLeft: Radius.circular(36),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const InsideBook(),
-                          ),
-                        );
-                      },
-                      child: CachedNetworkImage(
-                        imageUrl: widget.book.photoUrl,
-                        width: screenWidth * 0.25,
-                      ),
+          Row(
+            children: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.arrow_back)),
+              Padding(
+                padding: EdgeInsets.only(top: 60.h),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(36),
+                      topLeft: Radius.circular(36),
                     ),
-                    const SizedBox(width: 13),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
-                          widget.book.name,
-                          style: TextStyle(
-                            fontSize: 21.sp,
-                            fontWeight: FontWeight.w600,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const InsideBook(),
+                              ),
+                            );
+                          },
+                          child: CachedNetworkImage(
+                            imageUrl: widget.book.photoUrl,
+                            width: screenWidth * 0.25,
                           ),
                         ),
-                        Text(
-                          widget.book.author,
-                          style: TextStyle(
-                            fontSize: 15.sp,
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {},
-                          child: Container(
-                            padding: const EdgeInsets.all(11),
-                            margin: const EdgeInsets.only(top: 10),
-                            decoration: BoxDecoration(
-                              color: Colors.amber,
-                              borderRadius: BorderRadius.circular(70),
-                            ),
-                            child: Text(
-                              widget.book.bought ? "O'qish" : "Sotib olish",
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
+                        const SizedBox(width: 13),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.book.name,
+                              style: TextStyle(
+                                fontSize: 21.sp,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
-                          ),
+                            Text(
+                              widget.book.author,
+                              style: TextStyle(
+                                fontSize: 15.sp,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {},
+                              child: Container(
+                                padding: const EdgeInsets.all(11),
+                                margin: const EdgeInsets.only(top: 10),
+                                decoration: BoxDecoration(
+                                  color: Colors.amber,
+                                  borderRadius: BorderRadius.circular(70),
+                                ),
+                                child: Text(
+                                  widget.book.bought ? "O'qish" : "Sotib olish",
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const CircleAvatar(
+                          radius: 24,
+                          backgroundColor: Color(0xFFF2F2F2),
+                          child: Icon(Icons.share, color: Colors.black),
                         ),
                       ],
                     ),
-                    const CircleAvatar(
-                      radius: 24,
-                      backgroundColor: Color(0xFFF2F2F2),
-                      child: Icon(Icons.share, color: Colors.black),
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
           Container(
             height: 580.h,
