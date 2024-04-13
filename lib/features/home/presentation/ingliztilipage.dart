@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,10 +40,40 @@ class _IngliztilipageState extends State<Ingliztilipage> {
     );
   }
 
+  late Timer timer;
+
+  void _paymentCreated() {
+    // timer = Timer.periodic(const Duration(seconds: 3), (timer) async {
+    //   final result = await PaymentService().checkPayment(id: id, token: token);
+    //   print("Timer: $result");
+    //   if (result) {
+    //     isVerified = result;
+    //     setState(() {});
+    //   }
+    // });
+    // context.read<AuthBloc>().stream.listen((event) {
+    //   if (event is AuthErrorState) {
+    //     ScaffoldMessenger.of(context)
+    //         .showSnackBar(SnackBar(content: Text(event.message)));
+    //   }
+    //   print(isVerified);
+    //   if (isVerified) {
+    //     if (!isGone) {
+    //       Navigator.pushReplacement(context, MaterialPageRoute(
+    //         builder: (context) {
+    //           return const ChatPage();
+    //         },
+    //       ));
+    //       isGone = true;
+    //     }
+    //     timer.cancel();
+    //   }
+    // });
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
@@ -106,10 +138,11 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                               onTap: () {
                                 if (widget.book.bought) {
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const FinalView(),
-                                      ));
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const FinalView(),
+                                    ),
+                                  );
                                 } else {
                                   showClickSheet(context, widget.book.id);
                                 }
@@ -210,7 +243,14 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                       },
                       children: [
                         BookDescriptionContainer(data: widget.book.description),
-                        ContainerAudiosListening(bookData: widget.book),
+                        widget.book.bought
+                            ? ContainerAudiosListening(bookData: widget.book)
+                            : Center(
+                                child: Text(
+                                  "Tinglash uchun kitobni sotib oling",
+                                  style: TextStyle(fontSize: 20.sp),
+                                ),
+                              ),
                       ],
                     ),
                   ),

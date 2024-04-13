@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
-import 'package:melbook/features/home/data/service/payment_service.dart';
-import 'package:melbook/locator.dart';
+import 'package:melbook/shared/widgets/custom_alert_dialog.dart';
 
 void showClickSheet(BuildContext context, String bookId) {
   showDialog(
@@ -25,10 +23,20 @@ void showClickSheet(BuildContext context, String bookId) {
                 )),
             TextButton(
               onPressed: () {
-                PaymentService().createPayment(
-                    bookId: bookId,
-                    phoneNumber: getIt<AuthRepository>().user!.phoneNumber,
-                    token: getIt<AuthRepository>().token);
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return CustomAlertDialog(
+                      displayText: "To'landi",
+                      onPressed: () {},
+                    );
+                  },
+                );
+
+                // PaymentService().createPayment(
+                //     bookId: bookId,
+                //     phoneNumber: getIt<AuthRepository>().user!.phoneNumber,
+                //     token: getIt<AuthRepository>().token);
               },
               child: Image.asset("assets/images/img_click.png"),
             )

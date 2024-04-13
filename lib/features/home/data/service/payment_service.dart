@@ -38,7 +38,7 @@ class PaymentService {
     }
   }
 
-  Future<PaymentModel> checkPayment({
+  Future<PaymentModel?> checkPayment({
     required String id,
     required String token,
     String domain = AppConstants.baseUrl,
@@ -55,6 +55,9 @@ class PaymentService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final Map<String, dynamic> responseData =
             json.decode(response.body)['data'];
+        if (responseData["payment"] == null) {
+          return null;
+        }
         final PaymentModel payment =
             PaymentModel.fromJson(responseData['payment']);
         return payment;

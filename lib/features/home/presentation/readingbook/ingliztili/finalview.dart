@@ -4,8 +4,8 @@ import 'package:page_flip/page_flip.dart';
 
 class FinalView extends StatefulWidget {
   const FinalView({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<FinalView> createState() => _FinalViewState();
