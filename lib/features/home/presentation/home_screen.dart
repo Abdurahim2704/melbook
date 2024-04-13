@@ -29,6 +29,7 @@ class _HomePage1State extends State<HomePage1> {
   @override
   void initState() {
     super.initState();
+    debugPrint("Salom");
     context.read<BookBloc>().add(GetAllBooks());
     context.read<AuthBloc>().stream.listen((event) {
       if (event.message != null) {
@@ -69,7 +70,10 @@ class _HomePage1State extends State<HomePage1> {
             borderRadius: BorderRadius.circular(100),
           ),
           child: IconButton(
-            icon:  Icon(Icons.person, size: 16.sp,),
+            icon: Icon(
+              Icons.person,
+              size: 16.sp,
+            ),
             onPressed: () {},
           ),
         ),
@@ -113,6 +117,7 @@ class _HomePage1State extends State<HomePage1> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(height: 18.h),
+
                       /// #Header Banner
                       CarouselDemo(
                         carouselController: carouselController,
@@ -121,7 +126,9 @@ class _HomePage1State extends State<HomePage1> {
 
                       /// #Sub Books
                       Container(
-                        height: screenWidth > 795 ? (containerHeight * 1.1 ).h: containerHeight.h,
+                        height: screenWidth > 795
+                            ? (containerHeight * 1.1).h
+                            : containerHeight.h,
                         width: containerWidth.w,
                         decoration: const BoxDecoration(
                           color: Color(0xFFF2F2F2),
@@ -150,7 +157,9 @@ class _HomePage1State extends State<HomePage1> {
                                 return Expanded(
                                   child: Wrap(
                                     children: [
-                                      for(int i = 0; i < state.books.length; i++)
+                                      for (int i = 0;
+                                          i < state.books.length;
+                                          i++)
                                         BookTile(book: state.books[i]),
                                     ],
                                   ),

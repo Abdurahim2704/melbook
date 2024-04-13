@@ -10,6 +10,7 @@ class PaymentModel {
   final String createdAt;
   final String updatedAt;
   final int v;
+
   final String paymentUuid;
 
   PaymentModel({

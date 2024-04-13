@@ -1,20 +1,23 @@
 part of 'payment_bloc.dart';
 
 @immutable
-sealed class PaymentState {
+sealed class PaymentState extends Equatable {
   final String message;
 
   const PaymentState({
     required this.message,
   });
+
+  @override
+  List<Object?> get props => [message];
 }
 
 final class PaymentInitial extends PaymentState {
-  PaymentInitial({required super.message});
+  const PaymentInitial({required super.message});
 }
 
 class PaymentLoading extends PaymentState {
-  PaymentLoading({required super.message});
+  const PaymentLoading({required super.message});
 }
 
 class PaymentFaillure extends PaymentState {

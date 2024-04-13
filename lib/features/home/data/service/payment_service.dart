@@ -14,16 +14,17 @@ class PaymentService {
   }) async {
     try {
       final response = await http.post(
-        Uri.parse("$domain$endpoint"),
+        Uri.parse("https://api.mobile.mel-book.uz/api/payments//click/create"),
         body: jsonEncode({
           'book_id': bookId,
           'phone_number': phoneNumber,
         }),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
+        headers: {
+          "Content-Type": "application/json",
           'Authorization': 'Bearer $token',
         },
       );
+      print(response.statusCode);
       if (response.statusCode == 200 || response.statusCode == 201) {
         final Map<String, dynamic> responseData =
             json.decode(response.body)['data'];
@@ -46,16 +47,19 @@ class PaymentService {
   }) async {
     try {
       final response = await http.put(
-        Uri.parse("$domain$endpoint$id"),
+        Uri.parse("https://api.mobile.mel-book.uz/api/payments//click/$id"),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': 'Bearer $token',
         },
       );
+      print(response.body);
       if (response.statusCode == 200 || response.statusCode == 201) {
+        final Map<String, dynamic> data = json.decode(response.body);
         final Map<String, dynamic> responseData =
             json.decode(response.body)['data'];
-        if (responseData["payment"] == null) {
+
+        if (data["message"] == "To'lov Bekor Qilingan") {
           return null;
         }
         final PaymentModel payment =

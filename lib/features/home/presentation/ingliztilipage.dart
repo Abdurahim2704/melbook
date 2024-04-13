@@ -2,13 +2,17 @@ import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
+import 'package:melbook/features/home/presentation/bloc/payment_bloc/payment_bloc.dart';
 import 'package:melbook/features/home/presentation/inside_book.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/finalview.dart';
 import 'package:melbook/features/home/presentation/views/books_description.dart';
 import 'package:melbook/features/home/presentation/views/click_sheet.dart';
 import 'package:melbook/features/home/presentation/views/container_audios_listening.dart';
+
+import '../../../shared/widgets/custom_alert_dialog.dart';
 
 class Ingliztilipage extends StatefulWidget {
   final BookData book;
@@ -23,11 +27,11 @@ class _IngliztilipageState extends State<Ingliztilipage> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _pageController.dispose();
+  //   super.dispose();
+  // }
 
   void _changePage(int page) {
     setState(() {
@@ -42,33 +46,68 @@ class _IngliztilipageState extends State<Ingliztilipage> {
 
   late Timer timer;
 
-  void _paymentCreated() {
-    // timer = Timer.periodic(const Duration(seconds: 3), (timer) async {
-    //   final result = await PaymentService().checkPayment(id: id, token: token);
-    //   print("Timer: $result");
-    //   if (result) {
-    //     isVerified = result;
-    //     setState(() {});
-    //   }
-    // });
-    // context.read<AuthBloc>().stream.listen((event) {
-    //   if (event is AuthErrorState) {
-    //     ScaffoldMessenger.of(context)
-    //         .showSnackBar(SnackBar(content: Text(event.message)));
-    //   }
-    //   print(isVerified);
-    //   if (isVerified) {
-    //     if (!isGone) {
-    //       Navigator.pushReplacement(context, MaterialPageRoute(
-    //         builder: (context) {
-    //           return const ChatPage();
-    //         },
-    //       ));
-    //       isGone = true;
-    //     }
-    //     timer.cancel();
-    //   }
-    // });
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(const Duration(seconds: 3), (timer) async {
+      if (mounted) {
+        context.read<PaymentBloc>().add(CheckPayment(times: timer.tick));
+      }
+    });
+    context.read<PaymentBloc>().stream.listen((event) {
+      print(event);
+
+      if (event is PaymentSuccess) {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return CustomAlertDialog(
+              displayText: "To'landi",
+              onPressed: () {
+                Navigator.popUntil(
+                  context,
+                  (route) => !Navigator.canPop(context),
+                );
+              },
+            );
+          },
+        );
+        timer.cancel();
+      } else if (event is PaymentCanceled) {
+        print("I am here");
+        showDialog(
+          context: context,
+          builder: (context) {
+            return CustomAlertDialog(
+              displayText: "To'lov bekor qilindi",
+              onPressed: () {
+                Navigator.popUntil(
+                  context,
+                  (route) => !Navigator.canPop(context),
+                );
+              },
+            );
+          },
+        );
+        timer.cancel();
+        return;
+      } else if (event is PaymentCreated) {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return CustomAlertDialog(
+              displayText: "To'lov so'rovi yuborildi! Clickni tekshiring",
+              onPressed: () {
+                Navigator.popUntil(
+                  context,
+                  (route) => !Navigator.canPop(context),
+                );
+              },
+            );
+          },
+        );
+      }
+    });
   }
 
   @override
@@ -268,5 +307,17 @@ class _IngliztilipageState extends State<Ingliztilipage> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    timer.cancel();
+  }
+
+  @override
+  void deactivate() {
+    super.deactivate();
+    timer.cancel();
   }
 }

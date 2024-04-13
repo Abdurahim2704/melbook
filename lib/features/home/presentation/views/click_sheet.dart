@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:melbook/shared/widgets/custom_alert_dialog.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:melbook/features/home/presentation/bloc/payment_bloc/payment_bloc.dart';
 
 void showClickSheet(BuildContext context, String bookId) {
   showDialog(
@@ -23,20 +24,11 @@ void showClickSheet(BuildContext context, String bookId) {
                 )),
             TextButton(
               onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return CustomAlertDialog(
-                      displayText: "To'landi",
-                      onPressed: () {},
+                context.read<PaymentBloc>().add(
+                      CreatePayment(
+                        bookId: bookId,
+                      ),
                     );
-                  },
-                );
-
-                // PaymentService().createPayment(
-                //     bookId: bookId,
-                //     phoneNumber: getIt<AuthRepository>().user!.phoneNumber,
-                //     token: getIt<AuthRepository>().token);
               },
               child: Image.asset("assets/images/img_click.png"),
             )
