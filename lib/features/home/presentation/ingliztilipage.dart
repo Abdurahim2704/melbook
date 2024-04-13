@@ -106,10 +106,11 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                               onTap: () {
                                 if (widget.book.bought) {
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const FinalView(),
-                                      ));
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const FinalView(),
+                                    ),
+                                  );
                                 } else {
                                   showClickSheet(context, widget.book.id);
                                 }
