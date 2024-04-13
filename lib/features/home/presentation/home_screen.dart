@@ -95,7 +95,7 @@ class _HomePage1State extends State<HomePage1> {
       body: SingleChildScrollView(
         primary: true,
         child: Padding(
-          padding: EdgeInsets.only(top: screenHeight * 0.15),
+          padding: EdgeInsets.only(top: screenHeight * 0.14),
           // Padding relative to screen height
           child: Column(
             children: [
@@ -103,8 +103,8 @@ class _HomePage1State extends State<HomePage1> {
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(36),
-                    topRight: Radius.circular(36),
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
                   ),
                 ),
                 child: Padding(
@@ -112,15 +112,16 @@ class _HomePage1State extends State<HomePage1> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      SizedBox(height: 18.h),
                       /// #Header Banner
                       CarouselDemo(
                         carouselController: carouselController,
                       ),
-                      const SizedBox(height: 18),
+                      SizedBox(height: 18.h),
 
                       /// #Sub Books
                       Container(
-                        height: containerHeight,
+                        height: screenWidth > 795 ? containerHeight * 1.1 : containerHeight,
                         width: containerWidth,
                         decoration: const BoxDecoration(
                           color: Color(0xFFF2F2F2),
@@ -156,8 +157,8 @@ class _HomePage1State extends State<HomePage1> {
                                     gridDelegate:
                                         SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
-                                      childAspectRatio: 2 / 2.75.h,
-                                      crossAxisSpacing: 10.w,
+                                      childAspectRatio: screenWidth > 795 ? 2 / 2.4 : 2 / 3.3,
+                                      crossAxisSpacing: 12.w,
                                       mainAxisSpacing: 12.w,
                                     ),
                                     itemCount: state.books.length,

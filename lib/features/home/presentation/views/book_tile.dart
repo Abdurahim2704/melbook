@@ -34,7 +34,7 @@ class BookTile extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: book.photoUrl,
                 width: double.infinity,
-                height: 140.h,
+                height: 150.h,
                 fit: BoxFit.fitWidth,
               ),
             ),
@@ -50,7 +50,14 @@ class BookTile extends StatelessWidget {
                 ),
                 SizedBox(height: 15.h),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Ingliztilipage(book: book),
+                      ),
+                    );
+                  },
                   child: Container(
                     height: 40.h,
                     width: 40.w,
