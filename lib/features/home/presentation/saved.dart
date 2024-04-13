@@ -35,7 +35,7 @@ class _SavedState extends State<Saved> {
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
-          "Kitoblar",
+          "Saqlanganlar",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
