@@ -45,8 +45,7 @@ class _HomePage1State extends State<HomePage1> {
     double screenHeight = MediaQuery.of(context).size.height;
     double containerHeight = screenHeight * 0.8;
     double containerWidth = screenWidth * 0.95;
-    double imageWidth = screenWidth * 0.25;
-    double bookImageWidth = screenWidth * 0.6;
+
     CarouselController carouselController = CarouselController();
     return Scaffold(
       backgroundColor: Colors.black38,
@@ -94,8 +93,9 @@ class _HomePage1State extends State<HomePage1> {
         ],
       ),
       body: SingleChildScrollView(
+        primary: true,
         child: Padding(
-          padding: EdgeInsets.only(top: screenHeight * 0.15),
+          padding: EdgeInsets.only(top: screenHeight * 0.14),
           // Padding relative to screen height
           child: Column(
             children: [
@@ -103,22 +103,25 @@ class _HomePage1State extends State<HomePage1> {
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(36),
-                    topRight: Radius.circular(36),
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // Display sliding images at the top of the column
+                      SizedBox(height: 18.h),
+                      /// #Header Banner
                       CarouselDemo(
                         carouselController: carouselController,
                       ),
-                      const SizedBox(height: 18),
+                      SizedBox(height: 18.h),
+
+                      /// #Sub Books
                       Container(
-                        height: containerHeight,
+                        height: screenWidth > 795 ? containerHeight * 1.1 : containerHeight,
                         width: containerWidth,
                         decoration: const BoxDecoration(
                           color: Color(0xFFF2F2F2),
@@ -127,69 +130,49 @@ class _HomePage1State extends State<HomePage1> {
                             topRight: Radius.circular(24),
                           ),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    height: 47,
-                                    width: screenWidth * 0.4,
-                                    decoration: BoxDecoration(
-                                      image: const DecorationImage(
-                                          image: AssetImage(
-                                              'assets/images/frame1.png')),
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 30),
-                                  Container(
-                                    height: 47,
-                                    width: screenWidth * 0.3,
-                                    decoration: BoxDecoration(
-                                      image: const DecorationImage(
-                                          image: AssetImage(
-                                              'assets/images/frame2.png')),
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 20),
-                              Container(
-                                margin: const EdgeInsets.only(left: 18),
-                                alignment: Alignment.centerLeft,
-                                child: const Text(
-                                  'Kitoblar',
-                                  style: TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 1.3),
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 10),
+                            Container(
+                              margin: const EdgeInsets.only(left: 18),
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                'Kitoblar',
+                                style: TextStyle(
+                                  fontSize: 17.sp,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1.3,
                                 ),
                               ),
-                              const SizedBox(height: 12),
-                              BlocBuilder<BookBloc, BookState>(
-                                builder: (context, state) {
-                                  return SizedBox(
-                                    height: 200.h,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: state.books.length,
-                                      itemBuilder: (context, index) {
-                                        final book = state.books[index];
-                                        return BookTile(book: book);
-                                      },
+                            ),
+                            BlocBuilder<BookBloc, BookState>(
+                              builder: (context, state) {
+                                return Expanded(
+                                  child: GridView.builder(
+                                    primary: false,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 12.w,
+                                      vertical: 12.h,
                                     ),
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      childAspectRatio: screenWidth > 795 ? 2 / 2.4 : 2 / 3.3,
+                                      crossAxisSpacing: 12.w,
+                                      mainAxisSpacing: 12.w,
+                                    ),
+                                    itemCount: state.books.length,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      final book = state.books[index];
+                                      return BookTile(book: book);
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
                         ),
                       ),
                     ],
