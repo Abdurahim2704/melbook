@@ -89,11 +89,11 @@ class _SignInState extends State<SignIn> {
       bottomNavigationBar: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is SignInSuccessState) {
-            Navigator.pushReplacement(
+            Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const MainScreen(),
-                ));
+                  builder: (context) => const MainScreen()
+                ), (route) => false,);
           }
         },
         builder: (context, state) {

@@ -16,7 +16,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   int current = 0;
   List<String> titles = ["Foydalanuvchi nomi", "Ism", "Telefon raqam"];
   List<String> trailing = ["", "Familiya", "To'lov turi"];
-  List<String> trailingSub = ["", "Ismoilov", "PayMe"];
+  List<String> trailingSub = ["", "Ismoilov", "Click"];
 
   @override
   Widget build(BuildContext context) {
@@ -170,7 +170,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
-                    "PayMe",
+                    "Click",
                     style: TextStyle(fontSize: 14.sp),
                   ),
                 ),
