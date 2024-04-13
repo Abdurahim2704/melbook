@@ -109,85 +109,81 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 const SizedBox(height: 10),
                 Container(
+                  padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 8.w),
                   decoration: BoxDecoration(
                     border: Border(
                         top: BorderSide(
                             color: Colors.grey.withOpacity(0.3), width: 1)),
                   ),
-                  child: Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 10.0.w),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              titles[1],
-                              style:
-                              TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              state.user!.name,
-                              style: TextStyle(fontSize: 14.sp),
-                            ),
-                          ],),
-                        Column(crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(trailing[1],
-                                style: TextStyle(
-                                    fontSize: 14.sp, fontWeight: FontWeight.bold)),
-                            Text(
-                              state.user!.name,
-                              style: TextStyle(fontSize: 14.sp),
-                            ),
-                          ],)
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            titles[1],
+                            style:
+                            TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            state.user!.name,
+                            style: TextStyle(fontSize: 14.sp),
+                          ),
+                        ],),
+                      Column(crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(trailing[1],
+                              style: TextStyle(
+                                  fontSize: 14.sp, fontWeight: FontWeight.bold)),
+                          Text(
+                            state.user!.name,
+                            style: TextStyle(fontSize: 14.sp),
+                          ),
+                        ],)
 
-                      ],
-                    ),
+                    ],
                   ),
 
                 ),
                 const SizedBox(height: 10),
                 Container(
+                  padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 8.w),
                   decoration: BoxDecoration(
                     border: Border(
                         top: BorderSide(
                             color: Colors.grey.withOpacity(0.3), width: 1)),
                   ),
-                  child: Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 10.0.w),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        Column(crossAxisAlignment: CrossAxisAlignment.start,
+                        Text(
+                          titles[2],
+                          style:
+                          TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          state.user!.phoneNumber,
+                          style: TextStyle(fontSize: 14.sp),
+                        ),
+                      ],),
+                      Column(crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisSize: MainAxisSize.min,
                         children: [
+                          Text(trailing[2],
+                              style: TextStyle(
+                                  fontSize: 14.sp, fontWeight: FontWeight.bold)),
                           Text(
-                            titles[2],
-                            style:
-                            TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            state.user!.phoneNumber,
+                            "Click",
                             style: TextStyle(fontSize: 14.sp),
                           ),
-                        ],),
-                        Column(crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(trailing[2],
-                                style: TextStyle(
-                                    fontSize: 14.sp, fontWeight: FontWeight.bold)),
-                            Text(
-                              "Click",
-                              style: TextStyle(fontSize: 14.sp),
-                            ),
-                          ],)
+                        ],)
 
-                      ],
-                    ),
+                    ],
                   ),
 
                 ),

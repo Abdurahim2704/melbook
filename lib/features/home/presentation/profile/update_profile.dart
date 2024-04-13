@@ -31,7 +31,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
 
   @override
   void initState() {
-    context.read<AuthBloc>().stream.listen((event) {
+    context
+        .read<AuthBloc>()
+        .stream
+        .listen((event) {
       if (event.message != null) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(event.message!)));
@@ -43,8 +46,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size(double.infinity, 90),
+      appBar: PreferredSize(
+        preferredSize: Size(double.infinity, 80.h),
         child: Stack(
           children: [
             CustomAppBar(
@@ -52,7 +55,9 @@ class _UpdateProfileState extends State<UpdateProfile> {
             ),
             Align(
               alignment: Alignment.centerLeft,
-              child: BackButton(),
+              child: IconButton(onPressed: () {
+                Navigator.pop(context);
+              }, icon: Icon(Icons.arrow_back, size: 16.sp,)),
             )
           ],
         ),
@@ -61,80 +66,95 @@ class _UpdateProfileState extends State<UpdateProfile> {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(left: 18.0.w, right: 18.w, bottom: 20.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 30.h),
-              buildTextFieldHeaderText("Foydalanuvchi nomi"),
-              SizedBox(height: 12.h),
-              AuthTextField(
-                hinText: "Taxallusingizni kiriting",
-                textInputAction: TextInputAction.next,
-                controller: usernameCtrl,
-              ),
-              SizedBox(height: 15.h),
-              buildTextFieldHeaderText("Ism"),
-              SizedBox(height: 12.h),
-              AuthTextField(
-                controller: nameCtrl,
-                hinText: "Ismingizni kiriting",
-                textInputAction: TextInputAction.next,
-              ),
-              SizedBox(height: 15.h),
-              buildTextFieldHeaderText("Familiya"),
-              SizedBox(height: 12.h),
-              AuthTextField(
-                controller: surnameCtrl,
-                hinText: "Familiyangizni kiriting",
-                textInputAction: TextInputAction.next,
-              ),
-              SizedBox(height: 15.h),
-              buildTextFieldHeaderText("Telefon raqam"),
-              SizedBox(height: 12.h),
-              AuthTextField(
-                hinText: "\t+998 90 123 45 67",
-                controller: phoneNumberCtrl,
-                keyboardType: TextInputType.phone,
-                textInputAction: TextInputAction.next,
-                prefixIcon: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: SvgPicture.asset(
-                    "assets/icons/ic_phone.svg",
+          child: BlocBuilder<AuthBloc, AuthState>(
+            builder: (context, state) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 30.h),
+                  buildTextFieldHeaderText("Foydalanuvchi nomi"),
+                  SizedBox(height: 12.h),
+                  AuthTextField(
+                    style: TextStyle(fontSize: 14.sp),
+                    hinText: state.user?.userName,
+                    textInputAction: TextInputAction.next,
+                    controller: usernameCtrl,
                   ),
-                ),
-              ),
-              SizedBox(height: 15.h),
-              buildTextFieldHeaderText("Parol"),
-              SizedBox(height: 12.h),
-              AuthTextField(
-                hinText: "12345mkl",
-                controller: passwordCtrl,
-                textInputAction: TextInputAction.next,
-              ),
-              SizedBox(height: 15.h),
-              buildTextFieldHeaderText("Parolni takrorlang"),
-              SizedBox(height: 12.h),
-              AuthTextField(
-                hinText: "12345mkl",
-                controller: confirmPasswordCtrl,
-                textInputAction: TextInputAction.done,
-              ),
-              SizedBox(height: 30.h),
-              PrimaryYellowElevatedButton(
-                displayText: "Saqlash",
-                onPressed: () {
-                  if (confirmPasswordCtrl.text == passwordCtrl.text) {
-                    context.read<AuthRepository>().editData(
+                  SizedBox(height: 15.h),
+                  buildTextFieldHeaderText("Ism"),
+                  SizedBox(height: 12.h),
+                  AuthTextField(
+                    style: TextStyle(fontSize: 14.sp),
+
+                    controller: nameCtrl,
+                    hinText: state.user?.name,
+                    textInputAction: TextInputAction.next,
+                  ),
+                  SizedBox(height: 15.h),
+                  buildTextFieldHeaderText("Familiya"),
+                  SizedBox(height: 12.h),
+                  AuthTextField(
+                    style: TextStyle(fontSize: 14.sp),
+
+                    controller: surnameCtrl,
+                    hinText: state.user?.surname,
+                    textInputAction: TextInputAction.next,
+                  ),
+                  SizedBox(height: 15.h),
+                  buildTextFieldHeaderText("Telefon raqam"),
+                  SizedBox(height: 12.h),
+                  AuthTextField(
+                    style: TextStyle(fontSize: 14.sp),
+
+                    hinText: "\t${state.user?.phoneNumber}",
+                    controller: phoneNumberCtrl,
+                    keyboardType: TextInputType.phone,
+                    textInputAction: TextInputAction.next,
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: SvgPicture.asset(
+                        "assets/icons/ic_phone.svg",
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 15.h),
+                  buildTextFieldHeaderText("Parol"),
+                  SizedBox(height: 12.h),
+                  AuthTextField(
+                    style: TextStyle(fontSize: 14.sp),
+
+                    hinText: "* * * * * * *",
+                    controller: passwordCtrl,
+                    textInputAction: TextInputAction.next,
+                  ),
+                  SizedBox(height: 15.h),
+                  buildTextFieldHeaderText("Parolni takrorlang"),
+                  SizedBox(height: 12.h),
+                  AuthTextField(
+                    style: TextStyle(fontSize: 14.sp),
+
+                    hinText: "* * * * * * *",
+                    controller: confirmPasswordCtrl,
+                    textInputAction: TextInputAction.done,
+                  ),
+                  SizedBox(height: 30.h),
+                  PrimaryYellowElevatedButton(
+                    displayText: "Saqlash",
+                    onPressed: () {
+                      if (confirmPasswordCtrl.text == passwordCtrl.text) {
+                        context.read<AuthRepository>().editData(
                           username: usernameCtrl.text,
                           name: nameCtrl.text,
                           phoneNumber: phoneNumberCtrl.text,
                           password: passwordCtrl.text,
                           surname: surnameCtrl.text,
                         );
-                  }
-                },
-              )
-            ],
+                      }
+                    },
+                  )
+                ],
+              );
+            },
           ),
         ),
       ),

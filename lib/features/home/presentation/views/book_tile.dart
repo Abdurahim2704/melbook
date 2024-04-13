@@ -21,6 +21,7 @@ class BookTile extends StatelessWidget {
         );
       },
       child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 5.w, vertical: 12.h),
         padding: EdgeInsets.symmetric(horizontal: 1.w),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -33,7 +34,7 @@ class BookTile extends StatelessWidget {
               borderRadius: const BorderRadius.all(Radius.circular(8)),
               child: CachedNetworkImage(
                 imageUrl: book.photoUrl,
-                width: double.infinity,
+                width: 150.w,
                 height: 130.h,
                 fit: BoxFit.fitWidth,
               ),
