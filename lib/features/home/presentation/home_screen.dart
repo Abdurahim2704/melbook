@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
 import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
-import 'package:melbook/features/home/presentation/readingbook/ingliztili/finalview.dart';
+import 'package:melbook/features/home/presentation/notification/notification_screen.dart';
 import 'package:melbook/features/home/presentation/views/book_tile.dart';
 import 'package:melbook/features/home/widgets/header_carousel.dart';
 import 'package:melbook/locator.dart';
@@ -84,7 +84,7 @@ class _HomePage1State extends State<HomePage1> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const FinalView(),
+                  builder: (context) => const NotificationScreen(),
                 ),
               );
             },

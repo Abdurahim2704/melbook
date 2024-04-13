@@ -25,22 +25,29 @@ class LocalService {
   }
 
   Future<double> downloadFile(String fileName, String link, String book) async {
+    if (await Permission.storage.isDenied ||
+        await Permission.mediaLibrary.isDenied) {
+      await requestPermissions();
+      print("men shu yerda");
+    }
     final filePath = await getFilePath(fileName, book);
+    print(filePath);
     double value = -1;
     // final downloadStream = StreamController<int>();
     // downloadStream.add(0);
     final result = await Dio().download(
       link,
-      filePath,
+      "$filePath.mp3",
       onReceiveProgress: (count, total) {
-        if (total <= 0) return;
-        // downloadStream.add(((count / total) * 100).toInt());
         value = total / count;
+        print(value);
       },
     );
+    print("Status code: ${result.statusCode}");
     if (result.statusCode == 200) {
       final file = File(filePath);
       await LocalAudioService.saveAudio(fileName, filePath, book);
+      print(result);
     }
 
     return value;

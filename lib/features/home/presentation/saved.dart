@@ -83,9 +83,13 @@ class _SavedState extends State<Saved> {
                                     scrollDirection: Axis.vertical,
                                     physics: const BouncingScrollPhysics(),
                                     shrinkWrap: true,
-                                    itemCount: state.books.length,
+                                    itemCount: state.books
+                                        .where((element) => element.bought)
+                                        .length,
                                     itemBuilder: (context, index) {
-                                      final book = state.books[index];
+                                      final book = state.books
+                                          .where((element) => element.bought)
+                                          .toList()[index];
                                       return BookContainer(bookData: book);
                                     },
                                   ),

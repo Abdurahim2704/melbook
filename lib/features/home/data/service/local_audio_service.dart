@@ -13,7 +13,6 @@ class LocalAudioService {
           await openDatabase(path, version: 1, onCreate: (db, version) async {
         await db.execute(
           'CREATE TABLE $_tableName('
-          'id INTEGER PRIMARY KEY AUTOINCREMENT, '
           'name TEXT, location TEXT, book TEXT)',
         );
       });
@@ -26,11 +25,18 @@ class LocalAudioService {
   static Future<void> saveAudio(
       String name, String location, String book) async {
     await initDb();
+    final isExists = await getAudioByName(name);
+    print(isExists);
+    if (isExists.map((e) => e["book"]).contains(book)) {
+      return;
+    }
+    print("I am insert2");
     await _database?.insert(
       _tableName,
       {'name': name, 'location': location, 'book': book},
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
+    print("men insertman");
   }
 
   static Future<List<Map<String, dynamic>>> getAudios() async {
