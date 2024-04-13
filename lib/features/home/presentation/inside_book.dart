@@ -14,11 +14,12 @@ class _InsideBookState extends State<InsideBook> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: PreferredSize(
         preferredSize: Size(double.infinity, 80.w),
         child: Stack(
           children: [
-            CustomAppBar(
+            const CustomAppBar(
               displayText: "Kitob haqida",
             ),
             Align(
@@ -26,17 +27,18 @@ class _InsideBookState extends State<InsideBook> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  BackButton(),
+                  const BackButton(),
                   IconButton(
-                      onPressed: () {
-                        print("I am here");
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const AudioScreen(),
-                            ));
-                      },
-                      icon: Icon(Icons.headphones))
+                    onPressed: () {
+                      print("I am here");
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AudioScreen(),
+                          ));
+                    },
+                    icon: const Icon(Icons.headphones),
+                  )
                 ],
               ),
             )

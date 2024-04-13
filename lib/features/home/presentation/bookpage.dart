@@ -57,7 +57,7 @@ class _BookpageState extends State<Bookpage> {
                       topRight: Radius.circular(36)),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -68,7 +68,7 @@ class _BookpageState extends State<Bookpage> {
                         height: screenHeight,
                         width: screenHeight,
                         decoration: BoxDecoration(
-                            color: Color(0xFFF2F2F2),
+                            color: const Color(0xFFF2F2F2),
                             borderRadius: BorderRadius.circular(24)),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
