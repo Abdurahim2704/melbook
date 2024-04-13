@@ -12,7 +12,6 @@ class ArabTileReading extends StatefulWidget {
 class _ArabTileReadingState extends State<ArabTileReading> {
   List<String> images = [
     'https://i.ibb.co/4RT0MSW/Mel-Book-Arab-tili-A5-1-compressed-page-0001.jpg',
-    'https://i.ibb.co/4RT0MSW/Mel-Book-Arab-tili-A5-1-compressed-page-0001.jpg',
     'https://i.ibb.co/d6yj3Qk/Mel-Book-Arab-tili-A5-1-compressed-page-0002.jpg',
     'https://i.ibb.co/GTpCGdK/Mel-Book-Arab-tili-A5-1-compressed-page-0003.jpg',
     'https://i.ibb.co/KGrv0cb/Mel-Book-Arab-tili-A5-1-compressed-page-0004.jpg',
