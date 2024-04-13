@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
 import 'package:melbook/features/home/presentation/inside_book.dart';
+import 'package:melbook/features/home/presentation/readingbook/ingliztili/finalview.dart';
 import 'package:melbook/features/home/presentation/views/books_description.dart';
+import 'package:melbook/features/home/presentation/views/click_sheet.dart';
 import 'package:melbook/features/home/presentation/views/container_audios_listening.dart';
 
 class Ingliztilipage extends StatefulWidget {
@@ -102,7 +104,17 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                               ),
                             ),
                             InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                if (widget.book.bought) {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const FinalView(),
+                                      ));
+                                } else {
+                                  showClickSheet(context, widget.book.id);
+                                }
+                              },
                               child: Container(
                                 padding: const EdgeInsets.all(11),
                                 margin: const EdgeInsets.only(top: 10),
@@ -134,71 +146,72 @@ class _IngliztilipageState extends State<Ingliztilipage> {
               ),
             ],
           ),
-          Container(
-            height: 500.h,
-            color: const Color(0xFFF2F2F2),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(height: 10.h),
+          Expanded(
+            child: Container(
+              color: const Color(0xFFF2F2F2),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(height: 10.h),
 
-                /// #Header PageView Buttons
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: _currentPage == 0
-                            ? Colors.black
-                            : Colors.transparent,
-                        fixedSize: Size(170.w, 30.h),
-                      ),
-                      onPressed: () => _changePage(0),
-                      child: Text(
-                        "Batafsil",
-                        style: TextStyle(
-                          color:
-                              _currentPage == 0 ? Colors.white : Colors.black,
-                        ),
-                      ),
-                    ),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: _currentPage == 1
-                            ? Colors.black
-                            : Colors.transparent,
-                        fixedSize: Size(170.w, 30.h),
-                      ),
-                      onPressed: () => _changePage(1),
-                      child: Text(
-                        "Tinglab o'qish",
-                        style: TextStyle(
-                          color:
-                              _currentPage == 1 ? Colors.white : Colors.black,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-
-                SizedBox(height: 10.h),
-
-                /// #PageView SubContent
-                Expanded(
-                  child: PageView(
-                    controller: _pageController,
-                    onPageChanged: (page) {
-                      setState(() {
-                        _currentPage = page;
-                      });
-                    },
+                  /// #Header PageView Buttons
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      BookDescriptionContainer(data: widget.book.description),
-                      ContainerAudiosListening(bookData: widget.book),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: _currentPage == 0
+                              ? Colors.black
+                              : Colors.transparent,
+                          fixedSize: Size(170.w, 30.h),
+                        ),
+                        onPressed: () => _changePage(0),
+                        child: Text(
+                          "Batafsil",
+                          style: TextStyle(
+                            color:
+                                _currentPage == 0 ? Colors.white : Colors.black,
+                          ),
+                        ),
+                      ),
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: _currentPage == 1
+                              ? Colors.black
+                              : Colors.transparent,
+                          fixedSize: Size(170.w, 30.h),
+                        ),
+                        onPressed: () => _changePage(1),
+                        child: Text(
+                          "Tinglab o'qish",
+                          style: TextStyle(
+                            color:
+                                _currentPage == 1 ? Colors.white : Colors.black,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
-                ),
-              ],
+
+                  SizedBox(height: 10.h),
+
+                  /// #PageView SubContent
+                  Expanded(
+                    child: PageView(
+                      controller: _pageController,
+                      onPageChanged: (page) {
+                        setState(() {
+                          _currentPage = page;
+                        });
+                      },
+                      children: [
+                        BookDescriptionContainer(data: widget.book.description),
+                        ContainerAudiosListening(bookData: widget.book),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
