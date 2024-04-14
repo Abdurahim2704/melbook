@@ -35,8 +35,11 @@ class _SignUpState extends State<SignUp> {
     super.initState();
     context.read<AuthBloc>().stream.listen((event) {
       if (event.message != null) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(event.message!, style: TextStyle(fontSize: 14.sp)),));
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(event.message!, style: TextStyle(fontSize: 14.sp)),
+          ));
+        }
       }
     });
   }
@@ -44,7 +47,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  PreferredSize(
+      appBar: PreferredSize(
         preferredSize: Size(double.infinity, 90.h),
         child: CustomAppBar(
           displayText: "Ro’yxatdan o’tish",
@@ -61,7 +64,8 @@ class _SignUpState extends State<SignUp> {
               buildTextFieldHeaderText("Foydalanuvchi nomi"),
               SizedBox(height: 12.h),
               AuthTextField(
-                style: TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
+                style:
+                    TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
                 hinText: "Taxallusingizni kiriting",
                 textInputAction: TextInputAction.next,
                 controller: usernameCtrl,
@@ -70,7 +74,8 @@ class _SignUpState extends State<SignUp> {
               buildTextFieldHeaderText("Ism"),
               SizedBox(height: 12.h),
               AuthTextField(
-                style: TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
+                style:
+                    TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
                 controller: nameCtrl,
                 hinText: "Ismingizni kiriting",
                 textInputAction: TextInputAction.next,
@@ -79,7 +84,8 @@ class _SignUpState extends State<SignUp> {
               buildTextFieldHeaderText("Familiya"),
               SizedBox(height: 12.h),
               AuthTextField(
-                style: TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
+                style:
+                    TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
                 controller: surnameCtrl,
                 hinText: "Familiyangizni kiriting",
                 textInputAction: TextInputAction.next,
@@ -88,7 +94,8 @@ class _SignUpState extends State<SignUp> {
               buildTextFieldHeaderText("Telefon raqam"),
               SizedBox(height: 12.h),
               AuthTextField(
-                style: TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
+                style:
+                    TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
                 hinText: "\t+998 90 123 45 67",
                 controller: phoneNumberCtrl,
                 keyboardType: TextInputType.phone,
@@ -104,7 +111,8 @@ class _SignUpState extends State<SignUp> {
               buildTextFieldHeaderText("Parol"),
               SizedBox(height: 12.h),
               AuthTextField(
-                style: TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
+                style:
+                    TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
                 hinText: "12345mkl",
                 controller: passwordCtrl,
                 textInputAction: TextInputAction.next,
@@ -113,7 +121,8 @@ class _SignUpState extends State<SignUp> {
               buildTextFieldHeaderText("Parolni takrorlang"),
               SizedBox(height: 12.h),
               AuthTextField(
-                style: TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
+                style:
+                    TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
                 hinText: "12345mkl",
                 controller: confirmPasswordCtrl,
                 textInputAction: TextInputAction.done,
@@ -145,18 +154,21 @@ class _SignUpState extends State<SignUp> {
               ),
               Center(
                 child: RichText(
-                  text: TextSpan(
-                    text: "Akkauntingiz bormi? ",
-                    style:  TextStyle(
-                      color: Colors.blue, height: 2,
-                      decoration: TextDecoration.underline,
-                      fontSize: 16.sp
-                    ),
-                    recognizer: TapGestureRecognizer()..onTap = () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const SignIn(),));
-                    }
-                  )
-                ),
+                    text: TextSpan(
+                        text: "Akkauntingiz bormi? ",
+                        style: TextStyle(
+                            color: Colors.blue,
+                            height: 2,
+                            decoration: TextDecoration.underline,
+                            fontSize: 16.sp),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const SignIn(),
+                                ));
+                          })),
               )
             ],
           ),

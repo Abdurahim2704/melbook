@@ -7,7 +7,20 @@ import Flutter
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
+  self.window.makeSecure()
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
+}
+
+extension UIWindow {
+func makeSecure(){
+let field = UITextField()
+field.inSecureText = true
+self.addSubview(field)
+field.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+field.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+layer.superLayer?.addSubview(field.layer)
+field.layer.superLayer?.first?.addSubview(self.layer)
+}
 }

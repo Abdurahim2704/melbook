@@ -36,3 +36,7 @@ class SignInSuccessState extends AuthState {
     required super.user,
   });
 }
+
+class LogOutSuccess extends AuthState {
+  const LogOutSuccess({required super.message});
+}

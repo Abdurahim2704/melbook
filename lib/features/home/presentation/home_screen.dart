@@ -32,7 +32,7 @@ class _HomePage1State extends State<HomePage1> {
     debugPrint("Salom");
     context.read<BookBloc>().add(GetAllBooks());
     context.read<AuthBloc>().stream.listen((event) {
-      if (event.message != null) {
+      if (event.message != null && mounted) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(event.message!)));
       }
