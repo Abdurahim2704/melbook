@@ -63,20 +63,6 @@ class _HomePage1State extends State<HomePage1> {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: Container(
-          margin: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: Colors.grey,
-            borderRadius: BorderRadius.circular(100),
-          ),
-          child: IconButton(
-            icon: Icon(
-              Icons.person,
-              size: 16.sp,
-            ),
-            onPressed: () {},
-          ),
-        ),
         actions: <Widget>[
           IconButton(
             icon: SvgPicture.asset(
