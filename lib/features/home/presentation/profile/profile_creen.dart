@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:melbook/app.dart';
 import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
+import 'package:melbook/features/auth/presentation/sign_up.dart';
 import 'package:melbook/features/home/presentation/profile/update_profile.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
 
@@ -23,9 +23,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     context.read<AuthBloc>().add(LogOut());
     context.read<AuthBloc>().stream.listen((event) {
       if (event is LogOutSuccess) {
-        if (mounted) {
-          runApp(const App());
-        }
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const SignUp(),
+          ),
+        );
       }
     });
   }
@@ -60,11 +63,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Align(
               alignment: Alignment.centerLeft,
               child: IconButton(
-                  onPressed: logOut,
-                  icon: Icon(
-                    Icons.logout,
-                    size: 18.sp,
-                  )),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        backgroundColor: Colors.white,
+                        elevation: 0,
+                        title: Text(
+                          "Tizimdan chiqishni xohlaysizmi ?",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 17.sp,
+                          ),
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text("Yo'q"),
+                          ),
+                          SizedBox(width: 20.w),
+                          TextButton(
+                            onPressed: logOut,
+                            child: const Text("Ha"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                icon: Icon(
+                  Icons.logout,
+                  size: 18.sp,
+                ),
+              ),
             ),
           ],
         ),
@@ -127,7 +161,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
-                    state.user!.userName,
+                    state.user?.userName ?? "Unknown",
                     style: TextStyle(fontSize: 14.sp),
                   ),
                 ),
@@ -153,7 +187,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 fontSize: 14.sp, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            state.user!.name,
+                            state.user?.name ?? "Unknown",
                             style: TextStyle(fontSize: 14.sp),
                           ),
                         ],
@@ -167,7 +201,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   fontSize: 14.sp,
                                   fontWeight: FontWeight.bold)),
                           Text(
-                            state.user!.name,
+                            state.user?.name ?? "Unknown",
                             style: TextStyle(fontSize: 14.sp),
                           ),
                         ],
@@ -197,7 +231,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 fontSize: 14.sp, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            state.user!.phoneNumber,
+                            state.user?.phoneNumber ?? "Unknown",
                             style: TextStyle(fontSize: 14.sp),
                           ),
                         ],
@@ -206,10 +240,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(trailing[2],
-                              style: TextStyle(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.bold)),
+                          Text(
+                            trailing[2],
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                           Text(
                             "Click",
                             style: TextStyle(fontSize: 14.sp),
@@ -267,10 +304,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               style: TextStyle(fontSize: 14.sp, height: 2),
                             ),
                           ],
-                        )
+                        ),
                     ],
                   ),
-                )
+                ),
             ],
           );
         },
