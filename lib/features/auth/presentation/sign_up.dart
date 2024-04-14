@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:melbook/features/auth/presentation/sign_in.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
@@ -29,6 +30,12 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController passwordCtrl = TextEditingController();
 
   final TextEditingController confirmPasswordCtrl = TextEditingController();
+  var maskTextInputFormatter = MaskTextInputFormatter(
+    mask: ' ## ###-##-##',
+    filter: {
+      "#": RegExp(r'[0-9]'),
+    },
+  );
 
   @override
   void initState() {
@@ -42,6 +49,12 @@ class _SignUpState extends State<SignUp> {
         }
       }
     });
+  }
+
+  String formatPhoneNumber(String text) {
+    text = text.replaceAll(" ", "");
+    text = text.replaceAll("-", "");
+    return "+998$text";
   }
 
   @override
@@ -96,8 +109,10 @@ class _SignUpState extends State<SignUp> {
               AuthTextField(
                 style:
                     TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
-                hinText: "\t+998 90 123 45 67",
+                hinText: "90 123 45 67",
+                text: "+998 ",
                 controller: phoneNumberCtrl,
+                formatter: maskTextInputFormatter,
                 keyboardType: TextInputType.phone,
                 textInputAction: TextInputAction.next,
                 prefixIcon: Padding(
@@ -142,12 +157,23 @@ class _SignUpState extends State<SignUp> {
                   return PrimaryYellowElevatedButton(
                     displayText: "Ro’yxatdan o’tish",
                     onPressed: () {
+                      if (confirmPasswordCtrl.text != passwordCtrl.text) {
+                        if (mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                                "Parolni takrorlashda xato qildingiz!!!",
+                                style: TextStyle(fontSize: 14.sp)),
+                          ));
+                        }
+                        return;
+                      }
                       context.read<AuthBloc>().add(SignUpEvent(
                           name: nameCtrl.text,
                           username: usernameCtrl.text,
                           surname: surnameCtrl.text,
                           password: passwordCtrl.text,
-                          phoneNumber: phoneNumberCtrl.text));
+                          phoneNumber:
+                              formatPhoneNumber(phoneNumberCtrl.text)));
                     },
                   );
                 },

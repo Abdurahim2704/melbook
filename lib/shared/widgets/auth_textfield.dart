@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class AuthTextField extends StatelessWidget {
   final String? hinText;
@@ -12,33 +13,38 @@ class AuthTextField extends StatelessWidget {
   final int? maxLength;
   final TextEditingController controller;
   final TextStyle? style;
-  const AuthTextField({
-    super.key,
-    this.hinText,
-    this.keyboardType,
-    this.textInputAction,
-    this.prefixIcon,
-    this.suffixIcon,
-    this.inputFormatters,
-    this.maxLength,
-    required this.controller,
-    this.style
-  });
+  final String? text;
+  final MaskTextInputFormatter? formatter;
+
+  const AuthTextField(
+      {super.key,
+      this.hinText,
+      this.formatter,
+      this.keyboardType,
+      this.textInputAction,
+      this.prefixIcon,
+      this.suffixIcon,
+      this.inputFormatters,
+      this.maxLength,
+      this.text,
+      required this.controller,
+      this.style});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-
       controller: controller,
       textInputAction: textInputAction,
       keyboardType: keyboardType,
-      style:style,
-      inputFormatters: inputFormatters,
+      style: style,
+      inputFormatters: [...?inputFormatters, if (formatter != null) formatter!],
       maxLength: maxLength,
       maxLines: null,
       decoration: InputDecoration(
         counterText: "",
         prefixIcon: prefixIcon,
+        prefixStyle: style,
+        prefixText: text,
         contentPadding: EdgeInsets.symmetric(
           horizontal: 24.w,
           vertical: 17.h,
