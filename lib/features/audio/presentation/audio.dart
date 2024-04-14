@@ -4,6 +4,7 @@ import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:melbook/features/home/data/models/audio.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
 import 'package:rxdart/rxdart.dart';
@@ -11,8 +12,13 @@ import 'package:rxdart/rxdart.dart';
 class AudioScreen extends StatefulWidget {
   final String filePath;
   final BookData book;
+  final Audio audio;
 
-  const AudioScreen({super.key, required this.filePath, required this.book});
+  const AudioScreen(
+      {super.key,
+      required this.filePath,
+      required this.book,
+      required this.audio});
 
   @override
   State<AudioScreen> createState() => _AudioScreenState();
@@ -109,7 +115,7 @@ class _AudioScreenState extends State<AudioScreen> {
                 height: isKaraoke ? 20.h : 70.h,
               ),
               Text(
-                widget.book.name,
+                widget.audio.name,
                 style: TextStyle(
                   fontSize: 15.sp,
                   fontWeight: FontWeight.bold,

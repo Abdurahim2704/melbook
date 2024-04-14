@@ -4,10 +4,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:melbook/features/home/data/models/book_types.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
 import 'package:melbook/features/home/presentation/bloc/payment_bloc/payment_bloc.dart';
 import 'package:melbook/features/home/presentation/inside_book.dart';
+import 'package:melbook/features/home/presentation/readingbook/arabtili/arabtiliefinal.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/finalview.dart';
+import 'package:melbook/features/home/presentation/readingbook/rustili/rustilifinal.dart';
 import 'package:melbook/features/home/presentation/views/books_description.dart';
 import 'package:melbook/features/home/presentation/views/click_sheet.dart';
 import 'package:melbook/features/home/presentation/views/container_audios_listening.dart';
@@ -27,11 +30,24 @@ class _IngliztilipageState extends State<Ingliztilipage> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  // @override
-  // void dispose() {
-  //   _pageController.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    _pageController.dispose();
+    timer.cancel();
+    super.dispose();
+  }
+
+  Widget returnBooks(String book) {
+    if (book == BookTypes.english.name) {
+      return const FinalView();
+    } else if (book == BookTypes.arabian.name) {
+      return const FinalArabtiliView();
+    } else if (book == BookTypes.russian.name) {
+      return const FinalrustiliVuew();
+    }
+
+    return const FinalView();
+  }
 
   void _changePage(int page) {
     setState(() {
@@ -178,11 +194,19 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                             ),
                             InkWell(
                               onTap: () {
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) =>
+                                //         returnBooks(widget.book.name),
+                                //   ),
+                                // );
                                 if (widget.book.bought) {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => const FinalView(),
+                                      builder: (context) =>
+                                          returnBooks(widget.book.name),
                                     ),
                                   );
                                 } else {
@@ -307,12 +331,6 @@ class _IngliztilipageState extends State<Ingliztilipage> {
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    timer.cancel();
   }
 
   @override

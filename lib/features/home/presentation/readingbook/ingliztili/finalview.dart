@@ -3,9 +3,7 @@ import 'package:melbook/features/home/presentation/readingbook/ingliztili/englis
 import 'package:page_flip/page_flip.dart';
 
 class FinalView extends StatefulWidget {
-  const FinalView({
-    super.key,
-  });
+  const FinalView({super.key});
 
   @override
   State<FinalView> createState() => _FinalViewState();

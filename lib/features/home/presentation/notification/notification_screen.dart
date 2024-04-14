@@ -144,7 +144,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   fontWeight: FontWeight.w600,
                                   color: const Color(0xFF000000),
                                 ),
-                                maxLines: 2,
+                                maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
                               SizedBox(height: 7.h),
