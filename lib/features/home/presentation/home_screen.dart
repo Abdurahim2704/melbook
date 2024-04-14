@@ -72,7 +72,7 @@ class _HomePage1State extends State<HomePage1> {
           child: IconButton(
             icon: Icon(
               Icons.person,
-              size: 16.sp,
+              size: 17.sp,
             ),
             onPressed: () {},
           ),
@@ -81,8 +81,8 @@ class _HomePage1State extends State<HomePage1> {
           IconButton(
             icon: SvgPicture.asset(
               "assets/icons/ic_notification.svg",
-              height: 17.sp,
-              width: 17.sp,
+              height: 19.sp,
+              width: 19.sp,
             ),
             onPressed: () {
               Navigator.push(
