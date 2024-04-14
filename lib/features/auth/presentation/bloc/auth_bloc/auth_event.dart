@@ -41,7 +41,7 @@ class AutoLogInEvent extends AuthEvent {
   });
 }
 
-class LogOut {}
+class LogOut extends AuthEvent {}
 
 class EditProfile extends AuthEvent {
   final String? userName;

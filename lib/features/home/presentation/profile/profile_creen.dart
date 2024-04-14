@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:melbook/app.dart';
 import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:melbook/features/home/presentation/profile/update_profile.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
@@ -18,12 +19,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
   List<String> trailing = ["", "Familiya", "To'lov turi"];
   List<String> trailingSub = ["", "Ismoilov", "Click"];
 
+  void logOut() {
+    context.read<AuthBloc>().add(LogOut());
+    context.read<AuthBloc>().stream.listen((event) {
+      if (event is LogOutSuccess) {
+        if (mounted) {
+          runApp(const App());
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
-        preferredSize:  Size(double.infinity, 90.h),
+        preferredSize: Size(double.infinity, 90.h),
         child: Stack(
           children: [
             const CustomAppBar(
@@ -40,8 +52,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     );
                   },
-                  icon:  Icon(Icons.edit, size: 18.sp,)),
-            )
+                  icon: Icon(
+                    Icons.edit,
+                    size: 18.sp,
+                  )),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: IconButton(
+                  onPressed: logOut,
+                  icon: Icon(
+                    Icons.logout,
+                    size: 18.sp,
+                  )),
+            ),
           ],
         ),
       ),
@@ -49,7 +73,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         builder: (context, state) {
           return ListView(
             children: [
-               SizedBox(height: 20.h),
+              SizedBox(height: 20.h),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -109,7 +133,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 const SizedBox(height: 10),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 8.w),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 10.h, horizontal: 8.w),
                   decoration: BoxDecoration(
                     border: Border(
                         top: BorderSide(
@@ -118,38 +143,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(crossAxisAlignment: CrossAxisAlignment.start,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
                             titles[1],
-                            style:
-                            TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontSize: 14.sp, fontWeight: FontWeight.bold),
                           ),
                           Text(
                             state.user!.name,
                             style: TextStyle(fontSize: 14.sp),
                           ),
-                        ],),
-                      Column(crossAxisAlignment: CrossAxisAlignment.end,
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(trailing[1],
                               style: TextStyle(
-                                  fontSize: 14.sp, fontWeight: FontWeight.bold)),
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.bold)),
                           Text(
                             state.user!.name,
                             style: TextStyle(fontSize: 14.sp),
                           ),
-                        ],)
-
+                        ],
+                      )
                     ],
                   ),
-
                 ),
                 const SizedBox(height: 10),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 8.w),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 10.h, horizontal: 8.w),
                   decoration: BoxDecoration(
                     border: Border(
                         top: BorderSide(
@@ -158,37 +187,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          titles[2],
-                          style:
-                          TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          state.user!.phoneNumber,
-                          style: TextStyle(fontSize: 14.sp),
-                        ),
-                      ],),
-                      Column(crossAxisAlignment: CrossAxisAlignment.end,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            titles[2],
+                            style: TextStyle(
+                                fontSize: 14.sp, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            state.user!.phoneNumber,
+                            style: TextStyle(fontSize: 14.sp),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(trailing[2],
                               style: TextStyle(
-                                  fontSize: 14.sp, fontWeight: FontWeight.bold)),
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.bold)),
                           Text(
                             "Click",
                             style: TextStyle(fontSize: 14.sp),
                           ),
-                        ],)
-
+                        ],
+                      )
                     ],
                   ),
-
                 ),
-
-
               ],
               if (current == 1)
                 ListTile(

@@ -38,4 +38,9 @@ class LocalDBService {
     return (prefs.getString(_passwordKey) != null) &&
         (prefs.getString(_usernameKey) != null);
   }
+
+  static Future<bool> logOut() async {
+    return (await prefs.remove(_passwordKey)) &&
+        (await prefs.remove(_usernameKey));
+  }
 }

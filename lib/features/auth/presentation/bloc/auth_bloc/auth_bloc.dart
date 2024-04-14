@@ -16,6 +16,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SignInEvent>(_signInEvent);
     on<AutoLogInEvent>(_autologInEvent);
     on<EditProfile>(editProfile);
+    on<LogOut>(logOut);
   }
 
   Future<void> _signUpEvent(SignUpEvent event, Emitter<AuthState> emit) async {
@@ -96,5 +97,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
     emit(SignInSuccessState(
         message: result.message, user: (result as DataSuccess<User>).data));
+  }
+
+  Future<void> logOut(LogOut event, Emitter<AuthState> emit) async {
+    final service = await LocalDBService.logOut();
+    if (service) {
+      emit(const LogOutSuccess(message: "Log Out success"));
+    }
   }
 }
