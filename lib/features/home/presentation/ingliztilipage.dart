@@ -10,6 +10,7 @@ import 'package:melbook/features/home/presentation/bloc/payment_bloc/payment_blo
 import 'package:melbook/features/home/presentation/inside_book.dart';
 import 'package:melbook/features/home/presentation/readingbook/arabtili/arabtiliefinal.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/finalview.dart';
+import 'package:melbook/features/home/presentation/readingbook/koreystili/koreystilifinal.dart';
 import 'package:melbook/features/home/presentation/readingbook/rustili/rustilifinal.dart';
 import 'package:melbook/features/home/presentation/views/books_description.dart';
 import 'package:melbook/features/home/presentation/views/click_sheet.dart';
@@ -46,7 +47,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
       return const FinalrustiliVuew();
     }
 
-    return const FinalView();
+    return const Koreystilifinal();
   }
 
   void _changePage(int page) {

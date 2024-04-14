@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:melbook/features/auth/presentation/sign_up.dart';
+import 'package:melbook/features/home/presentation/bloc/book/book_bloc.dart';
 import 'package:melbook/features/home/presentation/profile/update_profile.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
 
@@ -287,24 +288,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         style: TextStyle(
                             fontSize: 16.sp, fontWeight: FontWeight.bold),
                       ),
-                      for (int i = 0; i < 3; i++)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Arab tili",
-                              style: TextStyle(fontSize: 14.sp, height: 2),
-                            ),
-                            Text(
-                              "12/02/2003",
-                              style: TextStyle(fontSize: 14.sp, height: 2),
-                            ),
-                            Text(
-                              "580 000",
-                              style: TextStyle(fontSize: 14.sp, height: 2),
-                            ),
-                          ],
-                        ),
+                      BlocBuilder<BookBloc, BookState>(
+                        builder: (context, state) {
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: state.books
+                                .where((element) => element.bought)
+                                .length,
+                            itemBuilder: (BuildContext context, int index) {
+                              final book = state.books
+                                  .where((element) => element.bought)
+                                  .toList()[index];
+                              return Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    book.name,
+                                    style:
+                                        TextStyle(fontSize: 14.sp, height: 2),
+                                  ),
+                                  Text(
+                                    book.price.toString(),
+                                    style:
+                                        TextStyle(fontSize: 14.sp, height: 2),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                      )
                     ],
                   ),
                 ),
