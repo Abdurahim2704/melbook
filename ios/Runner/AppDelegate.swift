@@ -16,11 +16,11 @@ import Flutter
 extension UIWindow {
 func makeSecure(){
 let field = UITextField()
-field.inSecureText = true
+field.inSecureTextEntry = true
 self.addSubview(field)
 field.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
 field.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-layer.superLayer?.addSubview(field.layer)
+self.layer.superLayer?.addSubview(field.layer)
 field.layer.superLayer?.first?.addSubview(self.layer)
 }
 }
