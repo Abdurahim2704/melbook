@@ -96,11 +96,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 right: 12.w,
                 bottom: 20.h,
               ),
-              separatorBuilder: (context, index) => SizedBox(height: 12.h),
+              separatorBuilder: (context, index) => SizedBox(height: 16.h),
               itemBuilder: (context, index) {
                 final notification = snapshot.data![index];
                 return SizedBox(
-                  height: 80.h,
+                  height: 90.h,
                   child: ListTile(
                     onTap: () {
                       Navigator.push(

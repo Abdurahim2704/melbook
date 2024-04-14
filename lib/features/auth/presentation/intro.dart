@@ -44,7 +44,7 @@ class _IntroScreenState extends State<IntroScreen> {
                   imgPath[i],
                   width: double.infinity,
                   height: double.infinity,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                 ),
                 SizedBox(
                   height: 270.h,
@@ -54,23 +54,20 @@ class _IntroScreenState extends State<IntroScreen> {
                     physics: const NeverScrollableScrollPhysics(),
                     padding: const EdgeInsets.symmetric(horizontal: 50),
                     children: [
-                       SizedBox(
-                        height: 60.h,
-                      ),
+                      SizedBox(height: 60.h),
                       Text(
                         titles[i],
-                        style:
-                             TextStyle(color: Colors.white, fontSize: 14.sp),
+                        style: TextStyle(color: Colors.white, fontSize: 14.sp),
                         textAlign: TextAlign.center,
                       ),
-                       SizedBox(
+                      SizedBox(
                         height: 20.h,
                       ),
                       SizedBox(
                         height: 94.h,
                         width: 94.h,
                         child: CustomPaint(
-                          size:  Size(94.h, 94.h),
+                          size: Size(94.h, 94.h),
                           painter: IntroPainter(currentPage: i),
                           child: Padding(
                             padding: const EdgeInsets.all(15),
