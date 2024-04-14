@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:melbook/features/home/presentation/main_screen.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
 import 'package:melbook/shared/widgets/auth_textfield.dart';
@@ -20,6 +21,12 @@ class _SignInState extends State<SignIn> {
   final usernameCtrl = TextEditingController();
 
   final passwordCtrl = TextEditingController();
+  var maskTextInputFormatter = MaskTextInputFormatter(
+    mask: ' ## ###-##-##',
+    filter: {
+      "#": RegExp(r'[0-9]'),
+    },
+  );
 
   @override
   void initState() {
@@ -35,7 +42,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  PreferredSize(
+      appBar: PreferredSize(
         preferredSize: Size(double.infinity, 90.h),
         child: const CustomAppBar(displayText: "Tizimga kirish"),
       ),
@@ -92,10 +99,10 @@ class _SignInState extends State<SignIn> {
         listener: (context, state) {
           if (state is SignInSuccessState) {
             Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const MainScreen()
-                ), (route) => false,);
+              context,
+              MaterialPageRoute(builder: (context) => const MainScreen()),
+              (route) => false,
+            );
           }
         },
         builder: (context, state) {
