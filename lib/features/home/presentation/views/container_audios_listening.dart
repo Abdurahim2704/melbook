@@ -83,6 +83,8 @@ class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) => AudioScreen(
+                                              audio: widget
+                                                  .bookData.audios![index],
                                               filePath: state.audios.firstWhere(
                                                   (element) => (element[
                                                           "name"] ==
