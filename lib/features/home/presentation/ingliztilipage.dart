@@ -143,7 +143,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                 },
                 icon: Icon(
                   Icons.arrow_back,
-                  size: 20.sp,
+                  size: 30.sp,
                 ),
               ),
               Padding(
@@ -170,12 +170,18 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                               ),
                             );
                           },
-                          child: CachedNetworkImage(
-                            imageUrl: widget.book.photoUrl,
-                            width: screenWidth * 0.25,
+                          child: ClipRRect(
+                            clipBehavior: Clip.antiAlias,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(8),
+                            ),
+                            child: CachedNetworkImage(
+                              imageUrl: widget.book.photoUrl,
+                              width: screenWidth * 0.25,
+                            ),
                           ),
                         ),
-                        SizedBox(width: 13.w),
+                        SizedBox(width: 30.w),
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -183,25 +189,19 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                             Text(
                               widget.book.name,
                               style: TextStyle(
-                                fontSize: 21.sp,
+                                fontSize: 25.sp,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
                             Text(
                               widget.book.author,
                               style: TextStyle(
-                                fontSize: 15.sp,
+                                fontSize: 18.sp,
                               ),
                             ),
+                            const SizedBox(height: 15),
                             InkWell(
                               onTap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) =>
-                                //         returnBooks(widget.book.name),
-                                //   ),
-                                // );
                                 if (widget.book.bought) {
                                   Navigator.push(
                                     context,
@@ -215,7 +215,10 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                 }
                               },
                               child: Container(
-                                padding: const EdgeInsets.all(11),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 45.w,
+                                  vertical: 8.h,
+                                ),
                                 margin: const EdgeInsets.only(top: 10),
                                 decoration: BoxDecoration(
                                   color: Colors.amber,
@@ -224,7 +227,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                 child: Text(
                                   widget.book.bought ? "O'qish" : "Sotib olish",
                                   style: TextStyle(
-                                    fontSize: 14.sp,
+                                    fontSize: 15.sp,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
@@ -232,18 +235,6 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                               ),
                             ),
                           ],
-                        ),
-                        SizedBox(
-                          width: 10.w,
-                        ),
-                        CircleAvatar(
-                          radius: 18.sp,
-                          backgroundColor: Color(0xFFF2F2F2),
-                          child: Icon(
-                            Icons.share,
-                            color: Colors.black,
-                            size: 14.sp,
-                          ),
                         ),
                       ],
                     ),
@@ -269,7 +260,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                           backgroundColor: _currentPage == 0
                               ? Colors.black
                               : Colors.transparent,
-                          fixedSize: Size(170.w, 30.h),
+                          fixedSize: Size(300.w, 45.h),
                         ),
                         onPressed: () => _changePage(0),
                         child: Text(
@@ -277,7 +268,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                           style: TextStyle(
                             color:
                                 _currentPage == 0 ? Colors.white : Colors.black,
-                            fontSize: 14.sp,
+                            fontSize: 18.sp,
                           ),
                         ),
                       ),
@@ -286,16 +277,16 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                           backgroundColor: _currentPage == 1
                               ? Colors.black
                               : Colors.transparent,
-                          fixedSize: Size(170.w, 30.h),
+                          fixedSize: Size(300.w, 45.h),
                         ),
                         onPressed: () => _changePage(1),
                         child: Text(
                           "Tinglab o'qish",
                           style: TextStyle(
-                              color: _currentPage == 1
-                                  ? Colors.white
-                                  : Colors.black,
-                              fontSize: 14.sp),
+                            color:
+                                _currentPage == 1 ? Colors.white : Colors.black,
+                            fontSize: 18.sp,
+                          ),
                         ),
                       ),
                     ],
@@ -319,7 +310,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                             : Center(
                                 child: Text(
                                   "Tinglash uchun kitobni sotib oling",
-                                  style: TextStyle(fontSize: 20.sp),
+                                  style: TextStyle(fontSize: 25.sp),
                                 ),
                               ),
                       ],

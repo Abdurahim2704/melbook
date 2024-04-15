@@ -52,37 +52,23 @@ class _HomePage1State extends State<HomePage1> {
       backgroundColor: Colors.black38,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        centerTitle: true,
+        centerTitle: false,
         title: Text(
-          "Xush kelibsiz ${getIt<AuthRepository>().user?.userName ?? ""}",
+          "Xush kelibsiz, ${getIt<AuthRepository>().user?.userName ?? ""}",
           style: TextStyle(
-            fontSize: 16.sp,
+            fontSize: 30.sp,
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: Container(
-          margin: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: Colors.grey,
-            borderRadius: BorderRadius.circular(100),
-          ),
-          child: IconButton(
-            icon: Icon(
-              Icons.person,
-              size: 17.sp,
-            ),
-            onPressed: () {},
-          ),
-        ),
         actions: <Widget>[
           IconButton(
             icon: SvgPicture.asset(
               "assets/icons/ic_notification.svg",
-              height: 19.sp,
-              width: 19.sp,
+              height: 35.sp,
+              width: 35.sp,
             ),
             onPressed: () {
               Navigator.push(
@@ -99,7 +85,7 @@ class _HomePage1State extends State<HomePage1> {
       body: SingleChildScrollView(
         primary: true,
         child: Padding(
-          padding: EdgeInsets.only(top: screenHeight * 0.14),
+          padding: EdgeInsets.only(top: screenHeight * 0.1),
           // Padding relative to screen height
           child: Column(
             children: [
@@ -122,13 +108,11 @@ class _HomePage1State extends State<HomePage1> {
                       CarouselDemo(
                         carouselController: carouselController,
                       ),
-                      SizedBox(height: 18.h),
+                      SizedBox(height: 25.h),
 
                       /// #Sub Books
                       Container(
-                        height: screenWidth > 795
-                            ? (containerHeight * 1.1).h
-                            : containerHeight.h,
+                        height: containerHeight.h * 1.4,
                         width: containerWidth.w,
                         decoration: const BoxDecoration(
                           color: Color(0xFFF2F2F2),
@@ -139,51 +123,60 @@ class _HomePage1State extends State<HomePage1> {
                         ),
                         child: Column(
                           children: [
-                            const SizedBox(height: 10),
+                            SizedBox(height: 15.h),
                             Container(
                               margin: const EdgeInsets.only(left: 18),
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 'Kitoblar',
                                 style: TextStyle(
-                                  fontSize: 17.sp,
+                                  fontSize: 30.sp,
                                   fontWeight: FontWeight.bold,
-                                  letterSpacing: 1.3,
+                                  letterSpacing: 3.w,
                                 ),
                               ),
                             ),
                             BlocBuilder<BookBloc, BookState>(
                               builder: (context, state) {
+                                List<String> images = [
+                                  "assets/images/rustili.jpg",
+                                  "assets/images/rustili.jpg",
+                                  "assets/images/arabtili.jpg",
+                                  "assets/images/koreystili.jpg",
+                                ];
                                 return Expanded(
-                                  child: Wrap(
-                                    children: [
-                                      for (int i = 0;
-                                          i < state.books.length;
-                                          i++)
-                                        BookTile(book: state.books[i]),
-                                    ],
-                                  ),
-                                  // child: GridView.builder(
-                                  //   primary: false,
-                                  //   padding: EdgeInsets.symmetric(
-                                  //     horizontal: 10.w,
-                                  //     vertical: 10.h,
-                                  //   ),
-                                  //   gridDelegate:
-                                  //       SliverGridDelegateWithFixedCrossAxisCount(
-                                  //     crossAxisCount: 2,
-                                  //     // childAspectRatio: screenWidth > 795 ? (2 / 8).sp : (2 / 3.2).w,
-                                  //     crossAxisSpacing: 10.w,
-                                  //     mainAxisSpacing: 10.w,
-                                  //   ),
-                                  //   itemCount: state.books.length,
-                                  //   physics:
-                                  //       const NeverScrollableScrollPhysics(),
-                                  //   itemBuilder: (context, index) {
-                                  //     final book = state.books[index];
-                                  //     return BookTile(book: book);
-                                  //   },
+                                  // child: Wrap(
+                                  //   children: [
+                                  //     for (int i = 0;
+                                  //         i < state.books.length;
+                                  //         i++)
+                                  //       BookTile(book: state.books[i]),
+                                  //   ],
                                   // ),
+                                  child: GridView.builder(
+                                    primary: false,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 10.w,
+                                      vertical: 10.h,
+                                    ),
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      childAspectRatio: 2 / 3.1,
+                                      crossAxisSpacing: 10.w,
+                                      mainAxisSpacing: 10.w,
+                                    ),
+                                    itemCount: state.books.length,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      final book = state.books[index];
+                                      return BookTile(
+                                        book: book,
+                                        imagePath: images[index],
+                                      );
+                                    },
+                                  ),
                                 );
                               },
                             ),

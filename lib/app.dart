@@ -22,7 +22,7 @@ class App extends StatelessWidget {
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     return ScreenUtilInit(
-      designSize: const Size(375, 812),
+      designSize: const Size(800, 1280),
       child: MultiBlocProvider(
         providers: [
           BlocProvider(

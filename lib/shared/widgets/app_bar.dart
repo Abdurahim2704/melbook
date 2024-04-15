@@ -29,7 +29,7 @@ class CustomAppBar extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.w600,
               color: const Color(0xFF201A21),
-              fontSize: 18.sp,
+              fontSize: 21.sp,
             ),
           ),
         ),

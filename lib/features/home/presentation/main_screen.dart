@@ -29,33 +29,34 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
-        height: 55.h,
+        height: 70.h,
         elevation: 0,
         color: const Color(0xffffffff),
         shadowColor: Colors.black,
         child: BlocBuilder<MainBloc, MainState>(
           builder: (context, state) {
             return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: List.generate(
-                    items.length,
-                    (index) => IconButton(
-                          onPressed: () {
-                            BlocProvider.of<MainBloc>(context).add(
-                              ChangePageEvent(index: index),
-                            );
-                            pageController.jumpToPage(index);
-                          },
-                          icon: SvgPicture.asset(
-                            items[index],
-                            height: 20.h,
-                            colorFilter: ColorFilter.mode(
-                                state.currentIndex == index
-                                    ? Colors.black
-                                    : Colors.grey,
-                                BlendMode.srcIn),
-                          ),
-                        )));
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: List.generate(
+                items.length,
+                (index) => IconButton(
+                  onPressed: () {
+                    BlocProvider.of<MainBloc>(context).add(
+                      ChangePageEvent(index: index),
+                    );
+                    pageController.jumpToPage(index);
+                  },
+                  icon: SvgPicture.asset(
+                    items[index],
+                    height: 50.h,
+                    colorFilter: ColorFilter.mode(
+                      state.currentIndex == index ? Colors.black : Colors.grey,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                ),
+              ),
+            );
           },
         ),
       ),
