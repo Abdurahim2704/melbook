@@ -233,18 +233,6 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          width: 10.w,
-                        ),
-                        CircleAvatar(
-                          radius: 18.sp,
-                          backgroundColor: Color(0xFFF2F2F2),
-                          child: Icon(
-                            Icons.share,
-                            color: Colors.black,
-                            size: 14.sp,
-                          ),
-                        ),
                       ],
                     ),
                   ),
