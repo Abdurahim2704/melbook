@@ -48,18 +48,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Align(
               alignment: Alignment.centerRight,
               child: IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const UpdateProfile(),
-                      ),
-                    );
-                  },
-                  icon: Icon(
-                    Icons.edit,
-                    size: 18.sp,
-                  )),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const UpdateProfile(),
+                    ),
+                  );
+                },
+                icon: Icon(
+                  Icons.edit,
+                  size: 28.sp,
+                ),
+              ),
             ),
             Align(
               alignment: Alignment.centerLeft,
@@ -97,7 +98,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 },
                 icon: Icon(
                   Icons.logout,
-                  size: 18.sp,
+                  size: 28.sp,
                 ),
               ),
             ),
@@ -116,7 +117,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   TextButton(
                     style: TextButton.styleFrom(
                         backgroundColor:
-                            current == 0 ? Colors.black : Colors.transparent),
+                            current == 0 ? Colors.black : Colors.transparent,
+                        padding: EdgeInsets.symmetric(horizontal: 60.w)),
                     onPressed: () {
                       current = 0;
                       setState(() {});
@@ -126,15 +128,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: TextStyle(
                         color: current == 0 ? Colors.white : Colors.black,
                         fontWeight: FontWeight.w500,
-                        fontSize: 15.sp,
+                        fontSize: 20.sp,
                       ),
                     ),
                   ),
                   SizedBox(width: 20.w),
                   TextButton(
                     style: TextButton.styleFrom(
-                        backgroundColor:
-                            current == 1 ? Colors.black : Colors.transparent),
+                      backgroundColor:
+                          current == 1 ? Colors.black : Colors.transparent,
+                      padding: EdgeInsets.symmetric(horizontal: 60.w),
+                    ),
                     onPressed: () {
                       current = 1;
                       setState(() {});
@@ -144,7 +148,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: TextStyle(
                         color: current == 1 ? Colors.white : Colors.black,
                         fontWeight: FontWeight.w500,
-                        fontSize: 15.sp,
+                        fontSize: 20.sp,
                       ),
                     ),
                   ),
@@ -154,26 +158,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
               if (current == 0) ...[
                 ListTile(
                   shape: Border(
-                      top: BorderSide(
-                          color: Colors.grey.withOpacity(0.3), width: 1)),
+                    top: BorderSide(
+                      color: Colors.grey.withOpacity(0.3),
+                      width: 1,
+                    ),
+                  ),
                   title: Text(
                     titles[0],
                     style:
-                        TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 21.sp, fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
                     state.user?.userName ?? "Unknown",
-                    style: TextStyle(fontSize: 14.sp),
+                    style: TextStyle(fontSize: 18.sp),
                   ),
                 ),
                 const SizedBox(height: 10),
                 Container(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 10.h, horizontal: 8.w),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10.h,
+                    horizontal: 18.w,
+                  ),
                   decoration: BoxDecoration(
                     border: Border(
-                        top: BorderSide(
-                            color: Colors.grey.withOpacity(0.3), width: 1)),
+                      top: BorderSide(
+                        color: Colors.grey.withOpacity(0.3),
+                        width: 1,
+                      ),
+                    ),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -185,11 +197,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Text(
                             titles[1],
                             style: TextStyle(
-                                fontSize: 14.sp, fontWeight: FontWeight.bold),
+                              fontSize: 21.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           Text(
                             state.user?.name ?? "Unknown",
-                            style: TextStyle(fontSize: 14.sp),
+                            style: TextStyle(
+                              fontSize: 18.sp,
+                            ),
                           ),
                         ],
                       ),
@@ -197,13 +213,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(trailing[1],
-                              style: TextStyle(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.bold)),
+                          Text(
+                            trailing[1],
+                            style: TextStyle(
+                              fontSize: 21.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                           Text(
                             state.user?.name ?? "Unknown",
-                            style: TextStyle(fontSize: 14.sp),
+                            style: TextStyle(fontSize: 18.sp),
                           ),
                         ],
                       )
@@ -212,12 +231,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 const SizedBox(height: 10),
                 Container(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 10.h, horizontal: 8.w),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10.h,
+                    horizontal: 18.w,
+                  ),
                   decoration: BoxDecoration(
                     border: Border(
-                        top: BorderSide(
-                            color: Colors.grey.withOpacity(0.3), width: 1)),
+                      top: BorderSide(
+                        color: Colors.grey.withOpacity(0.3),
+                        width: 1,
+                      ),
+                    ),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -229,11 +253,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Text(
                             titles[2],
                             style: TextStyle(
-                                fontSize: 14.sp, fontWeight: FontWeight.bold),
+                              fontSize: 21.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           Text(
                             state.user?.phoneNumber ?? "Unknown",
-                            style: TextStyle(fontSize: 14.sp),
+                            style: TextStyle(fontSize: 18.sp),
                           ),
                         ],
                       ),
@@ -244,13 +270,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Text(
                             trailing[2],
                             style: TextStyle(
-                              fontSize: 14.sp,
+                              fontSize: 21.sp,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
                             "Click",
-                            style: TextStyle(fontSize: 14.sp),
+                            style: TextStyle(fontSize: 18.sp),
                           ),
                         ],
                       )
@@ -262,18 +288,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ListTile(
                   shape: Border(
                     top: BorderSide(
-                        color: Colors.grey.withOpacity(0.3), width: 1),
+                      color: Colors.grey.withOpacity(0.3),
+                      width: 1,
+                    ),
                     bottom: BorderSide(
-                        color: Colors.grey.withOpacity(0.3), width: 1),
+                      color: Colors.grey.withOpacity(0.3),
+                      width: 1,
+                    ),
                   ),
                   title: Text(
                     "To'lov turi",
                     style:
-                        TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 21.sp, fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
                     "Click",
-                    style: TextStyle(fontSize: 14.sp),
+                    style: TextStyle(fontSize: 18.sp),
                   ),
                 ),
               if (current == 1)
@@ -286,7 +316,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Text(
                         "To'lovlar",
                         style: TextStyle(
-                            fontSize: 16.sp, fontWeight: FontWeight.bold),
+                          fontSize: 21.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       BlocBuilder<BookBloc, BookState>(
                         builder: (context, state) {
@@ -306,12 +338,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   Text(
                                     book.name,
                                     style:
-                                        TextStyle(fontSize: 14.sp, height: 2),
+                                        TextStyle(fontSize: 19.sp, height: 2),
                                   ),
                                   Text(
-                                    book.price.toString(),
+                                    "${book.price} so'm",
                                     style:
-                                        TextStyle(fontSize: 14.sp, height: 2),
+                                        TextStyle(fontSize: 18.sp, height: 2),
                                   ),
                                 ],
                               );

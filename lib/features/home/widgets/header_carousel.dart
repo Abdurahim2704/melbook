@@ -32,7 +32,7 @@ class _CarouselDemoState extends State<CarouselDemo> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
             child: SizedBox(
-              height: 200.h,
+              height: 280.h,
               child: const CupertinoActivityIndicator(),
             ),
           );
@@ -54,14 +54,14 @@ class _CarouselDemoState extends State<CarouselDemo> {
                     alignment: const Alignment(0, 3),
                     indicatorRadius: 3,
                   ),
-                  height: 200.h,
+                  height: 280.h,
                   autoPlay: true,
-                  autoPlayInterval: const Duration(seconds: 5),
-                  autoPlayAnimationDuration: const Duration(milliseconds: 850),
+                  autoPlayInterval: const Duration(seconds: 20),
+                  autoPlayAnimationDuration: const Duration(milliseconds: 880),
                   enableInfiniteScroll: true,
                   controller: widget.carouselController,
                   enlargeCenterPage: true,
-                  viewportFraction: 0.9.w,
+                  viewportFraction: 0.7.w,
                   initialPage: 1,
                 ),
               ),
@@ -78,8 +78,6 @@ class _CarouselDemoState extends State<CarouselDemo> {
         borderRadius: const BorderRadius.all(Radius.circular(10)),
         child: Image.network(
           banner.photoUrl,
-          width: 320.w,
-          height: 200.h,
           fit: BoxFit.cover,
         ),
       );

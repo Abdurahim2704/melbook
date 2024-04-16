@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,10 +32,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
 
   @override
   void initState() {
-    context
-        .read<AuthBloc>()
-        .stream
-        .listen((event) {
+    context.read<AuthBloc>().stream.listen((event) {
       if (event.message != null) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(event.message!)));
@@ -50,14 +48,20 @@ class _UpdateProfileState extends State<UpdateProfile> {
         preferredSize: Size(double.infinity, 80.h),
         child: Stack(
           children: [
-            CustomAppBar(
+            const CustomAppBar(
               displayText: "Profile",
             ),
             Align(
               alignment: Alignment.centerLeft,
-              child: IconButton(onPressed: () {
-                Navigator.pop(context);
-              }, icon: Icon(Icons.arrow_back, size: 16.sp,)),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back,
+                  size: 28.sp,
+                ),
+              ),
             )
           ],
         ),
@@ -80,32 +84,29 @@ class _UpdateProfileState extends State<UpdateProfile> {
                     textInputAction: TextInputAction.next,
                     controller: usernameCtrl,
                   ),
-                  SizedBox(height: 15.h),
+                  SizedBox(height: 20.h),
                   buildTextFieldHeaderText("Ism"),
                   SizedBox(height: 12.h),
                   AuthTextField(
                     style: TextStyle(fontSize: 14.sp),
-
                     controller: nameCtrl,
                     hinText: state.user?.name,
                     textInputAction: TextInputAction.next,
                   ),
-                  SizedBox(height: 15.h),
+                  SizedBox(height: 20.h),
                   buildTextFieldHeaderText("Familiya"),
                   SizedBox(height: 12.h),
                   AuthTextField(
                     style: TextStyle(fontSize: 14.sp),
-
                     controller: surnameCtrl,
                     hinText: state.user?.surname,
                     textInputAction: TextInputAction.next,
                   ),
-                  SizedBox(height: 15.h),
+                  SizedBox(height: 20.h),
                   buildTextFieldHeaderText("Telefon raqam"),
                   SizedBox(height: 12.h),
                   AuthTextField(
                     style: TextStyle(fontSize: 14.sp),
-
                     hinText: "\t${state.user?.phoneNumber}",
                     controller: phoneNumberCtrl,
                     keyboardType: TextInputType.phone,
@@ -117,40 +118,40 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 15.h),
+                  SizedBox(height: 20.h),
                   buildTextFieldHeaderText("Parol"),
                   SizedBox(height: 12.h),
                   AuthTextField(
                     style: TextStyle(fontSize: 14.sp),
-
                     hinText: "* * * * * * *",
                     controller: passwordCtrl,
                     textInputAction: TextInputAction.next,
                   ),
-                  SizedBox(height: 15.h),
+                  SizedBox(height: 20.h),
                   buildTextFieldHeaderText("Parolni takrorlang"),
                   SizedBox(height: 12.h),
                   AuthTextField(
                     style: TextStyle(fontSize: 14.sp),
-
                     hinText: "* * * * * * *",
                     controller: confirmPasswordCtrl,
                     textInputAction: TextInputAction.done,
                   ),
                   SizedBox(height: 30.h),
-                  PrimaryYellowElevatedButton(
-                    displayText: "Saqlash",
-                    onPressed: () {
-                      if (confirmPasswordCtrl.text == passwordCtrl.text) {
-                        context.read<AuthRepository>().editData(
-                          username: usernameCtrl.text,
-                          name: nameCtrl.text,
-                          phoneNumber: phoneNumberCtrl.text,
-                          password: passwordCtrl.text,
-                          surname: surnameCtrl.text,
-                        );
-                      }
-                    },
+                  Center(
+                    child: PrimaryYellowElevatedButton(
+                      displayText: "Saqlash",
+                      onPressed: () {
+                        if (confirmPasswordCtrl.text == passwordCtrl.text) {
+                          context.read<AuthRepository>().editData(
+                                username: usernameCtrl.text,
+                                name: nameCtrl.text,
+                                phoneNumber: phoneNumberCtrl.text,
+                                password: passwordCtrl.text,
+                                surname: surnameCtrl.text,
+                              );
+                        }
+                      },
+                    ),
                   )
                 ],
               );

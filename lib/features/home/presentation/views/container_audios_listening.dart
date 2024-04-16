@@ -39,7 +39,7 @@ class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
             return GestureDetector(
               onTap: () {},
               child: Container(
-                height: 114.h,
+                height: 180.h,
                 margin: const EdgeInsets.symmetric(vertical: 10),
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
@@ -48,13 +48,19 @@ class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
                 ),
                 child: Row(
                   children: [
-                    CachedNetworkImage(
-                      imageUrl: widget.bookData.photoUrl,
-                      width: 73.w,
-                      height: 104.h,
-                      fit: BoxFit.fill,
+                    ClipRRect(
+                      clipBehavior: Clip.antiAlias,
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(8),
+                      ),
+                      child: CachedNetworkImage(
+                        imageUrl: widget.bookData.photoUrl,
+                        width: 170.w,
+                        height: 170.h,
+                        fit: BoxFit.fill,
+                      ),
                     ),
-                    SizedBox(width: 20.w),
+                    SizedBox(width: 30.w),
                     Expanded(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -65,11 +71,11 @@ class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
                               widget.bookData.audios?[index].name ?? "",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 12.sp,
+                                fontSize: 18.sp,
                               ),
                             ),
                           ),
-                          SizedBox(height: 10.h),
+                          SizedBox(height: 20.h),
                           Row(
                             children: [
                               GestureDetector(
@@ -100,12 +106,13 @@ class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
                                           context: context,
                                           builder: (context) {
                                             return AlertDialog(
+                                              elevation: 0,
                                               backgroundColor: Colors.white,
                                               title: Center(
                                                 child: Text(
                                                   "Audioni avval yuklab oling!",
                                                   style: TextStyle(
-                                                    fontSize: 14.sp,
+                                                    fontSize: 25.sp,
                                                     fontWeight: FontWeight.w500,
                                                   ),
                                                 ),
@@ -123,6 +130,8 @@ class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
                                         );
                                 },
                                 child: Container(
+                                  height: 55.h,
+                                  width: 55.w,
                                   padding: EdgeInsets.all(6.sp),
                                   decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
@@ -130,6 +139,7 @@ class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
                                   ),
                                   child: const Icon(
                                     Icons.play_arrow,
+                                    size: 28,
                                     color: Colors.black,
                                   ),
                                 ),
@@ -152,6 +162,8 @@ class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
                                       );
                                 },
                                 child: Container(
+                                  height: 55.h,
+                                  width: 55.w,
                                   padding: EdgeInsets.all(6.sp),
                                   decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
@@ -162,8 +174,11 @@ class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
                                           .toList()
                                           .contains(widget
                                               .bookData.audios![index].name)
-                                      ? const Icon(Icons.check)
-                                      : const Icon(Icons.cloud_download),
+                                      ? const Icon(Icons.check, size: 28)
+                                      : const Icon(
+                                          Icons.cloud_download,
+                                          size: 28,
+                                        ),
                                 ),
                               ),
                             ],
