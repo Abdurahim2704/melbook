@@ -16,15 +16,20 @@ class _BookpageState extends State<Bookpage> {
   @override
   void initState() {
     super.initState();
-    context.read<BookBloc>().stream.listen((event) {
-      if (event is BookFetchError) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(
-          event.message,
-          style: TextStyle(fontSize: 14.sp),
-        )));
-      }
-    });
+    context.read<BookBloc>().stream.listen(
+      (event) {
+        if (event is BookFetchError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                event.message,
+                style: TextStyle(fontSize: 14.sp),
+              ),
+            ),
+          );
+        }
+      },
+    );
   }
 
   @override
@@ -41,7 +46,8 @@ class _BookpageState extends State<Bookpage> {
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 18.sp,
+            fontSize: 28.sp,
+            letterSpacing: 3.2,
           ),
         ),
         backgroundColor: Colors.transparent,

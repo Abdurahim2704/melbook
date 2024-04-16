@@ -172,7 +172,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                           },
                           child: ClipRRect(
                             clipBehavior: Clip.antiAlias,
-                            borderRadius: BorderRadius.all(
+                            borderRadius: const BorderRadius.all(
                               Radius.circular(8),
                             ),
                             child: CachedNetworkImage(

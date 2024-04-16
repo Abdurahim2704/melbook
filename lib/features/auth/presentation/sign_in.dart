@@ -111,10 +111,12 @@ class _SignInState extends State<SignIn> {
             child: PrimaryYellowElevatedButton(
               displayText: "Tizimga kirish",
               onPressed: () {
-                context.read<AuthBloc>().add(SignInEvent(
-                      password: passwordCtrl.text,
-                      username: usernameCtrl.text,
-                    ));
+                context.read<AuthBloc>().add(
+                      SignInEvent(
+                        password: passwordCtrl.text,
+                        username: usernameCtrl.text,
+                      ),
+                    );
               },
             ),
           );
