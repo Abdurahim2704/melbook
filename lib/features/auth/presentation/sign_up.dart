@@ -62,7 +62,7 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size(double.infinity, 90.h),
-        child: CustomAppBar(
+        child: const CustomAppBar(
           displayText: "Ro’yxatdan o’tish",
         ),
       ),
@@ -154,48 +154,61 @@ class _SignUpState extends State<SignUp> {
                   }
                 },
                 builder: (context, state) {
-                  return PrimaryYellowElevatedButton(
-                    displayText: "Ro’yxatdan o’tish",
-                    onPressed: () {
-                      if (confirmPasswordCtrl.text != passwordCtrl.text) {
-                        if (mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(
-                                "Parolni takrorlashda xato qildingiz!!!",
-                                style: TextStyle(fontSize: 14.sp)),
-                          ));
+                  return Center(
+                    child: PrimaryYellowElevatedButton(
+                      displayText: "Ro’yxatdan o’tish",
+                      onPressed: () {
+                        if (confirmPasswordCtrl.text != passwordCtrl.text) {
+                          if (mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  "Parolni takrorlashda xato qildingiz!!!",
+                                  style: TextStyle(fontSize: 14.sp),
+                                ),
+                              ),
+                            );
+                          }
+                          return;
                         }
-                        return;
-                      }
-                      context.read<AuthBloc>().add(SignUpEvent(
-                          name: nameCtrl.text,
-                          username: usernameCtrl.text,
-                          surname: surnameCtrl.text,
-                          password: passwordCtrl.text,
-                          phoneNumber:
-                              formatPhoneNumber(phoneNumberCtrl.text)));
-                    },
+                        context.read<AuthBloc>().add(
+                              SignUpEvent(
+                                name: nameCtrl.text,
+                                username: usernameCtrl.text,
+                                surname: surnameCtrl.text,
+                                password: passwordCtrl.text,
+                                phoneNumber:
+                                    formatPhoneNumber(phoneNumberCtrl.text),
+                              ),
+                            );
+                      },
+                    ),
                   );
                 },
               ),
+              const SizedBox(height: 15),
               Center(
                 child: RichText(
-                    text: TextSpan(
-                        text: "Akkauntingiz bormi? ",
-                        style: TextStyle(
-                            color: Colors.blue,
-                            height: 2,
-                            decoration: TextDecoration.underline,
-                            fontSize: 16.sp),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const SignIn(),
-                                ));
-                          })),
-              )
+                  text: TextSpan(
+                    text: "Akkauntingiz bormi? ",
+                    style: TextStyle(
+                      color: Colors.blue,
+                      height: 2,
+                      decoration: TextDecoration.underline,
+                      fontSize: 16.sp,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignIn(),
+                          ),
+                        );
+                      },
+                  ),
+                ),
+              ),
             ],
           ),
         ),

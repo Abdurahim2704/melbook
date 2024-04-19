@@ -47,8 +47,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 },
                 icon: SvgPicture.asset(
                   "assets/icons/ic_back.svg",
-                  height: 26.h,
-                  width: 26.w,
+                  height: 28.h,
+                  width: 28.w,
                 ),
               ),
             ),
@@ -58,8 +58,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 onPressed: () {},
                 icon: SvgPicture.asset(
                   "assets/icons/ic_notification_done.svg",
-                  height: 22.h,
-                  width: 22.w,
+                  height: 28.h,
+                  width: 28.w,
                 ),
               ),
             ),
@@ -95,12 +95,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 left: 12.w,
                 right: 12.w,
                 bottom: 20.h,
+                top: 12.h,
               ),
               separatorBuilder: (context, index) => SizedBox(height: 16.h),
               itemBuilder: (context, index) {
                 final notification = snapshot.data![index];
                 return SizedBox(
-                  height: 90.h,
+                  height: 120.h,
                   child: ListTile(
                     onTap: () {
                       Navigator.push(
@@ -126,60 +127,63 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             borderRadius: BorderRadius.circular(8.0),
                             child: Image.network(
                               notification.photoUrl,
-                              height: 72.h,
-                              width: 72.h,
+                              height: 105.h,
+                              width: 105.h,
                               fit: BoxFit.cover,
                             ),
                           ),
                         ),
                         SizedBox(width: 20.w),
                         Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                notification.title,
-                                style: TextStyle(
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: const Color(0xFF000000),
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 18.0.h),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  notification.title,
+                                  style: TextStyle(
+                                    fontSize: 20.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color(0xFF000000),
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              SizedBox(height: 7.h),
-                              Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    "assets/icons/ic_calendar_notification.svg",
-                                    height: 16.h,
-                                    width: 16.w,
-                                  ),
-                                  SizedBox(width: 8.w),
-                                  Text(
-                                    "${notification.date.day}.${notification.date.month}.${notification.date.year}",
-                                    style: TextStyle(
-                                      fontSize: 10.sp,
-                                      color: const Color(0xFFA4A3A4),
+                                SizedBox(height: 12.h),
+                                Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                      "assets/icons/ic_calendar_notification.svg",
+                                      height: 18.h,
+                                      width: 18.w,
                                     ),
-                                  ),
-                                  SizedBox(width: 50.w),
-                                  SvgPicture.asset(
-                                    "assets/icons/ic_view.svg",
-                                    height: 15.h,
-                                    width: 15.w,
-                                  ),
-                                  SizedBox(width: 5.w),
-                                  Text(
-                                    notification.readBy.length.toString(),
-                                    style: TextStyle(
-                                      fontSize: 10.sp,
-                                      color: const Color(0xFFA4A3A4),
+                                    SizedBox(width: 8.w),
+                                    Text(
+                                      "${notification.date.day}.${notification.date.month}.${notification.date.year}",
+                                      style: TextStyle(
+                                        fontSize: 15.sp,
+                                        color: const Color(0xFFA4A3A4),
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                                    SizedBox(width: 50.w),
+                                    SvgPicture.asset(
+                                      "assets/icons/ic_view.svg",
+                                      height: 17.h,
+                                      width: 17.w,
+                                    ),
+                                    SizedBox(width: 5.w),
+                                    Text(
+                                      notification.readBy.length.toString(),
+                                      style: TextStyle(
+                                        fontSize: 15.sp,
+                                        color: const Color(0xFFA4A3A4),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],

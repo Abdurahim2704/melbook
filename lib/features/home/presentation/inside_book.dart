@@ -26,9 +26,15 @@ class _InsideBookState extends State<InsideBook> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                   IconButton(onPressed: () {
-                     Navigator.pop(context);
-                   }, icon: Icon(Icons.arrow_back, size: 20.sp,)),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      Icons.arrow_back,
+                      size: 20.sp,
+                    ),
+                  ),
                   IconButton(
                     onPressed: () {
                       print("I am here");
@@ -38,7 +44,10 @@ class _InsideBookState extends State<InsideBook> {
                       //       builder: (context) => const AudioScreen(fi),
                       //     ));
                     },
-                    icon:  Icon(Icons.headphones, size: 20.sp,),
+                    icon: Icon(
+                      Icons.headphones,
+                      size: 20.sp,
+                    ),
                   )
                 ],
               ),
@@ -53,7 +62,7 @@ class _InsideBookState extends State<InsideBook> {
             textAlign: TextAlign.justify,
             "The high demand for fairy tale books was further facilitated by the emergence of many new publishing houses during the late 19th and early 20th centuries. Then the onset of World War I brought about inflation, leading to resource rationing and a shortage of paper, consequently leading to a reduced book production.[20] The aftermath of the war, later coupled with the Great Depression, further exacerbated the situation, causing a decline in demand for both fairy tales and books in general.[21] A few years later, fairy tales quickly gained popularity again. In 1937, Walt Disney, being aware of the public's desire for an escape from the turmoil of a war-torn and economically strained world, introduced an era of fairy tale movies.and"
             "being aware of the public's desire for an escape from the turmoil of a war-torn and economically strained world, introduced an era of fairy tale movies.and  ",
-            style: TextStyle(fontSize: 14.sp),
+            style: TextStyle(fontSize: 17.sp),
           ),
         ),
       ),
