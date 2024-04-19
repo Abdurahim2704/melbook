@@ -34,6 +34,7 @@ class BookService {
       final List<dynamic> jsonList = json.decode(response.body)['data'];
       final List<BookData> books =
           jsonList.map((json) => BookData.fromJson(json)).toList();
+      print(jsonList);
       return books;
     } else {
       throw Exception('Failed to fetch books: ${response.statusCode}');

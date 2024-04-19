@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -27,7 +29,7 @@ class LocalAudioService {
     await initDb();
     final isExists = await getAudioByName(name);
     print(isExists);
-    if (isExists.map((e) => e["book"]).contains(book)) {
+    if (isExists.map((e) => e.book).contains(book)) {
       return;
     }
     print("I am insert2");
@@ -39,17 +41,50 @@ class LocalAudioService {
     print("men insertman");
   }
 
-  static Future<List<Map<String, dynamic>>> getAudios() async {
+  static Future<List<LocalAudio>> getAudios() async {
     await initDb();
-    return await _database!.query(_tableName);
+    final result = await _database!.query(_tableName);
+    final audios = result
+        .map((e) => LocalAudio.fromSql(e as Map<String, dynamic>))
+        .toList();
+    return audios;
   }
 
-  static Future<List<Map<String, dynamic>>> getAudioByName(String name) async {
+  static Future<List<LocalAudio>> getAudioByName(String name) async {
     await initDb();
-    return await _database!.query(
+    final result = await _database!.query(
       _tableName,
       where: 'name = ?',
       whereArgs: [name],
     );
+    final audios = result
+        .map((e) => LocalAudio.fromSql(e as Map<String, dynamic>))
+        .toList();
+    return audios;
+  }
+}
+
+class LocalAudio {
+  final String name;
+  final String location;
+  final String book;
+
+  const LocalAudio({
+    required this.name,
+    required this.location,
+    required this.book,
+  });
+
+  factory LocalAudio.fromSql(Map<String, dynamic> json) {
+    final name = json["name"] as String;
+    final location = json["location"] as String;
+    final book = json["book"] as String;
+
+    return LocalAudio(name: name, location: location, book: book);
+  }
+
+  @override
+  String toString() {
+    return jsonEncode({"name": name, "location": location});
   }
 }

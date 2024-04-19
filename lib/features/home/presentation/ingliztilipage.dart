@@ -63,6 +63,19 @@ class _IngliztilipageState extends State<Ingliztilipage> {
 
   late Timer timer;
 
+  void _buyButton() {
+    if (widget.book.bought) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => returnBooks(widget.book.name),
+        ),
+      );
+    } else {
+      showClickSheet(context, widget.book.id);
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -72,8 +85,6 @@ class _IngliztilipageState extends State<Ingliztilipage> {
       }
     });
     context.read<PaymentBloc>().stream.listen((event) {
-      print(event);
-
       if (event is PaymentSuccess) {
         showDialog(
           context: context,
@@ -91,7 +102,6 @@ class _IngliztilipageState extends State<Ingliztilipage> {
         );
         timer.cancel();
       } else if (event is PaymentCanceled) {
-        print("I am here");
         showDialog(
           context: context,
           builder: (context) {
@@ -147,7 +157,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 60.h),
+                padding: const EdgeInsets.only(top: 60),
                 child: Container(
                   decoration: const BoxDecoration(
                     color: Colors.white,
@@ -172,7 +182,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                           },
                           child: ClipRRect(
                             clipBehavior: Clip.antiAlias,
-                            borderRadius: BorderRadius.all(
+                            borderRadius: const BorderRadius.all(
                               Radius.circular(8),
                             ),
                             child: CachedNetworkImage(
@@ -181,7 +191,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 30.w),
+                        const SizedBox(width: 30),
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,31 +199,19 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                             Text(
                               widget.book.name,
                               style: TextStyle(
-                                fontSize: 25.sp,
+                                fontSize: 35.sp,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
                             Text(
                               widget.book.author,
                               style: TextStyle(
-                                fontSize: 18.sp,
+                                fontSize: 30.sp,
                               ),
                             ),
                             const SizedBox(height: 15),
                             InkWell(
-                              onTap: () {
-                                if (widget.book.bought) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          returnBooks(widget.book.name),
-                                    ),
-                                  );
-                                } else {
-                                  showClickSheet(context, widget.book.id);
-                                }
-                              },
+                              onTap: _buyButton,
                               child: Container(
                                 padding: EdgeInsets.symmetric(
                                   horizontal: 45.w,
@@ -227,7 +225,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                 child: Text(
                                   widget.book.bought ? "O'qish" : "Sotib olish",
                                   style: TextStyle(
-                                    fontSize: 15.sp,
+                                    fontSize: 25.sp,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
@@ -250,8 +248,6 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(height: 10.h),
-
-                  /// #Header PageView Buttons
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -268,7 +264,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                           style: TextStyle(
                             color:
                                 _currentPage == 0 ? Colors.white : Colors.black,
-                            fontSize: 18.sp,
+                            fontSize: 21.sp,
                           ),
                         ),
                       ),
@@ -285,7 +281,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                           style: TextStyle(
                             color:
                                 _currentPage == 1 ? Colors.white : Colors.black,
-                            fontSize: 18.sp,
+                            fontSize: 21.sp,
                           ),
                         ),
                       ),

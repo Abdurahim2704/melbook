@@ -28,10 +28,8 @@ class LocalService {
     if (await Permission.storage.isDenied ||
         await Permission.mediaLibrary.isDenied) {
       await requestPermissions();
-      print("men shu yerda");
     }
     final filePath = await getFilePath(fileName, book);
-    print(filePath);
     double value = -1;
     // final downloadStream = StreamController<int>();
     // downloadStream.add(0);
@@ -39,7 +37,7 @@ class LocalService {
       link,
       "$filePath.mp3",
       onReceiveProgress: (count, total) {
-        value = total / count;
+        value = count / total;
         print(value);
       },
     );

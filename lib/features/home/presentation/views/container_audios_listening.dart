@@ -1,10 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:melbook/features/audio/presentation/audio.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
 import 'package:melbook/features/home/presentation/bloc/local_storage/local_storage_bloc.dart';
+import 'package:melbook/features/home/presentation/views/offline_list_tile.dart';
+import 'package:melbook/features/home/presentation/views/online_list_tile.dart';
 
 class ContainerAudiosListening extends StatefulWidget {
   final BookData bookData;
@@ -22,177 +24,61 @@ class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
     super.initState();
     context.read<LocalStorageBloc>().stream.listen((event) {
       if (event is DownloadSuccess) {
-        print("I am here");
         print(event.audios);
       }
     });
   }
 
+  Future<bool> checkConnection() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        return true;
+      }
+      return false;
+    } on SocketException catch (_) {
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LocalStorageBloc, LocalStorageState>(
-      builder: (context, state) {
-        return ListView.builder(
-          padding: EdgeInsets.only(bottom: 10.h, left: 12.w, right: 12.w),
-          itemCount: widget.bookData.audios?.length,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {},
-              child: Container(
-                height: 180.h,
-                margin: const EdgeInsets.symmetric(vertical: 10),
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  children: [
-                    ClipRRect(
-                      clipBehavior: Clip.antiAlias,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(8),
-                      ),
-                      child: CachedNetworkImage(
-                        imageUrl: widget.bookData.photoUrl,
-                        width: 170.w,
-                        height: 170.h,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    SizedBox(width: 30.w),
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Flexible(
-                            child: Text(
-                              widget.bookData.audios?[index].name ?? "",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18.sp,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 20.h),
-                          Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  state.audios
-                                          .map((e) => e["name"])
-                                          .toList()
-                                          .contains(widget
-                                              .bookData.audios![index].name)
-                                      ? Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => AudioScreen(
-                                              audio: widget
-                                                  .bookData.audios![index],
-                                              filePath: state.audios.firstWhere(
-                                                  (element) => (element[
-                                                          "name"] ==
-                                                      widget
-                                                          .bookData
-                                                          .audios![index]
-                                                          .name))["location"],
-                                              book: widget.bookData,
-                                            ),
-                                          ),
-                                        )
-                                      : showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return AlertDialog(
-                                              elevation: 0,
-                                              backgroundColor: Colors.white,
-                                              title: Center(
-                                                child: Text(
-                                                  "Audioni avval yuklab oling!",
-                                                  style: TextStyle(
-                                                    fontSize: 25.sp,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: const Text("Ok"),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                },
-                                child: Container(
-                                  height: 55.h,
-                                  width: 55.w,
-                                  padding: EdgeInsets.all(6.sp),
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Color(0xFFF2F2F2),
-                                  ),
-                                  child: const Icon(
-                                    Icons.play_arrow,
-                                    size: 28,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 22.w),
-                              GestureDetector(
-                                onTap: () {
-                                  print(state.audios);
-                                  print(state.audios
-                                      .map((e) => e["name"])
-                                      .toList());
-                                  context.read<LocalStorageBloc>().add(
-                                        DownloadFileAndSave(
-                                          link: widget
-                                              .bookData.audios![index].audioUrl,
-                                          name: widget
-                                              .bookData.audios![index].name,
-                                          book: widget.bookData.name,
-                                        ),
-                                      );
-                                },
-                                child: Container(
-                                  height: 55.h,
-                                  width: 55.w,
-                                  padding: EdgeInsets.all(6.sp),
-                                  decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Color(0xFFF2F2F2),
-                                  ),
-                                  child: state.audios
-                                          .map((e) => e["name"])
-                                          .toList()
-                                          .contains(widget
-                                              .bookData.audios![index].name)
-                                      ? const Icon(Icons.check, size: 28)
-                                      : const Icon(
-                                          Icons.cloud_download,
-                                          size: 28,
-                                        ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
-      },
-    );
+        builder: (context, state) {
+      return FutureBuilder<bool>(
+          future: checkConnection(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              final connection = snapshot.data!;
+              if (connection) {
+                return ListView.builder(
+                  padding:
+                      EdgeInsets.only(bottom: 10.h, left: 12.w, right: 12.w),
+                  itemCount: widget.bookData.audios?.length,
+                  itemBuilder: (context, index) {
+                    final currentAudio = widget.bookData.audios?[index];
+                    print(widget.bookData.audios?.length);
+                    return OnlineListTile(
+                        bookData: widget.bookData,
+                        currentAudio: currentAudio!,
+                        index: index);
+                  },
+                );
+              } else {
+                return ListView.builder(
+                  padding:
+                      EdgeInsets.only(bottom: 10.h, left: 12.w, right: 12.w),
+                  itemCount: state.audios.length,
+                  itemBuilder: (context, index) {
+                    final currentAudio = state.audios[index];
+                    print(widget.bookData.audios?.length);
+                    return OfflineListTile(audios: state.audios, index: index);
+                  },
+                );
+              }
+            }
+            return const SizedBox.shrink();
+          });
+    });
   }
 }

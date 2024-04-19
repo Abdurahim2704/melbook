@@ -2,45 +2,44 @@ import 'package:just_audio/just_audio.dart';
 import 'package:melbook/features/home/data/models/audio.dart';
 
 class AudioServiceImpl {
-  final player = AudioPlayer();
-  int current = 0;
-  List<Audio> audios = [];
-  Future<void> playNewTrack(String path) async {
-    await player.setUrl(path);
+  static final player = AudioPlayer();
+  static int current = 0;
+  static List<Audio> audios = [];
+
+  static Future<void> playNewTrack(String path) async {
+    await player.setFilePath(path);
     await player.play();
   }
 
-  Future<void> init() async {}
+  static Future<bool> get isPlaying async => player.playing;
 
-  Future<bool> get isPlaying async => player.playing;
-
-  Future<void> pause() async {
+  static Future<void> pause() async {
     await player.pause();
+    // await player.seekToNext()
   }
 
-  Future<void> play() async {
+  static Future<void> play() async {
     await player.play();
   }
 
-  Stream<Duration> audioDuration() {
+  static Stream<Duration> audioDuration() {
     return player.positionStream;
   }
 
-  Future<void> seekDuration(Duration position) async {
+  static Future<void> seekDuration(Duration position) async {
     await player.seek(position);
   }
 
-  // Future<void> skipNext() async {
-  //   await playNewTrack(tracks[(current + 1)]);
-  // }
-
-  void setAudio(List<Audio> myTrack) {
+  static void setAudio(List<Audio> myTrack) {
     audios.addAll(myTrack);
   }
 
-  Future<void> skipPrevious() async {
+  static Future<void> skipPrevious() async {
     await player.seekToPrevious();
   }
 
-  // Track get currentTrack => tracks[current];
+  static Duration totalDuration() {
+    return player.duration ?? const Duration(seconds: 0);
+  }
+// Track get currentTrack => tracks[current];
 }

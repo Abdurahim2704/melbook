@@ -1,52 +1,78 @@
 import 'dart:core';
 
-import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_audio/just_audio.dart';
-import 'package:melbook/features/home/data/models/audio.dart';
+import 'package:melbook/features/audio/data/audio_service.dart';
+import 'package:melbook/features/audio/presentation/views/play_pause_ctrl.dart';
+import 'package:melbook/features/audio/presentation/views/progress_bar.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
+import 'package:melbook/features/home/presentation/bloc/local_storage/local_storage_bloc.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
-import 'package:rxdart/rxdart.dart';
+
+import 'bloc/player/player_bloc.dart';
 
 class AudioScreen extends StatefulWidget {
   final String filePath;
   final BookData book;
-  final Audio audio;
 
-  const AudioScreen(
-      {super.key,
-      required this.filePath,
-      required this.book,
-      required this.audio});
+  const AudioScreen({
+    super.key,
+    required this.filePath,
+    required this.book,
+  });
 
   @override
   State<AudioScreen> createState() => _AudioScreenState();
 }
 
 class _AudioScreenState extends State<AudioScreen> {
-  late AudioPlayer _audioPlayer;
-
   bool isKaraoke = false;
-
-  Stream<PositionData> get _positionDataStream =>
-      Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
-          _audioPlayer.positionStream,
-          _audioPlayer.bufferedPositionStream,
-          _audioPlayer.durationStream,
-          (position, bufferPosition, duration) => PositionData(
-              position, bufferPosition, duration ?? Duration.zero));
 
   @override
   void initState() {
-    _audioPlayer = AudioPlayer()..setFilePath(widget.filePath);
     super.initState();
   }
 
-  @override
-  void dispose() {
-    _audioPlayer.dispose();
-    super.dispose();
+  void goNext() {
+    final currentAudio = context.read<PlayerBloc>().state.audio!;
+    final nextAudioIndex = (widget.book.audios!.indexOf(currentAudio) + 1) %
+        (widget.book.audios!.length);
+    final nextAudio = widget.book.audios![nextAudioIndex];
+    if (context
+        .read<LocalStorageBloc>()
+        .state
+        .audios
+        .map((e) => e.name)
+        .contains(nextAudio.name)) {
+      final nextPath = context
+          .read<LocalStorageBloc>()
+          .state
+          .audios
+          .firstWhere((element) => element.name == nextAudio.name)
+          .location;
+      context
+          .read<PlayerBloc>()
+          .add(SkipNext(path: nextPath, audio: nextAudio));
+    } else {
+      context.read<LocalStorageBloc>().add(DownloadFileAndSave(
+          link: nextAudio.audioUrl,
+          name: nextAudio.name,
+          book: widget.book.name));
+      context.read<LocalStorageBloc>().stream.listen((event) {
+        if (event is DownloadSuccess) {
+          final nextPath = context
+              .read<LocalStorageBloc>()
+              .state
+              .audios
+              .firstWhere((element) => element.name == nextAudio.name)
+              .location;
+          context
+              .read<PlayerBloc>()
+              .add(SkipNext(path: nextPath, audio: nextAudio));
+        }
+      });
+    }
   }
 
   @override
@@ -85,41 +111,43 @@ class _AudioScreenState extends State<AudioScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 30.h,
+              const SizedBox(
+                height: 30,
               ),
               if (!isKaraoke)
                 Image(
-                  height: 322.h,
-                  width: 280.w,
+                  height: 800,
                   fit: BoxFit.fill,
                   image: NetworkImage(widget.book.photoUrl),
                 ),
-              if (isKaraoke)
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.orange)),
-                  height: 420.h,
-                  child: SingleChildScrollView(
-                    child: Text(
-                      textAlign: TextAlign.justify,
-                      "The high demand for fairy tale books was further facilitated by the emergence of many new publishing houses during the late 19th and early 20th centuries. Then the onset of World War I brought about inflation, leading to resource rationing and a shortage of paper, consequently leading to a reduced book production.[20] The aftermath of the war, later coupled with the Great Depression, further exacerbated the situation, causing a decline in demand for both fairy tales and books in general.[21] A few years later, fairy tales quickly gained popularity again. In 1937, Walt Disney, being aware of the public's desire for an escape from the turmoil of a war-torn and economically strained world, introduced an era of fairy tale movies.and"
-                      "being aware of the public's desire for an escape from the turmoil of a war-torn and economically strained world, introduced an era of fairy tale movies.and  ",
-                      style: TextStyle(fontSize: 14.sp),
-                    ),
-                  ),
-                ),
+              // if (isKaraoke)
+              //   Container(
+              //     padding: const EdgeInsets.all(10),
+              //     decoration: BoxDecoration(
+              //         borderRadius: BorderRadius.circular(12),
+              //         border: Border.all(color: Colors.orange)),
+              //     child: SingleChildScrollView(
+              //       child: Text(
+              //         textAlign: TextAlign.justify,
+              //         "The high demand for fairy tale books was further facilitated by the emergence of many new publishing houses during the late 19th and early 20th centuries. Then the onset of World War I brought about inflation, leading to resource rationing and a shortage of paper, consequently leading to a reduced book production.[20] The aftermath of the war, later coupled with the Great Depression, further exacerbated the situation, causing a decline in demand for both fairy tales and books in general.[21] A few years later, fairy tales quickly gained popularity again. In 1937, Walt Disney, being aware of the public's desire for an escape from the turmoil of a war-torn and economically strained world, introduced an era of fairy tale movies.and"
+              //         "being aware of the public's desire for an escape from the turmoil of a war-torn and economically strained world, introduced an era of fairy tale movies.and  ",
+              //         style: TextStyle(fontSize: 14.sp),
+              //       ),
+              //     ),
+              //   ),
               SizedBox(
-                height: isKaraoke ? 20.h : 70.h,
+                height: isKaraoke ? 20 : 70,
               ),
-              Text(
-                widget.audio.name,
-                style: TextStyle(
-                  fontSize: 15.sp,
-                  fontWeight: FontWeight.bold,
-                ),
+              BlocBuilder<PlayerBloc, PlayerState>(
+                builder: (context, state) {
+                  return Text(
+                    state.audio!.name,
+                    style: TextStyle(
+                      fontSize: 30.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                },
               ),
               SizedBox(
                 height: 5.h,
@@ -128,76 +156,82 @@ class _AudioScreenState extends State<AudioScreen> {
                 widget.book.author,
                 style: TextStyle(
                   color: Colors.grey,
-                  fontSize: 12.sp,
+                  fontSize: 26.sp,
                 ),
               ),
               SizedBox(
                 height: 12.h,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      _audioPlayer.setFilePath(widget.filePath);
-                    },
-                    icon: const Icon(Icons.repeat),
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
+              BlocBuilder<LocalStorageBloc, LocalStorageState>(
+                builder: (context, state) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(
                         onPressed: () {},
-                        icon: const Icon(Icons.skip_previous_rounded),
+                        icon: const Icon(Icons.repeat),
                       ),
-                      Controls(
-                        audioPlayer: _audioPlayer,
-                        filePath: widget.filePath,
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.skip_next_rounded),
-                      ),
+                      state is! DownloadWaiting
+                          ? Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.skip_previous_rounded,
+                                    size: 40,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                BlocBuilder<PlayerBloc, PlayerState>(
+                                  builder: (context, state) {
+                                    return Controls(
+                                      filePath: widget.filePath,
+                                      audio: state.audio!,
+                                    );
+                                  },
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                BlocBuilder<PlayerBloc, PlayerState>(
+                                  builder: (context, state) {
+                                    return IconButton(
+                                      onPressed: () {
+                                        goNext();
+                                      },
+                                      icon: const Icon(
+                                        Icons.skip_next_rounded,
+                                        size: 40,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            )
+                          : CircularProgressIndicator.adaptive(),
+                      IconButton(onPressed: () {}, icon: const SizedBox())
                     ],
-                  ),
-                  IconButton(onPressed: () {}, icon: const SizedBox())
-                ],
+                  );
+                },
               ),
               SizedBox(
                 height: 10.h,
               ),
               Row(
                 children: [
-                  // Controls(audioPlayer: _audioPlayer),
-                  // const SizedBox(
-                  //   width: 5,
-                  // ),
-                  StreamBuilder<PositionData>(
-                    stream: _positionDataStream,
+                  StreamBuilder<Duration>(
+                    stream: AudioServiceImpl.audioDuration(),
                     builder: (context, snapshot) {
-                      final positionData = snapshot.data;
+                      final positionData =
+                          snapshot.data ?? const Duration(seconds: 0);
                       return Expanded(
                         child: Padding(
                           padding: const EdgeInsets.only(top: 5),
-                          child: ProgressBar(
-                            progress: positionData?.position ?? Duration.zero,
-                            buffered:
-                                positionData?.bufferPosition ?? Duration.zero,
-                            total: positionData?.duration ?? Duration.zero,
-                            onSeek: _audioPlayer.seek,
-                            barHeight: 4,
-                            timeLabelPadding: 8,
-                            thumbRadius: 7,
-                            thumbGlowRadius: 0.1,
-                            timeLabelTextStyle: const TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.black,
-                            ),
-                            timeLabelLocation: TimeLabelLocation.above,
-                            baseBarColor: Colors.grey,
-                            progressBarColor: Colors.orange,
-                            thumbColor: Colors.orange,
+                          child: CustomProgressBar(
+                            positionData: positionData,
                           ),
                         ),
                       );
@@ -211,63 +245,4 @@ class _AudioScreenState extends State<AudioScreen> {
       ),
     );
   }
-}
-
-class Controls extends StatelessWidget {
-  final AudioPlayer audioPlayer;
-  final String filePath;
-
-  const Controls(
-      {super.key, required this.audioPlayer, required this.filePath});
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<PlayerState>(
-      stream: audioPlayer.playerStateStream,
-      builder: (context, snapshot) {
-        final playerState = snapshot.data;
-        final processingState = playerState?.processingState;
-        final playing = playerState?.playing;
-        if (!(playing ?? false)) {
-          return GestureDetector(
-            onTap: audioPlayer.play,
-            child: CircleAvatar(
-                backgroundColor: Colors.orange,
-                radius: 30,
-                child: const Icon(Icons.play_arrow_rounded)),
-          );
-        } else if (processingState != ProcessingState.completed) {
-          return GestureDetector(
-            onTap: audioPlayer.pause,
-            child: CircleAvatar(
-              backgroundColor: Colors.orange,
-              radius: 30,
-              child: const Icon(
-                Icons.pause_rounded,
-                color: Colors.black,
-              ),
-            ),
-          );
-        }
-        return GestureDetector(
-          onTap: () {
-            audioPlayer.setFilePath(filePath);
-            audioPlayer.play;
-          },
-          child: const Icon(
-            Icons.play_arrow_rounded,
-            color: Colors.black,
-          ),
-        );
-      },
-    );
-  }
-}
-
-class PositionData {
-  final Duration position;
-  final Duration bufferPosition;
-  final Duration duration;
-
-  const PositionData(this.position, this.bufferPosition, this.duration);
 }

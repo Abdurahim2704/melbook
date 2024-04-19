@@ -1,6 +1,8 @@
 import 'dart:convert';
 
-class Audio {
+import 'package:equatable/equatable.dart';
+
+class Audio extends Equatable {
   final String id;
   final String name;
   final String audioUrl;
@@ -50,4 +52,14 @@ class Audio {
       '__v': v,
     });
   }
+
+  @override
+  String toString() {
+    return jsonEncode({
+      "name": name,
+    });
+  }
+
+  @override
+  List<Object?> get props => [id, name, audioUrl];
 }

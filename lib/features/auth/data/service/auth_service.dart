@@ -87,20 +87,24 @@ class AuthService extends AuthRepository {
     }
 
     final body = {"username": username, "password": password};
-    final data = await http.post(
-        Uri.parse("${AppConstants.baseUrl}${AppConstants.apiLoginUser}"),
-        body: jsonEncode(body),
-        headers: {"Content-Type": "application/json"});
+    try {
+      final data = await http.post(
+          Uri.parse("${AppConstants.baseUrl}${AppConstants.apiLoginUser}"),
+          body: jsonEncode(body),
+          headers: {"Content-Type": "application/json"});
 
-    if (data.statusCode != 200) {
-      return DataFailure(message: jsonDecode(data.body)["message"]);
+      if (data.statusCode != 200) {
+        return DataFailure(message: jsonDecode(data.body)["message"]);
+      }
+      _token = jsonDecode(data.body)["data"]["token"];
+      final user = User.fromJson((jsonDecode(data.body)
+          as Map<String, dynamic>)["data"]["user"] as Map<String, Object?>);
+      _user = user;
+      return DataSuccess<User>(
+          data: user, message: jsonDecode(data.body)["message"]);
+    } catch (e) {
+      return DataFailure(message: e.toString());
     }
-    _token = jsonDecode(data.body)["data"]["token"];
-    final user = User.fromJson((jsonDecode(data.body)
-        as Map<String, dynamic>)["data"]["user"] as Map<String, Object?>);
-    _user = user;
-    return DataSuccess<User>(
-        data: user, message: jsonDecode(data.body)["message"]);
   }
 
   @override
