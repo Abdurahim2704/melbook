@@ -37,12 +37,12 @@ class SkipNext extends PlayerEvent {
 }
 
 class InitAudio extends PlayerEvent {
-  final Audio audio;
+  final Audio? audio;
 
   const InitAudio({required this.audio});
 
   @override
-  List<Object?> get props => [audio.name];
+  List<Object?> get props => [audio?.name];
 }
 
 class InitAudioOffline extends PlayerEvent {

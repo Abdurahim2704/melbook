@@ -2,13 +2,14 @@ import 'package:just_audio/just_audio.dart';
 import 'package:melbook/features/home/data/models/audio.dart';
 
 class AudioServiceImpl {
-  static final player = AudioPlayer();
+  static final player = AudioPlayer()..setLoopMode(LoopMode.one);
   static int current = 0;
   static List<Audio> audios = [];
 
-  static Future<void> playNewTrack(String path) async {
-    await player.setFilePath(path);
-    await player.play();
+  static Future<void> playNewTrack(
+    String path,
+  ) async {
+    await player.setFilePath(path, preload: false);
   }
 
   static Future<bool> get isPlaying async => player.playing;

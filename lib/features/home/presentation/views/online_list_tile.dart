@@ -30,6 +30,7 @@ class _OnlineListTileState extends State<OnlineListTile> {
     context
         .read<PlayerBloc>()
         .add(InitAudio(audio: widget.bookData.audios![index]));
+    print(context.read<PlayerBloc>().state.audio?.name);
     Navigator.push(
       context,
       MaterialPageRoute(

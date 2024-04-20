@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
 import 'package:melbook/features/home/presentation/bloc/local_storage/local_storage_bloc.dart';
-import 'package:melbook/features/home/presentation/views/offline_list_tile.dart';
 import 'package:melbook/features/home/presentation/views/online_list_tile.dart';
 
 class ContainerAudiosListening extends StatefulWidget {
@@ -45,40 +44,18 @@ class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
   Widget build(BuildContext context) {
     return BlocBuilder<LocalStorageBloc, LocalStorageState>(
         builder: (context, state) {
-      return FutureBuilder<bool>(
-          future: checkConnection(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              final connection = snapshot.data!;
-              if (connection) {
-                return ListView.builder(
-                  padding:
-                      EdgeInsets.only(bottom: 10.h, left: 12.w, right: 12.w),
-                  itemCount: widget.bookData.audios?.length,
-                  itemBuilder: (context, index) {
-                    final currentAudio = widget.bookData.audios?[index];
-                    print(widget.bookData.audios?.length);
-                    return OnlineListTile(
-                        bookData: widget.bookData,
-                        currentAudio: currentAudio!,
-                        index: index);
-                  },
-                );
-              } else {
-                return ListView.builder(
-                  padding:
-                      EdgeInsets.only(bottom: 10.h, left: 12.w, right: 12.w),
-                  itemCount: state.audios.length,
-                  itemBuilder: (context, index) {
-                    final currentAudio = state.audios[index];
-                    print(widget.bookData.audios?.length);
-                    return OfflineListTile(audios: state.audios, index: index);
-                  },
-                );
-              }
-            }
-            return const SizedBox.shrink();
-          });
+      return ListView.builder(
+        padding: EdgeInsets.only(bottom: 10.h, left: 12.w, right: 12.w),
+        itemCount: widget.bookData.audios?.length,
+        itemBuilder: (context, index) {
+          final currentAudio = widget.bookData.audios?[index];
+          print(widget.bookData.audios?.length);
+          return OnlineListTile(
+              bookData: widget.bookData,
+              currentAudio: currentAudio!,
+              index: index);
+        },
+      );
     });
   }
 }

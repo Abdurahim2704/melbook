@@ -29,16 +29,56 @@ class AudioScreen extends StatefulWidget {
 class _AudioScreenState extends State<AudioScreen> {
   bool isKaraoke = false;
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
   void goNext() {
     final currentAudio = context.read<PlayerBloc>().state.audio!;
     final nextAudioIndex = (widget.book.audios!.indexOf(currentAudio) + 1) %
         (widget.book.audios!.length);
     final nextAudio = widget.book.audios![nextAudioIndex];
+    if (context
+        .read<LocalStorageBloc>()
+        .state
+        .audios
+        .map((e) => e.name)
+        .contains(nextAudio.name)) {
+      final nextPath = context
+          .read<LocalStorageBloc>()
+          .state
+          .audios
+          .firstWhere((element) => element.name == nextAudio.name)
+          .location;
+      print("Salom: ${nextAudio.name}");
+      context
+          .read<PlayerBloc>()
+          .add(SkipNext(path: nextPath, audio: nextAudio));
+    } else {
+      context.read<LocalStorageBloc>().add(DownloadFileAndSave(
+          link: nextAudio.audioUrl,
+          name: nextAudio.name,
+          book: widget.book.name));
+      context.read<LocalStorageBloc>().stream.listen((event) {
+        if (event is DownloadSuccess) {
+          final nextPath = context
+              .read<LocalStorageBloc>()
+              .state
+              .audios
+              .firstWhere((element) => element.name == nextAudio.name)
+              .location;
+          context
+              .read<PlayerBloc>()
+              .add(SkipNext(path: nextPath, audio: nextAudio));
+        }
+      });
+    }
+  }
+
+  void goPrevious() {
+    final currentAudio = context.read<PlayerBloc>().state.audio!;
+    int previousAudioIndex = (widget.book.audios!.indexOf(currentAudio) - 1);
+    if (previousAudioIndex < 0) {
+      previousAudioIndex =
+          widget.book.audios!.length - previousAudioIndex.abs();
+    }
+    final nextAudio = widget.book.audios![previousAudioIndex];
     if (context
         .read<LocalStorageBloc>()
         .state
@@ -73,6 +113,12 @@ class _AudioScreenState extends State<AudioScreen> {
         }
       });
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    print(context.read<PlayerBloc>().state.audio);
   }
 
   @override
@@ -176,7 +222,7 @@ class _AudioScreenState extends State<AudioScreen> {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: goPrevious,
                                   icon: const Icon(
                                     Icons.skip_previous_rounded,
                                     size: 40,
@@ -199,9 +245,7 @@ class _AudioScreenState extends State<AudioScreen> {
                                 BlocBuilder<PlayerBloc, PlayerState>(
                                   builder: (context, state) {
                                     return IconButton(
-                                      onPressed: () {
-                                        goNext();
-                                      },
+                                      onPressed: goNext,
                                       icon: const Icon(
                                         Icons.skip_next_rounded,
                                         size: 40,

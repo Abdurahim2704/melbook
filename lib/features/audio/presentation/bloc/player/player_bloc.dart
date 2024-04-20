@@ -30,6 +30,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
           path: event.path, isPlaying: true, audio: event.audio));
     } else {
       AudioServiceImpl.playNewTrack(event.path);
+      AudioServiceImpl.play();
       emit(PlayerSuccessState(
           path: event.path, isPlaying: true, audio: event.audio));
     }
@@ -41,7 +42,8 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
   }
 
   Future<void> _skipNext(SkipNext event, Emitter<PlayerState> emit) async {
-    await AudioServiceImpl.playNewTrack(event.path);
+    AudioServiceImpl.playNewTrack(event.path);
+    AudioServiceImpl.play();
     emit(PlayerSuccessState(
         isPlaying: true, path: event.path, audio: event.audio));
   }
