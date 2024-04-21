@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/audio/data/audio_service.dart';
-import 'package:melbook/features/audio/presentation/views/play_pause_ctrl.dart';
 import 'package:melbook/features/audio/presentation/views/progress_bar.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
 import 'package:melbook/features/home/presentation/bloc/local_storage/local_storage_bloc.dart';
@@ -51,10 +50,13 @@ class _AudioScreenState extends State<AudioScreen> {
           .read<PlayerBloc>()
           .add(SkipNext(path: nextPath, audio: nextAudio));
     } else {
-      context.read<LocalStorageBloc>().add(DownloadFileAndSave(
-          link: nextAudio.audioUrl,
-          name: nextAudio.name,
-          book: widget.book.name));
+      context.read<LocalStorageBloc>().add(
+            DownloadFileAndSave(
+                link: nextAudio.audioUrl,
+                name: nextAudio.name,
+                book: widget.book.name,
+                description: nextAudio.content),
+          );
       context.read<LocalStorageBloc>().stream.listen((event) {
         if (event is DownloadSuccess) {
           final nextPath = context
@@ -98,7 +100,8 @@ class _AudioScreenState extends State<AudioScreen> {
       context.read<LocalStorageBloc>().add(DownloadFileAndSave(
           link: nextAudio.audioUrl,
           name: nextAudio.name,
-          book: widget.book.name));
+          book: widget.book.name,
+          description: nextAudio.content));
       context.read<LocalStorageBloc>().stream.listen((event) {
         if (event is DownloadSuccess) {
           final nextPath = context
@@ -166,21 +169,24 @@ class _AudioScreenState extends State<AudioScreen> {
                   fit: BoxFit.fill,
                   image: NetworkImage(widget.book.photoUrl),
                 ),
-              // if (isKaraoke)
-              //   Container(
-              //     padding: const EdgeInsets.all(10),
-              //     decoration: BoxDecoration(
-              //         borderRadius: BorderRadius.circular(12),
-              //         border: Border.all(color: Colors.orange)),
-              //     child: SingleChildScrollView(
-              //       child: Text(
-              //         textAlign: TextAlign.justify,
-              //         "The high demand for fairy tale books was further facilitated by the emergence of many new publishing houses during the late 19th and early 20th centuries. Then the onset of World War I brought about inflation, leading to resource rationing and a shortage of paper, consequently leading to a reduced book production.[20] The aftermath of the war, later coupled with the Great Depression, further exacerbated the situation, causing a decline in demand for both fairy tales and books in general.[21] A few years later, fairy tales quickly gained popularity again. In 1937, Walt Disney, being aware of the public's desire for an escape from the turmoil of a war-torn and economically strained world, introduced an era of fairy tale movies.and"
-              //         "being aware of the public's desire for an escape from the turmoil of a war-torn and economically strained world, introduced an era of fairy tale movies.and  ",
-              //         style: TextStyle(fontSize: 14.sp),
-              //       ),
-              //     ),
-              //   ),
+              if (isKaraoke)
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: Colors.orange)),
+                  child: SingleChildScrollView(
+                    child: BlocBuilder<PlayerBloc, PlayerState>(
+                      builder: (context, state) {
+                        return Text(
+                          textAlign: TextAlign.justify,
+                          state.audio!.content,
+                          style: TextStyle(fontSize: 14.sp),
+                        );
+                      },
+                    ),
+                  ),
+                ),
               SizedBox(
                 height: isKaraoke ? 20 : 70,
               ),
@@ -233,9 +239,27 @@ class _AudioScreenState extends State<AudioScreen> {
                                 ),
                                 BlocBuilder<PlayerBloc, PlayerState>(
                                   builder: (context, state) {
-                                    return Controls(
-                                      filePath: widget.filePath,
-                                      audio: state.audio!,
+                                    return GestureDetector(
+                                      onTap: () {
+                                        final path = context
+                                            .read<LocalStorageBloc>()
+                                            .state
+                                            .audios
+                                            .firstWhere((element) =>
+                                                element.name ==
+                                                state.audio!.name)
+                                            .location;
+                                        context.read<PlayerBloc>().add(
+                                            PlayPause(
+                                                path: path,
+                                                audio: state.audio!));
+                                      },
+                                      child: CircleAvatar(
+                                          backgroundColor: Colors.orange,
+                                          radius: 30,
+                                          child: Icon(state.isPlaying
+                                              ? Icons.pause_rounded
+                                              : Icons.play_arrow_rounded)),
                                     );
                                   },
                                 ),

@@ -18,8 +18,8 @@ class LocalStorageBloc extends Bloc<LocalStorageEvent, LocalStorageState> {
       DownloadFileAndSave event, Emitter<LocalStorageState> emit) async {
     emit(DownloadWaiting(state.audios, downloadingAudio: event.name));
     try {
-      final result =
-          await LocalService().downloadFile(event.name, event.link, event.book);
+      final result = await LocalService()
+          .downloadFile(event.name, event.link, event.book, event.description);
       final audios = await LocalAudioService.getAudios();
       if (result.toInt() == 1) {
         emit(DownloadSuccess(audios));

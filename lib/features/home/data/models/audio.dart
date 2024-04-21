@@ -9,6 +9,7 @@ class Audio extends Equatable {
   final String bookId;
   final String createdAt;
   final String updatedAt;
+  final String content;
   final int v;
 
   Audio({
@@ -18,6 +19,7 @@ class Audio extends Equatable {
     required this.bookId,
     required this.createdAt,
     required this.updatedAt,
+    required this.content,
     required this.v,
   });
 
@@ -28,17 +30,18 @@ class Audio extends Equatable {
     final bookId = json['book_id'] as String;
     final createdAt = json['createdAt'] as String;
     final updatedAt = json['updatedAt'] as String;
+    final content = json["audio_content"] as String;
     final v = json['__v'] as int;
 
     return Audio(
-      id: id,
-      name: name,
-      audioUrl: audioUrl,
-      bookId: bookId,
-      createdAt: createdAt,
-      updatedAt: updatedAt,
-      v: v,
-    );
+        id: id,
+        name: name,
+        audioUrl: audioUrl,
+        bookId: bookId,
+        createdAt: createdAt,
+        updatedAt: updatedAt,
+        v: v,
+        content: content);
   }
 
   String toJson() {
@@ -50,6 +53,7 @@ class Audio extends Equatable {
       'createdAt': createdAt,
       'updatedAt': updatedAt,
       '__v': v,
+      "audio_content": content,
     });
   }
 
@@ -61,5 +65,5 @@ class Audio extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, name, audioUrl];
+  List<Object?> get props => [id, name, audioUrl, content];
 }

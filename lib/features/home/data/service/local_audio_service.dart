@@ -15,7 +15,7 @@ class LocalAudioService {
           await openDatabase(path, version: 1, onCreate: (db, version) async {
         await db.execute(
           'CREATE TABLE $_tableName('
-          'name TEXT, location TEXT, book TEXT)',
+          'name TEXT, location TEXT, book TEXT, description TEXT)',
         );
       });
     } catch (e) {
@@ -25,20 +25,22 @@ class LocalAudioService {
 
   // Add a new audio record
   static Future<void> saveAudio(
-      String name, String location, String book) async {
+      String name, String location, String book, String description) async {
     await initDb();
     final isExists = await getAudioByName(name);
-    print(isExists);
     if (isExists.map((e) => e.book).contains(book)) {
       return;
     }
-    print("I am insert2");
     await _database?.insert(
       _tableName,
-      {'name': name, 'location': location, 'book': book},
+      {
+        'name': name,
+        'location': location,
+        'book': book,
+        "description": description
+      },
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
-    print("men insertman");
   }
 
   static Future<List<LocalAudio>> getAudios() async {
@@ -68,23 +70,30 @@ class LocalAudio {
   final String name;
   final String location;
   final String book;
+  final String description;
 
   const LocalAudio({
     required this.name,
     required this.location,
     required this.book,
+    required this.description,
   });
 
   factory LocalAudio.fromSql(Map<String, dynamic> json) {
     final name = json["name"] as String;
     final location = json["location"] as String;
     final book = json["book"] as String;
+    final description = json["description"] as String;
 
-    return LocalAudio(name: name, location: location, book: book);
+    return LocalAudio(
+        name: name, location: location, book: book, description: description);
   }
 
   @override
   String toString() {
-    return jsonEncode({"name": name, "location": location});
+    return jsonEncode({
+      "name": name,
+      "location": location,
+    });
   }
 }

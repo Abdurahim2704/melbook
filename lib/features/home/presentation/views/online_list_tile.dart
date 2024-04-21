@@ -110,7 +110,7 @@ class _OnlineListTileState extends State<OnlineListTile> {
                 children: [
                   Flexible(
                     child: Text(
-                      widget.currentAudio?.name ?? "",
+                      widget.currentAudio.name ?? "",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18.sp,
@@ -122,7 +122,7 @@ class _OnlineListTileState extends State<OnlineListTile> {
                     builder: (context, state) {
                       return (state is DownloadWaiting &&
                               (state.downloadingAudio ?? "") ==
-                                  widget.currentAudio!.name)
+                                  widget.currentAudio.name)
                           ? const CircularProgressIndicator.adaptive()
                           : Row(
                               children: [
@@ -157,16 +157,19 @@ class _OnlineListTileState extends State<OnlineListTile> {
                                                 .audios![widget.index].name)) {
                                           context.read<LocalStorageBloc>().add(
                                                 DownloadFileAndSave(
-                                                  link: widget
-                                                      .bookData
-                                                      .audios![widget.index]
-                                                      .audioUrl,
-                                                  name: widget
-                                                      .bookData
-                                                      .audios![widget.index]
-                                                      .name,
-                                                  book: widget.bookData.name,
-                                                ),
+                                                    link: widget
+                                                        .bookData
+                                                        .audios![widget.index]
+                                                        .audioUrl,
+                                                    name: widget
+                                                        .bookData
+                                                        .audios![widget.index]
+                                                        .name,
+                                                    book: widget.bookData.name,
+                                                    description: widget
+                                                        .bookData
+                                                        .audios![widget.index]
+                                                        .content),
                                               );
                                         }
                                       },
