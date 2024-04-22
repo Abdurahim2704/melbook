@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -59,7 +58,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                 },
                 icon: Icon(
                   Icons.arrow_back,
-                  size: 28.sp,
+                  size: 35.sp,
                 ),
               ),
             )
@@ -79,7 +78,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   buildTextFieldHeaderText("Foydalanuvchi nomi"),
                   SizedBox(height: 12.h),
                   AuthTextField(
-                    style: TextStyle(fontSize: 14.sp),
+                    style: TextStyle(fontSize: 18.sp),
                     hinText: state.user?.userName,
                     textInputAction: TextInputAction.next,
                     controller: usernameCtrl,
@@ -88,7 +87,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   buildTextFieldHeaderText("Ism"),
                   SizedBox(height: 12.h),
                   AuthTextField(
-                    style: TextStyle(fontSize: 14.sp),
+                    style: TextStyle(fontSize: 18.sp),
                     controller: nameCtrl,
                     hinText: state.user?.name,
                     textInputAction: TextInputAction.next,
@@ -97,7 +96,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   buildTextFieldHeaderText("Familiya"),
                   SizedBox(height: 12.h),
                   AuthTextField(
-                    style: TextStyle(fontSize: 14.sp),
+                    style: TextStyle(fontSize: 18.sp),
                     controller: surnameCtrl,
                     hinText: state.user?.surname,
                     textInputAction: TextInputAction.next,
@@ -106,7 +105,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   buildTextFieldHeaderText("Telefon raqam"),
                   SizedBox(height: 12.h),
                   AuthTextField(
-                    style: TextStyle(fontSize: 14.sp),
+                    style: TextStyle(fontSize: 18.sp),
                     hinText: "\t${state.user?.phoneNumber}",
                     controller: phoneNumberCtrl,
                     keyboardType: TextInputType.phone,
@@ -122,7 +121,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   buildTextFieldHeaderText("Parol"),
                   SizedBox(height: 12.h),
                   AuthTextField(
-                    style: TextStyle(fontSize: 14.sp),
+                    style: TextStyle(fontSize: 18.sp),
                     hinText: "* * * * * * *",
                     controller: passwordCtrl,
                     textInputAction: TextInputAction.next,
@@ -131,7 +130,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   buildTextFieldHeaderText("Parolni takrorlang"),
                   SizedBox(height: 12.h),
                   AuthTextField(
-                    style: TextStyle(fontSize: 14.sp),
+                    style: TextStyle(fontSize: 18.sp),
                     hinText: "* * * * * * *",
                     controller: confirmPasswordCtrl,
                     textInputAction: TextInputAction.done,

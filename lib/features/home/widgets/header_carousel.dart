@@ -61,7 +61,7 @@ class _CarouselDemoState extends State<CarouselDemo> {
                   enableInfiniteScroll: true,
                   controller: widget.carouselController,
                   enlargeCenterPage: true,
-                  viewportFraction: 0.55.w,
+                  viewportFraction: 0.58.w,
                   initialPage: 1,
                 ),
               ),
@@ -78,8 +78,8 @@ class _CarouselDemoState extends State<CarouselDemo> {
         borderRadius: const BorderRadius.all(Radius.circular(10)),
         child: Image.network(
           banner.photoUrl,
-          fit: BoxFit.cover,
-          width: 400.w,
+          fit: BoxFit.fill,
+          width: 430.w,
         ),
       );
     }).toList();

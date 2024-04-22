@@ -58,7 +58,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 },
                 icon: Icon(
                   Icons.edit,
-                  size: 28.sp,
+                  size: 31.sp,
                 ),
               ),
             ),
@@ -72,11 +72,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       return AlertDialog(
                         backgroundColor: Colors.white,
                         elevation: 0,
+                        contentPadding: const EdgeInsets.all(60),
                         title: Text(
                           "Tizimdan chiqishni xohlaysizmi ?",
                           style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 17.sp,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 28.sp,
                           ),
                         ),
                         actions: [
@@ -84,12 +85,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: const Text("Yo'q"),
+                            child: Text(
+                              "Yo'q",
+                              style: TextStyle(
+                                fontSize: 21.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                           ),
                           SizedBox(width: 20.w),
                           TextButton(
                             onPressed: logOut,
-                            child: const Text("Ha"),
+                            child: Text(
+                              "Ha",
+                              style: TextStyle(
+                                fontSize: 21.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                           ),
                         ],
                       );
@@ -98,7 +111,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 },
                 icon: Icon(
                   Icons.logout,
-                  size: 28.sp,
+                  size: 33.sp,
                 ),
               ),
             ),
@@ -170,7 +183,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   subtitle: Text(
                     state.user?.userName ?? "Unknown",
-                    style: TextStyle(fontSize: 18.sp),
+                    style: TextStyle(
+                      fontSize: 18.sp,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 10),

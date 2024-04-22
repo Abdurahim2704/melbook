@@ -47,19 +47,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 },
                 icon: SvgPicture.asset(
                   "assets/icons/ic_back.svg",
-                  height: 28.h,
-                  width: 28.w,
-                ),
-              ),
-            ),
-            Align(
-              alignment: const Alignment(0.95, 0),
-              child: IconButton(
-                onPressed: () {},
-                icon: SvgPicture.asset(
-                  "assets/icons/ic_notification_done.svg",
-                  height: 28.h,
-                  width: 28.w,
+                  height: 35.h,
+                  width: 35.w,
                 ),
               ),
             ),
@@ -100,8 +89,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
               separatorBuilder: (context, index) => SizedBox(height: 16.h),
               itemBuilder: (context, index) {
                 final notification = snapshot.data![index];
+                print("Notifications: $notification");
                 return SizedBox(
-                  height: 120.h,
+                  height: 150.h,
                   child: ListTile(
                     onTap: () {
                       Navigator.push(
@@ -127,8 +117,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             borderRadius: BorderRadius.circular(8.0),
                             child: Image.network(
                               notification.photoUrl,
-                              height: 105.h,
-                              width: 105.h,
+                              height: 130.h,
+                              width: 130.h,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -143,7 +133,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                 Text(
                                   notification.title,
                                   style: TextStyle(
-                                    fontSize: 20.sp,
+                                    fontSize: 23.sp,
                                     fontWeight: FontWeight.w600,
                                     color: const Color(0xFF000000),
                                   ),
@@ -155,28 +145,28 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                   children: [
                                     SvgPicture.asset(
                                       "assets/icons/ic_calendar_notification.svg",
-                                      height: 18.h,
-                                      width: 18.w,
+                                      height: 22.h,
+                                      width: 22.w,
                                     ),
                                     SizedBox(width: 8.w),
                                     Text(
                                       "${notification.date.day}.${notification.date.month}.${notification.date.year}",
                                       style: TextStyle(
-                                        fontSize: 15.sp,
+                                        fontSize: 18.sp,
                                         color: const Color(0xFFA4A3A4),
                                       ),
                                     ),
                                     SizedBox(width: 50.w),
                                     SvgPicture.asset(
                                       "assets/icons/ic_view.svg",
-                                      height: 17.h,
-                                      width: 17.w,
+                                      height: 22.h,
+                                      width: 22.w,
                                     ),
                                     SizedBox(width: 5.w),
                                     Text(
                                       notification.readBy.length.toString(),
                                       style: TextStyle(
-                                        fontSize: 15.sp,
+                                        fontSize: 18.sp,
                                         color: const Color(0xFFA4A3A4),
                                       ),
                                     ),

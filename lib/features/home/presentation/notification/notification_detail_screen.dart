@@ -70,8 +70,8 @@ class _NotificationDetailScreenState extends State<NotificationDetailScreen> {
                       },
                       icon: SvgPicture.asset(
                         "assets/icons/ic_back.svg",
-                        height: 26.h,
-                        width: 26.w,
+                        height: 35.h,
+                        width: 35.w,
                       ),
                     ),
                   ),
@@ -80,28 +80,40 @@ class _NotificationDetailScreenState extends State<NotificationDetailScreen> {
             ),
             body: SingleChildScrollView(
               child: Padding(
-                padding:
-                    EdgeInsets.only(left: 18.0.w, right: 18.w, bottom: 25.h),
+                padding: EdgeInsets.only(
+                  left: 18.0.w,
+                  right: 18.w,
+                  bottom: 25.h,
+                  top: 20.h,
+                ),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(
-                      child: Image(
-                        width: 335.w,
-                        height: 180.h,
-                        image: NetworkImage(notification.photoUrl),
+                      child: ClipRRect(
+                        clipBehavior: Clip.antiAlias,
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                        child: Image(
+                          width: 500.w,
+                          height: 280.h,
+                          fit: BoxFit.fitWidth,
+                          image: NetworkImage(notification.photoUrl),
+                        ),
                       ),
                     ),
-                    SizedBox(height: 10.h),
-                    Text(
-                      notification.title,
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                        color: const Color(0xFF000000),
+                    SizedBox(height: 20.h),
+                    Center(
+                      child: Text(
+                        notification.title,
+                        style: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w600,
+                          color: const Color(0xFF000000),
+                        ),
+                        maxLines: 2,
                       ),
-                      maxLines: 2,
                     ),
-                    SizedBox(height: 10.h),
+                    SizedBox(height: 20.h),
                     const Divider(
                       color: Color(0xFFE6E6E6),
                       thickness: 1,
@@ -111,38 +123,38 @@ class _NotificationDetailScreenState extends State<NotificationDetailScreen> {
                       children: [
                         SvgPicture.asset(
                           "assets/icons/ic_calendar_notification.svg",
-                          height: 16.h,
-                          width: 16.w,
+                          height: 22.h,
+                          width: 22.w,
                         ),
                         SizedBox(width: 8.w),
                         Text(
                           "${notification.date.day}.${notification.date.month}.${notification.date.year}",
                           style: TextStyle(
-                            fontSize: 10.sp,
+                            fontSize: 16.sp,
                             color: const Color(0xFFA4A3A4),
                           ),
                         ),
                         const Spacer(),
                         SvgPicture.asset(
                           "assets/icons/ic_view.svg",
-                          height: 15.h,
-                          width: 15.w,
+                          height: 21.h,
+                          width: 21.w,
                         ),
                         SizedBox(width: 5.w),
                         Text(
                           notification.readBy.length.toString(),
                           style: TextStyle(
-                            fontSize: 10.sp,
+                            fontSize: 16.sp,
                             color: const Color(0xFFA4A3A4),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: 10.h),
+                    SizedBox(height: 15.h),
                     Text(
                       notification.content,
                       style: TextStyle(
-                        fontSize: 16.sp,
+                        fontSize: 23.sp,
                         color: const Color(0xFF201A21),
                       ),
                     ),
