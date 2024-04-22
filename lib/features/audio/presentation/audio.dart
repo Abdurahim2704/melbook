@@ -125,6 +125,11 @@ class _AudioScreenState extends State<AudioScreen> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final ScrollController scrollController = ScrollController();
     return Scaffold(

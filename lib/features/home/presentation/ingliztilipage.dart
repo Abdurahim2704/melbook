@@ -7,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/home/data/models/book_types.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
 import 'package:melbook/features/home/presentation/bloc/payment_bloc/payment_bloc.dart';
-import 'package:melbook/features/home/presentation/inside_book.dart';
 import 'package:melbook/features/home/presentation/readingbook/arabtili/arabtiliefinal.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/finalview.dart';
 import 'package:melbook/features/home/presentation/readingbook/koreystili/koreystilifinal.dart';
@@ -171,27 +170,17 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const InsideBook(),
-                              ),
-                            );
-                          },
-                          child: ClipRRect(
-                            clipBehavior: Clip.antiAlias,
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(8),
-                            ),
-                            child: Transform.scale(
-                              scaleY: 1.5,
-                              scaleX: 1.5,
-                              child: CachedNetworkImage(
-                                imageUrl: widget.book.photoUrl,
-                                width: screenWidth * 0.25,
-                              ),
+                        ClipRRect(
+                          clipBehavior: Clip.antiAlias,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(8),
+                          ),
+                          child: Transform.scale(
+                            scaleY: 1.5,
+                            scaleX: 1.5,
+                            child: CachedNetworkImage(
+                              imageUrl: widget.book.photoUrl,
+                              width: screenWidth * 0.25,
                             ),
                           ),
                         ),
