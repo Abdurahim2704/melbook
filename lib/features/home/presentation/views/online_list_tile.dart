@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,11 +16,12 @@ class OnlineListTile extends StatefulWidget {
   final Audio currentAudio;
   final int index;
 
-  const OnlineListTile(
-      {super.key,
-      required this.bookData,
-      required this.currentAudio,
-      required this.index});
+  const OnlineListTile({
+    super.key,
+    required this.bookData,
+    required this.currentAudio,
+    required this.index,
+  });
 
   @override
   State<OnlineListTile> createState() => _OnlineListTileState();
@@ -53,6 +55,7 @@ class _OnlineListTileState extends State<OnlineListTile> {
             builder: (context) {
               return AlertDialog(
                 elevation: 0,
+                contentPadding: const EdgeInsets.all(60),
                 backgroundColor: Colors.white,
                 title: Center(
                   child: Text(
@@ -68,7 +71,13 @@ class _OnlineListTileState extends State<OnlineListTile> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text("Ok"),
+                    child: Text(
+                      "Ok",
+                      style: TextStyle(
+                        fontSize: 23.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ),
                 ],
               );
@@ -78,132 +87,132 @@ class _OnlineListTileState extends State<OnlineListTile> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        height: 180.h,
-        margin: const EdgeInsets.symmetric(vertical: 10),
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Row(
-          children: [
-            ClipRRect(
-              clipBehavior: Clip.antiAlias,
-              borderRadius: const BorderRadius.all(
-                Radius.circular(8),
-              ),
-              child: CachedNetworkImage(
-                imageUrl: widget.bookData.photoUrl,
-                width: 170.w,
-                height: 170.h,
-                fit: BoxFit.fill,
-              ),
+    return Container(
+      height: 180.h,
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        children: [
+          ClipRRect(
+            clipBehavior: Clip.antiAlias,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(8),
             ),
-            SizedBox(width: 30.w),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Flexible(
-                    child: Text(
-                      widget.currentAudio.name ?? "",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.sp,
-                      ),
+            child: CachedNetworkImage(
+              imageUrl: widget.bookData.photoUrl,
+              width: 170.w,
+              height: 170.h,
+              fit: BoxFit.fill,
+            ),
+          ),
+          SizedBox(width: 30.w),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Flexible(
+                  child: Text(
+                    widget.currentAudio.name,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.sp,
                     ),
                   ),
-                  SizedBox(height: 20.h),
-                  BlocBuilder<LocalStorageBloc, LocalStorageState>(
-                    builder: (context, state) {
-                      return (state is DownloadWaiting &&
-                              (state.downloadingAudio ?? "") ==
-                                  widget.currentAudio.name)
-                          ? const CircularProgressIndicator.adaptive()
-                          : Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    _playButton(widget.index, state.audios);
-                                  },
-                                  child: Container(
-                                    height: 55.h,
-                                    width: 55.w,
-                                    padding: EdgeInsets.all(6.sp),
-                                    decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Color(0xFFF2F2F2),
-                                    ),
-                                    child: const Icon(
-                                      Icons.play_arrow,
-                                      size: 28,
-                                      color: Colors.black,
-                                    ),
+                ),
+                SizedBox(height: 20.h),
+                BlocBuilder<LocalStorageBloc, LocalStorageState>(
+                  builder: (context, state) {
+                    return (state is DownloadWaiting &&
+                            (state.downloadingAudio ?? "") ==
+                                widget.currentAudio.name)
+                        ? const Padding(
+                          padding: EdgeInsets.only(left: 80.0),
+                          child: CupertinoActivityIndicator(),
+                        )
+                        : Row(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  _playButton(widget.index, state.audios);
+                                },
+                                child: Container(
+                                  height: 55.h,
+                                  width: 55.w,
+                                  padding: EdgeInsets.all(6.sp),
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Color(0xFFF2F2F2),
+                                  ),
+                                  child: const Icon(
+                                    Icons.play_arrow,
+                                    size: 28,
+                                    color: Colors.black,
                                   ),
                                 ),
-                                SizedBox(width: 22.w),
-                                BlocBuilder<LocalStorageBloc,
-                                    LocalStorageState>(
-                                  builder: (context, state) {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        if (!state.audios
-                                            .map((e) => e.name)
-                                            .contains(widget.bookData
-                                                .audios![widget.index].name)) {
-                                          context.read<LocalStorageBloc>().add(
-                                                DownloadFileAndSave(
-                                                    link: widget
-                                                        .bookData
-                                                        .audios![widget.index]
-                                                        .audioUrl,
-                                                    name: widget
-                                                        .bookData
-                                                        .audios![widget.index]
-                                                        .name,
-                                                    book: widget.bookData.name,
-                                                    description: widget
-                                                        .bookData
-                                                        .audios![widget.index]
-                                                        .content),
-                                              );
-                                        }
-                                      },
-                                      child: Container(
-                                        height: 55.h,
-                                        width: 55.w,
-                                        padding: EdgeInsets.all(6.sp),
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Color(0xFFF2F2F2),
-                                        ),
-                                        child: state.audios
-                                                .map((e) => e.name)
-                                                .toList()
-                                                .contains(widget.bookData
-                                                    .audios![widget.index].name)
-                                            ? const Icon(Icons.check, size: 28)
-                                            : const Icon(
-                                                Icons.cloud_download,
-                                                size: 28,
-                                              ),
+                              ),
+                              SizedBox(width: 22.w),
+                              BlocBuilder<LocalStorageBloc,
+                                  LocalStorageState>(
+                                builder: (context, state) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      if (!state.audios
+                                          .map((e) => e.name)
+                                          .contains(widget.bookData
+                                              .audios![widget.index].name)) {
+                                        context.read<LocalStorageBloc>().add(
+                                              DownloadFileAndSave(
+                                                  link: widget
+                                                      .bookData
+                                                      .audios![widget.index]
+                                                      .audioUrl,
+                                                  name: widget
+                                                      .bookData
+                                                      .audios![widget.index]
+                                                      .name,
+                                                  book: widget.bookData.name,
+                                                  description: widget
+                                                      .bookData
+                                                      .audios![widget.index]
+                                                      .content),
+                                            );
+                                      }
+                                    },
+                                    child: Container(
+                                      height: 55.h,
+                                      width: 55.w,
+                                      padding: EdgeInsets.all(6.sp),
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Color(0xFFF2F2F2),
                                       ),
-                                    );
-                                  },
-                                ),
-                              ],
-                            );
-                    },
-                  ),
-                ],
-              ),
+                                      child: state.audios
+                                              .map((e) => e.name)
+                                              .toList()
+                                              .contains(widget.bookData
+                                                  .audios![widget.index].name)
+                                          ? const Icon(Icons.check, size: 28)
+                                          : const Icon(
+                                              Icons.cloud_download,
+                                              size: 28,
+                                            ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ],
+                          );
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

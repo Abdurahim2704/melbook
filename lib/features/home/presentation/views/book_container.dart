@@ -1,5 +1,4 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
@@ -12,29 +11,31 @@ class BookContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void navigateToInglizTiliPage(){
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Ingliztilipage(
+            book: bookData,
+          ),
+        ),
+      );
+    }
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Ingliztilipage(
-                book: bookData,
-              ),
-            ));
-      },
+      onTap: navigateToInglizTiliPage,
       child: Container(
         height: 200.h,
         margin: const EdgeInsets.all(10),
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(15),
         ),
         child: Row(
           children: [
             ClipRRect(
               clipBehavior: Clip.antiAlias,
-              borderRadius: BorderRadius.all(Radius.circular(12)),
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
               child: CachedNetworkImage(
                 imageUrl: bookData.photoUrl,
                 width: 170.w,
@@ -57,21 +58,21 @@ class BookContainer extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 15),
                   Container(
                     alignment: Alignment.center,
                     height: 35.h,
-                    width: 160.w,
+                    width: 170.w,
                     decoration: BoxDecoration(
                       color: Colors.amber,
                       borderRadius: BorderRadius.circular(24),
                     ),
                     child: Text(
                       bookData.bought ? "O'qish" : "Sotib olish",
-                      style:  TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 16.sp,
+                        fontSize: 17.sp,
                       ),
                     ),
                   ),
@@ -79,7 +80,7 @@ class BookContainer extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: navigateToInglizTiliPage,
               child: Container(
                 height: 40.h,
                 width: 40.w,

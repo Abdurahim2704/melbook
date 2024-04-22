@@ -140,13 +140,16 @@ class _AudioScreenState extends State<AudioScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const BackButton(),
+                  IconButton(
+                    onPressed: () => Navigator.pop(context),
+                    icon: Icon(Icons.arrow_back, size: 35.sp),
+                  ),
                   IconButton(
                     onPressed: () {
                       isKaraoke = !isKaraoke;
                       setState(() {});
                     },
-                    icon: const Icon(Icons.fullscreen),
+                    icon: Icon(Icons.fullscreen, size: 35.sp),
                   )
                 ],
               ),
@@ -156,39 +159,49 @@ class _AudioScreenState extends State<AudioScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 20.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 30,
+               SizedBox(
+                height: isKaraoke ? 54 : 20,
               ),
               if (!isKaraoke)
                 Image(
-                  height: 800,
-                  fit: BoxFit.fill,
+                  height: 720,
+                  fit: BoxFit.fitHeight,
                   image: NetworkImage(widget.book.photoUrl),
                 ),
               if (isKaraoke)
                 Container(
-                  padding: const EdgeInsets.all(10),
+                  height: 720.h,
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.orange)),
-                  child: SingleChildScrollView(
-                    child: BlocBuilder<PlayerBloc, PlayerState>(
-                      builder: (context, state) {
-                        return Text(
-                          textAlign: TextAlign.justify,
-                          state.audio!.content,
-                          style: TextStyle(fontSize: 14.sp),
-                        );
-                      },
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.orange),
+                  ),
+                  child: Scrollbar(
+                    thickness: 4,
+                    interactive: true,
+                    thumbVisibility: true,
+                    trackVisibility: true,
+                    scrollbarOrientation: ScrollbarOrientation.right,
+                    child: SingleChildScrollView(
+                      child: BlocBuilder<PlayerBloc, PlayerState>(
+                        builder: (context, state) {
+                          return Text(
+                            textAlign: TextAlign.start,
+                            state.audio!.content,
+                            style: TextStyle(fontSize: 28.sp),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
               SizedBox(
-                height: isKaraoke ? 20 : 70,
+                height: 42.h,
               ),
               BlocBuilder<PlayerBloc, PlayerState>(
                 builder: (context, state) {
@@ -221,7 +234,7 @@ class _AudioScreenState extends State<AudioScreen> {
                     children: [
                       IconButton(
                         onPressed: () {},
-                        icon: const Icon(Icons.repeat),
+                        icon: const Icon(Icons.repeat, size: 35),
                       ),
                       state is! DownloadWaiting
                           ? Row(
@@ -245,21 +258,29 @@ class _AudioScreenState extends State<AudioScreen> {
                                             .read<LocalStorageBloc>()
                                             .state
                                             .audios
-                                            .firstWhere((element) =>
-                                                element.name ==
-                                                state.audio!.name)
+                                            .firstWhere(
+                                              (element) =>
+                                                  element.name ==
+                                                  state.audio!.name,
+                                            )
                                             .location;
                                         context.read<PlayerBloc>().add(
-                                            PlayPause(
+                                              PlayPause(
                                                 path: path,
-                                                audio: state.audio!));
+                                                audio: state.audio!,
+                                              ),
+                                            );
                                       },
                                       child: CircleAvatar(
-                                          backgroundColor: Colors.orange,
-                                          radius: 30,
-                                          child: Icon(state.isPlaying
+                                        backgroundColor: Colors.orange,
+                                        radius: 40,
+                                        child: Icon(
+                                          state.isPlaying
                                               ? Icons.pause_rounded
-                                              : Icons.play_arrow_rounded)),
+                                              : Icons.play_arrow_rounded,
+                                          size: 40,
+                                        ),
+                                      ),
                                     );
                                   },
                                 ),
@@ -279,15 +300,13 @@ class _AudioScreenState extends State<AudioScreen> {
                                 ),
                               ],
                             )
-                          : CircularProgressIndicator.adaptive(),
+                          : const CircularProgressIndicator.adaptive(),
                       IconButton(onPressed: () {}, icon: const SizedBox())
                     ],
                   );
                 },
               ),
-              SizedBox(
-                height: 10.h,
-              ),
+              SizedBox(height: 10.h),
               Row(
                 children: [
                   StreamBuilder<Duration>(

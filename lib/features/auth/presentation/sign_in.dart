@@ -70,7 +70,7 @@ class _SignInState extends State<SignIn> {
 
             /// #TextField Username
             AuthTextField(
-              style: TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
+              style: TextStyle(fontSize: 18.sp, color: const Color(0xFF201A21)),
               controller: usernameCtrl,
               hinText: "Foydalanuvchi nomini kiriting",
               textInputAction: TextInputAction.next,
@@ -84,7 +84,7 @@ class _SignInState extends State<SignIn> {
 
             /// #TextField Password
             AuthTextField(
-              style: TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
+              style: TextStyle(fontSize: 18.sp, color: const Color(0xFF201A21)),
               hinText: "12345mkl",
               controller: passwordCtrl,
               keyboardType: TextInputType.visiblePassword,

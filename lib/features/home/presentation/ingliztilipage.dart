@@ -153,7 +153,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                 },
                 icon: Icon(
                   Icons.arrow_back,
-                  size: 30.sp,
+                  size: 35.sp,
                 ),
               ),
               Padding(
@@ -185,9 +185,13 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                             borderRadius: const BorderRadius.all(
                               Radius.circular(8),
                             ),
-                            child: CachedNetworkImage(
-                              imageUrl: widget.book.photoUrl,
-                              width: screenWidth * 0.25,
+                            child: Transform.scale(
+                              scaleY: 1.5,
+                              scaleX: 1.5,
+                              child: CachedNetworkImage(
+                                imageUrl: widget.book.photoUrl,
+                                width: screenWidth * 0.25,
+                              ),
                             ),
                           ),
                         ),
@@ -256,7 +260,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                           backgroundColor: _currentPage == 0
                               ? Colors.black
                               : Colors.transparent,
-                          fixedSize: Size(300.w, 45.h),
+                          fixedSize: Size(320.w, 55.h),
                         ),
                         onPressed: () => _changePage(0),
                         child: Text(
@@ -264,7 +268,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                           style: TextStyle(
                             color:
                                 _currentPage == 0 ? Colors.white : Colors.black,
-                            fontSize: 21.sp,
+                            fontSize: 22.sp,
                           ),
                         ),
                       ),
@@ -273,7 +277,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                           backgroundColor: _currentPage == 1
                               ? Colors.black
                               : Colors.transparent,
-                          fixedSize: Size(300.w, 45.h),
+                          fixedSize: Size(320.w, 55.h),
                         ),
                         onPressed: () => _changePage(1),
                         child: Text(
@@ -281,14 +285,12 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                           style: TextStyle(
                             color:
                                 _currentPage == 1 ? Colors.white : Colors.black,
-                            fontSize: 21.sp,
+                            fontSize: 22.sp,
                           ),
                         ),
                       ),
                     ],
                   ),
-
-                  SizedBox(height: 10.h),
 
                   /// #PageView SubContent
                   Expanded(

@@ -16,19 +16,20 @@ class AuthTextField extends StatelessWidget {
   final String? text;
   final MaskTextInputFormatter? formatter;
 
-  const AuthTextField(
-      {super.key,
-      this.hinText,
-      this.formatter,
-      this.keyboardType,
-      this.textInputAction,
-      this.prefixIcon,
-      this.suffixIcon,
-      this.inputFormatters,
-      this.maxLength,
-      this.text,
-      required this.controller,
-      this.style});
+  const AuthTextField({
+    super.key,
+    this.hinText,
+    this.formatter,
+    this.keyboardType,
+    this.textInputAction,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.inputFormatters,
+    this.maxLength,
+    this.text,
+    required this.controller,
+    this.style,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +83,7 @@ class AuthTextField extends StatelessWidget {
         hintText: hinText,
         hintStyle: TextStyle(
           fontWeight: FontWeight.w400,
-          fontSize: 16.sp,
+          fontSize: 18.sp,
           color: const Color(0xFFA4A3A4),
         ),
       ),

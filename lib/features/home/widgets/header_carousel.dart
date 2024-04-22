@@ -61,7 +61,7 @@ class _CarouselDemoState extends State<CarouselDemo> {
                   enableInfiniteScroll: true,
                   controller: widget.carouselController,
                   enlargeCenterPage: true,
-                  viewportFraction: 0.7.w,
+                  viewportFraction: 0.55.w,
                   initialPage: 1,
                 ),
               ),
@@ -79,6 +79,7 @@ class _CarouselDemoState extends State<CarouselDemo> {
         child: Image.network(
           banner.photoUrl,
           fit: BoxFit.cover,
+          width: 400.w,
         ),
       );
     }).toList();

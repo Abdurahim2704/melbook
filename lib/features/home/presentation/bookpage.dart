@@ -73,9 +73,7 @@ class _BookpageState extends State<Bookpage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        height: 45.h,
-                      ),
+                      SizedBox(height: 45.h),
                       Container(
                         height: screenHeight,
                         width: screenHeight,

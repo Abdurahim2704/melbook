@@ -7,7 +7,7 @@ Text buildTextFieldHeaderText(String text) {
     style: TextStyle(
       fontWeight: FontWeight.w600,
       color: const Color(0xFF201A21),
-      fontSize: 16.sp,
+      fontSize: 18.sp,
     ),
   );
 }

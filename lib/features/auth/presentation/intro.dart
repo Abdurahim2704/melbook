@@ -57,7 +57,11 @@ class _IntroScreenState extends State<IntroScreen> {
                       SizedBox(height: 60.h),
                       Text(
                         titles[i],
-                        style: TextStyle(color: Colors.white, fontSize: 14.sp),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(

@@ -78,7 +78,7 @@ class _SignUpState extends State<SignUp> {
               SizedBox(height: 12.h),
               AuthTextField(
                 style:
-                    TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
+                    TextStyle(fontSize: 18.sp, color: const Color(0xFF201A21)),
                 hinText: "Taxallusingizni kiriting",
                 textInputAction: TextInputAction.next,
                 controller: usernameCtrl,
@@ -88,27 +88,27 @@ class _SignUpState extends State<SignUp> {
               SizedBox(height: 12.h),
               AuthTextField(
                 style:
-                    TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
+                    TextStyle(fontSize: 18.sp, color: const Color(0xFF201A21)),
                 controller: nameCtrl,
                 hinText: "Ismingizni kiriting",
                 textInputAction: TextInputAction.next,
               ),
-              SizedBox(height: 15.h),
+              SizedBox(height: 18.h),
               buildTextFieldHeaderText("Familiya"),
               SizedBox(height: 12.h),
               AuthTextField(
                 style:
-                    TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
+                    TextStyle(fontSize: 18.sp, color: const Color(0xFF201A21)),
                 controller: surnameCtrl,
                 hinText: "Familiyangizni kiriting",
                 textInputAction: TextInputAction.next,
               ),
               SizedBox(height: 15.h),
               buildTextFieldHeaderText("Telefon raqam"),
-              SizedBox(height: 12.h),
+              SizedBox(height: 18.h),
               AuthTextField(
                 style:
-                    TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
+                    TextStyle(fontSize: 18.sp, color: const Color(0xFF201A21)),
                 hinText: "90 123 45 67",
                 text: "+998 ",
                 controller: phoneNumberCtrl,
@@ -127,7 +127,7 @@ class _SignUpState extends State<SignUp> {
               SizedBox(height: 12.h),
               AuthTextField(
                 style:
-                    TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
+                    TextStyle(fontSize: 18.sp, color: const Color(0xFF201A21)),
                 hinText: "12345mkl",
                 controller: passwordCtrl,
                 textInputAction: TextInputAction.next,
@@ -137,7 +137,7 @@ class _SignUpState extends State<SignUp> {
               SizedBox(height: 12.h),
               AuthTextField(
                 style:
-                    TextStyle(fontSize: 16.sp, color: const Color(0xFF201A21)),
+                    TextStyle(fontSize: 18.sp, color: const Color(0xFF201A21)),
                 hinText: "12345mkl",
                 controller: confirmPasswordCtrl,
                 textInputAction: TextInputAction.done,
@@ -195,7 +195,7 @@ class _SignUpState extends State<SignUp> {
                       color: Colors.blue,
                       height: 2,
                       decoration: TextDecoration.underline,
-                      fontSize: 16.sp,
+                      fontSize: 18.sp,
                     ),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {

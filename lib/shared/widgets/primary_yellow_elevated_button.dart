@@ -17,14 +17,14 @@ class PrimaryYellowElevatedButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         elevation: 0,
         shadowColor: Colors.transparent,
-        fixedSize: Size(334.w, 50.h),
+        fixedSize: Size(350.w, 50.h),
         backgroundColor: const Color(0xFFF6BE07),
       ),
       onPressed: onPressed,
       child: Text(
         displayText,
         style: TextStyle(
-          fontSize: 16.sp,
+          fontSize: 17.sp,
           fontWeight: FontWeight.w500,
           color: Colors.white,
         ),
