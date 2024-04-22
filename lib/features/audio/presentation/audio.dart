@@ -171,17 +171,33 @@ class _AudioScreenState extends State<AudioScreen> {
                 ),
               if (isKaraoke)
                 Container(
-                  padding: const EdgeInsets.all(10),
+                  height: 800,
+                  padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(color: Colors.orange)),
                   child: SingleChildScrollView(
                     child: BlocBuilder<PlayerBloc, PlayerState>(
                       builder: (context, state) {
-                        return Text(
-                          textAlign: TextAlign.justify,
-                          state.audio!.content,
-                          style: TextStyle(fontSize: 14.sp),
+                        List<String> content = state.audio!.content.split('\n');
+                        return SizedBox(
+                          child: ListView.builder(
+                            itemCount: content.length,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) => Center(
+                              child: Padding(
+                                padding:  EdgeInsets.only(bottom: 15.h),
+                                child: Text(
+                                  content[index],
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: index % 2 == 0
+                                          ? FontWeight.bold
+                                          : FontWeight.normal),
+                                ),
+                              ),
+                            ),
+                          ),
                         );
                       },
                     ),
