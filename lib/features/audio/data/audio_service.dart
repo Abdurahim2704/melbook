@@ -42,5 +42,8 @@ class AudioServiceImpl {
   static Duration totalDuration() {
     return player.duration ?? const Duration(seconds: 0);
   }
-// Track get currentTrack => tracks[current];
+
+  static Future<void> pauseAudio() {
+    return player.pause();
+  }
 }

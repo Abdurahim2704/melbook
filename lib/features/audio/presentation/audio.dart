@@ -28,6 +28,12 @@ class AudioScreen extends StatefulWidget {
 class _AudioScreenState extends State<AudioScreen> {
   bool isKaraoke = false;
 
+  @override
+  void deactivate() {
+    super.deactivate();
+    context.read<PlayerBloc>().add(const PauseAudio());
+  }
+
   void goNext() {
     final currentAudio = context.read<PlayerBloc>().state.audio!;
     final nextAudioIndex = (widget.book.audios!.indexOf(currentAudio) + 1) %
@@ -127,6 +133,7 @@ class _AudioScreenState extends State<AudioScreen> {
   @override
   void dispose() {
     super.dispose();
+    context.read<PlayerBloc>().add(const PauseAudio());
   }
 
   @override
@@ -180,45 +187,45 @@ class _AudioScreenState extends State<AudioScreen> {
                   image: NetworkImage(widget.book.photoUrl),
                 ),
               if (isKaraoke)
-              Container(
-                height: 720.h,
-                width: double.infinity,
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.orange),
-                ),
-                child: Scrollbar(
-                  thickness: 4,
-                  controller: scrollController,
-                  interactive: true,
-                  thumbVisibility: true,
-                  trackVisibility: true,
-                  scrollbarOrientation: ScrollbarOrientation.right,
-                  child: BlocBuilder<PlayerBloc, PlayerState>(
-                    builder: (context, state) {
-                      List<String> content = state.audio!.content.split('\n');
-                      return ListView.builder(
-                        itemCount: content.length,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) => Padding(
-                          padding: EdgeInsets.only(bottom: 15.h),
-                          child: Text(
-                            content[index],
-                            style: TextStyle(
-                              fontSize: 28.sp,
-                              fontWeight: index % 2 == 0
-                                  ? FontWeight.bold
-                                  : FontWeight.normal,
+                Container(
+                  height: 720.h,
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.orange),
+                  ),
+                  child: Scrollbar(
+                    thickness: 4,
+                    controller: scrollController,
+                    interactive: true,
+                    thumbVisibility: true,
+                    trackVisibility: true,
+                    scrollbarOrientation: ScrollbarOrientation.right,
+                    child: BlocBuilder<PlayerBloc, PlayerState>(
+                      builder: (context, state) {
+                        List<String> content = state.audio!.content.split('\n');
+                        return ListView.builder(
+                          itemCount: content.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) => Padding(
+                            padding: EdgeInsets.only(bottom: 15.h),
+                            child: Text(
+                              content[index],
+                              style: TextStyle(
+                                fontSize: 28.sp,
+                                fontWeight: index % 2 == 0
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                              ),
+                              textAlign: TextAlign.start,
                             ),
-                            textAlign: TextAlign.start,
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
                 ),
-              ),
               SizedBox(
                 height: 42.h,
               ),

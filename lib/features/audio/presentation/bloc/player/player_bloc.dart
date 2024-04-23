@@ -15,6 +15,7 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
     on<SeekPosition>(_seekPosition);
     on<SkipNext>(_skipNext);
     on<InitAudio>(_initAudio);
+    on<PauseAudio>(_pauseAudio);
   }
 
   Future<void> _playPause(PlayPause event, Emitter<PlayerState> emit) async {
@@ -50,5 +51,11 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
 
   Future<void> _initAudio(InitAudio event, Emitter<PlayerState> emit) async {
     emit(PlayerSuccessState(path: state.path, audio: event.audio));
+  }
+
+  Future<void> _pauseAudio(PauseAudio event, Emitter<PlayerState> emit) async {
+    await AudioServiceImpl.pause();
+    emit(PlayerSuccessState(
+        path: state.path, audio: state.audio, isPlaying: false));
   }
 }

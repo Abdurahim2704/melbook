@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -66,7 +67,7 @@ class LocalAudioService {
   }
 }
 
-class LocalAudio {
+class LocalAudio extends Equatable {
   final String name;
   final String location;
   final String book;
@@ -88,6 +89,9 @@ class LocalAudio {
     return LocalAudio(
         name: name, location: location, book: book, description: description);
   }
+
+  @override
+  List<Object?> get props => [name, location, book];
 
   @override
   String toString() {

@@ -50,3 +50,7 @@ class InitAudioOffline extends PlayerEvent {
 
   const InitAudioOffline({required this.audio});
 }
+
+class PauseAudio extends PlayerEvent {
+  const PauseAudio();
+}
