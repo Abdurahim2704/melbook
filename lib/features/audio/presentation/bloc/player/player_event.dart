@@ -9,10 +9,9 @@ abstract class PlayerEvent extends Equatable {
 }
 
 class PlayPause extends PlayerEvent {
-  final Audio audio;
   final String path;
 
-  const PlayPause({required this.path, required this.audio});
+  const PlayPause({required this.path});
 
   @override
   List<Object?> get props => [path];

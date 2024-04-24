@@ -41,7 +41,6 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
       try {
         final service = PaymentService();
         // await getIt<AuthRepository>().resetToken();
-        print("I am now bloc");
         final result = await service.checkPayment(
             id: (state as PaymentCreated).paymentUid.toString(),
             token: getIt<AuthRepository>().token);

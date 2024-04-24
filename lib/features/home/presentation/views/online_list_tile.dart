@@ -5,10 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
 
-import '../../../audio/presentation/audio.dart';
-import '../../../audio/presentation/bloc/player/player_bloc.dart';
 import '../../data/models/audio.dart';
-import '../../data/service/local_audio_service.dart';
 import '../bloc/local_storage/local_storage_bloc.dart';
 
 class OnlineListTile extends StatefulWidget {
@@ -28,62 +25,62 @@ class OnlineListTile extends StatefulWidget {
 }
 
 class _OnlineListTileState extends State<OnlineListTile> {
-  void goAudioPage(BuildContext context, List<LocalAudio> audios, int index) {
-    context
-        .read<PlayerBloc>()
-        .add(InitAudio(audio: widget.bookData.audios![index]));
-    print(context.read<PlayerBloc>().state.audio?.name);
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => AudioScreen(
-          filePath: audios
-              .firstWhere((element) =>
-                  (element.name == widget.bookData.audios![index].name))
-              .location,
-          book: widget.bookData,
-        ),
-      ),
-    );
-  }
+  // void goAudioPage(BuildContext context, List<LocalAudio> audios, int index) {
+  //   context
+  //       .read<PlayerBloc>()
+  //       .add(InitAudio(audio: widget.bookData.audios![index]));
+  //   print(context.read<PlayerBloc>().state.audio?.name);
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(
+  //       builder: (context) => AudioScreen(
+  //         filePath: audios
+  //             .firstWhere((element) =>
+  //                 (element.name == widget.bookData.audios![index].name))
+  //             .location,
+  //         book: widget.bookData,
+  //       ),
+  //     ),
+  //   );
+  // }
 
-  void _playButton(int index, List<LocalAudio> audios) {
-    audios.map((e) => e.name).contains(widget.bookData.audios![index].name)
-        ? goAudioPage(context, audios, index)
-        : showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                elevation: 0,
-                contentPadding: const EdgeInsets.all(60),
-                backgroundColor: Colors.white,
-                title: Center(
-                  child: Text(
-                    "Audioni avval yuklab oling!",
-                    style: TextStyle(
-                      fontSize: 25.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      "Ok",
-                      style: TextStyle(
-                        fontSize: 23.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            },
-          );
-  }
+  // void _playButton(int index, List<LocalAudio> audios) {
+  //   audios.map((e) => e.name).contains(widget.bookData.audios![index].name)
+  //       ? goAudioPage(context, audios, index)
+  //       : showDialog(
+  //           context: context,
+  //           builder: (context) {
+  //             return AlertDialog(
+  //               elevation: 0,
+  //               contentPadding: const EdgeInsets.all(60),
+  //               backgroundColor: Colors.white,
+  //               title: Center(
+  //                 child: Text(
+  //                   "Audioni avval yuklab oling!",
+  //                   style: TextStyle(
+  //                     fontSize: 25.sp,
+  //                     fontWeight: FontWeight.w500,
+  //                   ),
+  //                 ),
+  //               ),
+  //               actions: [
+  //                 TextButton(
+  //                   onPressed: () {
+  //                     Navigator.pop(context);
+  //                   },
+  //                   child: Text(
+  //                     "Ok",
+  //                     style: TextStyle(
+  //                       fontSize: 23.sp,
+  //                       fontWeight: FontWeight.w500,
+  //                     ),
+  //                   ),
+  //                 ),
+  //               ],
+  //             );
+  //           },
+  //         );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -127,18 +124,16 @@ class _OnlineListTileState extends State<OnlineListTile> {
                 SizedBox(height: 20.h),
                 BlocBuilder<LocalStorageBloc, LocalStorageState>(
                   builder: (context, state) {
-                    return (state is DownloadWaiting &&
-                            (state.downloadingAudio ?? "") ==
-                                widget.currentAudio.name)
+                    return (state is DownloadWaiting)
                         ? const Padding(
-                          padding: EdgeInsets.only(left: 80.0),
-                          child: CupertinoActivityIndicator(),
-                        )
+                            padding: EdgeInsets.only(left: 80.0),
+                            child: CupertinoActivityIndicator(),
+                          )
                         : Row(
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  _playButton(widget.index, state.audios);
+                                  // _playButton(widget.index, state.audios);
                                 },
                                 child: Container(
                                   height: 55.h,
@@ -156,8 +151,7 @@ class _OnlineListTileState extends State<OnlineListTile> {
                                 ),
                               ),
                               SizedBox(width: 22.w),
-                              BlocBuilder<LocalStorageBloc,
-                                  LocalStorageState>(
+                              BlocBuilder<LocalStorageBloc, LocalStorageState>(
                                 builder: (context, state) {
                                   return GestureDetector(
                                     onTap: () {

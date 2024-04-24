@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -115,8 +116,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
                           offset: Offset(-9.5.w, -7.h),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
-                            child: Image.network(
-                              notification.photoUrl,
+                            child: CachedNetworkImage(
+                              imageUrl: notification.photoUrl,
+                              errorWidget: (context, url, error) {
+                                return SizedBox.shrink();
+                              },
                               height: 130.h,
                               width: 130.h,
                               fit: BoxFit.cover,

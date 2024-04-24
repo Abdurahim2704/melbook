@@ -39,7 +39,6 @@ class LocalService {
       "$filePath.mp3",
       onReceiveProgress: (count, total) {
         value = count / total;
-        print(value);
       },
     );
     print("Status code: ${result.statusCode}");

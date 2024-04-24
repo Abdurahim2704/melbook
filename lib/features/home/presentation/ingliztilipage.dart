@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/home/data/models/book_types.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
+import 'package:melbook/features/home/presentation/bloc/local_storage/local_storage_bloc.dart';
 import 'package:melbook/features/home/presentation/bloc/payment_bloc/payment_bloc.dart';
 import 'package:melbook/features/home/presentation/readingbook/arabtili/arabtiliefinal.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/finalview.dart';
@@ -203,27 +204,67 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                               ),
                             ),
                             const SizedBox(height: 15),
-                            InkWell(
-                              onTap: _buyButton,
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 45.w,
-                                  vertical: 8.h,
-                                ),
-                                margin: const EdgeInsets.only(top: 10),
-                                decoration: BoxDecoration(
-                                  color: Colors.amber,
-                                  borderRadius: BorderRadius.circular(70),
-                                ),
-                                child: Text(
-                                  widget.book.bought ? "O'qish" : "Sotib olish",
-                                  style: TextStyle(
-                                    fontSize: 25.sp,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                InkWell(
+                                  onTap: _buyButton,
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 45.w,
+                                      vertical: 8.h,
+                                    ),
+                                    margin: const EdgeInsets.only(top: 10),
+                                    decoration: BoxDecoration(
+                                      color: Colors.amber,
+                                      borderRadius: BorderRadius.circular(70),
+                                    ),
+                                    child: Text(
+                                      widget.book.bought
+                                          ? "O'qish"
+                                          : "Sotib olish",
+                                      style: TextStyle(
+                                        fontSize: 25.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
+                                SizedBox(
+                                  width: 10.w,
+                                ),
+                                BlocBuilder<LocalStorageBloc,
+                                    LocalStorageState>(
+                                  builder: (context, state) {
+                                    return InkWell(
+                                      onTap: () {
+                                        context.read<LocalStorageBloc>().add(
+                                            DownloadAllAudios(
+                                                audios:
+                                                    widget.book.audios ?? []));
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.all(10),
+                                        margin: const EdgeInsets.only(top: 10),
+                                        decoration: BoxDecoration(
+                                          color: Colors.amber,
+                                          borderRadius:
+                                              BorderRadius.circular(70),
+                                        ),
+                                        child: Icon(
+                                          state.audios.length ==
+                                                  (widget.book.audios ?? [])
+                                                      .length
+                                              ? Icons.check
+                                              : Icons.download,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
                             ),
                           ],
                         ),

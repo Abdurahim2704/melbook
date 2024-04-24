@@ -4,32 +4,40 @@ part of 'player_bloc.dart';
 abstract class PlayerState extends Equatable {
   final String? path;
   final bool isPlaying;
-  final Audio? audio;
 
-  const PlayerState({this.path, this.isPlaying = false, this.audio});
+  const PlayerState({this.path, this.isPlaying = false});
 
   @override
-  List<Object?> get props => [path, isPlaying, audio];
+  List<Object?> get props => [
+        path,
+        isPlaying,
+      ];
 }
 
 class PlayerInitial extends PlayerState {
-  const PlayerInitial({super.path, super.isPlaying = false, super.audio});
+  const PlayerInitial({super.path, super.isPlaying = false});
 }
 
 class PlayerLoading extends PlayerState {
-  const PlayerLoading(
-      {required super.path, super.isPlaying, required super.audio});
+  const PlayerLoading({
+    required super.path,
+    super.isPlaying,
+  });
 }
 
 class PlayerSuccessState extends PlayerState {
-  const PlayerSuccessState(
-      {required super.path, super.isPlaying, required super.audio});
+  const PlayerSuccessState({
+    required super.path,
+    super.isPlaying,
+  });
 
   @override
-  List<Object?> get props => [path, audio?.name, isPlaying];
+  List<Object?> get props => [path, isPlaying];
 }
 
 class PlayerErrorState extends PlayerState {
-  const PlayerErrorState(
-      {required super.path, super.isPlaying, required super.audio});
+  const PlayerErrorState({
+    required super.path,
+    super.isPlaying,
+  });
 }

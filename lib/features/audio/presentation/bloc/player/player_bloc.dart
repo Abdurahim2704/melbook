@@ -20,20 +20,28 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
 
   Future<void> _playPause(PlayPause event, Emitter<PlayerState> emit) async {
     emit(PlayerLoading(
-        path: state.path, isPlaying: state.isPlaying, audio: state.audio));
+      path: state.path,
+      isPlaying: state.isPlaying,
+    ));
     if ((event.path == state.path) && state.isPlaying) {
       AudioServiceImpl.pause();
       emit(PlayerSuccessState(
-          isPlaying: false, path: event.path, audio: event.audio));
+        isPlaying: false,
+        path: event.path,
+      ));
     } else if (event.path == state.path) {
       AudioServiceImpl.play();
       emit(PlayerSuccessState(
-          path: event.path, isPlaying: true, audio: event.audio));
+        path: event.path,
+        isPlaying: true,
+      ));
     } else {
       AudioServiceImpl.playNewTrack(event.path);
       AudioServiceImpl.play();
       emit(PlayerSuccessState(
-          path: event.path, isPlaying: true, audio: event.audio));
+        path: event.path,
+        isPlaying: true,
+      ));
     }
   }
 
@@ -45,17 +53,15 @@ class PlayerBloc extends Bloc<PlayerEvent, PlayerState> {
   Future<void> _skipNext(SkipNext event, Emitter<PlayerState> emit) async {
     AudioServiceImpl.playNewTrack(event.path);
     AudioServiceImpl.play();
-    emit(PlayerSuccessState(
-        isPlaying: true, path: event.path, audio: event.audio));
+    emit(PlayerSuccessState(isPlaying: true, path: event.path));
   }
 
   Future<void> _initAudio(InitAudio event, Emitter<PlayerState> emit) async {
-    emit(PlayerSuccessState(path: state.path, audio: event.audio));
+    emit(PlayerSuccessState(path: state.path));
   }
 
   Future<void> _pauseAudio(PauseAudio event, Emitter<PlayerState> emit) async {
     await AudioServiceImpl.pause();
-    emit(PlayerSuccessState(
-        path: state.path, audio: state.audio, isPlaying: false));
+    emit(PlayerSuccessState(path: state.path, isPlaying: false));
   }
 }

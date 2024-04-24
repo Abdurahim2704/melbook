@@ -22,9 +22,7 @@ class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
   void initState() {
     super.initState();
     context.read<LocalStorageBloc>().stream.listen((event) {
-      if (event is DownloadSuccess) {
-        print(event.audios);
-      }
+      if (event is DownloadSuccess) {}
     });
   }
 
@@ -49,7 +47,6 @@ class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
         itemCount: widget.bookData.audios?.length,
         itemBuilder: (context, index) {
           final currentAudio = widget.bookData.audios?[index];
-          print(widget.bookData.audios?.length);
           return OnlineListTile(
             bookData: widget.bookData,
             currentAudio: currentAudio!,

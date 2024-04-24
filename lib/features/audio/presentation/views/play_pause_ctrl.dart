@@ -16,10 +16,7 @@ class Controls extends StatelessWidget {
       builder: (context, state) {
         return GestureDetector(
           onTap: () {
-            print(filePath);
-            context
-                .read<PlayerBloc>()
-                .add(PlayPause(path: filePath, audio: audio));
+            context.read<PlayerBloc>().add(PlayPause(path: filePath));
           },
           child: CircleAvatar(
               backgroundColor: Colors.orange,

@@ -24,7 +24,6 @@ class PaymentService {
           'Authorization': 'Bearer $token',
         },
       );
-      print(response.statusCode);
       if (response.statusCode == 200 || response.statusCode == 201) {
         final Map<String, dynamic> responseData =
             json.decode(response.body)['data'];
@@ -53,7 +52,6 @@ class PaymentService {
           'Authorization': 'Bearer $token',
         },
       );
-      print(response.body);
       if (response.statusCode == 200 || response.statusCode == 201) {
         final Map<String, dynamic> data = json.decode(response.body);
         final Map<String, dynamic> responseData =
