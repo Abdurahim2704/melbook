@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/home/data/service/local_audio_service.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/englishreading.dart';
 import 'package:page_flip/page_flip.dart';
@@ -27,10 +28,11 @@ class _FinalViewState extends State<FinalView> {
       if ((dialogs.length + currentDialogs) > maxLines) {
         final lastText = dialogs.take(maxLines - currentDialogs).toList();
         slices.add(Slice(
-            audios: result,
-            lastText: lastText,
-            lastAudio: audio,
-            remained: remained));
+          audios: result,
+          lastText: lastText,
+          lastAudio: audio,
+          remained: remained,
+        ));
         remained = dialogs.skip(maxLines - currentDialogs).toList();
         result = [];
         currentDialogs = 0;
@@ -59,11 +61,19 @@ class _FinalViewState extends State<FinalView> {
           print(slices.length);
           return PageFlipWidget(
             key: _controller,
-            backgroundColor: const Color.fromARGB(255, 139, 111, 111),
             initialIndex: 0,
             lastPage: Container(
-                color: Colors.white,
-                child: const Center(child: Text("E'tiboringiz uchun rahmat!"))),
+              color: Colors.white,
+              child: Center(
+                child: Text(
+                  "E'tiboringiz uchun rahmat!",
+                  style: TextStyle(
+                    fontSize: 30.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
             children: <Widget>[
               for (var i = 0; i < slices.length; i++)
                 IngliztiliReading(

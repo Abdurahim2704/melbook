@@ -54,14 +54,14 @@ class BookContainer extends StatelessWidget {
                       bookData.name,
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
-                        fontSize: 24.sp,
+                        fontSize: 27.sp,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 15),
+                  SizedBox(height: 15.h),
                   Container(
                     alignment: Alignment.center,
-                    height: 35.h,
+                    height: 45.h,
                     width: 170.w,
                     decoration: BoxDecoration(
                       color: Colors.amber,
@@ -72,7 +72,7 @@ class BookContainer extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
-                        fontSize: 17.sp,
+                        fontSize: 19.sp,
                       ),
                     ),
                   ),
@@ -82,8 +82,9 @@ class BookContainer extends StatelessWidget {
             GestureDetector(
               onTap: navigateToInglizTiliPage,
               child: Container(
-                height: 40.h,
-                width: 40.w,
+                height: 50.h,
+                width: 50.w,
+                margin: const EdgeInsets.only(right: 5),
                 padding: EdgeInsets.all(7.sp),
                 decoration: const BoxDecoration(
                   shape: BoxShape.circle,
@@ -92,6 +93,7 @@ class BookContainer extends StatelessWidget {
                 child: const Icon(
                   Icons.play_arrow,
                   color: Colors.white,
+                  size: 32,
                 ),
               ),
             ),

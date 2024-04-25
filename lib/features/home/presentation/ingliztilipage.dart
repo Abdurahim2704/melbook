@@ -14,7 +14,6 @@ import 'package:melbook/features/home/presentation/readingbook/koreystili/koreys
 import 'package:melbook/features/home/presentation/readingbook/rustili/rustilifinal.dart';
 import 'package:melbook/features/home/presentation/views/books_description.dart';
 import 'package:melbook/features/home/presentation/views/click_sheet.dart';
-import 'package:melbook/features/home/presentation/views/container_audios_listening.dart';
 
 import '../../../shared/widgets/custom_alert_dialog.dart';
 
@@ -29,7 +28,6 @@ class Ingliztilipage extends StatefulWidget {
 
 class _IngliztilipageState extends State<Ingliztilipage> {
   final PageController _pageController = PageController();
-  int _currentPage = 0;
 
   @override
   void dispose() {
@@ -48,17 +46,6 @@ class _IngliztilipageState extends State<Ingliztilipage> {
     }
 
     return const Koreystilifinal();
-  }
-
-  void _changePage(int page) {
-    setState(() {
-      _currentPage = page;
-    });
-    _pageController.animateToPage(
-      page,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.ease,
-    );
   }
 
   late Timer timer;
@@ -177,8 +164,8 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                             Radius.circular(8),
                           ),
                           child: Transform.scale(
-                            scaleY: 1.5,
-                            scaleX: 1.5,
+                            scaleY: 1.6,
+                            scaleX: 1.6,
                             child: CachedNetworkImage(
                               imageUrl: widget.book.photoUrl,
                               width: screenWidth * 0.25,
@@ -200,7 +187,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                             Text(
                               widget.book.author,
                               style: TextStyle(
-                                fontSize: 30.sp,
+                                fontSize: 28.sp,
                               ),
                             ),
                             const SizedBox(height: 15),
@@ -240,10 +227,12 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                     return InkWell(
                                       onTap: () {
                                         context.read<LocalStorageBloc>().add(
-                                            DownloadAllAudios(
+                                              DownloadAllAudios(
                                                 audios:
                                                     widget.book.audios ?? [],
-                                                book: widget.book.name));
+                                                book: widget.book.name,
+                                              ),
+                                            );
                                       },
                                       child: Container(
                                         padding: const EdgeInsets.all(10),
@@ -265,16 +254,17 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                     );
                                   },
                                 ),
-                                SizedBox(
-                                  width: 10,
-                                ),
+                                const SizedBox(width: 15),
                                 BlocBuilder<LocalStorageBloc,
                                     LocalStorageState>(
                                   builder: (context, state) {
                                     if (state is Progress) {
-                                      return CircularProgressIndicator(
-                                        value: state.progress /
-                                            widget.book.audios!.length,
+                                      return Padding(
+                                        padding: EdgeInsets.only(top: 12.0.h),
+                                        child: CircularProgressIndicator(
+                                          value: state.progress /
+                                              widget.book.audios!.length,
+                                        ),
                                       );
                                     }
                                     return const SizedBox.shrink();
@@ -291,77 +281,16 @@ class _IngliztilipageState extends State<Ingliztilipage> {
               ),
             ],
           ),
-          Expanded(
-            child: Container(
-              color: const Color(0xFFF2F2F2),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(height: 10.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: _currentPage == 0
-                              ? Colors.black
-                              : Colors.transparent,
-                          fixedSize: Size(320.w, 55.h),
-                        ),
-                        onPressed: () => _changePage(0),
-                        child: Text(
-                          "Batafsil",
-                          style: TextStyle(
-                            color:
-                                _currentPage == 0 ? Colors.white : Colors.black,
-                            fontSize: 22.sp,
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: _currentPage == 1
-                              ? Colors.black
-                              : Colors.transparent,
-                          fixedSize: Size(320.w, 55.h),
-                        ),
-                        onPressed: () => _changePage(1),
-                        child: Text(
-                          "Tinglab o'qish",
-                          style: TextStyle(
-                            color:
-                                _currentPage == 1 ? Colors.white : Colors.black,
-                            fontSize: 22.sp,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  /// #PageView SubContent
-                  Expanded(
-                    child: PageView(
-                      controller: _pageController,
-                      onPageChanged: (page) {
-                        setState(() {
-                          _currentPage = page;
-                        });
-                      },
-                      children: [
-                        BookDescriptionContainer(data: widget.book.description),
-                        widget.book.bought
-                            ? ContainerAudiosListening(bookData: widget.book)
-                            : Center(
-                                child: Text(
-                                  "Tinglash uchun kitobni sotib oling",
-                                  style: TextStyle(fontSize: 25.sp),
-                                ),
-                              ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+          Container(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(12)),
+              color: Color(0xFFF2F2F2),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                BookDescriptionContainer(data: widget.book.description),
+              ],
             ),
           ),
         ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/home/presentation/views/book_container.dart';
 
 import 'bloc/book/book_bloc.dart';
@@ -33,9 +34,10 @@ class _SavedState extends State<Saved> {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
+        title: Text(
           "Saqlanganlar",
           style: TextStyle(
+            fontSize: 33.sp,
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
@@ -47,7 +49,7 @@ class _SavedState extends State<Saved> {
       body: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
         child: Padding(
-          padding: EdgeInsets.only(top: screenHeight * 0.15),
+          padding: EdgeInsets.only(top: screenHeight * 0.1),
           child: Column(
             children: [
               Container(

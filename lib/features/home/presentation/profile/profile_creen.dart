@@ -129,9 +129,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   SizedBox(width: 20.w),
                   TextButton(
                     style: TextButton.styleFrom(
-                        backgroundColor:
-                            current == 0 ? Colors.black : Colors.transparent,
-                        padding: EdgeInsets.symmetric(horizontal: 60.w)),
+                      backgroundColor:
+                          current == 0 ? Colors.black : Colors.transparent,
+                      padding: EdgeInsets.symmetric(horizontal: 90.w, vertical: 8.h),
+                    ),
                     onPressed: () {
                       current = 0;
                       setState(() {});
@@ -150,7 +151,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     style: TextButton.styleFrom(
                       backgroundColor:
                           current == 1 ? Colors.black : Colors.transparent,
-                      padding: EdgeInsets.symmetric(horizontal: 60.w),
+                      padding: EdgeInsets.symmetric(horizontal: 90.w, vertical: 8.h),
                     ),
                     onPressed: () {
                       current = 1;

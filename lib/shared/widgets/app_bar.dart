@@ -21,16 +21,13 @@ class CustomAppBar extends StatelessWidget {
       ),
       height: 110.h,
       width: double.infinity,
-      child: Padding(
-        padding: EdgeInsets.only(top: 15.h, left: 10.w, right: 10.w),
-        child: Center(
-          child: Text(
-            displayText,
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              color: const Color(0xFF201A21),
-              fontSize: 25.sp,
-            ),
+      child: Center(
+        child: Text(
+          displayText,
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            color: const Color(0xFF201A21),
+            fontSize: 30.sp,
           ),
         ),
       ),

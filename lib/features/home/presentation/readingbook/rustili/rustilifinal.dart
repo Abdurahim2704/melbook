@@ -16,7 +16,6 @@ class _FinalrustiliVuewState extends State<FinalrustiliVuew> {
     return Scaffold(
       body: PageFlipWidget(
         key: _controller,
-        backgroundColor: const Color.fromARGB(255, 139, 111, 111),
         initialIndex: 0,
         lastPage: Container(
             color: Colors.white,

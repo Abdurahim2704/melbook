@@ -5,14 +5,14 @@ import 'package:melbook/features/home/presentation/views/book_container.dart';
 
 import 'bloc/book/book_bloc.dart';
 
-class Bookpage extends StatefulWidget {
-  const Bookpage({super.key});
+class BookPage extends StatefulWidget {
+  const BookPage({super.key});
 
   @override
-  State<Bookpage> createState() => _BookpageState();
+  State<BookPage> createState() => _BookPageState();
 }
 
-class _BookpageState extends State<Bookpage> {
+class _BookPageState extends State<BookPage> {
   @override
   void initState() {
     super.initState();
@@ -44,10 +44,9 @@ class _BookpageState extends State<Bookpage> {
         title: Text(
           "Kitoblar",
           style: TextStyle(
+            fontSize: 33.sp,
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 28.sp,
-            letterSpacing: 3.2,
           ),
         ),
         backgroundColor: Colors.transparent,
@@ -57,7 +56,7 @@ class _BookpageState extends State<Bookpage> {
       body: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
         child: Padding(
-          padding: EdgeInsets.only(top: 120.h),
+          padding: EdgeInsets.only(top: screenHeight * 0.1),
           child: Column(
             children: [
               Container(
