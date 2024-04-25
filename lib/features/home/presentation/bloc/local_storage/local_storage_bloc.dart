@@ -34,29 +34,31 @@ class LocalStorageBloc extends Bloc<LocalStorageEvent, LocalStorageState> {
 
   Future<void> _getAllAudios(
       GetAllAudios event, Emitter<LocalStorageState> emit) async {
+    print("I am here you dumpass");
     final service = await LocalAudioService.getAudios();
     final audios = service.where((element) {
       final file = File(element.location);
       return file.existsSync();
     }).toList();
-    emit(GetAllAudiosSuccess(audios));
+    print(audios.length);
+    emit(DownloadSuccess(audios));
   }
 
   Future<void> _downloadAllAudios(
       DownloadAllAudios event, Emitter<LocalStorageState> emit) async {
     int results = 0;
     emit(DownloadWaiting(state.audios));
-    Future.forEach(event.audios, (element) async {
+    await Future.forEach(event.audios, (element) async {
       final result = await LocalService().downloadFile(
-          element.name, element.audioUrl, element.name, element.content);
+          element.name, element.audioUrl, event.book, element.content);
       if (result.toInt() == 1) {
         results++;
+        emit(Progress(state.audios, progress: results));
       }
     });
-    print(results);
     if (results == event.audios.length) {
       final audios = await LocalAudioService.getAudios();
-      emit(GetAllAudiosSuccess(audios));
+      emit(DownloadSuccess(audios));
     }
   }
 }

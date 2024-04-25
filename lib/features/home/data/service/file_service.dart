@@ -32,8 +32,6 @@ class LocalService {
     }
     final filePath = await getFilePath(fileName, book);
     double value = -1;
-    // final downloadStream = StreamController<int>();
-    // downloadStream.add(0);
     final result = await Dio().download(
       link,
       "$filePath.mp3",

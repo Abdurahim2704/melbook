@@ -242,10 +242,11 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                         context.read<LocalStorageBloc>().add(
                                             DownloadAllAudios(
                                                 audios:
-                                                    widget.book.audios ?? []));
+                                                    widget.book.audios ?? [],
+                                                book: widget.book.name));
                                       },
                                       child: Container(
-                                        padding: EdgeInsets.all(10),
+                                        padding: const EdgeInsets.all(10),
                                         margin: const EdgeInsets.only(top: 10),
                                         decoration: BoxDecoration(
                                           color: Colors.amber,
@@ -264,6 +265,21 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                     );
                                   },
                                 ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                BlocBuilder<LocalStorageBloc,
+                                    LocalStorageState>(
+                                  builder: (context, state) {
+                                    if (state is Progress) {
+                                      return CircularProgressIndicator(
+                                        value: state.progress /
+                                            widget.book.audios!.length,
+                                      );
+                                    }
+                                    return const SizedBox.shrink();
+                                  },
+                                )
                               ],
                             ),
                           ],

@@ -18,14 +18,6 @@ class ContainerAudiosListening extends StatefulWidget {
 }
 
 class _ContainerAudiosListeningState extends State<ContainerAudiosListening> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<LocalStorageBloc>().stream.listen((event) {
-      if (event is DownloadSuccess) {}
-    });
-  }
-
   Future<bool> checkConnection() async {
     try {
       final result = await InternetAddress.lookup('google.com');

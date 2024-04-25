@@ -24,6 +24,8 @@ class DownloadWaiting extends LocalStorageState {
   DownloadWaiting(super.audios);
 }
 
-class GetAllAudiosSuccess extends LocalStorageState {
-  const GetAllAudiosSuccess(super.audios);
+class Progress extends LocalStorageState {
+  final int progress;
+
+  const Progress(super.audios, {required this.progress});
 }

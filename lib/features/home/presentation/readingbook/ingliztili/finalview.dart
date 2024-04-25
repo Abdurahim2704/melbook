@@ -24,7 +24,6 @@ class _FinalViewState extends State<FinalView> {
     int currentDialogs = 0;
     for (var audio in audios) {
       final dialogs = audio.description;
-      //max=13 dialogs = 5 current 10
       if ((dialogs.length + currentDialogs) > maxLines) {
         final lastText = dialogs.take(maxLines - currentDialogs).toList();
         slices.add(Slice(

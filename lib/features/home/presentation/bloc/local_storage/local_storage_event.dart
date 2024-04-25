@@ -22,6 +22,7 @@ class GetAllAudios extends LocalStorageEvent {}
 
 class DownloadAllAudios extends LocalStorageEvent {
   final List<Audio> audios;
+  final String book;
 
-  const DownloadAllAudios({required this.audios});
+  const DownloadAllAudios({required this.audios, required this.book});
 }
