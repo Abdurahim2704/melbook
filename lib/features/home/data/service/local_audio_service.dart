@@ -71,7 +71,7 @@ class LocalAudio extends Equatable {
   final String name;
   final String location;
   final String book;
-  final String description;
+  final List<DialogPairs> description;
 
   const LocalAudio({
     required this.name,
@@ -85,9 +85,15 @@ class LocalAudio extends Equatable {
     final location = json["location"] as String;
     final book = json["book"] as String;
     final description = json["description"] as String;
+    final List<DialogPairs> dialogs = [];
+    for (int i = 0; i < description.split("\n").length ~/ 2; i += 2) {
+      final line = description.split("\n").toList()[i];
+      final translation = description.split("\n").toList()[i + 1];
+      dialogs.add(DialogPairs(line: line, translation: translation));
+    }
 
     return LocalAudio(
-        name: name, location: location, book: book, description: description);
+        name: name, location: location, book: book, description: dialogs);
   }
 
   @override
@@ -100,4 +106,11 @@ class LocalAudio extends Equatable {
       "location": location,
     });
   }
+}
+
+class DialogPairs {
+  final String line;
+  final String translation;
+
+  const DialogPairs({required this.line, required this.translation});
 }

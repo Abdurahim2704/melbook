@@ -61,7 +61,7 @@ class _LessonWidgetState extends State<LessonWidget> {
             ),
           ],
         ),
-        DialogMaker(text: widget.audio.description),
+        DialogMaker(dialogs: widget.audio.description),
       ],
     );
   }

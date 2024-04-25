@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:melbook/features/home/presentation/bloc/local_storage/local_storage_bloc.dart';
+import 'package:melbook/features/home/data/service/local_audio_service.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/dialog_maker.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/lesson_widget.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/name_player.dart';
@@ -10,7 +9,7 @@ import 'finalview.dart';
 
 class IngliztiliReading extends StatefulWidget {
   final Slice slice;
-  final String? lastText;
+  final List<DialogPairs>? lastText;
 
   const IngliztiliReading({super.key, required this.slice, this.lastText});
 
@@ -20,12 +19,6 @@ class IngliztiliReading extends StatefulWidget {
 
 class _IngliztiliReadingState extends State<IngliztiliReading> {
   final double horPadding = 30;
-
-  List<String> descriptionSplitter() {
-    final description =
-        context.read<LocalStorageBloc>().state.audios.first.description;
-    return description.split("\n").toList();
-  }
 
   @override
   void initState() {
@@ -50,7 +43,7 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 widget.slice.remained != null
-                    ? DialogMaker(text: widget.slice.remained!)
+                    ? DialogMaker(dialogs: widget.slice.remained!)
                     : const SizedBox.shrink(),
                 ListView.separated(
                   shrinkWrap: true,
@@ -68,7 +61,7 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
                     ? NamePlayer(audio: widget.slice.lastAudio!)
                     : const SizedBox.shrink(),
                 widget.lastText != null
-                    ? DialogMaker(text: widget.lastText!)
+                    ? DialogMaker(dialogs: widget.lastText!)
                     : const SizedBox.shrink(),
               ],
             ),

@@ -15,44 +15,38 @@ class FinalView extends StatefulWidget {
 
 class _FinalViewState extends State<FinalView> {
   final _controller = GlobalKey<PageFlipWidgetState>();
-
-  int maxLines = 1400;
-
-  int symbolCount(String text) => text
-      .split("\n")
-      .map((e) => e.length)
-      .reduce((value, element) => value + element);
+  int maxLines = 11;
   List<Slice> slices = [];
 
   void makeCut(List<LocalAudio> audios) {
     List<LocalAudio> result = [];
-    String? remained;
-    int currentLines = 0;
+    List<DialogPairs>? remained;
+    int currentDialogs = 0;
     for (var audio in audios) {
-      final lines = symbolCount(audio.description);
-      if ((lines + currentLines) > maxLines) {
-        final lastText =
-            audio.description.substring(0, maxLines - currentLines);
+      final dialogs = audio.description;
+      //max=13 dialogs = 5 current 10
+      if ((dialogs.length + currentDialogs) > maxLines) {
+        final lastText = dialogs.take(maxLines - currentDialogs).toList();
         slices.add(Slice(
             audios: result,
             lastText: lastText,
             lastAudio: audio,
             remained: remained));
-        remained = audio.description.substring(maxLines - currentLines);
+        remained = dialogs.skip(maxLines - currentDialogs).toList();
         result = [];
-        currentLines = 0;
-      } else if ((lines + currentLines) == maxLines) {
+        currentDialogs = 0;
+      } else if ((dialogs.length + currentDialogs) == maxLines) {
         result.add(audio);
         slices.add(Slice(audios: result, remained: remained));
         remained = null;
         result = [];
-        currentLines = lines;
+        currentDialogs = 0;
       } else {
         result.add(audio);
-        currentLines += symbolCount(audio.description) + 20;
+        currentDialogs += dialogs.length;
       }
     }
-    if (result.isNotEmpty) {
+    if (result.isNotEmpty || remained != null) {
       slices.add(Slice(audios: result, remained: remained));
     }
   }
@@ -87,9 +81,9 @@ class _FinalViewState extends State<FinalView> {
 
 class Slice {
   final List<LocalAudio> audios;
-  final String? lastText;
+  final List<DialogPairs>? lastText;
   final LocalAudio? lastAudio;
-  final String? remained;
+  final List<DialogPairs>? remained;
 
   const Slice(
       {this.lastText, required this.audios, this.lastAudio, this.remained});
