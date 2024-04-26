@@ -36,10 +36,7 @@ void main() {
 
     test("edit", () async {
       final result = await authService.editData(name: "Abdurahim yangi ism");
-      print(result.message);
-      if (result is DataSuccess<User>) {
-        print(result.data.name);
-      }
+      if (result is DataSuccess<User>) {}
     });
   });
 }

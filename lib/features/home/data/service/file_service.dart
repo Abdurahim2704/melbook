@@ -44,7 +44,6 @@ class LocalService {
       // final file = File(filePath);
       await LocalAudioService.saveAudio(
           fileName, "$filePath.mp3", book, description);
-      print(result);
     }
 
     return value;

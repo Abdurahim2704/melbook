@@ -164,12 +164,10 @@ class AuthService extends AuthRepository {
       return;
     }
     final body = {"username": _user!.userName, "password": _user!.password};
-    print(body);
     final data = await http.post(
         Uri.parse("${AppConstants.baseUrl}${AppConstants.apiLoginUser}"),
         body: jsonEncode(body),
         headers: {"Content-Type": "application/json"});
-    print(data.body);
     if (data.statusCode != 200) {
       throw Exception("reset Token failed: ${data.statusCode}");
     }

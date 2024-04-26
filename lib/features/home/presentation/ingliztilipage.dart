@@ -52,6 +52,8 @@ class _IngliztilipageState extends State<Ingliztilipage> {
 
   void _buyButton() {
     if (widget.book.bought) {
+      print("I am here");
+
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -67,7 +69,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
   void initState() {
     super.initState();
     timer = Timer.periodic(const Duration(seconds: 3), (timer) async {
-      if (mounted) {
+      if (mounted && !widget.book.bought) {
         context.read<PaymentBloc>().add(CheckPayment(times: timer.tick));
       }
     });

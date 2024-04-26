@@ -22,9 +22,6 @@ void main() {
 
       final user = User.fromJson(json["data"] as Map<String, Object>);
 
-      print(user.name);
-      print(user.password);
-      print(user.userName);
       expect(user, const TypeMatcher<User>());
     });
 

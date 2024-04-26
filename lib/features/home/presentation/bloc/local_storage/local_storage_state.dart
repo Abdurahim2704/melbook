@@ -1,17 +1,20 @@
 part of 'local_storage_bloc.dart';
 
-sealed class LocalStorageState {
+sealed class LocalStorageState extends Equatable {
   final List<LocalAudio> audios;
 
   const LocalStorageState(this.audios);
+
+  @override
+  List<Object?> get props => [audios];
 }
 
 final class LocalStorageInitial extends LocalStorageState {
-  LocalStorageInitial(super.audios);
+  const LocalStorageInitial(super.audios);
 }
 
 class DownloadSuccess extends LocalStorageState {
-  DownloadSuccess(super.audios);
+  const DownloadSuccess(super.audios);
 }
 
 class DownloadFailed extends LocalStorageState {
@@ -21,7 +24,7 @@ class DownloadFailed extends LocalStorageState {
 }
 
 class DownloadWaiting extends LocalStorageState {
-  DownloadWaiting(super.audios);
+  const DownloadWaiting(super.audios);
 }
 
 class Progress extends LocalStorageState {

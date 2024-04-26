@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:equatable/equatable.dart';
 import 'package:path/path.dart';
@@ -86,14 +87,26 @@ class LocalAudio extends Equatable {
     final book = json["book"] as String;
     final description = json["description"] as String;
     final List<DialogPairs> dialogs = [];
-    for (int i = 0; i < description.split("\n").length ~/ 2; i += 2) {
+    for (int i = 0; i < description.split("\n").length - 1; i += 2) {
       final line = description.split("\n").toList()[i];
       final translation = description.split("\n").toList()[i + 1];
-      dialogs.add(DialogPairs(line: line, translation: translation));
+      int points = max(line.length, translation.length) ~/ 30;
+      if (points == 0) {
+        points = 1;
+      }
+
+      dialogs.add(
+          DialogPairs(line: line, translation: translation, points: points));
     }
 
     return LocalAudio(
         name: name, location: location, book: book, description: dialogs);
+  }
+
+  int pointCount() {
+    return description
+        .map((e) => e.points)
+        .reduce((value, element) => element + value);
   }
 
   @override
@@ -111,6 +124,14 @@ class LocalAudio extends Equatable {
 class DialogPairs {
   final String line;
   final String translation;
+  final int points;
 
-  const DialogPairs({required this.line, required this.translation});
+  const DialogPairs(
+      {required this.line, required this.translation, required this.points});
+
+  @override
+  String toString() {
+    return jsonEncode(
+        {"line": line, "translation": translation, "points": points});
+  }
 }

@@ -18,10 +18,12 @@ class _DialogMakerState extends State<DialogMaker> {
   Widget boldMaker(String text, Color color) {
     final textParts = text.split(":");
     if (textParts.length == 1) {
-      return Text(
-        textParts.single,
-        style: TextStyle(fontSize: 25, color: color),
-      );
+      return textParts.single.isEmpty
+          ? SizedBox.shrink()
+          : Text(
+              textParts.single,
+              style: TextStyle(fontSize: 25, color: color),
+            );
     }
     return Text.rich(
         TextSpan(style: TextStyle(fontSize: 25, color: color), children: [

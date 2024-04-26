@@ -44,9 +44,6 @@ void main() {
 
       final book = Book.fromJson(json);
 
-      print(book.data.first.name);
-      print(book.data.first.description);
-      print(book.data.first.author);
       expect(book, isA<Book>());
     });
 
@@ -91,7 +88,6 @@ void main() {
 
       final book = Book.fromJson(json);
       final jsonString = book.toJson();
-      print("jsonString: $jsonString");
       expect(jsonString, isA<String>());
     });
   });

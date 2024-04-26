@@ -29,6 +29,9 @@ class App extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
+            create: (context) => LocalStorageBloc()..add(GetAllAudios()),
+          ),
+          BlocProvider(
             create: (context) => AuthBloc(),
           ),
           BlocProvider(
@@ -39,9 +42,6 @@ class App extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => PaymentBloc(),
-          ),
-          BlocProvider(
-            create: (context) => LocalStorageBloc()..add(GetAllAudios()),
           ),
           BlocProvider(
             create: (context) => PlayerBloc(),

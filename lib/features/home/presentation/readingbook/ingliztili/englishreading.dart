@@ -22,6 +22,15 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
 
   @override
   void initState() {
+    print(widget.slice.audios
+            .map((e) => e.pointCount())
+            .reduce((value, element) => element + value) +
+        (widget.slice.remained
+                ?.map((e) => e.points)
+                .reduce((value, element) => element + value) ??
+            0) +
+        (widget.slice.lastAudio?.pointCount() ?? 0));
+
     super.initState();
   }
 
@@ -53,7 +62,7 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
                     return LessonWidget(audio: audio);
                   },
                   separatorBuilder: (context, index) => SizedBox(
-                    height: 10.h,
+                    height: 5.h,
                   ),
                   itemCount: widget.slice.audios.length,
                 ),
