@@ -91,6 +91,7 @@
 //   }
 // }
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
@@ -108,7 +109,8 @@ class BookTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+
       onTap: () {
         Navigator.push(
           context,
@@ -117,71 +119,60 @@ class BookTile extends StatelessWidget {
           ),
         );
       },
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 5.w, vertical: 12.h),
-        padding: EdgeInsets.symmetric(horizontal: 1.w),
-        decoration: BoxDecoration(
+      child: SizedBox(
+        height: 260.h,
+        child: Card(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Column(
-          children: [
-            ClipRRect(
-              clipBehavior: Clip.antiAlias,
-              borderRadius: const BorderRadius.all(
-                Radius.circular(8),
-              ),
-              child: Image(
-                image: AssetImage(imagePath),
-                fit: BoxFit.fill,
-                width: 352.w,
-                height: 370.h,
-              ),
-            ),
-            SizedBox(height: 25.h),
-            Column(
-              children: [
-                Text(
-                  book.name,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 25.sp,
+          child: Row(crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ClipRRect(
+                  clipBehavior: Clip.antiAlias,
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(8),
+                  ),
+                  child: CachedNetworkImage(
+                    fit: BoxFit.fill,
+                    width: 250.w,
+                    height: 250.h, imageUrl: imagePath,
                   ),
                 ),
-                SizedBox(height: 25.h),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Ingliztilipage(book: book),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: 70.h,
-                    width: 70.w,
-                    padding: EdgeInsets.only(
-                      top: 6.sp,
-                      left: 7.sp,
-                      right: 7.sp,
-                      bottom: 9.sp,
-                    ),
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xFFF2F2F2),
-                    ),
-                    child: Icon(
-                      size: 35.sp,
-                      Icons.play_arrow,
-                      color: Colors.black,
+              ),
+              SizedBox(width: 20.w),
+              Column(mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    book.name,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.orange.shade800,
                     ),
                   ),
-                )
-              ],
-            ),
-          ],
+                  SizedBox(
+                    width: 300.w,
+                    child: Text(
+                      book.author,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        color: Colors.orange.shade600,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    book.bought? "Sotib olingan" : "Sotib olinmagan",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 30.sp,
+                      color: book.bought ? Colors.green : Colors.red,
+                    ),
+                  ),
+                  SizedBox(height: 15,),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
