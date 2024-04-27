@@ -135,7 +135,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SizedBox(height: 20.h),
+          SizedBox(height: 50.h),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: Row(

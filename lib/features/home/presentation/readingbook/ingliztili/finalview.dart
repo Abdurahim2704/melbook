@@ -70,7 +70,6 @@ class _FinalViewState extends State<FinalView> {
           makeCut(state.audios);
           print(slices.length);
           return PageFlipWidget(
-            isRightSwipe: false,
             key: _controller,
             initialIndex: 0,
             lastPage: Container(

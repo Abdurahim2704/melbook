@@ -40,8 +40,8 @@ class BookTile extends StatelessWidget {
             Hero(
               tag: book.id,
               child: Transform.scale(
-                scaleY: 2,
-                scaleX: 2,
+                scaleY: 2.w,
+                scaleX: 2.h,
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: CachedNetworkImage(
