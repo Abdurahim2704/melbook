@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class ArabTileReading extends StatefulWidget {
   final int page;
+
   const ArabTileReading({super.key, required this.page});
 
   @override
@@ -300,15 +302,16 @@ class _ArabTileReadingState extends State<ArabTileReading> {
     'https://i.ibb.co/PcMk7Sw/Mel-Book-Arab-tili-A5-1-compressed-page-0287.jpg',
     'https://i.ibb.co/FzYWtCS/Mel-Book-Arab-tili-A5-1-compressed-page-0288.jpg',
   ];
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(
       context,
-      designSize: Size(360, 690),
+      designSize: const Size(360, 690),
       minTextAdapt: true,
     );
-    if (widget.page < 0 || widget.page >= images.length){
-      return Scaffold(
+    if (widget.page < 0 || widget.page >= images.length) {
+      return const Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
           child: Center(
@@ -325,14 +328,17 @@ class _ArabTileReadingState extends State<ArabTileReading> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(height: 32.h),
-              Container(
+              SizedBox(
                 height: 1.sh - 140.h,
                 width: 1.sw,
                 child: CachedNetworkImage(
                   imageUrl: images[widget.page],
                   fit: BoxFit.cover,
-                  placeholder: (context, url) => Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) => Center(child: Icon(Icons.error)),
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => const Center(
+                    child: Icon(Icons.error),
+                  ),
                 ),
               )
             ],

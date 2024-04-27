@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class KoreystiliReading extends StatefulWidget {
   final int page;
+
   const KoreystiliReading({super.key, required this.page});
 
   @override
@@ -117,7 +118,7 @@ class _KoreystiliReadingState extends State<KoreystiliReading> {
     'https://i.ibb.co/XV5Mk3J/Mel-Book-Koreys-tili-A5-Page103.jpg',
     'https://i.ibb.co/QPnXmhB/Mel-Book-Koreys-tili-A5-Page104.jpg',
     'https://i.ibb.co/JnWsByw/Mel-Book-Koreys-tili-A5-Page105.jpg'
-    'https://i.ibb.co/Gcq8JDD/Mel-Book-Koreys-tili-A5-Page106.jpg',
+        'https://i.ibb.co/Gcq8JDD/Mel-Book-Koreys-tili-A5-Page106.jpg',
     'https://i.ibb.co/0Zr6Lv3/Mel-Book-Koreys-tili-A5-Page107.jpg',
     'https://i.ibb.co/nmYTqtg/Mel-Book-Koreys-tili-A5-Page108.jpg',
     'https://i.ibb.co/1MMn0Q6/Mel-Book-Koreys-tili-A5-Page109.jpg',
@@ -325,15 +326,16 @@ class _KoreystiliReadingState extends State<KoreystiliReading> {
     'https://i.ibb.co/yWqRTRC/Mel-Book-Koreys-tili-A5-Page311.jpg',
     'https://i.ibb.co/bHvphqR/Mel-Book-Koreys-tili-A5-Page312.jpg',
   ];
+
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(
       context,
-      designSize: Size(360, 690),
+      designSize: const Size(360, 690),
       minTextAdapt: true,
     );
-    if (widget.page < 0 || widget.page >= images.length){
-      return Scaffold(
+    if (widget.page < 0 || widget.page >= images.length) {
+      return const Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
           child: Center(
@@ -350,14 +352,16 @@ class _KoreystiliReadingState extends State<KoreystiliReading> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(height: 32.h),
-              Container(
+              SizedBox(
                 height: 1.sh - 140.h,
                 width: 1.sw,
                 child: CachedNetworkImage(
                   imageUrl: images[widget.page],
                   fit: BoxFit.cover,
-                  placeholder: (context, url) => Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) => Center(child: Icon(Icons.error)),
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) =>
+                      const Center(child: Icon(Icons.error)),
                 ),
               )
             ],
@@ -365,6 +369,5 @@ class _KoreystiliReadingState extends State<KoreystiliReading> {
         ),
       ),
     );
-
   }
 }

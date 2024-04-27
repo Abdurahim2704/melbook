@@ -5,6 +5,7 @@ import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
 import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:melbook/features/home/presentation/views/book_tile.dart';
 import 'package:melbook/locator.dart';
+import 'package:melbook/shared/widgets/app_bar.dart';
 
 import 'bloc/book/book_bloc.dart';
 
@@ -33,33 +34,36 @@ class _HomePage1State extends State<HomePage1> {
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          "Xush kelibsiz, ${getIt<AuthRepository>().user?.userName ?? ""}",
-          style: TextStyle(
-            fontSize: 33.sp,
-            fontWeight: FontWeight.bold,
-          ),
+      appBar: PreferredSize(
+        preferredSize: Size(double.infinity, 90.h),
+        child: CustomAppBar(
+          displayText:
+              "Xush kelibsiz, ${getIt<AuthRepository>().user?.userName ?? ""}",
         ),
-        elevation: 0,
       ),
       body: BlocBuilder<BookBloc, BookState>(
         builder: (context, state) {
-          return Column(
-
-            children: [
-              // Text("Kitoblar", style: TextStyle(fontSize: 33.sp, fontWeight: FontWeight.bold, color: Colors.black),),
-              ListView.separated(itemBuilder: (context, index) {
-                final book = state.books[index];
-                return BookTile(
-                  book: book,
-                  imagePath: state.books[index].photoUrl,
-                );
-              }, separatorBuilder: (context, index) {
-                return SizedBox(height: 15.h);
-              }, itemCount: state.books.length, shrinkWrap: true,),
-            ],
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Column(
+              children: [
+                SizedBox(height: 20.h),
+                ListView.separated(
+                  itemBuilder: (context, index) {
+                    final book = state.books[index];
+                    return BookTile(
+                      book: book,
+                      imagePath: state.books[index].photoUrl,
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return SizedBox(height: 15.h);
+                  },
+                  itemCount: state.books.length,
+                  shrinkWrap: true,
+                ),
+              ],
+            ),
           );
         },
       ),

@@ -12,24 +12,20 @@ class BookDescriptionContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      primary: true,
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 8.w),
-        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
+        margin:  EdgeInsets.symmetric(vertical: 15.h, horizontal: 15.w),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-          child: Text(
-            data,
-            style: TextStyle(
-              fontSize: 23.sp,
-              fontWeight: FontWeight.w500,
-            ),
-            textAlign: TextAlign.start,
+        child: Text(
+          data,
+          style: TextStyle(
+            fontSize: 23.sp,
+            fontWeight: FontWeight.w500,
           ),
+          textAlign: TextAlign.start,
         ),
       ),
     );

@@ -314,11 +314,11 @@ class _RustiliReadingState extends State<RustiliReading> {
   Widget build(BuildContext context) {
     ScreenUtil.init(
       context,
-      designSize: Size(360, 690),
+      designSize: const Size(360, 690),
       minTextAdapt: true,
     );
     if (widget.page < 0 || widget.page >= images.length){
-      return Scaffold(
+      return const Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
           child: Center(
@@ -335,14 +335,14 @@ class _RustiliReadingState extends State<RustiliReading> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(height: 32.h),
-              Container(
+              SizedBox(
                 height: 1.sh - 140.h,
                 width: 1.sw,
                 child: CachedNetworkImage(
                   imageUrl: images[widget.page],
                   fit: BoxFit.cover,
-                  placeholder: (context, url) => Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) => Center(child: Icon(Icons.error)),
+                  placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => const Center(child: Icon(Icons.error)),
                 ),
               )
             ],

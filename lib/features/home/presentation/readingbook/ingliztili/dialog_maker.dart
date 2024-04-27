@@ -19,7 +19,7 @@ class _DialogMakerState extends State<DialogMaker> {
     final textParts = text.split(":");
     if (textParts.length == 1) {
       return textParts.single.isEmpty
-          ? SizedBox.shrink()
+          ? const SizedBox.shrink()
           : Text(
               textParts.single,
               style: TextStyle(fontSize: 25, color: color),
@@ -28,8 +28,9 @@ class _DialogMakerState extends State<DialogMaker> {
     return Text.rich(
         TextSpan(style: TextStyle(fontSize: 25, color: color), children: [
       TextSpan(
-          text: "${textParts.first}: ",
-          style: const TextStyle(fontWeight: FontWeight.w800)),
+        text: "${textParts.first}: ",
+        style: const TextStyle(fontWeight: FontWeight.w800),
+      ),
       TextSpan(
           text: textParts.last,
           style: const TextStyle(fontWeight: FontWeight.w400)),

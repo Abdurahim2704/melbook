@@ -9,9 +9,10 @@ import 'finalview.dart';
 
 class IngliztiliReading extends StatefulWidget {
   final Slice slice;
+  final int index;
   final List<DialogPairs>? lastText;
 
-  const IngliztiliReading({super.key, required this.slice, this.lastText});
+  const IngliztiliReading({super.key, required this.slice, this.lastText,required this.index});
 
   @override
   State<IngliztiliReading> createState() => _IngliztiliReadingState();
@@ -22,14 +23,15 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
 
   @override
   void initState() {
-    print(widget.slice.audios
-            .map((e) => e.pointCount())
-            .reduce((value, element) => element + value) +
-        (widget.slice.remained
-                ?.map((e) => e.points)
-                .reduce((value, element) => element + value) ??
-            0) +
-        (widget.slice.lastAudio?.pointCount() ?? 0));
+    // print(widget.slice.audios
+    //         .map((e) => e.pointCount())
+    //         .reduce((value, element) => element + value) +
+    //     (widget.slice.remained
+    //             ?.map((e) => e.points)
+    //             .reduce((value, element) => element + value) ??
+    //         0) +
+    //     (widget.slice.lastAudio?.pointCount() ?? 0));
+    print(widget.index);
 
     super.initState();
   }

@@ -8,9 +8,9 @@ void main() {
   AuthRepository authService = AuthService();
 
   group("Auth service", () {
-    final username = "abdurahim1210";
-    final password = "12345678911";
-    final phoneNumber = "+9982874328979";
+    const username = "abdurahim1210";
+    const password = "12345678911";
+    const phoneNumber = "+9982874328979";
 
     // test("register user success", () async {
     //   final result = await authService.registerUser(

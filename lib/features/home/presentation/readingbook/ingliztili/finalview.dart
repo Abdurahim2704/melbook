@@ -70,6 +70,7 @@ class _FinalViewState extends State<FinalView> {
           makeCut(state.audios);
           print(slices.length);
           return PageFlipWidget(
+            isRightSwipe: false,
             key: _controller,
             initialIndex: 0,
             lastPage: Container(
@@ -89,6 +90,7 @@ class _FinalViewState extends State<FinalView> {
                 IngliztiliReading(
                   slice: slices[i],
                   lastText: slices[i].lastText,
+                  index: i,
                 ),
             ],
           );
@@ -104,6 +106,10 @@ class Slice {
   final LocalAudio? lastAudio;
   final List<DialogPairs>? remained;
 
-  const Slice(
-      {this.lastText, required this.audios, this.lastAudio, this.remained});
+  const Slice({
+    this.lastText,
+    required this.audios,
+    this.lastAudio,
+    this.remained,
+  });
 }

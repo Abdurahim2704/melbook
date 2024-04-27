@@ -25,29 +25,29 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       bottomNavigationBar: BlocBuilder<MainBloc, MainState>(
         builder: (context, state) {
-          return MyBottomNavigation(tabs: [
-            MyBottomItem(image: items[0
-            ], title: "Home"),
-            MyBottomItem(image: items[1], title: "Profile"),
-          ], selectedIndex: state.currentIndex, onPress: (value) {
-            BlocProvider.of<MainBloc>(context).add(
-              ChangePageEvent(index: value),
-            );
-            pageController.jumpToPage(value);
-          },);
+          return MyBottomNavigation(
+            tabs: [
+              MyBottomItem(image: items[0], title: "Home"),
+              MyBottomItem(image: items[1], title: "Profile"),
+            ],
+            selectedIndex: state.currentIndex,
+            onPress: (value) {
+              BlocProvider.of<MainBloc>(context).add(
+                ChangePageEvent(index: value),
+              );
+              pageController.jumpToPage(value);
+            },
+          );
         },
       ),
-
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
         children: const [
           HomePage1(),
-          ProfileScreen()
+          ProfileScreen(),
         ],
       ),
     );
   }
 }
-
-

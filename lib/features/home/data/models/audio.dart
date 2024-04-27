@@ -12,7 +12,7 @@ class Audio extends Equatable {
   final String content;
   final int v;
 
-  Audio({
+  const Audio({
     required this.id,
     required this.name,
     required this.audioUrl,

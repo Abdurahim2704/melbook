@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/home/data/models/book_types.dart';
@@ -128,53 +130,51 @@ class _IngliztilipageState extends State<Ingliztilipage> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
-      extendBodyBehindAppBar: true,
       body: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            children: [
-              IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(
-                  Icons.arrow_back,
-                  size: 35.sp,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 60),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(36),
-                      topLeft: Radius.circular(36),
-                    ),
+          SizedBox(height: 20.h),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.arrow_back,
+                    size: 35.sp,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(15),
+                ),
+                Expanded(
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(36),
+                        topLeft: Radius.circular(36),
+                      ),
+                    ),
                     child: Row(
+                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        ClipRRect(
-                          clipBehavior: Clip.antiAlias,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(8),
-                          ),
+                        Hero(
+                          tag: widget.book.id,
                           child: Transform.scale(
-                            scaleY: 1.6,
-                            scaleX: 1.6,
+                            scaleY: 1.8,
+                            scaleX: 1.8,
                             child: CachedNetworkImage(
+                              width: 200.w,
                               imageUrl: widget.book.photoUrl,
-                              width: screenWidth * 0.25,
                             ),
                           ),
                         ),
-                        const SizedBox(width: 30),
+                        const SizedBox(width: 20),
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -182,14 +182,14 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                             Text(
                               widget.book.name,
                               style: TextStyle(
-                                fontSize: 35.sp,
+                                fontSize: 30.sp,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
                             Text(
                               widget.book.author,
                               style: TextStyle(
-                                fontSize: 28.sp,
+                                fontSize: 22.sp,
                               ),
                             ),
                             const SizedBox(height: 15),
@@ -221,7 +221,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                   ),
                                 ),
                                 SizedBox(
-                                  width: 10.w,
+                                  width: 15.w,
                                 ),
                                 BlocBuilder<LocalStorageBloc,
                                     LocalStorageState>(
@@ -237,12 +237,11 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                             );
                                       },
                                       child: Container(
-                                        padding: const EdgeInsets.all(10),
                                         margin: const EdgeInsets.only(top: 10),
-                                        decoration: BoxDecoration(
+                                        padding: EdgeInsets.all(10.sp),
+                                        decoration: const BoxDecoration(
                                           color: Colors.amber,
-                                          borderRadius:
-                                              BorderRadius.circular(70),
+                                          shape: BoxShape.circle,
                                         ),
                                         child: Icon(
                                           state.audios.length ==
@@ -251,22 +250,20 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                               ? Icons.check
                                               : Icons.download,
                                           color: Colors.white,
+                                          size: 28.sp,
                                         ),
                                       ),
                                     );
                                   },
                                 ),
-                                const SizedBox(width: 15),
+                                const SizedBox(width: 18),
                                 BlocBuilder<LocalStorageBloc,
                                     LocalStorageState>(
                                   builder: (context, state) {
                                     if (state is Progress) {
-                                      return Padding(
-                                        padding: EdgeInsets.only(top: 12.0.h),
-                                        child: CircularProgressIndicator(
-                                          value: state.progress /
-                                              widget.book.audios!.length,
-                                        ),
+                                      return CircularProgressIndicator(
+                                        value: state.progress /
+                                            widget.book.audios!.length,
                                       );
                                     }
                                     return const SizedBox.shrink();
@@ -280,20 +277,15 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Container(
             decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(12)),
+              borderRadius: BorderRadius.all(Radius.circular(10)),
               color: Color(0xFFF2F2F2),
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                BookDescriptionContainer(data: widget.book.description),
-              ],
-            ),
+            child: BookDescriptionContainer(data: widget.book.description),
           ),
         ],
       ),

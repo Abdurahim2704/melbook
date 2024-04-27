@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class MyBottomNavigation extends StatelessWidget {
@@ -6,10 +8,12 @@ class MyBottomNavigation extends StatelessWidget {
   final int selectedIndex;
   final Function(int value) onPress;
 
-  const MyBottomNavigation({super.key,
+  const MyBottomNavigation({
+    super.key,
     required this.tabs,
     required this.selectedIndex,
-    required this.onPress});
+    required this.onPress,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +21,11 @@ class MyBottomNavigation extends StatelessWidget {
       bottom: true,
       child: Container(
         decoration: const BoxDecoration(
-            border: Border(top: BorderSide(color: Colors.black12))),
-        height: 72,
+          color: CupertinoColors.systemGroupedBackground,
+        ),
+        height: 72.h,
         child: Padding(
-          padding: const EdgeInsets.all(4.0),
+          padding: const EdgeInsets.symmetric(vertical: 4),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -40,14 +45,15 @@ class MyBottomNavigation extends StatelessWidget {
   }
 }
 
-
 class TabItem extends StatelessWidget {
-  const TabItem({super.key,
+  const TabItem({
+    super.key,
     required this.item,
     required this.onTap,
     required this.index,
     required this.length,
-    required this.isSelected});
+    required this.isSelected,
+  });
 
   final Function(int) onTap;
   final MyBottomItem item;
@@ -61,29 +67,27 @@ class TabItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       onTap: () => onTap.call(index),
       child: SizedBox(
-        width: (MediaQuery
-            .of(context)
-            .size
-            .width - 8) / length,
+        width: MediaQuery.of(context).size.width / length,
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               SvgPicture.asset(
                 item.image,
+                height: 29.h,
                 colorFilter: ColorFilter.mode(
                   isSelected ? Colors.green : Colors.grey,
                   BlendMode.srcIn,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 3),
+                padding: const EdgeInsets.only(top: 4),
                 child: Text(
                   item.title,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: isSelected ? Colors.green : Colors.grey,
-                    fontSize: 12,
+                    fontSize: 15.sp,
                   ),
                   maxLines: 1,
                 ),
@@ -96,11 +100,12 @@ class TabItem extends StatelessWidget {
   }
 }
 
-
-
 class MyBottomItem {
   String title;
   String image;
 
-  MyBottomItem({required this.image, required this.title});
+  MyBottomItem({
+    required this.image,
+    required this.title,
+  });
 }
