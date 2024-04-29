@@ -25,7 +25,7 @@ class _IngliztilipageState extends State<OfflineReadingPage> {
 
   void _buyButton() {
     print("I am here");
-    print(widget.book.audios!.length);
+    print(widget.book.audios.length);
     print(context.read<LocalStorageBloc>().state.audios);
     Navigator.push(
       context,
@@ -133,7 +133,7 @@ class _IngliztilipageState extends State<OfflineReadingPage> {
                                   builder: (context, state) {
                                     if (state is Progress) {
                                       return Text((state.progress /
-                                              widget.book.audios!.length)
+                                              widget.book.audios.length)
                                           .toString());
                                     }
                                     return const SizedBox.shrink();
