@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/home/data/service/local_audio_service.dart';
 
 class DialogMaker extends StatefulWidget {
@@ -43,9 +42,7 @@ class _DialogMakerState extends State<DialogMaker> {
     return Column(
       children: [
         for (int i = 0; i < widget.dialogs.length; i++) ...[
-          SizedBox(
-            height: 5.h,
-          ),
+          const SizedBox(height: 5),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,

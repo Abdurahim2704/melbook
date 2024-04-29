@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
 import 'package:melbook/features/home/presentation/ingliztilipage.dart';
 
@@ -29,7 +28,7 @@ class BookTile extends StatelessWidget {
       },
       child: Container(
         clipBehavior: Clip.antiAlias,
-        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 18.h),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 18),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(16)),
           color: CupertinoColors.systemGroupedBackground,
@@ -42,32 +41,32 @@ class BookTile extends StatelessWidget {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: CachedNetworkImage(
-                  height: 250.h,
+                  height: 250,
                   imageUrl: imagePath,
                 ),
               ),
             ),
-            SizedBox(width: 20.w),
+            const SizedBox(width: 20),
             Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 60.h),
+                  const SizedBox(height: 60),
                   Text(
                     book.name,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: Colors.orange.shade800,
-                      fontSize: 23.sp,
+                      fontSize: 23,
                     ),
                   ),
-                  SizedBox(height: 5.h),
+                  const SizedBox(height: 5),
                   Text(
                     book.bought ? "Sotib olingan" : "Sotib olinmagan",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: 28.sp,
+                      fontSize: 28,
                       color: Colors.green,
                     ),
                   ),

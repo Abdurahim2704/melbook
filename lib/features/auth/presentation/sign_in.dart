@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:melbook/features/home/presentation/main_screen.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
@@ -42,49 +41,49 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size(double.infinity, 90.h),
-        child: const CustomAppBar(displayText: "Tizimga kirish"),
+      appBar: const PreferredSize(
+        preferredSize: Size(double.infinity, 90),
+        child: CustomAppBar(displayText: "Tizimga kirish"),
       ),
       backgroundColor: Colors.white,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.0.w),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 30.h),
+            const SizedBox(height: 30),
 
             /// #Header Logo
-            Center(
+            const Center(
               child: Image(
-                image: const AssetImage("assets/images/img_logo_melbook.png"),
-                width: 165.w,
-                height: 50.h,
+                image: AssetImage("assets/images/img_logo_melbook.png"),
+                width: 165,
+                height: 50,
               ),
             ),
-            SizedBox(height: 40.h),
+            const SizedBox(height: 40),
 
             /// #TextField Header
             buildTextFieldHeaderText("Foydalanuvchi nomi"),
-            SizedBox(height: 12.h),
+            const SizedBox(height: 12),
 
             /// #TextField Username
             AuthTextField(
-              style: TextStyle(fontSize: 18.sp, color: const Color(0xFF201A21)),
+              style: const TextStyle(fontSize: 18, color: Color(0xFF201A21)),
               controller: usernameCtrl,
               hinText: "Foydalanuvchi nomini kiriting",
               textInputAction: TextInputAction.next,
             ),
-            SizedBox(height: 20.h),
+            const SizedBox(height: 20),
 
             /// #TextField Header
             buildTextFieldHeaderText("Parol"),
 
-            SizedBox(height: 12.h),
+            const SizedBox(height: 12),
 
             /// #TextField Password
             AuthTextField(
-              style: TextStyle(fontSize: 18.sp, color: const Color(0xFF201A21)),
+              style: const TextStyle(fontSize: 18, color: Color(0xFF201A21)),
               hinText: "12345mkl",
               controller: passwordCtrl,
               keyboardType: TextInputType.visiblePassword,
@@ -107,7 +106,7 @@ class _SignInState extends State<SignIn> {
         },
         builder: (context, state) {
           return Padding(
-            padding: EdgeInsets.only(bottom: 40.0.h, left: 20.w, right: 20.w),
+            padding: const EdgeInsets.only(bottom: 40.0, left: 20, right: 20),
             child: PrimaryYellowElevatedButton(
               displayText: "Tizimga kirish",
               onPressed: () {

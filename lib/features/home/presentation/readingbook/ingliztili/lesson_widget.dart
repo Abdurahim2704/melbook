@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/home/data/service/local_audio_service.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/dialog_maker.dart';
 
@@ -32,7 +31,7 @@ class _LessonWidgetState extends State<LessonWidget> {
                         ));
                   },
                   child: Container(
-                    padding: EdgeInsets.all(2.5.sp),
+                    padding: const EdgeInsets.all(2.5),
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(width: 3, color: Colors.black)),
@@ -42,7 +41,7 @@ class _LessonWidgetState extends State<LessonWidget> {
                             ? Icons.pause_rounded
                             : Icons.play_arrow_rounded,
                         color: Colors.black,
-                        size: 11.sp,
+                        size: 11,
                       ),
                     ),
                   ),
@@ -50,9 +49,10 @@ class _LessonWidgetState extends State<LessonWidget> {
               },
             ),
             TextButton(
-              child: Text(widget.audio.name,
-                  style:
-                      TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w700)),
+              child: Text(
+                widget.audio.name,
+                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+              ),
               onPressed: () {
                 context.read<PlayerBloc>().add(PlayPause(
                       path: widget.audio.location,

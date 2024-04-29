@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class AuthTextField extends StatelessWidget {
@@ -47,8 +46,8 @@ class AuthTextField extends StatelessWidget {
         prefixStyle: style,
         prefixText: text,
         contentPadding: EdgeInsets.symmetric(
-          horizontal: 24.w,
-          vertical: 17.h,
+          horizontal: 24,
+          vertical: 17,
         ),
         suffixIcon: suffixIcon,
         filled: true,
@@ -83,7 +82,7 @@ class AuthTextField extends StatelessWidget {
         hintText: hinText,
         hintStyle: TextStyle(
           fontWeight: FontWeight.w400,
-          fontSize: 18.sp,
+          fontSize: 18,
           color: const Color(0xFFA4A3A4),
         ),
       ),

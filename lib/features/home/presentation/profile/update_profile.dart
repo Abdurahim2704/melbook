@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
 import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
@@ -44,7 +43,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size(double.infinity, 80.h),
+        preferredSize: const Size(double.infinity, 80),
         child: Stack(
           children: [
             const CustomAppBar(
@@ -56,9 +55,9 @@ class _UpdateProfileState extends State<UpdateProfile> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back,
-                  size: 35.sp,
+                  size: 35,
                 ),
               ),
             )
@@ -68,44 +67,44 @@ class _UpdateProfileState extends State<UpdateProfile> {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(left: 18.0.w, right: 18.w, bottom: 20.h),
+          padding: const EdgeInsets.only(left: 18.0, right: 18, bottom: 20),
           child: BlocBuilder<AuthBloc, AuthState>(
             builder: (context, state) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 30.h),
+                  const SizedBox(height: 30),
                   buildTextFieldHeaderText("Foydalanuvchi nomi"),
-                  SizedBox(height: 12.h),
+                  const SizedBox(height: 12),
                   AuthTextField(
-                    style: TextStyle(fontSize: 18.sp),
+                    style: const TextStyle(fontSize: 18),
                     hinText: state.user?.userName,
                     textInputAction: TextInputAction.next,
                     controller: usernameCtrl,
                   ),
-                  SizedBox(height: 20.h),
+                  const SizedBox(height: 20),
                   buildTextFieldHeaderText("Ism"),
-                  SizedBox(height: 12.h),
+                  const SizedBox(height: 12),
                   AuthTextField(
-                    style: TextStyle(fontSize: 18.sp),
+                    style: const TextStyle(fontSize: 18),
                     controller: nameCtrl,
                     hinText: state.user?.name,
                     textInputAction: TextInputAction.next,
                   ),
-                  SizedBox(height: 20.h),
+                  const SizedBox(height: 20),
                   buildTextFieldHeaderText("Familiya"),
-                  SizedBox(height: 12.h),
+                  const SizedBox(height: 12),
                   AuthTextField(
-                    style: TextStyle(fontSize: 18.sp),
+                    style: const TextStyle(fontSize: 18),
                     controller: surnameCtrl,
                     hinText: state.user?.surname,
                     textInputAction: TextInputAction.next,
                   ),
-                  SizedBox(height: 20.h),
+                  const SizedBox(height: 20),
                   buildTextFieldHeaderText("Telefon raqam"),
-                  SizedBox(height: 12.h),
+                  const SizedBox(height: 12),
                   AuthTextField(
-                    style: TextStyle(fontSize: 18.sp),
+                    style: const TextStyle(fontSize: 18),
                     hinText: "\t${state.user?.phoneNumber}",
                     controller: phoneNumberCtrl,
                     keyboardType: TextInputType.phone,
@@ -117,25 +116,25 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20.h),
+                  const SizedBox(height: 20),
                   buildTextFieldHeaderText("Parol"),
-                  SizedBox(height: 12.h),
+                  const SizedBox(height: 12),
                   AuthTextField(
-                    style: TextStyle(fontSize: 18.sp),
+                    style: const TextStyle(fontSize: 18),
                     hinText: "* * * * * * *",
                     controller: passwordCtrl,
                     textInputAction: TextInputAction.next,
                   ),
-                  SizedBox(height: 20.h),
+                  const SizedBox(height: 20),
                   buildTextFieldHeaderText("Parolni takrorlang"),
-                  SizedBox(height: 12.h),
+                  const SizedBox(height: 12),
                   AuthTextField(
-                    style: TextStyle(fontSize: 18.sp),
+                    style: const TextStyle(fontSize: 18),
                     hinText: "* * * * * * *",
                     controller: confirmPasswordCtrl,
                     textInputAction: TextInputAction.done,
                   ),
-                  SizedBox(height: 30.h),
+                  const SizedBox(height: 30),
                   Center(
                     child: PrimaryYellowElevatedButton(
                       displayText: "Saqlash",

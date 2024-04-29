@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ArabTileReading extends StatefulWidget {
   final int page;
@@ -305,11 +304,6 @@ class _ArabTileReadingState extends State<ArabTileReading> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-      context,
-      designSize: const Size(360, 690),
-      minTextAdapt: true,
-    );
     if (widget.page < 0 || widget.page >= images.length) {
       return const Scaffold(
         backgroundColor: Colors.white,
@@ -327,10 +321,9 @@ class _ArabTileReadingState extends State<ArabTileReading> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: 32.h),
+              SizedBox(height: 32),
               SizedBox(
-                height: 1.sh - 140.h,
-                width: 1.sw,
+                height: 140,
                 child: CachedNetworkImage(
                   imageUrl: images[widget.page],
                   fit: BoxFit.cover,

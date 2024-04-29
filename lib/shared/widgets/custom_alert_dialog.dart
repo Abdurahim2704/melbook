@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CustomAlertDialog extends StatelessWidget {
@@ -29,31 +28,31 @@ class CustomAlertDialog extends StatelessWidget {
               const SizedBox(height: 10),
               SvgPicture.asset(
                 "assets/icons/ic_dialog_pattern.svg",
-                width: 180.w,
-                height: 180.h,
+                width: 180,
+                height: 180,
               ),
-              SizedBox(height: 40.h),
+              const SizedBox(height: 40),
               Text(
                 displayText,
-                style: TextStyle(
-                  fontSize: 20.sp,
+                style: const TextStyle(
+                  fontSize: 20,
                   fontWeight: FontWeight.w600,
-                  color: const Color(0xFF201A21),
+                  color: Color(0xFF201A21),
                 ),
               ),
-              SizedBox(height: 80.h),
+              const SizedBox(height: 80),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF201A21),
-                  fixedSize: Size(300.w, 50.h),
+                  fixedSize: const Size(300, 50),
                 ),
                 onPressed: onPressed,
-                child: Text(
+                child: const Text(
                   "OK",
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 17.sp,
-                    color: const Color(0xFFFFFFFF),
+                    fontSize: 17,
+                    color: Color(0xFFFFFFFF),
                   ),
                 ),
               ),

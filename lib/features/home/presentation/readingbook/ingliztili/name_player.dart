@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/home/data/service/local_audio_service.dart';
 
 import '../../../../audio/presentation/bloc/player/player_bloc.dart';
@@ -24,7 +23,7 @@ class NamePlayer extends StatelessWidget {
                       ));
                 },
                 child: Container(
-                  padding: EdgeInsets.all(2.5.sp),
+                  padding: const EdgeInsets.all(2.5),
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(width: 3, color: Colors.black)),
@@ -34,7 +33,7 @@ class NamePlayer extends StatelessWidget {
                           ? Icons.pause_rounded
                           : Icons.play_arrow_rounded,
                       color: Colors.black,
-                      size: 11.sp,
+                      size: 11,
                     ),
                   ),
                 ),
@@ -42,12 +41,16 @@ class NamePlayer extends StatelessWidget {
             },
           ),
         if (audio.location == "no audio")
-          Text(audio.name,
-              style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w700)),
+          Text(
+            audio.name,
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+          ),
         if (audio.location != "no audio")
           TextButton(
-            child: Text(audio.name,
-                style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w700)),
+            child: Text(
+              audio.name,
+              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+            ),
             onPressed: () {
               context.read<PlayerBloc>().add(PlayPause(
                     path: audio.location,

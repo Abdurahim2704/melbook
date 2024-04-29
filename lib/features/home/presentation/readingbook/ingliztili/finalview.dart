@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/home/data/service/local_audio_service.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/englishreading.dart';
 import 'package:page_flip/page_flip.dart';
@@ -74,11 +73,11 @@ class _FinalViewState extends State<FinalView> {
             initialIndex: 0,
             lastPage: Container(
               color: Colors.white,
-              child: Center(
+              child: const Center(
                 child: Text(
                   "E'tiboringiz uchun rahmat!",
                   style: TextStyle(
-                    fontSize: 30.sp,
+                    fontSize: 30,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

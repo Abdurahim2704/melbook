@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
 import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:melbook/features/home/presentation/views/book_tile.dart';
@@ -36,7 +35,7 @@ class _HomePage1State extends State<HomePage1> {
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
-        preferredSize: Size(double.infinity, 90.h),
+        preferredSize: Size(double.infinity, 90),
         child: CustomAppBar(
           displayText:
               "Xush kelibsiz, ${getIt<AuthRepository>().user?.userName ?? ""}",
@@ -48,7 +47,7 @@ class _HomePage1State extends State<HomePage1> {
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: Column(
               children: [
-                SizedBox(height: 20.h),
+                SizedBox(height: 20),
                 ListView.separated(
                   itemBuilder: (context, index) {
                     final book = state.books[index];
@@ -58,7 +57,7 @@ class _HomePage1State extends State<HomePage1> {
                     );
                   },
                   separatorBuilder: (context, index) {
-                    return SizedBox(height: 15.h);
+                    return SizedBox(height: 15);
                   },
                   itemCount: state.books.length,
                   shrinkWrap: true,

@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:melbook/features/auth/data/service/local_service.dart';
 import 'package:melbook/features/auth/presentation/sign_up.dart';
@@ -47,31 +46,31 @@ class _IntroScreenState extends State<IntroScreen> {
                   fit: BoxFit.cover,
                 ),
                 SizedBox(
-                  height: 270.h,
+                  height: 270,
                   width: double.infinity,
                   child: ListView(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     padding: const EdgeInsets.symmetric(horizontal: 50),
                     children: [
-                      SizedBox(height: 60.h),
+                      const SizedBox(height: 60),
                       Text(
                         titles[i],
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 18.sp,
+                          fontSize: 18,
                           fontWeight: FontWeight.w600,
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(
-                        height: 20.h,
+                      const SizedBox(
+                        height: 20,
                       ),
                       SizedBox(
-                        height: 94.h,
-                        width: 94.h,
+                        height: 94,
+                        width: 94,
                         child: CustomPaint(
-                          size: Size(94.h, 94.h),
+                          size: const Size(94, 94),
                           painter: IntroPainter(currentPage: i),
                           child: Padding(
                             padding: const EdgeInsets.all(15),
