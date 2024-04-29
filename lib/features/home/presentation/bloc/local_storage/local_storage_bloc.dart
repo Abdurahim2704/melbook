@@ -7,12 +7,13 @@ import 'package:melbook/features/home/data/service/local_audio_service.dart';
 import 'package:meta/meta.dart';
 
 import '../../../data/models/audio.dart';
+import '../../../data/models/local_book.dart';
 
 part 'local_storage_event.dart';
 part 'local_storage_state.dart';
 
 class LocalStorageBloc extends Bloc<LocalStorageEvent, LocalStorageState> {
-  LocalStorageBloc() : super(const LocalStorageInitial([])) {
+  LocalStorageBloc() : super(const LocalStorageInitial([], books: [])) {
     on<DownloadFileAndSave>(_downloadFileAndSave);
     on<GetAllAudios>(_getAllAudios);
     on<DownloadAllAudios>(_downloadAllAudios);
@@ -20,16 +21,16 @@ class LocalStorageBloc extends Bloc<LocalStorageEvent, LocalStorageState> {
 
   Future<void> _downloadFileAndSave(
       DownloadFileAndSave event, Emitter<LocalStorageState> emit) async {
-    emit(DownloadWaiting(state.audios));
+    emit(DownloadWaiting(state.audios, books: state.books));
     try {
-      final result = await LocalService()
-          .downloadFile(event.name, event.link, event.book, event.description);
+      final result = await LocalService().downloadFile(
+          event.name, event.link, event.book, event.description, ".mp3");
       final audios = await LocalAudioService.getAudios();
       if (result.toInt() == 1) {
-        emit(DownloadSuccess(audios));
+        emit(DownloadSuccess(audios, books: state.books));
       }
     } catch (e) {
-      DownloadFailed(state.audios, message: e.toString());
+      DownloadFailed(state.audios, message: e.toString(), books: state.books);
     }
   }
 
@@ -38,28 +39,46 @@ class LocalStorageBloc extends Bloc<LocalStorageEvent, LocalStorageState> {
     print("I am here you dumpass");
     final service = await LocalAudioService.getAudios();
     final audios = service.where((element) {
+      if (element.location == "no audio") {
+        return true;
+      }
       final file = File(element.location);
       return file.existsSync();
     }).toList();
-    print(audios.length);
-    emit(DownloadSuccess(audios));
+    final books = await SqfliteService().getBooks();
+    emit(GetAllAudiosState(audios, books: books));
   }
 
   Future<void> _downloadAllAudios(
       DownloadAllAudios event, Emitter<LocalStorageState> emit) async {
     int results = 0;
-    emit(DownloadWaiting(state.audios));
+    emit(DownloadWaiting(state.audios, books: state.books));
+
     await Future.forEach(event.audios, (element) async {
-      final result = await LocalService().downloadFile(
-          element.name, element.audioUrl, event.book, element.content);
-      if (result.toInt() == 1) {
+      if (element.audioUrl.contains(".json")) {
+        await LocalAudioService.saveAudio(
+            element.name, "no audio", event.book, element.content);
         results++;
-        emit(Progress(state.audios, progress: results));
+      } else {
+        final result = await LocalService().downloadFile(element.name,
+            element.audioUrl, event.book, element.content, ".mp3");
+        if (result.toInt() == 1) {
+          results++;
+          print("Results: $results");
+          emit(Progress(state.audios, progress: results, books: state.books));
+        }
       }
     });
     if (results == event.audios.length) {
       final audios = await LocalAudioService.getAudios();
-      emit(DownloadSuccess(audios));
+      await SqfliteService().insertBook(LocalBook(
+          name: event.book,
+          audios: audios,
+          description: event.description,
+          author: event.author));
+
+      final books = await SqfliteService().getBooks();
+      emit(DownloadSuccess(audios, books: books));
     }
   }
 }

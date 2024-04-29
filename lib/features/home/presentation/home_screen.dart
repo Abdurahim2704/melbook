@@ -20,6 +20,7 @@ class _HomePage1State extends State<HomePage1> {
   @override
   void initState() {
     super.initState();
+    print(getIt<AuthRepository>().token);
     context.read<BookBloc>().add(GetAllBooks());
     context.read<AuthBloc>().stream.listen((event) {
       if (event.message != null && mounted) {

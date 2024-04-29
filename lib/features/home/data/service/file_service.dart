@@ -24,8 +24,8 @@ class LocalService {
     return join(appDocPath, book, filename);
   }
 
-  Future<double> downloadFile(
-      String fileName, String link, String book, String description) async {
+  Future<double> downloadFile(String fileName, String link, String book,
+      String description, String suffix) async {
     if (await Permission.storage.isDenied ||
         await Permission.mediaLibrary.isDenied) {
       await requestPermissions();
@@ -34,12 +34,11 @@ class LocalService {
     double value = -1;
     final result = await Dio().download(
       link,
-      "$filePath.mp3",
+      "$filePath$suffix",
       onReceiveProgress: (count, total) {
         value = count / total;
       },
     );
-    print("Status code: ${result.statusCode}");
     if (result.statusCode == 200) {
       // final file = File(filePath);
       await LocalAudioService.saveAudio(

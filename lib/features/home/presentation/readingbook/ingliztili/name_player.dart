@@ -14,41 +14,46 @@ class NamePlayer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        BlocBuilder<PlayerBloc, PlayerState>(
-          builder: (context, state) {
-            return GestureDetector(
-              onTap: () {
-                context.read<PlayerBloc>().add(PlayPause(
-                      path: audio.location,
-                    ));
-              },
-              child: Container(
-                padding: EdgeInsets.all(2.5.sp),
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(width: 3, color: Colors.black)),
-                child: Center(
-                  child: Icon(
-                    state.isPlaying && state.path == audio.location
-                        ? Icons.pause_rounded
-                        : Icons.play_arrow_rounded,
-                    color: Colors.black,
-                    size: 11.sp,
+        if (audio.location != "no audio")
+          BlocBuilder<PlayerBloc, PlayerState>(
+            builder: (context, state) {
+              return GestureDetector(
+                onTap: () {
+                  context.read<PlayerBloc>().add(PlayPause(
+                        path: audio.location,
+                      ));
+                },
+                child: Container(
+                  padding: EdgeInsets.all(2.5.sp),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(width: 3, color: Colors.black)),
+                  child: Center(
+                    child: Icon(
+                      state.isPlaying && state.path == audio.location
+                          ? Icons.pause_rounded
+                          : Icons.play_arrow_rounded,
+                      color: Colors.black,
+                      size: 11.sp,
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
-        ),
-        TextButton(
-          child: Text(audio.name,
+              );
+            },
+          ),
+        if (audio.location == "no audio")
+          Text(audio.name,
               style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w700)),
-          onPressed: () {
-            context.read<PlayerBloc>().add(PlayPause(
-                  path: audio.location,
-                ));
-          },
-        ),
+        if (audio.location != "no audio")
+          TextButton(
+            child: Text(audio.name,
+                style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w700)),
+            onPressed: () {
+              context.read<PlayerBloc>().add(PlayPause(
+                    path: audio.location,
+                  ));
+            },
+          ),
       ],
     );
   }

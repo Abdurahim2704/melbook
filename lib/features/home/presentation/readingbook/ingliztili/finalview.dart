@@ -93,6 +93,18 @@ class _FinalViewState extends State<FinalView> {
                 ),
             ],
           );
+
+          //     PageView(
+          //   physics: PageScrollPhysics(),
+          //   children: <Widget>[
+          //     for (var i = 0; i < slices.length; i++)
+          //       IngliztiliReading(
+          //         slice: slices[i],
+          //         lastText: slices[i].lastText,
+          //         index: i,
+          //       ),
+          //   ],
+          // );
         },
       ),
     );

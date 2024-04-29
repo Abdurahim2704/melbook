@@ -26,41 +26,45 @@ class App extends StatelessWidget {
     ]);
     return ScreenUtilInit(
       designSize: const Size(800, 1280),
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => LocalStorageBloc()..add(GetAllAudios()),
-          ),
-          BlocProvider(
-            create: (context) => AuthBloc(),
-          ),
-          BlocProvider(
-            create: (context) => MainBloc(),
-          ),
-          BlocProvider(
-            create: (context) => BookBloc(),
-          ),
-          BlocProvider(
-            create: (context) => PaymentBloc(),
-          ),
-          BlocProvider(
-            create: (context) => PlayerBloc(),
-          )
-        ],
-        child: FutureBuilder<bool>(
-            future: LocalDBService.hasUser(),
-            initialData: false,
-            builder: (context, snapshot) {
-              return MaterialApp(
-                debugShowCheckedModeBanner: false,
-                home: showIntro
-                    ? const IntroScreen()
-                    : snapshot.data!
-                        ? const MainScreen()
-                        : const SignUp(),
-              );
-            }),
-      ),
+      minTextAdapt: true,
+      rebuildFactor: RebuildFactors.always,
+      builder: (context, child) {
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => LocalStorageBloc()..add(GetAllAudios()),
+            ),
+            BlocProvider(
+              create: (context) => AuthBloc(),
+            ),
+            BlocProvider(
+              create: (context) => MainBloc(),
+            ),
+            BlocProvider(
+              create: (context) => BookBloc(),
+            ),
+            BlocProvider(
+              create: (context) => PaymentBloc(),
+            ),
+            BlocProvider(
+              create: (context) => PlayerBloc(),
+            )
+          ],
+          child: FutureBuilder<bool>(
+              future: LocalDBService.hasUser(),
+              initialData: false,
+              builder: (context, snapshot) {
+                return MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  home: showIntro
+                      ? const IntroScreen()
+                      : snapshot.data!
+                          ? const MainScreen()
+                          : const SignUp(),
+                );
+              }),
+        );
+      },
     );
   }
 }

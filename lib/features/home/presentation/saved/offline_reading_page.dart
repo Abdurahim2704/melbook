@@ -1,122 +1,38 @@
-import 'dart:async';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:melbook/features/home/data/models/bookdata.dart';
-import 'package:melbook/features/home/presentation/bloc/book/book_bloc.dart';
+import 'package:melbook/features/home/data/models/local_book.dart';
 import 'package:melbook/features/home/presentation/bloc/local_storage/local_storage_bloc.dart';
-import 'package:melbook/features/home/presentation/bloc/payment_bloc/payment_bloc.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/finalview.dart';
 import 'package:melbook/features/home/presentation/views/books_description.dart';
-import 'package:melbook/features/home/presentation/views/click_sheet.dart';
-import 'package:melbook/features/home/presentation/views/download_icon.dart';
 
-import '../../../shared/widgets/custom_alert_dialog.dart';
+class OfflineReadingPage extends StatefulWidget {
+  final LocalBook book;
 
-class Ingliztilipage extends StatefulWidget {
-  final BookData book;
-
-  const Ingliztilipage({super.key, required this.book});
+  const OfflineReadingPage({super.key, required this.book});
 
   @override
-  State<Ingliztilipage> createState() => _IngliztilipageState();
+  State<OfflineReadingPage> createState() => _IngliztilipageState();
 }
 
-class _IngliztilipageState extends State<Ingliztilipage> {
+class _IngliztilipageState extends State<OfflineReadingPage> {
   final PageController _pageController = PageController();
 
   @override
   void dispose() {
     _pageController.dispose();
-    timer.cancel();
     super.dispose();
   }
 
-  late Timer timer;
-
   void _buyButton() {
-    if (widget.book.bought) {
-      print("I am here");
-      print(widget.book.audios!.length);
-      print(context.read<LocalStorageBloc>().state.audios);
-      if (context.read<LocalStorageBloc>().state.audios.length !=
-          widget.book.audios!.length) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Iltimos avval resurslarni yuklang")));
-        return;
-      }
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const FinalView(),
-        ),
-      );
-    } else {
-      showClickSheet(context, widget.book.id);
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    timer = Timer.periodic(const Duration(seconds: 3), (timer) async {
-      if (mounted && !widget.book.bought) {
-        context.read<PaymentBloc>().add(CheckPayment(times: timer.tick));
-      }
-    });
-    context.read<PaymentBloc>().stream.listen((event) {
-      if (event is PaymentSuccess) {
-        context.read<BookBloc>().add(GetAllBooks());
-        showDialog(
-          context: context,
-          builder: (context) {
-            return CustomAlertDialog(
-              displayText: "To'landi",
-              onPressed: () {
-                Navigator.popUntil(
-                  context,
-                  (route) => !Navigator.canPop(context),
-                );
-              },
-            );
-          },
-        );
-        timer.cancel();
-      } else if (event is PaymentCanceled) {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return CustomAlertDialog(
-              displayText: "To'lov bekor qilindi",
-              onPressed: () {
-                Navigator.popUntil(
-                  context,
-                  (route) => !Navigator.canPop(context),
-                );
-              },
-            );
-          },
-        );
-        timer.cancel();
-        return;
-      } else if (event is PaymentCreated) {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return CustomAlertDialog(
-              displayText: "To'lov so'rovi yuborildi! Clickni tekshiring",
-              onPressed: () {
-                Navigator.popUntil(
-                  context,
-                  (route) => !Navigator.canPop(context),
-                );
-              },
-            );
-          },
-        );
-      }
-    });
+    print("I am here");
+    print(widget.book.audios!.length);
+    print(context.read<LocalStorageBloc>().state.audios);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const FinalView(),
+      ),
+    );
   }
 
   @override
@@ -126,7 +42,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(height: 50),
+          SizedBox(height: 50),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: Row(
@@ -136,7 +52,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.arrow_back,
                     size: 35,
                   ),
@@ -157,10 +73,10 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                         GestureDetector(
                           onTap: _buyButton,
                           child: Hero(
-                            tag: widget.book.id,
-                            child: CachedNetworkImage(
+                            tag: widget.book.name,
+                            child: Image.asset(
+                              "assets/images/ingliztili.png",
                               width: 200,
-                              imageUrl: widget.book.photoUrl,
                             ),
                           ),
                         ),
@@ -171,14 +87,14 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                           children: [
                             Text(
                               widget.book.name,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 30,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
                             Text(
                               widget.book.author,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 22,
                               ),
                             ),
@@ -189,7 +105,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                 InkWell(
                                   onTap: _buyButton,
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(
+                                    padding: EdgeInsets.symmetric(
                                       horizontal: 45,
                                       vertical: 8,
                                     ),
@@ -199,9 +115,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                       borderRadius: BorderRadius.circular(70),
                                     ),
                                     child: Text(
-                                      widget.book.bought
-                                          ? "O'qish"
-                                          : "Sotib olish",
+                                      "O'qish",
                                       style: const TextStyle(
                                         fontSize: 25,
                                         fontWeight: FontWeight.bold,
@@ -212,15 +126,6 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                 ),
                                 SizedBox(
                                   width: 15,
-                                ),
-                                BlocBuilder<LocalStorageBloc,
-                                    LocalStorageState>(
-                                  builder: (context, state) {
-                                    print(widget.book.audios?.length);
-                                    return DownloadIcon(
-                                        book: widget.book,
-                                        audios: state.audios);
-                                  },
                                 ),
                                 const SizedBox(width: 18),
                                 BlocBuilder<LocalStorageBloc,
@@ -255,11 +160,5 @@ class _IngliztilipageState extends State<Ingliztilipage> {
         ],
       ),
     );
-  }
-
-  @override
-  void deactivate() {
-    super.deactivate();
-    timer.cancel();
   }
 }

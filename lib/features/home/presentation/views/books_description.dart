@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BookDescriptionContainer extends StatelessWidget {
   final String data;
@@ -13,8 +12,8 @@ class BookDescriptionContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 15.h),
-        margin:  EdgeInsets.symmetric(vertical: 15.h, horizontal: 15.w),
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        margin: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
@@ -22,7 +21,7 @@ class BookDescriptionContainer extends StatelessWidget {
         child: Text(
           data,
           style: TextStyle(
-            fontSize: 23.sp,
+            fontSize: 23,
             fontWeight: FontWeight.w500,
           ),
           textAlign: TextAlign.start,

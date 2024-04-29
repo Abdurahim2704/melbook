@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:melbook/features/home/presentation/bloc/main_bloc/main_bloc.dart';
 import 'package:melbook/features/home/presentation/profile/profile_creen.dart';
+import 'package:melbook/features/home/presentation/saved/saved_pages.dart';
 import 'package:melbook/features/home/presentation/views/my_bottom_item.dart';
 
 import 'home_screen.dart';
@@ -17,6 +18,7 @@ class _MainScreenState extends State<MainScreen> {
   List<String> items = [
     "assets/icons/ic_main.svg",
     "assets/icons/ic_profile.svg",
+    "assets/icons/ic_saved.svg"
   ];
   PageController pageController = PageController();
 
@@ -29,6 +31,7 @@ class _MainScreenState extends State<MainScreen> {
             tabs: [
               MyBottomItem(image: items[0], title: "Home"),
               MyBottomItem(image: items[1], title: "Profile"),
+              MyBottomItem(image: items[2], title: "Profile"),
             ],
             selectedIndex: state.currentIndex,
             onPress: (value) {
@@ -46,6 +49,7 @@ class _MainScreenState extends State<MainScreen> {
         children: const [
           HomePage1(),
           ProfileScreen(),
+          SavedPages(),
         ],
       ),
     );

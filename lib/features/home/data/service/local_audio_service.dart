@@ -109,6 +109,19 @@ class LocalAudio extends Equatable {
         .reduce((value, element) => element + value);
   }
 
+  Map<String, dynamic> toSql() {
+    final descriptionString = description.map((dialogPair) {
+      return '${dialogPair.line}\n${dialogPair.translation}';
+    }).join('\n');
+
+    return {
+      'name': name,
+      'location': location,
+      'book': book,
+      'description': descriptionString,
+    };
+  }
+
   @override
   List<Object?> get props => [name, location, book];
 
@@ -133,5 +146,12 @@ class DialogPairs {
   String toString() {
     return jsonEncode(
         {"line": line, "translation": translation, "points": points});
+  }
+
+  String toJson() {
+    return jsonEncode({
+      "line": line,
+      "translation": translation,
+    });
   }
 }
