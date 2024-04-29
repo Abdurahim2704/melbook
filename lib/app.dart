@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:melbook/features/audio/presentation/bloc/player/player_bloc.dart';
 import 'package:melbook/features/auth/data/service/local_service.dart';
 import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
@@ -25,47 +23,42 @@ class App extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return ScreenUtilInit(
-      designSize: const Size(800, 1280),
-      minTextAdapt: true,
-      rebuildFactor: RebuildFactors.always,
-      builder: (context, child) {
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (context) => LocalStorageBloc()..add(GetAllAudios()),
-            ),
-            BlocProvider(
-              create: (context) => AuthBloc(),
-            ),
-            BlocProvider(
-              create: (context) => MainBloc(),
-            ),
-            BlocProvider(
-              create: (context) => BookBloc(),
-            ),
-            BlocProvider(
-              create: (context) => PaymentBloc(),
-            ),
-            BlocProvider(
-              create: (context) => PlayerBloc(),
-            )
-          ],
-          child: FutureBuilder<bool>(
-              future: LocalDBService.hasUser(),
-              initialData: false,
-              builder: (context, snapshot) {
-                return GetMaterialApp(
-                  debugShowCheckedModeBanner: false,
-                  home: showIntro
-                      ? const IntroScreen()
-                      : snapshot.data!
-                          ? const MainScreen()
-                          : const SignUp(),
-                );
-              }),
-        );
-      },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+          LocalStorageBloc()
+            ..add(GetAllAudios()),
+        ),
+        BlocProvider(
+          create: (context) => AuthBloc(),
+        ),
+        BlocProvider(
+          create: (context) => MainBloc(),
+        ),
+        BlocProvider(
+          create: (context) => BookBloc(),
+        ),
+        BlocProvider(
+          create: (context) => PaymentBloc(),
+        ),
+        BlocProvider(
+          create: (context) => PlayerBloc(),
+        )
+      ],
+      child: FutureBuilder<bool>(
+          future: LocalDBService.hasUser(),
+          initialData: false,
+          builder: (context, snapshot) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: showIntro
+                  ? const IntroScreen()
+                  : snapshot.data!
+                  ? const MainScreen()
+                  : const SignUp(),
+            );
+          }),
     );
   }
 }

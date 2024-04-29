@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class MyBottomNavigation extends StatelessWidget {
@@ -23,7 +22,7 @@ class MyBottomNavigation extends StatelessWidget {
         decoration: const BoxDecoration(
           color: CupertinoColors.systemGroupedBackground,
         ),
-        height: 72.h,
+        height: 72,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 4),
           child: Row(
@@ -74,7 +73,7 @@ class TabItem extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 item.image,
-                height: 29.h,
+                height: 29,
                 colorFilter: ColorFilter.mode(
                   isSelected ? Colors.green : Colors.grey,
                   BlendMode.srcIn,
@@ -87,7 +86,7 @@ class TabItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: isSelected ? Colors.green : Colors.grey,
-                    fontSize: 15.sp,
+                    fontSize: 15,
                   ),
                   maxLines: 1,
                 ),

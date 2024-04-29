@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/home/data/models/local_book.dart';
 import 'package:melbook/features/home/presentation/saved/offline_reading_page.dart';
 
@@ -26,7 +25,7 @@ class OfflineBookTile extends StatelessWidget {
       },
       child: Container(
         clipBehavior: Clip.antiAlias,
-        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 18.h),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 18),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(16)),
           color: CupertinoColors.systemGroupedBackground,
@@ -40,31 +39,31 @@ class OfflineBookTile extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Image.asset(
                   "assets/images/ingliztili.png",
-                  height: 250.h,
+                  height: 250,
                 ),
               ),
             ),
-            SizedBox(width: 20.w),
+            const SizedBox(width: 20),
             Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 60.h),
+                  const SizedBox(height: 60),
                   Text(
                     book.name,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: Colors.orange.shade800,
-                      fontSize: 23.sp,
+                      fontSize: 23,
                     ),
                   ),
-                  SizedBox(height: 5.h),
-                  Text(
+                  const SizedBox(height: 5),
+                  const Text(
                     "O'qish",
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: 28.sp,
+                      fontSize: 28,
                       color: Colors.green,
                     ),
                   ),

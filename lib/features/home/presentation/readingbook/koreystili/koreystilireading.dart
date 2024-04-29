@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class KoreystiliReading extends StatefulWidget {
   final int page;
@@ -329,11 +328,6 @@ class _KoreystiliReadingState extends State<KoreystiliReading> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-      context,
-      designSize: const Size(360, 690),
-      minTextAdapt: true,
-    );
     if (widget.page < 0 || widget.page >= images.length) {
       return const Scaffold(
         backgroundColor: Colors.white,
@@ -351,10 +345,10 @@ class _KoreystiliReadingState extends State<KoreystiliReading> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: 32.h),
+              const SizedBox(height: 32),
               SizedBox(
-                height: 1.sh - 140.h,
-                width: 1.sw,
+                height: 140,
+                width: 1,
                 child: CachedNetworkImage(
                   imageUrl: images[widget.page],
                   fit: BoxFit.cover,

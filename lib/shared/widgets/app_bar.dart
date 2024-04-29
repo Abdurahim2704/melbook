@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String displayText;
@@ -19,15 +18,15 @@ class CustomAppBar extends StatelessWidget {
           bottomRight: Radius.circular(36),
         ),
       ),
-      height: 110.h,
+      height: 110,
       width: double.infinity,
       child: Center(
         child: Text(
           displayText,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.w600,
-            color: const Color(0xFF201A21),
-            fontSize: 30.sp,
+            color: Color(0xFF201A21),
+            fontSize: 30,
           ),
         ),
       ),

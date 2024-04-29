@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:melbook/features/auth/presentation/sign_up.dart';
 import 'package:melbook/features/home/presentation/bloc/book/book_bloc.dart';
@@ -39,7 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
-        preferredSize: Size(double.infinity, 90.h),
+        preferredSize: const Size(double.infinity, 90),
         child: Stack(
           children: [
             const CustomAppBar(
@@ -56,9 +55,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   );
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.edit,
-                  size: 31.sp,
+                  size: 31,
                 ),
               ),
             ),
@@ -73,11 +72,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         backgroundColor: Colors.white,
                         elevation: 0,
                         contentPadding: const EdgeInsets.all(60),
-                        title: Text(
+                        title: const Text(
                           "Tizimdan chiqishni xohlaysizmi ?",
                           style: TextStyle(
                             fontWeight: FontWeight.w400,
-                            fontSize: 28.sp,
+                            fontSize: 28,
                           ),
                         ),
                         actions: [
@@ -85,21 +84,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            child: Text(
+                            child: const Text(
                               "Yo'q",
                               style: TextStyle(
-                                fontSize: 21.sp,
+                                fontSize: 21,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
-                          SizedBox(width: 20.w),
+                          const SizedBox(width: 20),
                           TextButton(
                             onPressed: logOut,
-                            child: Text(
+                            child: const Text(
                               "Ha",
                               style: TextStyle(
-                                fontSize: 21.sp,
+                                fontSize: 21,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -109,9 +108,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     },
                   );
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.logout,
-                  size: 33.sp,
+                  size: 33,
                 ),
               ),
             ),
@@ -122,16 +121,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
         builder: (context, state) {
           return ListView(
             children: [
-              SizedBox(height: 20.h),
+              const SizedBox(height: 20),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SizedBox(width: 20.w),
+                  const SizedBox(width: 20),
                   TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor:
                           current == 0 ? Colors.black : Colors.transparent,
-                      padding: EdgeInsets.symmetric(horizontal: 90.w, vertical: 8.h),
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 90, vertical: 8),
                     ),
                     onPressed: () {
                       current = 0;
@@ -142,16 +142,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: TextStyle(
                         color: current == 0 ? Colors.white : Colors.black,
                         fontWeight: FontWeight.w500,
-                        fontSize: 20.sp,
+                        fontSize: 20,
                       ),
                     ),
                   ),
-                  SizedBox(width: 20.w),
+                  const SizedBox(width: 20),
                   TextButton(
                     style: TextButton.styleFrom(
                       backgroundColor:
                           current == 1 ? Colors.black : Colors.transparent,
-                      padding: EdgeInsets.symmetric(horizontal: 90.w, vertical: 8.h),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 90,
+                        vertical: 8,
+                      ),
                     ),
                     onPressed: () {
                       current = 1;
@@ -162,7 +165,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: TextStyle(
                         color: current == 1 ? Colors.white : Colors.black,
                         fontWeight: FontWeight.w500,
-                        fontSize: 20.sp,
+                        fontSize: 20,
                       ),
                     ),
                   ),
@@ -179,21 +182,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   title: Text(
                     titles[0],
-                    style:
-                        TextStyle(fontSize: 21.sp, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
                     state.user?.userName ?? "Unknown",
-                    style: TextStyle(
-                      fontSize: 18.sp,
+                    style: const TextStyle(
+                      fontSize: 18,
                     ),
                   ),
                 ),
                 const SizedBox(height: 10),
                 Container(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 10.h,
-                    horizontal: 18.w,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 18,
                   ),
                   decoration: BoxDecoration(
                     border: Border(
@@ -212,15 +214,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: [
                           Text(
                             titles[1],
-                            style: TextStyle(
-                              fontSize: 21.sp,
+                            style: const TextStyle(
+                              fontSize: 21,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
                             state.user?.name ?? "Unknown",
-                            style: TextStyle(
-                              fontSize: 18.sp,
+                            style: const TextStyle(
+                              fontSize: 18,
                             ),
                           ),
                         ],
@@ -231,14 +233,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: [
                           Text(
                             trailing[1],
-                            style: TextStyle(
-                              fontSize: 21.sp,
+                            style: const TextStyle(
+                              fontSize: 21,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
                             state.user?.name ?? "Unknown",
-                            style: TextStyle(fontSize: 18.sp),
+                            style: const TextStyle(fontSize: 18),
                           ),
                         ],
                       )
@@ -247,9 +249,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 const SizedBox(height: 10),
                 Container(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 10.h,
-                    horizontal: 18.w,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 18,
                   ),
                   decoration: BoxDecoration(
                     border: Border(
@@ -268,14 +270,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: [
                           Text(
                             titles[2],
-                            style: TextStyle(
-                              fontSize: 21.sp,
+                            style: const TextStyle(
+                              fontSize: 21,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
                             state.user?.phoneNumber ?? "Unknown",
-                            style: TextStyle(fontSize: 18.sp),
+                            style: const TextStyle(fontSize: 18),
                           ),
                         ],
                       ),
@@ -285,14 +287,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: [
                           Text(
                             trailing[2],
-                            style: TextStyle(
-                              fontSize: 21.sp,
+                            style: const TextStyle(
+                              fontSize: 21,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text(
+                          const Text(
                             "Click",
-                            style: TextStyle(fontSize: 18.sp),
+                            style: TextStyle(fontSize: 18),
                           ),
                         ],
                       )
@@ -312,14 +314,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       width: 1,
                     ),
                   ),
-                  title: Text(
+                  title: const Text(
                     "To'lov turi",
-                    style:
-                        TextStyle(fontSize: 21.sp, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
                   ),
-                  subtitle: Text(
+                  subtitle: const Text(
                     "Click",
-                    style: TextStyle(fontSize: 18.sp),
+                    style: TextStyle(fontSize: 18),
                   ),
                 ),
               if (current == 1)
@@ -329,10 +330,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "To'lovlar",
                         style: TextStyle(
-                          fontSize: 21.sp,
+                          fontSize: 21,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -353,13 +354,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 children: [
                                   Text(
                                     book.name,
-                                    style:
-                                        TextStyle(fontSize: 19.sp, height: 2),
+                                    style: const TextStyle(fontSize: 19, height: 2),
                                   ),
                                   Text(
                                     "${book.price} so'm",
-                                    style:
-                                        TextStyle(fontSize: 18.sp, height: 2),
+                                    style: const TextStyle(fontSize: 18, height: 2),
                                   ),
                                 ],
                               );

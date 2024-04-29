@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PrimaryYellowElevatedButton extends StatelessWidget {
   final String displayText;
@@ -17,14 +16,14 @@ class PrimaryYellowElevatedButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         elevation: 0,
         shadowColor: Colors.transparent,
-        fixedSize: Size(350.w, 50.h),
+        fixedSize: Size(350, 50),
         backgroundColor: const Color(0xFFF6BE07),
       ),
       onPressed: onPressed,
       child: Text(
         displayText,
-        style: TextStyle(
-          fontSize: 17.sp,
+        style: const TextStyle(
+          fontSize: 17,
           fontWeight: FontWeight.w500,
           color: Colors.white,
         ),

@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RustiliReading extends StatefulWidget {
   final int page;
+
   const RustiliReading({super.key, required this.page});
 
   @override
@@ -310,14 +310,10 @@ class _RustiliReadingState extends State<RustiliReading> {
     'https://i.ibb.co/6RLCdkh/Mel-Book-Rus-tili-A5-page-0252.jpg',
     'https://i.ibb.co/4NRCvVh/Mel-Book-Rus-tili-A5-page-0286.jpg',
   ];
+
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-      context,
-      designSize: const Size(360, 690),
-      minTextAdapt: true,
-    );
-    if (widget.page < 0 || widget.page >= images.length){
+    if (widget.page < 0 || widget.page >= images.length) {
       return const Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
@@ -334,15 +330,17 @@ class _RustiliReadingState extends State<RustiliReading> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: 32.h),
+              const SizedBox(height: 32),
               SizedBox(
-                height: 1.sh - 140.h,
-                width: 1.sw,
+                height: 140,
+                width: 1,
                 child: CachedNetworkImage(
                   imageUrl: images[widget.page],
                   fit: BoxFit.cover,
-                  placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) => const Center(child: Icon(Icons.error)),
+                  placeholder: (context, url) =>
+                      const Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) =>
+                      const Center(child: Icon(Icons.error)),
                 ),
               )
             ],
