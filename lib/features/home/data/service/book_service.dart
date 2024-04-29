@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:melbook/config/core/constants/app_constants.dart';
@@ -15,28 +14,25 @@ class BookService {
     String domain = AppConstants.baseUrl,
     String endpoint = AppConstants.apiGetAllBooks,
   }) async {
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {}
-    } on SocketException catch (_) {
-      return const [];
-    }
-
     final token = getIt<AuthRepository>().token;
-    final response = await http.get(Uri.parse("$domain$endpoint"), headers: {
-      "Content-Type": "application/json",
-      'Authorization': 'Bearer $token',
-    });
-    if (response.statusCode == 401) {
-      throw ExpiredTokenException();
-    }
-    if (response.statusCode == 200 || response.statusCode == 201) {
-      final List<dynamic> jsonList = json.decode(response.body)['data'];
-      final List<BookData> books =
-          jsonList.map((json) => BookData.fromJson(json)).toList();
-      return books;
-    } else {
-      throw Exception('Failed to fetch books: ${response.statusCode}');
+    try {
+      final response = await http.get(Uri.parse("$domain$endpoint"), headers: {
+        "Content-Type": "application/json",
+        'Authorization': 'Bearer $token',
+      });
+      if (response.statusCode == 401) {
+        throw ExpiredTokenException();
+      }
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final List<dynamic> jsonList = json.decode(response.body)['data'];
+        final List<BookData> books =
+            jsonList.map((json) => BookData.fromJson(json)).toList();
+        return books;
+      } else {
+        throw Exception('Failed to fetch books: ${response.statusCode}');
+      }
+    } catch (e) {
+      return [];
     }
   }
 

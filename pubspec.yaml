@@ -37,6 +37,10 @@ dependencies:
   page_flip: ^0.2.3
   device_preview: ^1.1.0
   mask_text_input_formatter: ^2.9.0
+  device_info: ^2.0.3
+  connectivity_plus: ^6.0.3
+  get: ^4.6.6
+  internet_connection_checker: ^1.0.0+1
 #splash screen ning parametrlari
 flutter_native_splash:
   android: true

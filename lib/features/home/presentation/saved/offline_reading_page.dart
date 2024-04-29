@@ -52,7 +52,7 @@ class _IngliztilipageState extends State<OfflineReadingPage> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back,
                     size: 35,
                   ),
@@ -105,7 +105,7 @@ class _IngliztilipageState extends State<OfflineReadingPage> {
                                 InkWell(
                                   onTap: _buyButton,
                                   child: Container(
-                                    padding: EdgeInsets.symmetric(
+                                    padding: const EdgeInsets.symmetric(
                                       horizontal: 45,
                                       vertical: 8,
                                     ),
@@ -114,9 +114,9 @@ class _IngliztilipageState extends State<OfflineReadingPage> {
                                       color: Colors.amber,
                                       borderRadius: BorderRadius.circular(70),
                                     ),
-                                    child: Text(
+                                    child: const Text(
                                       "O'qish",
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 25,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,

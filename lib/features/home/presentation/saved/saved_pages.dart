@@ -24,7 +24,7 @@ class SavedPageState extends State<SavedPages> {
             future: LocalDBService.getUsername(),
             builder: (context, snapshot) {
               return CustomAppBar(
-                displayText: "Xush kelibsiz, ${snapshot.data ?? ""}",
+                displayText: "Saqlangan kitoblar",
               );
             }),
       ),
