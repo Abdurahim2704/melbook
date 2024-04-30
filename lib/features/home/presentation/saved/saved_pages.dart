@@ -15,15 +15,16 @@ class SavedPages extends StatefulWidget {
 class SavedPageState extends State<SavedPages> {
   @override
   Widget build(BuildContext context) {
+    final w = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
-        preferredSize: Size(double.infinity, 90),
+        preferredSize: const Size(double.infinity, 90),
         child: FutureBuilder<String?>(
             future: LocalDBService.getUsername(),
             builder: (context, snapshot) {
-              return CustomAppBar(
+              return const CustomAppBar(
                 displayText: "Saqlangan kitoblar",
               );
             }),
@@ -31,7 +32,7 @@ class SavedPageState extends State<SavedPages> {
       body: BlocBuilder<LocalStorageBloc, LocalStorageState>(
         builder: (context, state) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            padding: EdgeInsets.symmetric(horizontal: w * 0.02),
             child: Column(
               children: [
                 const SizedBox(height: 20),

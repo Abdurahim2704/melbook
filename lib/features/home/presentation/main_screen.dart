@@ -31,7 +31,7 @@ class _MainScreenState extends State<MainScreen> {
             tabs: [
               MyBottomItem(image: items[0], title: "Home"),
               MyBottomItem(image: items[1], title: "Profile"),
-              MyBottomItem(image: items[2], title: "Profile"),
+              MyBottomItem(image: items[2], title: "Saved"),
             ],
             selectedIndex: state.currentIndex,
             onPress: (value) {
