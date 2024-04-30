@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:melbook/features/home/data/service/last_read.dart';
 import 'package:melbook/features/home/data/service/local_audio_service.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/dialog_maker.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/lesson_widget.dart';
@@ -19,6 +20,8 @@ class IngliztiliReading extends StatefulWidget {
 }
 
 class _IngliztiliReadingState extends State<IngliztiliReading> {
+  final double horPadding = 30;
+
   @override
   void initState() {
     // print(widget.slice.audios
@@ -30,20 +33,17 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
     //         0) +
     //     (widget.slice.lastAudio?.pointCount() ?? 0));
     print(widget.index);
-
+    Preferences().saveLastRead(0, widget.index);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final w = MediaQuery.sizeOf(context).width;
-    final h = MediaQuery.sizeOf(context).height;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: w * 0.03, vertical: h * 0.01),
+          padding: EdgeInsets.symmetric(horizontal: horPadding),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -58,8 +58,7 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
                     final audio = widget.slice.audios[index];
                     return LessonWidget(audio: audio);
                   },
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 10),
+                  separatorBuilder: (context, index) => const SizedBox(height: 5),
                   itemCount: widget.slice.audios.length,
                 ),
                 widget.slice.lastAudio != null

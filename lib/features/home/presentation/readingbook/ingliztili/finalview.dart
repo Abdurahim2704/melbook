@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:melbook/features/home/data/service/last_read.dart';
 import 'package:melbook/features/home/data/service/local_audio_service.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/englishreading.dart';
 import 'package:page_flip/page_flip.dart';
@@ -70,7 +71,7 @@ class _FinalViewState extends State<FinalView> {
           print(slices.length);
           return PageFlipWidget(
             key: _controller,
-            initialIndex: 0,
+            initialIndex:Preferences().getLastReadBet(),
             lastPage: Container(
               color: Colors.white,
               child: const Center(
