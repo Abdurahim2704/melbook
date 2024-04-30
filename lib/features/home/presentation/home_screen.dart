@@ -33,41 +33,50 @@ class _HomePage1State extends State<HomePage1> {
   Widget build(BuildContext context) {
     final w = MediaQuery.sizeOf(context).width;
     final h = MediaQuery.sizeOf(context).height;
-    return Scaffold(
-      backgroundColor: Colors.white,
-      extendBodyBehindAppBar: true,
-      appBar: PreferredSize(
-        preferredSize: Size(double.infinity, h * 0.09),
-        child: CustomAppBar(
-          displayText:
-              "Xush kelibsiz, ${getIt<AuthRepository>().user?.userName ?? ""}",
+    return RefreshIndicator(
+      onRefresh: () async {
+        context.read<BookBloc>().add(GetAllBooks());
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        extendBodyBehindAppBar: true,
+        appBar: PreferredSize(
+          preferredSize: Size(double.infinity, h * 0.09),
+          child: CustomAppBar(
+            displayText:
+                "Xush kelibsiz, ${getIt<AuthRepository>().user?.userName ?? ""}",
+          ),
         ),
-      ),
-      body: BlocBuilder<BookBloc, BookState>(
-        builder: (context, state) {
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: w * 0.02),
-            child: Column(
-              children: [
-                SizedBox(height: h * 0.023),
-                ListView.separated(
-                  itemBuilder: (context, index) {
-                    final book = state.books[index];
-                    return BookTile(
-                      book: book,
-                      imagePath: state.books[index].photoUrl,
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(height: 15);
-                  },
-                  itemCount: state.books.length,
-                  shrinkWrap: true,
-                ),
-              ],
-            ),
-          );
-        },
+        body: BlocBuilder<BookBloc, BookState>(
+          builder: (context, state) {
+            return state is BookLoading
+                ? const Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  )
+                : Padding(
+                    padding: EdgeInsets.symmetric(horizontal: w * 0.02),
+                    child: Column(
+                      children: [
+                        SizedBox(height: h * 0.023),
+                        ListView.separated(
+                          itemBuilder: (context, index) {
+                            final book = state.books[index];
+                            return BookTile(
+                              book: book,
+                              imagePath: state.books[index].photoUrl,
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(height: 15);
+                          },
+                          itemCount: state.books.length,
+                          shrinkWrap: true,
+                        ),
+                      ],
+                    ),
+                  );
+          },
+        ),
       ),
     );
   }

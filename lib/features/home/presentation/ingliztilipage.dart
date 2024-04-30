@@ -237,10 +237,10 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                       LocalStorageState>(
                                     builder: (context, state) {
                                       if (state is Progress) {
-                                        return Text(
-                                          (state.progress /
-                                                  widget.book.audios!.length)
-                                              .toString(),
+                                        return CircularProgressIndicator(
+                                          value: (state.progress /
+                                              widget.book.audios!.length),
+                                          color: Colors.amber,
                                         );
                                       }
                                       return const SizedBox.shrink();

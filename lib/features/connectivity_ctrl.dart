@@ -24,7 +24,7 @@ class ConnectivityController extends GetxController {
             "You are offline",
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
-          duration: const Duration(seconds: 30));
+          duration: const Duration(seconds: 10));
       Navigator.pushReplacement(
           Get.context!,
           MaterialPageRoute(
