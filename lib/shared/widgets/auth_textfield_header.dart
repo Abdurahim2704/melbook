@@ -6,7 +6,7 @@ Text buildTextFieldHeaderText(String text) {
     style: const TextStyle(
       fontWeight: FontWeight.w600,
       color: Color(0xFF201A21),
-      fontSize: 18,
+      fontSize: 22,
     ),
   );
 }

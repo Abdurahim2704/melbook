@@ -32,6 +32,8 @@ class AuthTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final w = MediaQuery.sizeOf(context).width;
+    final h = MediaQuery.sizeOf(context).height;
     return TextField(
       controller: controller,
       textInputAction: textInputAction,
@@ -46,8 +48,8 @@ class AuthTextField extends StatelessWidget {
         prefixStyle: style,
         prefixText: text,
         contentPadding: EdgeInsets.symmetric(
-          horizontal: 24,
-          vertical: 17,
+          horizontal: w * 0.057,
+          vertical: h * 0.018,
         ),
         suffixIcon: suffixIcon,
         filled: true,
@@ -80,10 +82,10 @@ class AuthTextField extends StatelessWidget {
           borderSide: BorderSide(color: Color(0xFFFF0000)),
         ),
         hintText: hinText,
-        hintStyle: TextStyle(
+        hintStyle: const TextStyle(
           fontWeight: FontWeight.w400,
-          fontSize: 18,
-          color: const Color(0xFFA4A3A4),
+          fontSize: 20,
+          color: Color(0xFFA4A3A4),
         ),
       ),
     );

@@ -41,6 +41,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
 
   @override
   Widget build(BuildContext context) {
+    final w = MediaQuery.sizeOf(context).width;
+    final h = MediaQuery.sizeOf(context).height;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size(double.infinity, 80),
@@ -137,6 +139,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   const SizedBox(height: 30),
                   Center(
                     child: PrimaryYellowElevatedButton(
+                      // width: w * 0.9,
+                      // height: h * 0.045,
                       displayText: "Saqlash",
                       onPressed: () {
                         if (confirmPasswordCtrl.text == passwordCtrl.text) {

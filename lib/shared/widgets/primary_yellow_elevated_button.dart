@@ -12,18 +12,20 @@ class PrimaryYellowElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final w = MediaQuery.sizeOf(context).width;
+    final h = MediaQuery.sizeOf(context).height;
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         elevation: 0,
         shadowColor: Colors.transparent,
-        fixedSize: Size(350, 50),
+        fixedSize: Size(w * 0.9, h * 0.045),
         backgroundColor: const Color(0xFFF6BE07),
       ),
       onPressed: onPressed,
       child: Text(
         displayText,
         style: const TextStyle(
-          fontSize: 17,
+          fontSize: 22,
           fontWeight: FontWeight.w500,
           color: Colors.white,
         ),
