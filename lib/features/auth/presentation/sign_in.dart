@@ -40,6 +40,8 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
+    final w = MediaQuery.sizeOf(context).width;
+    final h = MediaQuery.sizeOf(context).height;
     return Scaffold(
       appBar: const PreferredSize(
         preferredSize: Size(double.infinity, 90),
@@ -54,11 +56,11 @@ class _SignInState extends State<SignIn> {
             const SizedBox(height: 30),
 
             /// #Header Logo
-            const Center(
+             Center(
               child: Image(
-                image: AssetImage("assets/images/img_logo_melbook.png"),
-                width: 165,
-                height: 50,
+                image: const AssetImage("assets/images/img_logo_melbook.png"),
+                width: w * 0.5,
+                height: h * 0.05,
               ),
             ),
             const SizedBox(height: 40),

@@ -35,6 +35,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final w = MediaQuery.sizeOf(context).width;
+    final h = MediaQuery.sizeOf(context).height;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -121,7 +123,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         builder: (context, state) {
           return ListView(
             children: [
-              const SizedBox(height: 20),
+              SizedBox(height: h * 0.02),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -130,8 +132,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     style: TextButton.styleFrom(
                       backgroundColor:
                           current == 0 ? Colors.black : Colors.transparent,
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 90, vertical: 8),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: w * 0.12,
+                        vertical: 8,
+                      ),
                     ),
                     onPressed: () {
                       current = 0;
@@ -142,7 +146,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: TextStyle(
                         color: current == 0 ? Colors.white : Colors.black,
                         fontWeight: FontWeight.w500,
-                        fontSize: 20,
+                        fontSize: 23,
                       ),
                     ),
                   ),
@@ -151,8 +155,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     style: TextButton.styleFrom(
                       backgroundColor:
                           current == 1 ? Colors.black : Colors.transparent,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 90,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: w * 0.12,
                         vertical: 8,
                       ),
                     ),
@@ -165,7 +169,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: TextStyle(
                         color: current == 1 ? Colors.white : Colors.black,
                         fontWeight: FontWeight.w500,
-                        fontSize: 20,
+                        fontSize: 23,
                       ),
                     ),
                   ),
@@ -182,12 +186,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   title: Text(
                     titles[0],
-                    style: const TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                      fontSize: 23,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   subtitle: Text(
                     state.user?.userName ?? "Unknown",
                     style: const TextStyle(
-                      fontSize: 18,
+                      fontSize: 20,
                     ),
                   ),
                 ),
@@ -215,14 +222,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Text(
                             titles[1],
                             style: const TextStyle(
-                              fontSize: 21,
+                              fontSize: 23,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
                             state.user?.name ?? "Unknown",
                             style: const TextStyle(
-                              fontSize: 18,
+                              fontSize: 20,
                             ),
                           ),
                         ],
@@ -234,13 +241,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Text(
                             trailing[1],
                             style: const TextStyle(
-                              fontSize: 21,
+                              fontSize: 23,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
                             state.user?.name ?? "Unknown",
-                            style: const TextStyle(fontSize: 18),
+                            style: const TextStyle(fontSize: 20),
                           ),
                         ],
                       )
@@ -271,13 +278,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Text(
                             titles[2],
                             style: const TextStyle(
-                              fontSize: 21,
+                              fontSize: 23,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
                             state.user?.phoneNumber ?? "Unknown",
-                            style: const TextStyle(fontSize: 18),
+                            style: const TextStyle(fontSize: 20),
                           ),
                         ],
                       ),
@@ -288,13 +295,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Text(
                             trailing[2],
                             style: const TextStyle(
-                              fontSize: 21,
+                              fontSize: 23,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           const Text(
                             "Click",
-                            style: TextStyle(fontSize: 18),
+                            style: TextStyle(fontSize: 20),
                           ),
                         ],
                       )
@@ -316,11 +323,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   title: const Text(
                     "To'lov turi",
-                    style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
                   ),
                   subtitle: const Text(
                     "Click",
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: 20),
                   ),
                 ),
               if (current == 1)
@@ -333,7 +340,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       const Text(
                         "To'lovlar",
                         style: TextStyle(
-                          fontSize: 21,
+                          fontSize: 23,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -354,11 +361,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 children: [
                                   Text(
                                     book.name,
-                                    style: const TextStyle(fontSize: 19, height: 2),
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      height: 2,
+                                    ),
                                   ),
                                   Text(
                                     "${book.price} so'm",
-                                    style: const TextStyle(fontSize: 18, height: 2),
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      height: 2,
+                                    ),
                                   ),
                                 ],
                               );
