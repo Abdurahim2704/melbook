@@ -136,6 +136,9 @@ class AuthService extends AuthRepository {
     if (data.statusCode == 400 || data.statusCode == 404) {
       return DataFailure(message: jsonDecode(data.body)["message"]);
     }
+    if (data.statusCode == 500) {
+      return DataFailure(message: jsonDecode(data.body)["message"]);
+    }
     _token = jsonDecode(data.body)["data"]["token"];
     final user = User.fromJson((jsonDecode(data.body)
         as Map<String, dynamic>)["data"]["user"] as Map<String, Object?>);

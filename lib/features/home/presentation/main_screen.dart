@@ -5,6 +5,7 @@ import 'package:melbook/features/home/presentation/profile/profile_creen.dart';
 import 'package:melbook/features/home/presentation/saved/saved_pages.dart';
 import 'package:melbook/features/home/presentation/views/my_bottom_item.dart';
 
+import 'bloc/book/book_bloc.dart';
 import 'home_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -21,6 +22,12 @@ class _MainScreenState extends State<MainScreen> {
     "assets/icons/ic_saved.svg"
   ];
   PageController pageController = PageController();
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<BookBloc>().add(GetAllBooks());
+  }
 
   @override
   Widget build(BuildContext context) {

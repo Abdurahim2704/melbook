@@ -1,10 +1,11 @@
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../service/local_audio_service.dart';
 
-class LocalBook {
+class LocalBook extends Equatable {
   final String name;
   final List<LocalAudio> audios;
   final String description;
@@ -35,6 +36,9 @@ class LocalBook {
         description: json['description'],
         author: json['author'],
       );
+
+  @override
+  List<Object?> get props => [name, author, description];
 }
 
 class SqfliteService {
@@ -70,6 +74,10 @@ class SqfliteService {
   // Insert a LocalBook into the database
   Future<void> insertBook(LocalBook book) async {
     var dbClient = await db;
+    final books = await getBooks();
+    if (books.contains(book)) {
+      return;
+    }
     await dbClient.insert(
       'books',
       book.toJson(),
