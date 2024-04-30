@@ -19,8 +19,6 @@ class IngliztiliReading extends StatefulWidget {
 }
 
 class _IngliztiliReadingState extends State<IngliztiliReading> {
-  final double horPadding = 30;
-
   @override
   void initState() {
     // print(widget.slice.audios
@@ -38,11 +36,14 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
 
   @override
   Widget build(BuildContext context) {
+    final w = MediaQuery.sizeOf(context).width;
+    final h = MediaQuery.sizeOf(context).height;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: horPadding),
+          padding:
+              EdgeInsets.symmetric(horizontal: w * 0.03, vertical: h * 0.01),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -57,7 +58,8 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
                     final audio = widget.slice.audios[index];
                     return LessonWidget(audio: audio);
                   },
-                  separatorBuilder: (context, index) => const SizedBox(height: 5),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 10),
                   itemCount: widget.slice.audios.length,
                 ),
                 widget.slice.lastAudio != null
