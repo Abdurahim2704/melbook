@@ -20,25 +20,27 @@ class ConnectivityController extends GetxController {
     bool connection = await InternetConnectionChecker().hasConnection;
     if (result.first == ConnectivityResult.none) {
       Get.rawSnackbar(
-          messageText: const Text(
-            "You are offline",
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          ),
-          duration: Duration(days: 1));
+        messageText: const Text(
+          "You are offline",
+          style: TextStyle(color: Colors.white, fontSize: 20),
+        ),
+        duration: const Duration(days: 1),
+      );
       Navigator.pushReplacement(
           Get.context!,
           MaterialPageRoute(
-            builder: (context) => SavedPages(),
+            builder: (context) => const SavedPages(),
           ));
     } else {
       if (Get.isSnackbarOpen && connection) {
         await Get.closeCurrentSnackbar();
-        Get.rawSnackbar(messageText: Text("You are online"));
+        Get.rawSnackbar(messageText: const Text("You are online"));
         Navigator.push(
-            Get.context!,
-            MaterialPageRoute(
-              builder: (context) => MainScreen(),
-            ));
+          Get.context!,
+          MaterialPageRoute(
+            builder: (context) => const MainScreen(),
+          ),
+        );
       }
     }
   }
