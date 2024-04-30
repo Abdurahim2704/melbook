@@ -37,7 +37,6 @@ class _IngliztilipageState extends State<Ingliztilipage> {
 
   void _buyButton() {
     if (widget.book.bought) {
-      print("I am here");
       print(widget.book.audios!.length);
       print(context.read<LocalStorageBloc>().state.audios);
       if (context.read<LocalStorageBloc>().state.audios.length !=
@@ -216,10 +215,16 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                 BlocBuilder<LocalStorageBloc,
                                     LocalStorageState>(
                                   builder: (context, state) {
-                                    print(widget.book.audios?.length);
+                                    final books = state.books.where((element) =>
+                                        widget.book.name == element.name);
+                                    if (books.isEmpty) {
+                                      return DownloadIcon(
+                                          book: widget.book, localBook: null);
+                                    }
+                                    print(state.books.length);
                                     return DownloadIcon(
                                         book: widget.book,
-                                        audios: state.audios);
+                                        localBook: books.first);
                                   },
                                 ),
                                 const SizedBox(width: 18),
@@ -227,9 +232,11 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                     LocalStorageState>(
                                   builder: (context, state) {
                                     if (state is Progress) {
-                                      return Text((state.progress /
-                                              widget.book.audios!.length)
-                                          .toString());
+                                      return CircularProgressIndicator(
+                                        value: state.progress /
+                                            widget.book.audios!.length,
+                                        color: Colors.amber,
+                                      );
                                     }
                                     return const SizedBox.shrink();
                                   },

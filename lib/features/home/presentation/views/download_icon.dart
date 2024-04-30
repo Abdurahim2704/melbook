@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
+import 'package:melbook/features/home/data/models/local_book.dart';
 
-import '../../data/service/local_audio_service.dart';
 import '../bloc/local_storage/local_storage_bloc.dart';
 
 class DownloadIcon extends StatelessWidget {
   final BookData book;
-  final List<LocalAudio> audios;
+  final LocalBook? localBook;
 
-  const DownloadIcon({super.key, required this.book, required this.audios});
+  const DownloadIcon({super.key, required this.book, required this.localBook});
 
   @override
   Widget build(BuildContext context) {
+    print(localBook?.audios.length);
+    print("books");
+    print(book.audios?.length);
     return InkWell(
       onTap: () {
-        if (audios.length != (book.audios ?? []).length) {
+        if (localBook?.audios.length != (book.audios ?? []).length) {
           context.read<LocalStorageBloc>().add(
                 DownloadAllAudios(
                   audios: book.audios ?? [],
@@ -38,7 +41,7 @@ class DownloadIcon extends StatelessWidget {
           shape: BoxShape.circle,
         ),
         child: Icon(
-          audios.length == (book.audios ?? []).length
+          localBook?.audios.length == (book.audios ?? []).length
               ? Icons.check
               : Icons.download,
           color: Colors.white,

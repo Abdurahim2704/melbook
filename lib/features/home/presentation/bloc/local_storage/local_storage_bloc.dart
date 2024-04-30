@@ -36,7 +36,6 @@ class LocalStorageBloc extends Bloc<LocalStorageEvent, LocalStorageState> {
 
   Future<void> _getAllAudios(
       GetAllAudios event, Emitter<LocalStorageState> emit) async {
-    print("I am here you dumpass");
     final service = await LocalAudioService.getAudios();
     final audios = service.where((element) {
       if (element.location == "no audio") {

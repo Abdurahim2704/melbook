@@ -24,20 +24,25 @@ class ConnectivityController extends GetxController {
             "You are offline",
             style: TextStyle(color: Colors.white, fontSize: 20),
           ),
-          duration: Duration(days: 1));
+          duration: const Duration(seconds: 30));
       Navigator.pushReplacement(
           Get.context!,
           MaterialPageRoute(
-            builder: (context) => SavedPages(),
+            builder: (context) => const SavedPages(),
           ));
     } else {
       if (Get.isSnackbarOpen && connection) {
         await Get.closeCurrentSnackbar();
-        Get.rawSnackbar(messageText: Text("You are online"));
+        Get.rawSnackbar(
+            messageText: const Text(
+          "You are online",
+          style: TextStyle(fontSize: 20, color: Colors.white),
+        ));
+
         Navigator.push(
             Get.context!,
             MaterialPageRoute(
-              builder: (context) => MainScreen(),
+              builder: (context) => const MainScreen(),
             ));
       }
     }
