@@ -25,15 +25,20 @@ class _DialogMakerState extends State<DialogMaker> {
             );
     }
     return Text.rich(
-        TextSpan(style: TextStyle(fontSize: 25, color: color), children: [
       TextSpan(
-        text: "${textParts.first}: ",
-        style: const TextStyle(fontWeight: FontWeight.w800),
+        style: TextStyle(fontSize: 25, color: color),
+        children: [
+          TextSpan(
+            text: "${textParts.first}: ",
+            style: const TextStyle(fontWeight: FontWeight.w800),
+          ),
+          TextSpan(
+            text: textParts.last,
+            style: const TextStyle(fontWeight: FontWeight.w400),
+          ),
+        ],
       ),
-      TextSpan(
-          text: textParts.last,
-          style: const TextStyle(fontWeight: FontWeight.w400)),
-    ]));
+    );
   }
 
   @override

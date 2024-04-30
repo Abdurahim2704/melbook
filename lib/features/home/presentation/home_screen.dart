@@ -31,11 +31,13 @@ class _HomePage1State extends State<HomePage1> {
 
   @override
   Widget build(BuildContext context) {
+    final w = MediaQuery.sizeOf(context).width;
+    final h = MediaQuery.sizeOf(context).height;
     return Scaffold(
       backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
-        preferredSize: Size(double.infinity, 90),
+        preferredSize: Size(double.infinity, h * 0.09),
         child: CustomAppBar(
           displayText:
               "Xush kelibsiz, ${getIt<AuthRepository>().user?.userName ?? ""}",
@@ -44,10 +46,10 @@ class _HomePage1State extends State<HomePage1> {
       body: BlocBuilder<BookBloc, BookState>(
         builder: (context, state) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            padding: EdgeInsets.symmetric(horizontal: w * 0.02),
             child: Column(
               children: [
-                SizedBox(height: 20),
+                SizedBox(height: h * 0.023),
                 ListView.separated(
                   itemBuilder: (context, index) {
                     final book = state.books[index];
@@ -57,7 +59,7 @@ class _HomePage1State extends State<HomePage1> {
                     );
                   },
                   separatorBuilder: (context, index) {
-                    return SizedBox(height: 15);
+                    return const SizedBox(height: 15);
                   },
                   itemCount: state.books.length,
                   shrinkWrap: true,

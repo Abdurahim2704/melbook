@@ -121,14 +121,16 @@ class _IngliztilipageState extends State<Ingliztilipage> {
 
   @override
   Widget build(BuildContext context) {
+    final w = MediaQuery.sizeOf(context).width;
+    final h = MediaQuery.sizeOf(context).height;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const SizedBox(height: 50),
+          SizedBox(height: h * 0.06),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            padding: EdgeInsets.symmetric(horizontal: w * 0.01),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -141,6 +143,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                     size: 35,
                   ),
                 ),
+                SizedBox(width: w * 0.02),
                 Expanded(
                   child: Container(
                     decoration: const BoxDecoration(
@@ -159,12 +162,12 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                           child: Hero(
                             tag: widget.book.id,
                             child: CachedNetworkImage(
-                              width: 200,
+                              width: w * 0.24,
                               imageUrl: widget.book.photoUrl,
                             ),
                           ),
                         ),
-                        const SizedBox(width: 20),
+                        SizedBox(width: w * 0.04),
                         Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,9 +192,9 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                 InkWell(
                                   onTap: _buyButton,
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 45,
-                                      vertical: 8,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: w * 0.07,
+                                      vertical: 6,
                                     ),
                                     margin: const EdgeInsets.only(top: 10),
                                     decoration: BoxDecoration(
@@ -210,16 +213,15 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 15,
-                                ),
+                                const SizedBox(width: 15),
                                 BlocBuilder<LocalStorageBloc,
                                     LocalStorageState>(
                                   builder: (context, state) {
                                     print(widget.book.audios?.length);
                                     return DownloadIcon(
-                                        book: widget.book,
-                                        audios: state.audios);
+                                      book: widget.book,
+                                      audios: state.audios,
+                                    );
                                   },
                                 ),
                                 const SizedBox(width: 18),
@@ -227,9 +229,11 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                     LocalStorageState>(
                                   builder: (context, state) {
                                     if (state is Progress) {
-                                      return Text((state.progress /
-                                              widget.book.audios!.length)
-                                          .toString());
+                                      return Text(
+                                        (state.progress /
+                                                widget.book.audios!.length)
+                                            .toString(),
+                                      );
                                     }
                                     return const SizedBox.shrink();
                                   },

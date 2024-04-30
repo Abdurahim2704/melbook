@@ -11,6 +11,7 @@ class NamePlayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final h = MediaQuery.sizeOf(context).height;
     return Row(
       children: [
         if (audio.location != "no audio")
@@ -18,22 +19,23 @@ class NamePlayer extends StatelessWidget {
             builder: (context, state) {
               return GestureDetector(
                 onTap: () {
-                  context.read<PlayerBloc>().add(PlayPause(
-                        path: audio.location,
-                      ));
+                  context.read<PlayerBloc>().add(
+                        PlayPause(path: audio.location),
+                      );
                 },
                 child: Container(
-                  padding: const EdgeInsets.all(2.5),
+                  padding: const EdgeInsets.all(2),
                   decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(width: 3, color: Colors.black)),
+                    shape: BoxShape.circle,
+                    border: Border.all(width: 3, color: Colors.black),
+                  ),
                   child: Center(
                     child: Icon(
                       state.isPlaying && state.path == audio.location
                           ? Icons.pause_rounded
                           : Icons.play_arrow_rounded,
                       color: Colors.black,
-                      size: 11,
+                      size: h * 0.03,
                     ),
                   ),
                 ),
@@ -41,20 +43,25 @@ class NamePlayer extends StatelessWidget {
             },
           ),
         if (audio.location == "no audio")
-          Text(
-            audio.name,
-            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
-          ),
+        Text(
+          audio.name,
+          style: TextStyle(fontSize: h * 0.022, fontWeight: FontWeight.w700),
+        ),
         if (audio.location != "no audio")
           TextButton(
             child: Text(
               audio.name,
-              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
+              style: TextStyle(
+                fontSize: h * 0.022,
+                fontWeight: FontWeight.w700,
+              ),
             ),
             onPressed: () {
-              context.read<PlayerBloc>().add(PlayPause(
-                    path: audio.location,
-                  ));
+              context.read<PlayerBloc>().add(
+                    PlayPause(
+                      path: audio.location,
+                    ),
+                  );
             },
           ),
       ],

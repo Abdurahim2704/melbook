@@ -16,6 +16,8 @@ class BookTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final w = MediaQuery.sizeOf(context).width;
+    final h = MediaQuery.sizeOf(context).height;
     return InkWell(
       borderRadius: const BorderRadius.all(Radius.circular(16)),
       onTap: () {
@@ -28,7 +30,7 @@ class BookTile extends StatelessWidget {
       },
       child: Container(
         clipBehavior: Clip.antiAlias,
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 18),
+        padding: EdgeInsets.symmetric(horizontal: w * 0.01, vertical: h * 0.012),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(16)),
           color: CupertinoColors.systemGroupedBackground,
@@ -41,24 +43,24 @@ class BookTile extends StatelessWidget {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: CachedNetworkImage(
-                  height: 250,
+                  height: h * 0.18,
                   imageUrl: imagePath,
                 ),
               ),
             ),
-            const SizedBox(width: 20),
+             SizedBox(width: w * 0.055),
             Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 60),
+                  SizedBox(height: h * 0.05),
                   Text(
                     book.name,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: Colors.orange.shade800,
-                      fontSize: 23,
+                      fontSize: 26,
                     ),
                   ),
                   const SizedBox(height: 5),
@@ -66,7 +68,7 @@ class BookTile extends StatelessWidget {
                     book.bought ? "Sotib olingan" : "Sotib olinmagan",
                     style: const TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: 28,
+                      fontSize: 29,
                       color: Colors.green,
                     ),
                   ),
