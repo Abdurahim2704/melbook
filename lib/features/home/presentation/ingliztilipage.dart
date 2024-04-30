@@ -218,10 +218,17 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                   BlocBuilder<LocalStorageBloc,
                                       LocalStorageState>(
                                     builder: (context, state) {
-                                      print(widget.book.audios?.length);
+                                      final books = state.books.where(
+                                          (element) =>
+                                              widget.book.name == element.name);
+                                      if (books.isEmpty) {
+                                        return DownloadIcon(
+                                            book: widget.book, localBook: null);
+                                      }
+                                      print(state.books.length);
                                       return DownloadIcon(
                                         book: widget.book,
-                                        audios: state.audios,
+                                        localBook: state.books.first,
                                       );
                                     },
                                   ),
