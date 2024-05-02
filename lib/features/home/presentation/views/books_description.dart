@@ -20,7 +20,7 @@ class BookDescriptionContainer extends StatelessWidget {
       child: Text(
         data,
         style: const TextStyle(
-          fontSize: 24,
+          fontSize: 20,
           fontWeight: FontWeight.w500,
         ),
         textAlign: TextAlign.start,

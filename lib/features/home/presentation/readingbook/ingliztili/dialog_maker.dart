@@ -21,12 +21,12 @@ class _DialogMakerState extends State<DialogMaker> {
           ? const SizedBox.shrink()
           : Text(
               textParts.single,
-              style: TextStyle(fontSize: 25, color: color),
+              style: TextStyle(fontSize: 20, color: color),
             );
     }
     return Text.rich(
       TextSpan(
-        style: TextStyle(fontSize: 25, color: color),
+        style: TextStyle(fontSize: 20, color: color),
         children: [
           TextSpan(
             text: "${textParts.first}: ",

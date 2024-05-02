@@ -60,7 +60,7 @@ class BookTile extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: Colors.orange.shade800,
-                      fontSize: 26,
+                      fontSize: 20,
                     ),
                   ),
                   const SizedBox(height: 5),
@@ -68,7 +68,7 @@ class BookTile extends StatelessWidget {
                     book.bought ? "Sotib olingan" : "Sotib olinmagan",
                     style: const TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: 29,
+                      fontSize: 22,
                       color: Colors.green,
                     ),
                   ),

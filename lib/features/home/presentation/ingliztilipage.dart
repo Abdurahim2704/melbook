@@ -40,7 +40,10 @@ class _IngliztilipageState extends State<Ingliztilipage> {
       print("I am here");
       print(widget.book.audios!.length);
       print(context.read<LocalStorageBloc>().state.audios);
-      if (context.read<LocalStorageBloc>().state.audios.length !=
+      print("Local Audios:");
+      print(context.read<LocalStorageBloc>().state.audios.length);
+      print(widget.book.audios!.length);
+      if (context.read<LocalStorageBloc>().state.books.first.audios.length !=
           widget.book.audios!.length) {
         ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("Iltimos avval resurslarni yuklang")));
@@ -141,10 +144,10 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                     },
                     icon: const Icon(
                       Icons.arrow_back,
-                      size: 35,
+                      size: 31,
                     ),
                   ),
-                  SizedBox(width: w * 0.02),
+                  SizedBox(width: w * 0.01),
                   Expanded(
                     child: Container(
                       decoration: const BoxDecoration(
@@ -163,7 +166,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                             child: Hero(
                               tag: widget.book.id,
                               child: CachedNetworkImage(
-                                width: w * 0.24,
+                                width: w * 0.2,
                                 imageUrl: widget.book.photoUrl,
                               ),
                             ),
@@ -176,14 +179,14 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                               Text(
                                 widget.book.name,
                                 style: const TextStyle(
-                                  fontSize: 30,
+                                  fontSize: 22,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
                               Text(
                                 widget.book.author,
                                 style: const TextStyle(
-                                  fontSize: 22,
+                                  fontSize: 20,
                                 ),
                               ),
                               const SizedBox(height: 15),
@@ -195,7 +198,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                     child: Container(
                                       padding: EdgeInsets.symmetric(
                                         horizontal: w * 0.07,
-                                        vertical: 6,
+                                        vertical: h * 0.001,
                                       ),
                                       margin: const EdgeInsets.only(top: 10),
                                       decoration: BoxDecoration(
@@ -214,7 +217,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(width: 15),
+                                  const SizedBox(width: 12),
                                   BlocBuilder<LocalStorageBloc,
                                       LocalStorageState>(
                                     builder: (context, state) {
@@ -232,7 +235,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                       );
                                     },
                                   ),
-                                  const SizedBox(width: 18),
+                                  const SizedBox(width: 14),
                                   BlocBuilder<LocalStorageBloc,
                                       LocalStorageState>(
                                     builder: (context, state) {
