@@ -210,7 +210,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                             ? "O'qish"
                                             : "Sotib olish",
                                         style: const TextStyle(
-                                          fontSize: 25,
+                                          fontSize: 19,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
                                         ),
