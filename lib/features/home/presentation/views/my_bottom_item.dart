@@ -62,6 +62,7 @@ class TabItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return InkWell(
       borderRadius: BorderRadius.circular(10),
       onTap: () => onTap.call(index),
@@ -73,7 +74,7 @@ class TabItem extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 item.image,
-                height: 29,
+                height: height * 0.025,
                 colorFilter: ColorFilter.mode(
                   isSelected ? Colors.green : Colors.grey,
                   BlendMode.srcIn,
@@ -86,7 +87,7 @@ class TabItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: isSelected ? Colors.green : Colors.grey,
-                    fontSize: 15,
+                    fontSize: 14,
                   ),
                   maxLines: 1,
                 ),

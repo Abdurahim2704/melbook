@@ -18,61 +18,64 @@ class _LessonWidgetState extends State<LessonWidget> {
   @override
   Widget build(BuildContext context) {
     final h = MediaQuery.sizeOf(context).height;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Row(
-          children: [
-            BlocBuilder<PlayerBloc, PlayerState>(
-              builder: (context, state) {
-                return GestureDetector(
-                  onTap: () {
-                    context.read<PlayerBloc>().add(
-                          PlayPause(
-                            path: widget.audio.location,
-                          ),
-                        );
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(2),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(width: 3, color: Colors.black),
-                    ),
-                    child: Center(
-                      child: Icon(
-                        state.isPlaying && state.path == widget.audio.location
-                            ? Icons.pause_rounded
-                            : Icons.play_arrow_rounded,
-                        color: Colors.black,
-                        size: h * 0.03,
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Row(
+            children: [
+              BlocBuilder<PlayerBloc, PlayerState>(
+                builder: (context, state) {
+                  return GestureDetector(
+                    onTap: () {
+                      context.read<PlayerBloc>().add(
+                            PlayPause(
+                              path: widget.audio.location,
+                            ),
+                          );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(width: 3, color: Colors.black),
+                      ),
+                      child: Center(
+                        child: Icon(
+                          state.isPlaying && state.path == widget.audio.location
+                              ? Icons.pause_rounded
+                              : Icons.play_arrow_rounded,
+                          color: Colors.black,
+                          size: h * 0.03,
+                        ),
                       ),
                     ),
-                  ),
-                );
-              },
-            ),
-            const SizedBox(width: 5),
-            TextButton(
-              child: Text(
-                widget.audio.name,
-                style: TextStyle(
-                  fontSize: h * 0.022,
-                  fontWeight: FontWeight.w700,
-                ),
+                  );
+                },
               ),
-              onPressed: () {
-                context.read<PlayerBloc>().add(
-                      PlayPause(
-                        path: widget.audio.location,
-                      ),
-                    );
-              },
-            ),
-          ],
-        ),
-        DialogMaker(dialogs: widget.audio.description),
-      ],
+              const SizedBox(width: 5),
+              TextButton(
+                child: Text(
+                  widget.audio.name,
+                  style: TextStyle(
+                    fontSize: h * 0.022,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                onPressed: () {
+                  context.read<PlayerBloc>().add(
+                        PlayPause(
+                          path: widget.audio.location,
+                        ),
+                      );
+                },
+              ),
+            ],
+          ),
+          DialogMaker(dialogs: widget.audio.description),
+        ],
+      ),
     );
   }
 }
