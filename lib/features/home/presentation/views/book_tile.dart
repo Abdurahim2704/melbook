@@ -30,7 +30,7 @@ class BookTile extends StatelessWidget {
       },
       child: Container(
         clipBehavior: Clip.antiAlias,
-        padding: EdgeInsets.symmetric(horizontal: w * 0.01, vertical: h * 0.012),
+        padding: EdgeInsets.symmetric(horizontal: w * 0.01, vertical: h * 0.01),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(16)),
           color: CupertinoColors.systemGroupedBackground,
@@ -68,7 +68,7 @@ class BookTile extends StatelessWidget {
                     book.bought ? "Sotib olingan" : "Sotib olinmagan",
                     style: const TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: 22,
+                      fontSize: 21,
                       color: Colors.green,
                     ),
                   ),

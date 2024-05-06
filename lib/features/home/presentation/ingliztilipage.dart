@@ -142,9 +142,9 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.arrow_back,
-                      size: 31,
+                      size: h * 0.03,
                     ),
                   ),
                   SizedBox(width: w * 0.01),
@@ -178,19 +178,20 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                             children: [
                               Text(
                                 widget.book.name,
-                                style: const TextStyle(
-                                  fontSize: 22,
+                                style: TextStyle(
+                                  fontSize: w * 0.045,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
                               Text(
                                 widget.book.author,
-                                style: const TextStyle(
-                                  fontSize: 20,
+                                style: TextStyle(
+                                  fontSize: w * 0.035,
                                 ),
                               ),
                               const SizedBox(height: 15),
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   InkWell(
@@ -198,7 +199,7 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                     child: Container(
                                       padding: EdgeInsets.symmetric(
                                         horizontal: w * 0.07,
-                                        vertical: h * 0.001,
+                                        vertical: h * 0.007,
                                       ),
                                       margin: const EdgeInsets.only(top: 10),
                                       decoration: BoxDecoration(
@@ -222,11 +223,14 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                       LocalStorageState>(
                                     builder: (context, state) {
                                       final books = state.books.where(
-                                          (element) =>
-                                              widget.book.name == element.name);
+                                        (element) =>
+                                            widget.book.name == element.name,
+                                      );
                                       if (books.isEmpty) {
                                         return DownloadIcon(
-                                            book: widget.book, localBook: null);
+                                          book: widget.book,
+                                          localBook: null,
+                                        );
                                       }
                                       print(state.books.length);
                                       return DownloadIcon(
@@ -240,10 +244,15 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                       LocalStorageState>(
                                     builder: (context, state) {
                                       if (state is Progress) {
-                                        return CircularProgressIndicator(
-                                          value: (state.progress /
-                                              widget.book.audios!.length),
-                                          color: Colors.amber,
+                                        return Padding(
+                                          padding: const EdgeInsets.only(
+                                            top: 8.0,
+                                          ),
+                                          child: CircularProgressIndicator(
+                                            value: (state.progress /
+                                                widget.book.audios!.length),
+                                            color: Colors.amber,
+                                          ),
                                         );
                                       }
                                       return const SizedBox.shrink();

@@ -9,10 +9,17 @@ class DownloadIcon extends StatelessWidget {
   final BookData book;
   final LocalBook? localBook;
 
-  const DownloadIcon({super.key, required this.book, required this.localBook});
+  const DownloadIcon({
+    super.key,
+    required this.book,
+    required this.localBook,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final w = MediaQuery.sizeOf(context).width;
+    final h = MediaQuery.sizeOf(context).height;
+
     print(localBook?.audios.length);
     print("books");
     print(book.audios?.length);
@@ -34,7 +41,6 @@ class DownloadIcon extends StatelessWidget {
         }
       },
       child: Container(
-        margin: const EdgeInsets.only(top: 10),
         padding: const EdgeInsets.all(10),
         decoration: const BoxDecoration(
           color: Colors.amber,
@@ -45,7 +51,7 @@ class DownloadIcon extends StatelessWidget {
               ? Icons.check
               : Icons.download,
           color: Colors.white,
-          size: 28,
+          size: h * 0.025,
         ),
       ),
     );

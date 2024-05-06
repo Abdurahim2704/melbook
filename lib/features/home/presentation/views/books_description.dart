@@ -10,9 +10,12 @@ class BookDescriptionContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final w = MediaQuery.sizeOf(context).width;
+    final h = MediaQuery.sizeOf(context).height;
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-      margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+      margin: EdgeInsets.symmetric(vertical: h * 0.012, horizontal: w * 0.025),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -20,7 +23,7 @@ class BookDescriptionContainer extends StatelessWidget {
       child: Text(
         data,
         style: const TextStyle(
-          fontSize: 20,
+          fontSize: 19,
           fontWeight: FontWeight.w500,
         ),
         textAlign: TextAlign.start,

@@ -47,14 +47,14 @@ class _LessonWidgetState extends State<LessonWidget> {
                               ? Icons.pause_rounded
                               : Icons.play_arrow_rounded,
                           color: Colors.black,
-                          size: h * 0.03,
+                          size: h * 0.025,
                         ),
                       ),
                     ),
                   );
                 },
               ),
-              const SizedBox(width: 5),
+              const SizedBox(width: 2),
               TextButton(
                 child: Text(
                   widget.audio.name,
