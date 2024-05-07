@@ -50,10 +50,11 @@ class EditProfile extends AuthEvent {
   final String? phoneNumber;
   final String? password;
 
-  const EditProfile(
-      {this.surname,
-      this.name,
-      this.userName,
-      this.phoneNumber,
-      this.password});
+  const EditProfile({
+    this.surname,
+    this.name,
+    this.userName,
+    this.phoneNumber,
+    this.password,
+  });
 }

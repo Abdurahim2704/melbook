@@ -10,6 +10,7 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final h = MediaQuery.sizeOf(context).height;
     return Container(
       decoration: const BoxDecoration(
         color: Color(0xFFF2F2F2),
@@ -21,12 +22,15 @@ class CustomAppBar extends StatelessWidget {
       height: 110,
       width: double.infinity,
       child: Center(
-        child: Text(
-          displayText,
-          style: const TextStyle(
-            fontWeight: FontWeight.w600,
-            color: Color(0xFF201A21),
-            fontSize: 21,
+        child: Padding(
+          padding: EdgeInsets.only(top: h * 0.025),
+          child: Text(
+            displayText,
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF201A21),
+              fontSize: 20,
+            ),
           ),
         ),
       ),
