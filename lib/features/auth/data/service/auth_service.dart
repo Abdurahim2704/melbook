@@ -92,6 +92,7 @@ class AuthService extends AuthRepository {
           Uri.parse("${AppConstants.baseUrl}${AppConstants.apiLoginUser}"),
           body: jsonEncode(body),
           headers: {"Content-Type": "application/json"});
+      print(data.body);
 
       if (data.statusCode != 200) {
         return DataFailure(message: jsonDecode(data.body)["message"]);
