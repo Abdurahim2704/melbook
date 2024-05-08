@@ -5,6 +5,7 @@ import 'package:melbook/features/home/data/service/local_audio_service.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/englishreading.dart';
 import 'package:page_flip/page_flip.dart';
 
+import '../../../../../locator.dart';
 import '../../bloc/local_storage/local_storage_bloc.dart';
 
 class FinalView extends StatefulWidget {
@@ -64,35 +65,45 @@ class _FinalViewState extends State<FinalView> {
 
   @override
   Widget build(BuildContext context) {
+    getIt<SharedPreferenceService>()
+        .getLastPage()
+        .then((value) => print("Last index:$value"));
     return Scaffold(
       body: BlocBuilder<LocalStorageBloc, LocalStorageState>(
         builder: (context, state) {
           makeCut(state.audios);
           print(slices.length);
-          return PageFlipWidget(
-            key: _controller,
-            initialIndex:Preferences().getLastReadBet(),
-            lastPage: Container(
-              color: Colors.white,
-              child: const Center(
-                child: Text(
-                  "E'tiboringiz uchun rahmat!",
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-            ),
-            children: <Widget>[
-              for (var i = 0; i < slices.length; i++)
-                IngliztiliReading(
-                  slice: slices[i],
-                  lastText: slices[i].lastText,
-                  index: i,
-                ),
-            ],
-          );
+          return FutureBuilder<int?>(
+              future: getIt<SharedPreferenceService>().getLastPage(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return PageFlipWidget(
+                    key: _controller,
+                    initialIndex: snapshot.data ?? 0,
+                    lastPage: Container(
+                      color: Colors.white,
+                      child: const Center(
+                        child: Text(
+                          "E'tiboringiz uchun rahmat!",
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ),
+                    children: <Widget>[
+                      for (var i = 0; i < slices.length; i++)
+                        IngliztiliReading(
+                          slice: slices[i],
+                          lastText: slices[i].lastText,
+                          index: i,
+                        ),
+                    ],
+                  );
+                }
+                return const SizedBox.shrink();
+              });
 
           //     PageView(
           //   physics: PageScrollPhysics(),

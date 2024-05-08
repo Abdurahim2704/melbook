@@ -1,30 +1,52 @@
+// import 'package:shared_preferences/shared_preferences.dart';
+//
+// class Preferences {
+//   static final Preferences _singleton = Preferences._internal();
+//
+//   factory Preferences() {
+//     return _singleton;
+//   }
+//
+//   Preferences._internal();
+//
+//   SharedPreferences? _prefs;
+//
+//   Future<void> init() async {
+//     _prefs ??= await SharedPreferences.getInstance();
+//   }
+//
+//   Future<void> saveLastRead(int kitob, int bet) async {
+//     await _prefs?.setInt("kitob", kitob);
+//     await _prefs?.setInt("bet", bet);
+//     print("should saved: $bet");
+//     print("Saved:${getLastReadBet()}");
+//   }
+//
+//   int getLastReadKitob() {
+//     return _prefs?.getInt("kitob") ?? 0;
+//   }
+//
+//   int getLastReadBet() {
+//     return _prefs?.getInt("bet") ?? 0;
+//   }
+// }
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Preferences {
-  static final Preferences _singleton = Preferences._internal();
+class SharedPreferenceService {
+  final String _lastReadBookIndexKey = 'lastReadBookIndex';
+  final String _lastReadPageNumberKey = 'lastReadPageNumber';
 
-  factory Preferences() {
-    return _singleton;
+  Future<void> saveLastReadBook(int bookIndex, int pageNumber) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(_lastReadBookIndexKey, bookIndex);
+    await prefs.setInt(_lastReadPageNumberKey, pageNumber);
   }
 
-  Preferences._internal();
-
-  SharedPreferences? _prefs;
-
-  Future<void> init() async {
-    _prefs ??= await SharedPreferences.getInstance();
-  }
-
-  void saveLastRead(int kitob, int bet) {
-    _prefs?.setInt("kitob", kitob);
-    _prefs?.setInt("bet", bet);
-  }
-
-  int getLastReadKitob() {
-    return _prefs?.getInt("kitob") ?? 0;
-  }
-  int getLastReadBet() {
-    return _prefs?.getInt("bet") ?? 0;
+  Future<int?> getLastPage() async {
+    final prefs = await SharedPreferences.getInstance();
+    // final bookIndex = prefs.getInt(_lastReadBookIndexKey) ?? -1;
+    final pageNumber = prefs.getInt(_lastReadPageNumberKey);
+    return pageNumber;
   }
 }

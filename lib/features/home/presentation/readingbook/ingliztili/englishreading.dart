@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:melbook/features/home/data/service/last_read.dart';
 import 'package:melbook/features/home/data/service/local_audio_service.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/dialog_maker.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/lesson_widget.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/name_player.dart';
 
+import '../../../../../locator.dart';
+import '../../../data/service/last_read.dart';
 import 'finalview.dart';
 
 class IngliztiliReading extends StatefulWidget {
@@ -22,6 +23,10 @@ class IngliztiliReading extends StatefulWidget {
 class _IngliztiliReadingState extends State<IngliztiliReading> {
   final double horPadding = 30;
 
+  void init() async {
+    getIt<SharedPreferenceService>().saveLastReadBook(1, widget.index);
+  }
+
   @override
   void initState() {
     // print(widget.slice.audios
@@ -33,7 +38,9 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
     //         0) +
     //     (widget.slice.lastAudio?.pointCount() ?? 0));
     print(widget.index);
-    Preferences().saveLastRead(0, widget.index);
+    init();
+    // Preferences().saveLastRead(0, widget.index);
+
     super.initState();
   }
 
@@ -58,7 +65,8 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
                     final audio = widget.slice.audios[index];
                     return LessonWidget(audio: audio);
                   },
-                  separatorBuilder: (context, index) => const SizedBox(height: 5),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 5),
                   itemCount: widget.slice.audios.length,
                 ),
                 widget.slice.lastAudio != null

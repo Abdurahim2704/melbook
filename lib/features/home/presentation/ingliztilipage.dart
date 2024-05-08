@@ -40,12 +40,12 @@ class _IngliztilipageState extends State<Ingliztilipage> {
       print("I am here");
       print(widget.book.audios!.length);
       print(context.read<LocalStorageBloc>().state.audios);
-      if (context.read<LocalStorageBloc>().state.audios.length !=
-          widget.book.audios!.length) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Iltimos avval resurslarni yuklang")));
-        return;
-      }
+      // if (context.read<LocalStorageBloc>().state.audios.length !=
+      //     widget.book.audios!.length) {
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //       const SnackBar(content: Text("Iltimos avval resurslarni yuklang")));
+      //   return;
+      // }
       Navigator.push(
         context,
         MaterialPageRoute(

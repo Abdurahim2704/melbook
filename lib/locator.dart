@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:melbook/features/auth/data/service/auth_service.dart';
 import 'package:melbook/features/auth/data/service/local_service.dart';
 import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
+import 'package:melbook/features/home/data/service/last_read.dart';
 
 late GetIt getIt;
 bool showIntro = false;
@@ -12,6 +13,7 @@ bool showIntro = false;
 Future<void> setUp() async {
   getIt = GetIt.instance;
   getIt.registerSingleton<AuthRepository>(AuthService());
+  getIt.registerSingleton<SharedPreferenceService>(SharedPreferenceService());
   await LocalDBService.init();
   if (await LocalDBService.hasUser()) {
     final username = await LocalDBService.getUsername();

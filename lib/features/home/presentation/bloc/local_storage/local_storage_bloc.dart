@@ -52,8 +52,7 @@ class LocalStorageBloc extends Bloc<LocalStorageEvent, LocalStorageState> {
       DownloadAllAudios event, Emitter<LocalStorageState> emit) async {
     int results = 0;
     emit(DownloadWaiting(state.audios, books: state.books));
-
-    await Future.forEach(event.audios, (element) async {
+    await Future.forEach(event.audios.take(10), (element) async {
       if (element.audioUrl.contains(".json")) {
         await LocalAudioService.saveAudio(
             element.name, "no audio", event.book, element.content);
@@ -68,16 +67,16 @@ class LocalStorageBloc extends Bloc<LocalStorageEvent, LocalStorageState> {
         }
       }
     });
-    if (results == event.audios.length) {
-      final audios = await LocalAudioService.getAudios();
-      await SqfliteService().insertBook(LocalBook(
-          name: event.book,
-          audios: audios,
-          description: event.description,
-          author: event.author));
+    // if (results == event.audios.length) {
+    final audios = await LocalAudioService.getAudios();
+    await SqfliteService().insertBook(LocalBook(
+        name: event.book,
+        audios: audios,
+        description: event.description,
+        author: event.author));
 
-      final books = await SqfliteService().getBooks();
-      emit(DownloadSuccess(audios, books: books));
-    }
+    final books = await SqfliteService().getBooks();
+    emit(DownloadSuccess(audios, books: books));
+    // }
   }
 }
