@@ -59,7 +59,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 },
                 icon: const Icon(
                   Icons.edit,
-                  size: 31,
+                  size: 26,
                 ),
               ),
             ),
@@ -78,7 +78,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           "Tizimdan chiqishni xohlaysizmi ?",
                           style: TextStyle(
                             fontWeight: FontWeight.w400,
-                            fontSize: 28,
+                            fontSize: 22,
                           ),
                         ),
                         actions: [
@@ -89,7 +89,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: const Text(
                               "Yo'q",
                               style: TextStyle(
-                                fontSize: 21,
+                                fontSize: 19,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -100,7 +100,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: const Text(
                               "Ha",
                               style: TextStyle(
-                                fontSize: 21,
+                                fontSize: 19,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -112,7 +112,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 },
                 icon: const Icon(
                   Icons.logout,
-                  size: 33,
+                  size: 28,
                 ),
               ),
             ),
@@ -134,7 +134,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           current == 0 ? Colors.black : Colors.transparent,
                       padding: EdgeInsets.symmetric(
                         horizontal: w * 0.12,
-                        vertical: 8,
+                        vertical: h * 0.005,
                       ),
                     ),
                     onPressed: () {
@@ -157,7 +157,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           current == 1 ? Colors.black : Colors.transparent,
                       padding: EdgeInsets.symmetric(
                         horizontal: w * 0.12,
-                        vertical: 8,
+                        vertical: h * 0.005,
                       ),
                     ),
                     onPressed: () {

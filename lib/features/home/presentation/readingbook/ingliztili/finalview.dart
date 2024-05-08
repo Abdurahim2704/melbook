@@ -17,7 +17,7 @@ class FinalView extends StatefulWidget {
 
 class _FinalViewState extends State<FinalView> {
   final _controller = GlobalKey<PageFlipWidgetState>();
-  int maxLines = 13;
+  int maxLines = 8;
   List<Slice> slices = [];
 
   void makeCut(List<LocalAudio> audios) {

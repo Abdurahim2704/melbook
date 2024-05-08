@@ -35,34 +35,38 @@ class NamePlayer extends StatelessWidget {
                           ? Icons.pause_rounded
                           : Icons.play_arrow_rounded,
                       color: Colors.black,
-                      size: h * 0.03,
+                      size: h * 0.025,
                     ),
                   ),
                 ),
               );
             },
           ),
+
         if (audio.location == "no audio")
         Text(
           audio.name,
           style: TextStyle(fontSize: h * 0.022, fontWeight: FontWeight.w700),
         ),
+        const SizedBox(width: 2),
         if (audio.location != "no audio")
-          TextButton(
-            child: Text(
-              audio.name,
-              style: TextStyle(
-                fontSize: h * 0.022,
-                fontWeight: FontWeight.w700,
+          Flexible(
+            child: TextButton(
+              child: Text(
+                audio.name,
+                style: TextStyle(
+                  fontSize: h * 0.022,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
+              onPressed: () {
+                context.read<PlayerBloc>().add(
+                      PlayPause(
+                        path: audio.location,
+                      ),
+                    );
+              },
             ),
-            onPressed: () {
-              context.read<PlayerBloc>().add(
-                    PlayPause(
-                      path: audio.location,
-                    ),
-                  );
-            },
           ),
       ],
     );

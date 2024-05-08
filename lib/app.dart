@@ -46,18 +46,19 @@ class App extends StatelessWidget {
         )
       ],
       child: FutureBuilder<bool>(
-          future: LocalDBService.hasUser(),
-          initialData: false,
-          builder: (context, snapshot) {
-            return GetMaterialApp(
-              debugShowCheckedModeBanner: false,
-              home: showIntro
-                  ? const IntroScreen()
-                  : snapshot.data!
-                      ? const MainScreen()
-                      : const SignUp(),
-            );
-          }),
+        future: LocalDBService.hasUser(),
+        initialData: false,
+        builder: (context, snapshot) {
+          return GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: showIntro
+                ? const IntroScreen()
+                : snapshot.data!
+                    ? const MainScreen()
+                    : const SignUp(),
+          );
+        },
+      ),
     );
   }
 }

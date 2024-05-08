@@ -60,7 +60,7 @@ class OfflineBookTile extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: Colors.orange.shade800,
-                      fontSize: 25,
+                      fontSize: 20,
                     ),
                   ),
                   const SizedBox(height: 5),
@@ -68,7 +68,7 @@ class OfflineBookTile extends StatelessWidget {
                     "O'qish",
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: 30,
+                      fontSize: 22,
                       color: Colors.green,
                     ),
                   ),
