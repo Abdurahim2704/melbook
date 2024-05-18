@@ -88,9 +88,10 @@ class LocalAudio extends Equatable {
     final description = json["description"] as String;
     final List<DialogPairs> dialogs = [];
     for (int i = 0; i < description.split("\n").length - 1; i += 2) {
-      final line = description.split("\n").toList()[i];
-      final translation = description.split("\n").toList()[i + 1];
-      int points = max(line.length, translation.length) ~/ 30;
+      final line = description.split("\n").toList()[i].replaceAll("\n", " ");
+      final translation =
+          description.split("\n").toList()[i + 1].replaceAll("\n", " ");
+      int points = (max(line.length, translation.length) / 22).ceil();
       if (points == 0) {
         points = 1;
       }
@@ -104,9 +105,13 @@ class LocalAudio extends Equatable {
   }
 
   int pointCount() {
+    if (description.isEmpty) {
+      return 2;
+    }
     return description
-        .map((e) => e.points)
-        .reduce((value, element) => element + value);
+            .map((e) => e.points)
+            .reduce((value, element) => element + value) +
+        2;
   }
 
   Map<String, dynamic> toSql() {

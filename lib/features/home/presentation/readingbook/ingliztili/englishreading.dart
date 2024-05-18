@@ -24,7 +24,7 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
   final double horPadding = 30;
 
   void init() async {
-    getIt<SharedPreferenceService>().saveLastReadBook(1, widget.index);
+    getIt<SharedPreferenceService>().saveLastReadBook(1, widget.index - 1);
   }
 
   @override

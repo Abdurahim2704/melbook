@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
 import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
-import 'package:melbook/features/home/data/service/last_read.dart';
 import 'package:melbook/features/home/presentation/views/book_tile.dart';
 import 'package:melbook/locator.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
@@ -21,18 +20,12 @@ class _HomePage1State extends State<HomePage1> {
   void initState() {
     super.initState();
     print(getIt<AuthRepository>().token);
-    context.read<BookBloc>().add(GetAllBooks());
     context.read<AuthBloc>().stream.listen((event) {
       if (event.message != null && mounted) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(event.message!)));
       }
     });
-    getIt<SharedPreferenceService>().getLastPage().then(
-      (value) {
-        print("Index: $value");
-      },
-    );
   }
 
   @override
@@ -54,6 +47,7 @@ class _HomePage1State extends State<HomePage1> {
           ),
         ),
         body: BlocBuilder<BookBloc, BookState>(
+          bloc: getIt<BookBloc>(),
           builder: (context, state) {
             return state is BookLoading
                 ? const Center(

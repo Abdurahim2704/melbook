@@ -44,7 +44,6 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
         final result = await service.checkPayment(
             id: (state as PaymentCreated).paymentUid.toString(),
             token: getIt<AuthRepository>().token);
-        print(result?.status);
         switch (result?.status) {
           case null:
             emit(const PaymentCanceled(message: "To'lov bekor qilingan"));

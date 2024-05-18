@@ -17,12 +17,10 @@ class DownloadIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final w = MediaQuery.sizeOf(context).width;
-    final h = MediaQuery.sizeOf(context).height;
+    print("Local book: ${localBook?.audios.length}");
+    print("Book: ${book.audios?.length}");
 
-    print(localBook?.audios.length);
-    print("books");
-    print(book.audios?.length);
+    final h = MediaQuery.sizeOf(context).height;
     return InkWell(
       onTap: () {
         if (localBook?.audios.length != (book.audios ?? []).length) {

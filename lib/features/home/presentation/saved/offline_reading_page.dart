@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:melbook/features/home/data/models/local_book.dart';
-import 'package:melbook/features/home/presentation/bloc/local_storage/local_storage_bloc.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/finalview.dart';
 import 'package:melbook/features/home/presentation/views/books_description.dart';
+
+import '../../data/models/local_book.dart';
 
 class OfflineReadingPage extends StatefulWidget {
   final LocalBook book;
@@ -24,9 +23,6 @@ class _IngliztilipageState extends State<OfflineReadingPage> {
   }
 
   void _buyButton() {
-    print("I am here");
-    print(widget.book.audios.length);
-    print(context.read<LocalStorageBloc>().state.audios);
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -55,11 +51,12 @@ class _IngliztilipageState extends State<OfflineReadingPage> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.arrow_back,
-                      size: 35,
+                      size: h * 0.03,
                     ),
                   ),
+                  SizedBox(width: w * 0.01),
                   Expanded(
                     child: Container(
                       decoration: const BoxDecoration(
@@ -79,30 +76,31 @@ class _IngliztilipageState extends State<OfflineReadingPage> {
                               tag: widget.book.name,
                               child: Image.asset(
                                 "assets/images/ingliztili.png",
-                                width: w * 0.24,
+                                width: w * 0.2,
                               ),
                             ),
                           ),
-                          SizedBox(width: w * 0.02),
+                          SizedBox(width: w * 0.04),
                           Column(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 widget.book.name,
-                                style: const TextStyle(
-                                  fontSize: 25,
+                                style: TextStyle(
+                                  fontSize: w * 0.045,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
                               Text(
                                 widget.book.author,
-                                style: const TextStyle(
-                                  fontSize: 20,
+                                style: TextStyle(
+                                  fontSize: w * 0.035,
                                 ),
                               ),
                               const SizedBox(height: 15),
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   InkWell(
@@ -110,7 +108,7 @@ class _IngliztilipageState extends State<OfflineReadingPage> {
                                     child: Container(
                                       padding: EdgeInsets.symmetric(
                                         horizontal: w * 0.07,
-                                        vertical: h * 0.001,
+                                        vertical: h * 0.007,
                                       ),
                                       margin: const EdgeInsets.only(top: 10),
                                       decoration: BoxDecoration(
@@ -120,28 +118,13 @@ class _IngliztilipageState extends State<OfflineReadingPage> {
                                       child: const Text(
                                         "O'qish",
                                         style: TextStyle(
-                                          fontSize: 25,
+                                          fontSize: 19,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
                                         ),
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  const SizedBox(width: 18),
-                                  BlocBuilder<LocalStorageBloc,
-                                      LocalStorageState>(
-                                    builder: (context, state) {
-                                      if (state is Progress) {
-                                        return Text((state.progress /
-                                                widget.book.audios.length)
-                                            .toString());
-                                      }
-                                      return const SizedBox.shrink();
-                                    },
-                                  )
                                 ],
                               ),
                             ],
@@ -153,6 +136,7 @@ class _IngliztilipageState extends State<OfflineReadingPage> {
                 ],
               ),
             ),
+            SizedBox(height: h * 0.02),
             Container(
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -164,5 +148,10 @@ class _IngliztilipageState extends State<OfflineReadingPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void deactivate() {
+    super.deactivate();
   }
 }

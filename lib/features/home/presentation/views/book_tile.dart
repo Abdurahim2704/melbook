@@ -45,10 +45,13 @@ class BookTile extends StatelessWidget {
                 child: CachedNetworkImage(
                   height: h * 0.18,
                   imageUrl: imagePath,
+                  progressIndicatorBuilder: (context, url, progress) {
+                    return const CupertinoActivityIndicator();
+                  },
                 ),
               ),
             ),
-             SizedBox(width: w * 0.055),
+            SizedBox(width: w * 0.055),
             Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,

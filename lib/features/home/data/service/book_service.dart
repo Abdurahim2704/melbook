@@ -15,24 +15,21 @@ class BookService {
     String endpoint = AppConstants.apiGetAllBooks,
   }) async {
     final token = getIt<AuthRepository>().token;
-    try {
-      final response = await http.get(Uri.parse("$domain$endpoint"), headers: {
-        "Content-Type": "application/json",
-        'Authorization': 'Bearer $token',
-      });
-      if (response.statusCode == 401) {
-        throw ExpiredTokenException();
-      }
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        final List<dynamic> jsonList = json.decode(response.body)['data'];
-        final List<BookData> books =
-            jsonList.map((json) => BookData.fromJson(json)).toList();
-        return books;
-      } else {
-        throw Exception('Failed to fetch books: ${response.statusCode}');
-      }
-    } catch (e) {
-      return [];
+
+    final response = await http.get(Uri.parse("$domain$endpoint"), headers: {
+      "Content-Type": "application/json",
+      'Authorization': 'Bearer $token',
+    });
+    if (response.statusCode == 401) {
+      throw ExpiredTokenException();
+    }
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final List<dynamic> jsonList = json.decode(response.body)['data'];
+      final List<BookData> books =
+          jsonList.map((json) => BookData.fromJson(json)).toList();
+      return books;
+    } else {
+      throw Exception('Failed to fetch books: ${response.statusCode}');
     }
   }
 

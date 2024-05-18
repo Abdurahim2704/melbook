@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:melbook/features/home/data/service/file_service.dart';
 import 'package:melbook/features/home/data/service/local_audio_service.dart';
+import 'package:melbook/features/home/data/service/localbook_service.dart';
 import 'package:meta/meta.dart';
 
 import '../../../data/models/audio.dart';
@@ -52,21 +53,25 @@ class LocalStorageBloc extends Bloc<LocalStorageEvent, LocalStorageState> {
       DownloadAllAudios event, Emitter<LocalStorageState> emit) async {
     int results = 0;
     emit(DownloadWaiting(state.audios, books: state.books));
-    await Future.forEach(event.audios.take(10), (element) async {
-      if (element.audioUrl.contains(".json")) {
-        await LocalAudioService.saveAudio(
-            element.name, "no audio", event.book, element.content);
-        results++;
-      } else {
-        final result = await LocalService().downloadFile(element.name,
-            element.audioUrl, event.book, element.content, ".mp3");
-        if (result.toInt() == 1) {
+    try {
+      await Future.forEach(event.audios, (element) async {
+        if (element.audioUrl.contains(".json")) {
+          await LocalAudioService.saveAudio(
+              element.name, "no audio", event.book, element.content);
           results++;
-          print("Results: $results");
-          emit(Progress(state.audios, progress: results, books: state.books));
+        } else {
+          final result = await LocalService().downloadFile(element.name,
+              element.audioUrl, event.book, element.content, ".mp3");
+          if (result.toInt() == 1) {
+            results++;
+            emit(Progress(state.audios, progress: results, books: state.books));
+          }
         }
-      }
-    });
+      });
+    } catch (e) {
+      emit(DownloadFailed(state.audios,
+          message: "Error when downloading files", books: state.books));
+    }
     // if (results == event.audios.length) {
     final audios = await LocalAudioService.getAudios();
     await SqfliteService().insertBook(LocalBook(

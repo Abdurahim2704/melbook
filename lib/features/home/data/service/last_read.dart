@@ -43,10 +43,10 @@ class SharedPreferenceService {
     await prefs.setInt(_lastReadPageNumberKey, pageNumber);
   }
 
-  Future<int?> getLastPage() async {
+  Future<int> getLastPage() async {
     final prefs = await SharedPreferences.getInstance();
     // final bookIndex = prefs.getInt(_lastReadBookIndexKey) ?? -1;
-    final pageNumber = prefs.getInt(_lastReadPageNumberKey);
+    final pageNumber = prefs.getInt(_lastReadPageNumberKey) ?? -1;
     return pageNumber;
   }
 }

@@ -37,14 +37,9 @@ class _IngliztilipageState extends State<Ingliztilipage> {
 
   void _buyButton() {
     if (widget.book.bought) {
-      print("I am here");
-      print(widget.book.audios!.length);
-      print(context.read<LocalStorageBloc>().state.audios);
-      print("Local Audios:");
-      print(context.read<LocalStorageBloc>().state.audios.length);
-      print(widget.book.audios!.length);
-      if (context.read<LocalStorageBloc>().state.books.first.audios.length !=
-          widget.book.audios!.length) {
+      if (context.read<LocalStorageBloc>().state.books.isEmpty ||
+          context.read<LocalStorageBloc>().state.books.first.audios.length !=
+              widget.book.audios!.length) {
         ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text("Iltimos avval resurslarni yuklang")));
         return;
@@ -127,160 +122,159 @@ class _IngliztilipageState extends State<Ingliztilipage> {
     final w = MediaQuery.sizeOf(context).width;
     final h = MediaQuery.sizeOf(context).height;
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(height: h * 0.06),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: w * 0.01),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(
-                      Icons.arrow_back,
-                      size: h * 0.03,
-                    ),
-                  ),
-                  SizedBox(width: w * 0.01),
-                  Expanded(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(36),
-                          topLeft: Radius.circular(36),
-                        ),
+        backgroundColor: Colors.white,
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(height: h * 0.06),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: w * 0.01),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(
+                        Icons.arrow_back,
+                        size: h * 0.03,
                       ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          GestureDetector(
-                            onTap: _buyButton,
-                            child: Hero(
-                              tag: widget.book.id,
-                              child: CachedNetworkImage(
-                                width: w * 0.2,
-                                imageUrl: widget.book.photoUrl,
+                    ),
+                    SizedBox(width: w * 0.01),
+                    Expanded(
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(36),
+                            topLeft: Radius.circular(36),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: _buyButton,
+                              child: Hero(
+                                tag: widget.book.id,
+                                child: CachedNetworkImage(
+                                  width: w * 0.2,
+                                  imageUrl: widget.book.photoUrl,
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(width: w * 0.04),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                widget.book.name,
-                                style: TextStyle(
-                                  fontSize: w * 0.045,
-                                  fontWeight: FontWeight.w600,
+                            SizedBox(width: w * 0.04),
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  widget.book.name,
+                                  style: TextStyle(
+                                    fontSize: w * 0.045,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                widget.book.author,
-                                style: TextStyle(
-                                  fontSize: w * 0.035,
+                                Text(
+                                  widget.book.author,
+                                  style: TextStyle(
+                                    fontSize: w * 0.035,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 15),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  InkWell(
-                                    onTap: _buyButton,
-                                    child: Container(
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: w * 0.07,
-                                        vertical: h * 0.007,
-                                      ),
-                                      margin: const EdgeInsets.only(top: 10),
-                                      decoration: BoxDecoration(
-                                        color: Colors.amber,
-                                        borderRadius: BorderRadius.circular(70),
-                                      ),
-                                      child: Text(
-                                        widget.book.bought
-                                            ? "O'qish"
-                                            : "Sotib olish",
-                                        style: const TextStyle(
-                                          fontSize: 19,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
+                                const SizedBox(height: 15),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    InkWell(
+                                      onTap: _buyButton,
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: w * 0.07,
+                                          vertical: h * 0.007,
+                                        ),
+                                        margin: const EdgeInsets.only(top: 10),
+                                        decoration: BoxDecoration(
+                                          color: Colors.amber,
+                                          borderRadius:
+                                              BorderRadius.circular(70),
+                                        ),
+                                        child: Text(
+                                          widget.book.bought
+                                              ? "O'qish"
+                                              : "Sotib olish",
+                                          style: const TextStyle(
+                                            fontSize: 19,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(width: 12),
-                                  BlocBuilder<LocalStorageBloc,
-                                      LocalStorageState>(
-                                    builder: (context, state) {
-                                      final books = state.books.where(
-                                        (element) =>
-                                            widget.book.name == element.name,
-                                      );
-                                      if (books.isEmpty) {
+                                    const SizedBox(width: 12),
+                                    BlocBuilder<LocalStorageBloc,
+                                        LocalStorageState>(
+                                      builder: (context, state) {
+                                        final books = state.books.where(
+                                          (element) =>
+                                              widget.book.name == element.name,
+                                        );
+                                        if (books.isEmpty) {
+                                          return DownloadIcon(
+                                            book: widget.book,
+                                            localBook: state.books.isEmpty
+                                                ? null
+                                                : state.books.first,
+                                          );
+                                        }
+                                        print(state.books.length);
                                         return DownloadIcon(
                                           book: widget.book,
-                                          localBook: null,
+                                          localBook: state.books.first,
                                         );
-                                      }
-                                      print(state.books.length);
-                                      return DownloadIcon(
-                                        book: widget.book,
-                                        localBook: state.books.first,
-                                      );
-                                    },
-                                  ),
-                                  const SizedBox(width: 14),
-                                  BlocBuilder<LocalStorageBloc,
-                                      LocalStorageState>(
-                                    builder: (context, state) {
-                                      if (state is Progress) {
-                                        return Padding(
-                                          padding: const EdgeInsets.only(
-                                            top: 8.0,
-                                          ),
-                                          child: CircularProgressIndicator(
-                                            value: (state.progress /
-                                                widget.book.audios!.length),
-                                            color: Colors.amber,
-                                          ),
-                                        );
-                                      }
-                                      return const SizedBox.shrink();
-                                    },
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
+                                      },
+                                    ),
+                                    const SizedBox(width: 14),
+                                    BlocBuilder<LocalStorageBloc,
+                                        LocalStorageState>(
+                                      builder: (context, state) {
+                                        if (state is Progress) {
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                              top: 8.0,
+                                            ),
+                                            child: Text(
+                                                "${state.progress}/${widget.book.audios!.length}"),
+                                          );
+                                        }
+                                        return const SizedBox.shrink();
+                                      },
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            SizedBox(height: h * 0.02),
-            Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                color: Color(0xFFF2F2F2),
+              SizedBox(height: h * 0.02),
+              Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  color: Color(0xFFF2F2F2),
+                ),
+                child: BookDescriptionContainer(data: widget.book.description),
               ),
-              child: BookDescriptionContainer(data: widget.book.description),
-            ),
-          ],
-        ),
-      ),
-    );
+            ],
+          ),
+        ));
   }
 
   @override

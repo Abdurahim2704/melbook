@@ -27,23 +27,23 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => LocalStorageBloc()..add(GetAllAudios()),
+          create: (context) => getIt<LocalStorageBloc>()..add(GetAllAudios()),
         ),
         BlocProvider(
-          create: (context) => AuthBloc(),
+          create: (context) => getIt<AuthBloc>(),
         ),
         BlocProvider(
-          create: (context) => MainBloc(),
+          create: (context) => getIt<MainBloc>(),
         ),
         BlocProvider(
-          create: (context) => BookBloc(),
+          create: (context) => getIt<BookBloc>()..add(GetAllBooks()),
         ),
         BlocProvider(
-          create: (context) => PaymentBloc(),
+          create: (context) => getIt<PaymentBloc>(),
         ),
         BlocProvider(
-          create: (context) => PlayerBloc(),
-        )
+          create: (context) => getIt<PlayerBloc>(),
+        ),
       ],
       child: FutureBuilder<bool>(
         future: LocalDBService.hasUser(),

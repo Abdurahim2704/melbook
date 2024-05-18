@@ -7,11 +7,14 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-// String link =
-//     "https://cdn.mel-book.uz/9526d9b0-e61f-11ee-8f75-f9d1644ebbbc.pdf";
 String appDocPath2 = "";
 
 class LocalService {
+  final dio = Dio(BaseOptions(
+      connectTimeout: const Duration(hours: 60),
+      receiveTimeout: const Duration(hours: 20),
+      receiveDataWhenStatusError: true));
+
   Future<void> requestPermissions() async {
     await Permission.storage.request();
     await Permission.mediaLibrary.request();
@@ -32,7 +35,7 @@ class LocalService {
     }
     final filePath = await getFilePath(fileName, book);
     double value = -1;
-    final result = await Dio().download(
+    final result = await dio.download(
       link,
       "$filePath$suffix",
       onReceiveProgress: (count, total) {
