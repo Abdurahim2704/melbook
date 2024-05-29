@@ -25,7 +25,8 @@ class SqfliteService {
       name TEXT,
       audios TEXT,
       description TEXT,
-      author TEXT
+      author TEXT,
+      slices TEXT
     )
     ''');
   }
@@ -47,10 +48,11 @@ class SqfliteService {
   // Retrieve all LocalBooks from the database
   Future<List<LocalBook>> getBooks() async {
     var dbClient = await db;
-    final List<Map<String, dynamic>> maps = await dbClient.query('books');
-    return List.generate(maps.length, (i) {
-      return LocalBook.fromJson(maps[i]);
-    });
+    final List<Map<String, Object?>> maps = await dbClient.query('books');
+    // final List<Map<String, Object?>> data = jsonDecode(jsonEncode(maps));
+    final books = maps.map((e) => LocalBook.fromJson(e)).toList();
+    print(books.runtimeType);
+    return books;
   }
 
   // Update a LocalBook in the database

@@ -65,5 +65,5 @@ class Audio extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, name, audioUrl, content];
+  List<Object?> get props => [name];
 }

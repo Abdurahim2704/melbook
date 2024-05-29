@@ -48,9 +48,7 @@ class LocalAudioService {
   static Future<List<LocalAudio>> getAudios() async {
     await initDb();
     final result = await _database!.query(_tableName);
-    final audios = result
-        .map((e) => LocalAudio.fromSql(e as Map<String, dynamic>))
-        .toList();
+    final audios = result.map((e) => LocalAudio.fromSql(e)).toList();
     return audios;
   }
 
@@ -61,9 +59,7 @@ class LocalAudioService {
       where: 'name = ?',
       whereArgs: [name],
     );
-    final audios = result
-        .map((e) => LocalAudio.fromSql(e as Map<String, dynamic>))
-        .toList();
+    final audios = result.map((e) => LocalAudio.fromSql(e)).toList();
     return audios;
   }
 }
@@ -81,7 +77,7 @@ class LocalAudio extends Equatable {
     required this.description,
   });
 
-  factory LocalAudio.fromSql(Map<String, dynamic> json) {
+  factory LocalAudio.fromSql(Map<String, Object?> json) {
     final name = json["name"] as String;
     final location = json["location"] as String;
     final book = json["book"] as String;
@@ -91,7 +87,7 @@ class LocalAudio extends Equatable {
       final line = description.split("\n").toList()[i].replaceAll("\n", " ");
       final translation =
           description.split("\n").toList()[i + 1].replaceAll("\n", " ");
-      int points = (max(line.length, translation.length) / 22).ceil();
+      int points = (max(line.length, translation.length) / 25).ceil();
       if (points == 0) {
         points = 1;
       }
@@ -114,7 +110,7 @@ class LocalAudio extends Equatable {
         2;
   }
 
-  Map<String, dynamic> toSql() {
+  Map<String, Object?> toSql() {
     final descriptionString = description.map((dialogPair) {
       return '${dialogPair.line}\n${dialogPair.translation}';
     }).join('\n');
@@ -158,5 +154,15 @@ class DialogPairs {
       "line": line,
       "translation": translation,
     });
+  }
+
+  factory DialogPairs.fromJson(Map<String, Object?> json) {
+    final line = json["line"] as String;
+    final translation = json["translation"] as String;
+    int point = (max(line.length, translation.length) / 20).ceil();
+    if (point == 0) {
+      point = 1;
+    }
+    return DialogPairs(line: line, translation: translation, points: point);
   }
 }

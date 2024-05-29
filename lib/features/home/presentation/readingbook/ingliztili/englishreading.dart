@@ -5,8 +5,8 @@ import 'package:melbook/features/home/presentation/readingbook/ingliztili/lesson
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/name_player.dart';
 
 import '../../../../../locator.dart';
+import '../../../data/models/slice.dart';
 import '../../../data/service/last_read.dart';
-import 'finalview.dart';
 
 class IngliztiliReading extends StatefulWidget {
   final Slice slice;

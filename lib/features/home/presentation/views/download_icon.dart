@@ -44,12 +44,30 @@ class DownloadIcon extends StatelessWidget {
           color: Colors.amber,
           shape: BoxShape.circle,
         ),
-        child: Icon(
-          localBook?.audios.length == (book.audios ?? []).length
-              ? Icons.check
-              : Icons.download,
-          color: Colors.white,
-          size: h * 0.025,
+        child: BlocBuilder<LocalStorageBloc, LocalStorageState>(
+          builder: (context, state) {
+            if (state.books.isEmpty) {
+              return Icon(
+                Icons.download,
+                color: Colors.white,
+                size: h * 0.025,
+              );
+            }
+            final localBookNames =
+                state.books.first.audios.map((e) => e.name).toList().toSet();
+            final bookNames = book.audios?.map((e) => e.name).toList().toSet();
+
+            print(localBookNames.length);
+            print(bookNames!.length);
+
+            return Icon(
+              state.books.first.audios.length == (book.audios ?? []).length
+                  ? Icons.check
+                  : Icons.download,
+              color: Colors.white,
+              size: h * 0.025,
+            );
+          },
         ),
       ),
     );

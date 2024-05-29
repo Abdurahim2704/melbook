@@ -52,6 +52,7 @@ class BookData extends Equatable {
     final bought = json['bought'] as bool;
     final audios = (json['audios'] as List<dynamic>?)
         ?.map((e) => Audio.fromJson(e as Map<String, Object?>))
+        .toSet()
         .toList();
 
     return BookData(
@@ -85,10 +86,10 @@ class BookData extends Equatable {
       'updatedAt': updatedAt,
       '__v': v,
       'bought': bought,
-      'audios': audios?.map((e) => e.toJson()).toList(),
+      'audios': audios?.map((e) => e.toJson()).toSet().toList(),
     });
   }
 
   @override
-  List<Object?> get props => [id];
+  List<Object?> get props => [id, name];
 }
