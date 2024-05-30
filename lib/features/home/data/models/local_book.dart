@@ -58,6 +58,13 @@ class LocalBook extends Equatable {
           return 0;
         },
       );
+
+      // audios.map((e) => e.name).forEach(
+      //       (element) => print("Name: $element"),
+      //     );
+      print(slices.isEmpty);
+      slices.map((e) => print(
+          "Audio: ${e.audios.map((e) => e.name).join(",")}, Last: ${e.lastAudio?.name}"));
       final description = json["description"] as String;
       final author = json["author"] as String;
 
