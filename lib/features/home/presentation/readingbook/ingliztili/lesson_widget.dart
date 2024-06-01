@@ -15,6 +15,20 @@ class LessonWidget extends StatefulWidget {
 }
 
 class _LessonWidgetState extends State<LessonWidget> {
+  String filterAudioName(String title) {
+    if (title.contains(r"\")) {
+      return title.split(r"\")[1];
+    }
+    return title;
+  }
+
+  String filterLessonName(String title) {
+    if (title.contains(r"\")) {
+      return title.split(r"\")[0];
+    }
+    return "";
+  }
+
   @override
   Widget build(BuildContext context) {
     final h = MediaQuery.sizeOf(context).height;
@@ -23,6 +37,19 @@ class _LessonWidgetState extends State<LessonWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
+          if (filterLessonName(widget.audio.name).isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Center(
+                child: Text(
+                  filterLessonName(widget.audio.name),
+                  style: TextStyle(
+                      fontSize: h * 0.025,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black),
+                ),
+              ),
+            ),
           Row(
             children: [
               BlocBuilder<PlayerBloc, PlayerState>(
@@ -57,7 +84,7 @@ class _LessonWidgetState extends State<LessonWidget> {
               const SizedBox(width: 2),
               TextButton(
                 child: Text(
-                  widget.audio.name,
+                  filterAudioName(widget.audio.name),
                   style: TextStyle(
                     fontSize: h * 0.022,
                     fontWeight: FontWeight.w700,

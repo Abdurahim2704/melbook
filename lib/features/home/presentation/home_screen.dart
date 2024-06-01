@@ -1,11 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
 import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
+import 'package:melbook/features/auth/presentation/sign_up.dart';
 import 'package:melbook/features/home/presentation/views/book_tile.dart';
 import 'package:melbook/locator.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
 
+import '../../../config/exceptions/expired_token_exception.dart';
+import '../data/service/book_service.dart';
 import 'bloc/book/book_bloc.dart';
 
 class HomePage1 extends StatefulWidget {
@@ -20,10 +25,34 @@ class _HomePage1State extends State<HomePage1> {
   void initState() {
     super.initState();
     print(getIt<AuthRepository>().token);
+    checkLogin();
     context.read<AuthBloc>().stream.listen((event) {
       if (event.message != null && mounted) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(event.message!)));
+      }
+    });
+  }
+
+  Future<void> checkLogin() async {
+    String route = "";
+    Timer.periodic(const Duration(seconds: 10), (timer) async {
+      try {
+        final data = await BookService().methodGetAllBooks();
+        print("Message: ${data}");
+      } catch (e) {
+        if (e is ExpiredTokenException) {
+          print(e.toString());
+          if (mounted && route.isEmpty) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SignUp(),
+                ));
+            route = ModalRoute.of(context)?.settings.name ?? "";
+            print("Route: ${ModalRoute.of(context)?.settings.name}");
+          }
+        }
       }
     });
   }

@@ -25,8 +25,7 @@ class SqfliteService {
       name TEXT,
       audios TEXT,
       description TEXT,
-      author TEXT,
-      slices TEXT
+      author TEXT
     )
     ''');
   }
