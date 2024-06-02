@@ -23,11 +23,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     context.read<AuthBloc>().add(LogOut());
     context.read<AuthBloc>().stream.listen((event) {
       if (event is LogOutSuccess) {
-        Navigator.pushReplacement(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
             builder: (context) => const SignUp(),
           ),
+          (route) => false,
         );
       }
     });

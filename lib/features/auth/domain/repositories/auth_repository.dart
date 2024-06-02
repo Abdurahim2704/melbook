@@ -14,8 +14,10 @@ abstract class AuthRepository {
 
   bool get isSignedIn;
 
-  Future<DataSource> loginUser(
-      {required String username, required String password});
+  Future<DataSource> loginUser({
+    required String username,
+    required String password,
+  });
 
   Future<DataSource> getMe();
 

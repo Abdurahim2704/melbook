@@ -10,7 +10,7 @@ import '../../../../../locator.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 
-class AuthBloc extends Bloc<AuthEvent, AuthState> {
+class AuthBloc extends Bloc<AuthEvent, AuthState> { 
   AuthBloc() : super(AuthInitial(user: getIt<AuthRepository>().user)) {
     on<SignUpEvent>(_signUpEvent);
     on<SignInEvent>(_signInEvent);
@@ -23,11 +23,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     final authService = getIt<AuthRepository>();
     emit(AuthLoadingState(user: state.user));
     final result = await authService.registerUser(
-      username: event.username,
-      name: event.name,
-      surname: event.surname,
-      phoneNumber: event.phoneNumber,
-      password: event.password,
+      username: event.username.trim(),
+      name: event.name.trim(),
+      surname: event.surname.trim(),
+      phoneNumber: event.phoneNumber.trim(),
+      password: event.password.trim(),
     );
 
     if (result is DataFailure) {
@@ -44,8 +44,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     final authService = getIt<AuthRepository>();
     emit(AuthLoadingState(user: state.user));
     final result = await authService.loginUser(
-      username: event.username,
-      password: event.password,
+      username: event.username.trim(),
+      password: event.password.trim(),
     );
 
     if (result is DataFailure) {
