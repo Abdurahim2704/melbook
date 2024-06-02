@@ -31,9 +31,10 @@ class _HomePage1State extends State<HomePage1> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: const Text(
-                "Ushbu akkountga boshqa qurilmadan kirganingiz uchun tizimdan chiqdingiz!"),
+              "Ushbu akkountga boshqa qurilmadan kirganingiz sababli tizimdan chiqdingiz!",
+            ),
           ),
-        ); 
+        );
       }
     });
   }
