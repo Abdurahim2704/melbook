@@ -26,11 +26,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
         .add(LogOut(localBooks: context.read<LocalStorageBloc>().state.books));
     context.read<AuthBloc>().stream.listen((event) {
       if (event is LogOutSuccess) {
-        Navigator.pushReplacement(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
             builder: (context) => const SignUp(),
           ),
+          (route) => false,
         );
       }
     });

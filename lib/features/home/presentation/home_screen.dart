@@ -29,8 +29,12 @@ class _HomePage1State extends State<HomePage1> {
     checkLogin();
     context.read<AuthBloc>().stream.listen((event) {
       if (event.message != null && mounted) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(event.message!)));
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: const Text(
+                "Ushbu akkountga boshqa qurilmadan kirganingiz uchun tizimdan chiqdingiz!"),
+          ),
+        ); 
       }
     });
   }

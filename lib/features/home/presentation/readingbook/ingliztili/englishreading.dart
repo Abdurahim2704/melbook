@@ -31,39 +31,10 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
   Duration debounceDuration = const Duration(milliseconds: 300);
   Future<void> init() async {
     if (controller.hasClients) {
-      await getIt<SharedPreferenceService>().saveLastReadBook(1, pixel);
+      await getIt<SharedPreferenceService>()
+          .saveLastReadBook(1, pixel * controller.position.maxScrollExtent);
     }
   }
-
-  // @override
-  // void initState() {
-  //   // print(widget.index);
-  //   super.initState();
-  //   pixel = widget.initialPosition;
-  //   controller = ScrollController(
-  //     initialScrollOffset: widget.initialPosition,
-  //   )..addListener(() {
-  //       if (controller.hasClients &&
-  //           viewport < controller.position.maxScrollExtent) {
-  //         WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-  //           await Future.delayed(const Duration(seconds: 1));
-  //           if (mounted) {
-  //             viewport = controller.position.maxScrollExtent;
-  //             setState(() {});
-  //           }
-  //         });
-  //       }
-  //       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-  //         pixel = controller.offset / controller.position.maxScrollExtent;
-  //         pixelStream.add(pixel);
-  //       });
-  //       scrolling.add((controller.position.pixels -
-  //                   widget.initialPosition *
-  //                       controller.position.maxScrollExtent)
-  //               .abs() >
-  //           200);
-  //     });
-  // }
 
   @override
   void initState() {
@@ -85,14 +56,12 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
         if (_debounce?.isActive ?? false) _debounce?.cancel();
         _debounce = Timer(debounceDuration, () {
           WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-            pixel = controller.offset / controller.position.maxScrollExtent;
+            pixel = controller.position.pixels;
             pixelStream.add(pixel);
           });
-          scrolling.add((controller.position.pixels -
-                      widget.initialPosition *
-                          controller.position.maxScrollExtent)
-                  .abs() >
-              200);
+          scrolling.add(
+              (controller.position.pixels - widget.initialPosition).abs() >
+                  200);
         });
       });
   }
@@ -107,11 +76,13 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: horPadding),
               child: DraggableScrollbar.rrect(
+                backgroundColor: Colors.black45,
+                alwaysVisibleScrollThumb: true,
                 controller: controller,
                 child: ListView.separated(
+                  physics: const AlwaysScrollableScrollPhysics(),
                   controller: controller,
                   cacheExtent: 1000,
-                  physics: const ClampingScrollPhysics(),
                   itemBuilder: (context, index) {
                     final audio = widget.audios[index];
                     return LessonWidget(audio: audio);
