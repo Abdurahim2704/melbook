@@ -31,8 +31,7 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
   Duration debounceDuration = const Duration(milliseconds: 300);
   Future<void> init() async {
     if (controller.hasClients) {
-      await getIt<SharedPreferenceService>()
-          .saveLastReadBook(1, pixel * controller.position.maxScrollExtent);
+      await getIt<SharedPreferenceService>().saveLastReadBook(1, pixel);
     }
   }
 
