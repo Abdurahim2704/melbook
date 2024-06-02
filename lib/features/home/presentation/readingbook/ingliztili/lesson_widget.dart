@@ -84,11 +84,15 @@ class _LessonWidgetState extends State<LessonWidget> {
               ),
               const SizedBox(width: 2),
               TextButton(
-                child: Text(
-                  filterAudioName(widget.audio.name),
-                  style: TextStyle(
-                    fontSize: h * 0.022,
-                    fontWeight: FontWeight.w700,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    filterAudioName(widget.audio.name),
+                    softWrap: true,
+                    style: TextStyle(
+                      fontSize: h * 0.022,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
                 onPressed: () {
