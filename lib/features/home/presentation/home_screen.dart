@@ -33,7 +33,7 @@ class _HomePage1State extends State<HomePage1> {
             content: const Text(
                 "Ushbu akkountga boshqa qurilmadan kirganingiz uchun tizimdan chiqdingiz!"),
           ),
-        );
+        ); 
       }
     });
   }

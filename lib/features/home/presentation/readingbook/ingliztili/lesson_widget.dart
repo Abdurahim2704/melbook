@@ -35,6 +35,7 @@ class _LessonWidgetState extends State<LessonWidget> {
     return SizedBox(
       width: double.infinity,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           if (filterLessonName(widget.audio.name).isNotEmpty)
@@ -45,66 +46,82 @@ class _LessonWidgetState extends State<LessonWidget> {
                   filterLessonName(widget.audio.name),
                   softWrap: true,
                   style: TextStyle(
-                      fontSize: h * 0.025,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black),
+                    fontSize: h * 0.025,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),
-          Row(
-            children: [
-              BlocBuilder<PlayerBloc, PlayerState>(
-                builder: (context, state) {
-                  return GestureDetector(
-                    onTap: () {
-                      context.read<PlayerBloc>().add(
-                            PlayPause(
-                              path: widget.audio.location,
-                            ),
-                          );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(2),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(width: 3, color: Colors.black),
-                      ),
-                      child: Center(
-                        child: Icon(
-                          state.isPlaying && state.path == widget.audio.location
-                              ? Icons.pause_rounded
-                              : Icons.play_arrow_rounded,
-                          color: Colors.black,
-                          size: h * 0.025,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-              const SizedBox(width: 2),
-              TextButton(
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    filterAudioName(widget.audio.name),
-                    softWrap: true,
-                    style: TextStyle(
-                      fontSize: h * 0.022,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
+          widget.audio.location == "no audio"
+              ? Text(
+                filterAudioName(widget.audio.name),
+                softWrap: true,
+                style: TextStyle(
+                  fontSize: h * 0.022,
+                  fontWeight: FontWeight.w700,
                 ),
-                onPressed: () {
-                  context.read<PlayerBloc>().add(
-                        PlayPause(
-                          path: widget.audio.location,
+                overflow: TextOverflow.visible,
+                textAlign: TextAlign.start,
+              )
+              : Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    BlocBuilder<PlayerBloc, PlayerState>(
+                      builder: (context, state) {
+                        return GestureDetector(
+                          onTap: () {
+                            context.read<PlayerBloc>().add(
+                                  PlayPause(
+                                    path: widget.audio.location,
+                                  ),
+                                );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(width: 3, color: Colors.black),
+                            ),
+                            child: Center(
+                              child: Icon(
+                                state.isPlaying &&
+                                        state.path == widget.audio.location
+                                    ? Icons.pause_rounded
+                                    : Icons.play_arrow_rounded,
+                                color: Colors.black,
+                                size: h * 0.025,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    const SizedBox(width: 2),
+                    Expanded(
+                      child: TextButton(
+                        child: Text(
+                          filterAudioName(widget.audio.name),
+                          softWrap: true,
+                          style: TextStyle(
+                            fontSize: h * 0.022,
+                            fontWeight: FontWeight.w700,
+                          ),
+                          overflow: TextOverflow.visible,
+                          textAlign: TextAlign.start,
                         ),
-                      );
-                },
-              ),
-            ],
-          ),
+                        onPressed: () {
+                          context.read<PlayerBloc>().add(
+                                PlayPause(
+                                  path: widget.audio.location,
+                                ),
+                              );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
           DialogMaker(dialogs: widget.audio.description),
         ],
       ),
