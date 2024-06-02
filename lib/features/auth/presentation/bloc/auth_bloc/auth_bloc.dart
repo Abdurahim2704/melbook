@@ -3,6 +3,7 @@ import 'package:melbook/config/datasource.dart';
 import 'package:melbook/features/auth/data/models/user.dart';
 import 'package:melbook/features/auth/data/service/local_service.dart';
 import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
+import 'package:melbook/features/home/data/models/local_book.dart';
 import 'package:meta/meta.dart';
 
 import '../../../../../locator.dart';
@@ -100,7 +101,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> logOut(LogOut event, Emitter<AuthState> emit) async {
-    final service = await LocalDBService.logOut();
+    final service = await LocalDBService.logOut(
+        event.localBooks.isEmpty ? null : event.localBooks.first);
     if (service) {
       emit(const LogOutSuccess(message: "Log Out success"));
     }

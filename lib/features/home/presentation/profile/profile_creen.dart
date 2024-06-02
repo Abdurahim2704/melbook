@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:melbook/features/auth/presentation/sign_up.dart';
 import 'package:melbook/features/home/presentation/bloc/book/book_bloc.dart';
+import 'package:melbook/features/home/presentation/bloc/local_storage/local_storage_bloc.dart';
 import 'package:melbook/features/home/presentation/profile/update_profile.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
 
@@ -20,7 +21,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   List<String> trailingSub = ["", "Ismoilov", "Click"];
 
   void logOut() {
-    context.read<AuthBloc>().add(LogOut());
+    context
+        .read<AuthBloc>()
+        .add(LogOut(localBooks: context.read<LocalStorageBloc>().state.books));
     context.read<AuthBloc>().stream.listen((event) {
       if (event is LogOutSuccess) {
         Navigator.pushReplacement(

@@ -1,4 +1,7 @@
+import 'package:melbook/features/home/data/models/local_book.dart';
+import 'package:melbook/features/home/data/service/localbook_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sqflite/sqflite.dart';
 
 class LocalDBService {
   static const _usernameKey = 'username';
@@ -39,7 +42,8 @@ class LocalDBService {
         (prefs.getString(_usernameKey) != null);
   }
 
-  static Future<bool> logOut() async {
+  static Future<bool> logOut(LocalBook? localBook) async {
+    SqfliteService().deleteBook(localBook);
     return (await prefs.remove(_passwordKey)) &&
         (await prefs.remove(_usernameKey));
   }

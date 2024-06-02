@@ -57,14 +57,16 @@ class LocalService {
   //   return sizeInMb;
   // }
 
-  Future<void> deleteFile(String filePath) async {
-    final file = File(filePath);
+  Future<void> deleteFile(List<String> filepaths) async {
+    for (var filepath in filepaths) {
+      final file = File(filepath);
 
-    if (await file.exists()) {
-      await file.delete();
-      print("File deleted successfully.");
-    } else {
-      print("File does not exist.");
+      if (await file.exists()) {
+        await file.delete();
+        print("File deleted successfully.");
+      } else {
+        print("File does not exist.");
+      }
     }
   }
 }
