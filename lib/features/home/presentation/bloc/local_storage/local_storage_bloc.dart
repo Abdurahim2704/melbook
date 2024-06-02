@@ -9,6 +9,7 @@ import '../../../data/models/audio.dart';
 import '../../../data/models/local_book.dart';
 
 part 'local_storage_event.dart';
+
 part 'local_storage_state.dart';
 
 class LocalStorageBloc extends Bloc<LocalStorageEvent, LocalStorageState> {
@@ -20,6 +21,10 @@ class LocalStorageBloc extends Bloc<LocalStorageEvent, LocalStorageState> {
   Future<void> _getAllAudios(
       GetAllAudios event, Emitter<LocalStorageState> emit) async {
     final books = await SqfliteService().getBooks();
+    if (books.isEmpty) {
+      emit(const GetAllAudiosState(books: []));
+      return;
+    }
     final audioNames = books.first.audios.map((e) => e.name).toList();
     final audioNamesWithLesson = audioNames
         .where(
@@ -42,6 +47,9 @@ class LocalStorageBloc extends Bloc<LocalStorageEvent, LocalStorageState> {
 
     try {
       await Future.forEach(event.audios, (element) async {
+        if (results >= 350) {
+          print("hello");
+        }
         if (element.audioUrl.contains(".json")) {
           await LocalAudioService.saveAudio(
               element.name, "no audio", event.book, element.content);
@@ -62,6 +70,16 @@ class LocalStorageBloc extends Bloc<LocalStorageEvent, LocalStorageState> {
     }
     // if (results == event.audios.length) {
     final audios = await LocalAudioService.getAudios();
+    if (audios.length != event.audios.length) {
+      await LocalAudioService.deleteAudios();
+      emit(
+        DownloadFailed(
+          message: "Ma'lumotlarni saqlashda muammo paydo bo'ldi",
+          books: state.books,
+        ),
+      );
+      return;
+    }
     print("Audio: ${audios.length}");
     await SqfliteService().insertBook(LocalBook(
       name: event.book,

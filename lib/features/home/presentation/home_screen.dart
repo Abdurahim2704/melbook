@@ -34,6 +34,21 @@ class _HomePage1State extends State<HomePage1> {
     });
   }
 
+  void logOut() {
+    context.read<AuthBloc>().add(LogOut());
+    context.read<AuthBloc>().stream.listen((event) {
+      if (event is LogOutSuccess) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const SignUp(),
+          ),
+          (route) => false,
+        );
+      }
+    });
+  }
+
   Future<void> checkLogin() async {
     String route = "";
     Timer.periodic(const Duration(seconds: 10), (timer) async {
@@ -43,14 +58,11 @@ class _HomePage1State extends State<HomePage1> {
       } catch (e) {
         if (e is ExpiredTokenException) {
           print(e.toString());
-          if (mounted && route.isEmpty) {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const SignUp(),
-                ));
+          print("Route1:$route");
+          if (mounted && (route.trim().isEmpty)) {
+            logOut();
             route = ModalRoute.of(context)?.settings.name ?? "";
-            print("Route: ${ModalRoute.of(context)?.settings.name}");
+            print("Route: $route");
           }
         }
       }

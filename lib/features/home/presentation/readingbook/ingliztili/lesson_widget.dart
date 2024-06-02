@@ -43,6 +43,7 @@ class _LessonWidgetState extends State<LessonWidget> {
               child: Center(
                 child: Text(
                   filterLessonName(widget.audio.name),
+                  softWrap: true,
                   style: TextStyle(
                       fontSize: h * 0.025,
                       fontWeight: FontWeight.w700,

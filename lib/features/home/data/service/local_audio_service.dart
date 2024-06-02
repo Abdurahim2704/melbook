@@ -45,6 +45,11 @@ class LocalAudioService {
     );
   }
 
+  static Future<bool> deleteAudios() async {
+    final result = await _database?.delete(_tableName);
+    return result != 0;
+  }
+
   static Future<List<LocalAudio>> getAudios() async {
     await initDb();
     final result = await _database!.query(_tableName);

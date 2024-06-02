@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:melbook/features/home/data/models/local_book.dart';
 import 'package:melbook/features/home/data/service/last_read.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/englishreading.dart';
 
@@ -22,7 +23,8 @@ class _FinalViewState extends State<FinalView> {
         .getLastPage()
         .then((value) => print("Last index:$value"));
     return Scaffold(
-      body: BlocBuilder<LocalStorageBloc, LocalStorageState>(
+      body: BlocSelector<LocalStorageBloc, LocalStorageState, List<LocalBook>>(
+        selector: (state) => state.books,
         builder: (context, state) {
           return FutureBuilder<double>(
               future: getIt<SharedPreferenceService>().getLastPage(),
@@ -30,7 +32,7 @@ class _FinalViewState extends State<FinalView> {
                 if (snapshot.connectionState == ConnectionState.done) {
                   return IngliztiliReading(
                     initialPosition: snapshot.data ?? 0.0,
-                    audios: state.books.first.audios,
+                    audios: state.first.audios,
                   );
                 }
                 return const SizedBox.shrink();

@@ -26,40 +26,113 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
   late final ScrollController controller;
   double pixel = 0.0;
   double viewport = 0.0;
+  Timer? _debounce;
+  Duration debounceDuration = const Duration(milliseconds: 300);
   Future<void> init() async {
-    await getIt<SharedPreferenceService>().saveLastReadBook(1, pixel);
+    if (controller.hasClients) {
+      await getIt<SharedPreferenceService>()
+          .saveLastReadBook(1, pixel * controller.position.maxScrollExtent);
+    }
   }
+
+  // @override
+  // void initState() {
+  //   // print(widget.index);
+  //   super.initState();
+  //   pixel = widget.initialPosition;
+  //   controller = ScrollController(
+  //     initialScrollOffset: widget.initialPosition,
+  //   )..addListener(() {
+  //       if (controller.hasClients &&
+  //           viewport < controller.position.maxScrollExtent) {
+  //         WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+  //           await Future.delayed(const Duration(seconds: 1));
+  //           if (mounted) {
+  //             viewport = controller.position.maxScrollExtent;
+  //             setState(() {});
+  //           }
+  //         });
+  //       }
+  //       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+  //         pixel = controller.offset / controller.position.maxScrollExtent;
+  //         pixelStream.add(pixel);
+  //       });
+  //       scrolling.add((controller.position.pixels -
+  //                   widget.initialPosition *
+  //                       controller.position.maxScrollExtent)
+  //               .abs() >
+  //           200);
+  //     });
+  // }
 
   @override
   void initState() {
-    // print(widget.index);
     super.initState();
     pixel = widget.initialPosition;
     controller = ScrollController(
       initialScrollOffset: widget.initialPosition,
     )..addListener(() {
-        if (controller.hasClients && viewport == 0.0) {
-          viewport = controller.position.maxScrollExtent;
-          setState(() {});
+        if (controller.hasClients &&
+            viewport < controller.position.maxScrollExtent) {
+          WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+            await Future.delayed(const Duration(seconds: 1));
+            if (mounted) {
+              viewport = controller.position.maxScrollExtent;
+              setState(() {});
+            }
+          });
         }
-        pixel = controller.position.pixels;
-        pixelStream.add(pixel);
-        scrolling.add(
-            (controller.position.pixels - widget.initialPosition).abs() > 200);
+        if (_debounce?.isActive ?? false) _debounce?.cancel();
+        _debounce = Timer(debounceDuration, () {
+          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+            pixel = controller.offset / controller.position.maxScrollExtent;
+            pixelStream.add(pixel);
+          });
+          scrolling.add((controller.position.pixels -
+                      widget.initialPosition *
+                          controller.position.maxScrollExtent)
+                  .abs() >
+              200);
+        });
       });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        body: Stack(
-          children: [
-            SafeArea(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: horPadding),
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          // SafeArea(
+          //   child: Padding(
+          //     padding: EdgeInsets.symmetric(horizontal: horPadding),
+          //     child: ListView.separated(
+          //       controller: controller,
+          //       cacheExtent: 1000,
+
+          //       // physics: const PageScrollPhysics(),
+          //       itemBuilder: (context, index) {
+          //         final audio = widget.audios[index];
+          //         return LessonWidget(audio: audio);
+          //       },
+          //       separatorBuilder: (context, index) => const SizedBox(height: 5),
+          //       itemCount: widget.audios.length,
+          //     ),
+          //   ),
+          // ),
+          // if (viewport != 0.0)
+
+          SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: horPadding),
+              child: Scrollbar(
+                controller: controller,
+                thickness: 8.0,
+                radius: const Radius.circular(10.0),
+                scrollbarOrientation: ScrollbarOrientation.right,
                 child: ListView.separated(
                   controller: controller,
+                  cacheExtent: 1000,
                   itemBuilder: (context, index) {
                     final audio = widget.audios[index];
                     return LessonWidget(audio: audio);
@@ -70,48 +143,63 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
                 ),
               ),
             ),
-            if (viewport != 0.0)
-              StreamBuilder(
-                stream: pixelStream.stream,
+          ),
+          // StreamBuilder(
+          //   stream: pixelStream.stream,
+          //   builder: (context, snapshot) {
+          //     return Align(
+          //       alignment: Alignment.bottomCenter,
+          //       child: Padding(
+          //         padding: const EdgeInsets.symmetric(horizontal: 50),
+          //         child: SizedBox(
+          //           height: 40,
+          //           child: Slider.adaptive(
+          //             // min: 0,
+          //             // max: viewport + 1000,
+          //             value: snapshot.data ?? 0,
+          //             onChanged: (value) {
+          //               pixel = value;
+          //               controller.jumpTo(
+          //                   value * controller.position.maxScrollExtent);
+          //             },
+          //           ),
+          //         ),
+          //       ),
+          //     );
+          //   },
+          // ),
+          Align(
+            alignment: const Alignment(0.8, 0.9),
+            child: StreamBuilder<bool>(
+                stream: scrolling.stream,
                 builder: (context, snapshot) {
-                  return Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30),
-                      child: SizedBox(
-                        height: 40,
-                        child: Slider(
-                          min: 0,
-                          max: viewport,
-                          value: snapshot.data ?? 0,
-                          onChanged: (value) {
-                            pixel = value;
-                            controller.jumpTo(value);
-                          },
-                        ),
+                  if (snapshot.data ?? false) {
+                    return Container(
+                      width: 70.0,
+                      height: 70.0,
+                      decoration: const BoxDecoration(
+                        color: Colors.black12,
+                        shape: BoxShape.circle,
                       ),
-                    ),
-                  );
-                },
-              )
-          ],
-        ),
-        floatingActionButton: StreamBuilder<bool>(
-            stream: scrolling.stream,
-            builder: (context, snapshot) {
-              if (snapshot.data ?? false) {
-                return FloatingActionButton(
-                  onPressed: () {
-                    controller.animateTo(
-                      widget.initialPosition,
-                      duration: const Duration(milliseconds: 200),
-                      curve: Curves.easeIn,
+                      child: IconButton(
+                        icon: const Icon(Icons.bookmark,
+                            size: 30, color: Colors.white),
+                        onPressed: () {
+                          controller.animateTo(
+                            widget.initialPosition,
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.easeIn,
+                          );
+                        },
+                      ),
                     );
-                  },
-                );
-              }
-              return const SizedBox.shrink();
-            }));
+                  }
+                  return const SizedBox.shrink();
+                }),
+          )
+        ],
+      ),
+    );
   }
 
   // @override
@@ -124,6 +212,10 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
   @override
   void dispose() {
     init();
+    controller.dispose();
+    _debounce?.cancel();
+    scrolling.close();
+    pixelStream.close();
     super.dispose();
   }
 }

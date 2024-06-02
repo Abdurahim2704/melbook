@@ -32,23 +32,23 @@ class LocalBook extends Equatable {
           .map((audioJson) => LocalAudio.fromSql(audioJson))
           .toSet()
           .toList();
-      audios.sort(
-        (a, b) {
-          try {
-            RegExp regExp = RegExp(r'\d+\.\d+');
+      // audios.sort(
+      //   (a, b) {
+      //     try {
+      //       RegExp regExp = RegExp(r'\d+\.\d+');
 
-            RegExpMatch matches1 = regExp.allMatches(a.name).first;
-            RegExpMatch matches2 = regExp.allMatches(b.name).first;
-            final number1 = double.parse(matches1.group(0) ?? "0");
-            final number2 = double.parse(matches2.group(0) ?? "0");
-            return number1.compareTo(number2);
-          } catch (e) {
-            print(e);
-          }
+      //       RegExpMatch matches1 = regExp.allMatches(a.name).first;
+      //       RegExpMatch matches2 = regExp.allMatches(b.name).first;
+      //       final number1 = double.parse(matches1.group(0) ?? "0");
+      //       final number2 = double.parse(matches2.group(0) ?? "0");
+      //       return number1.compareTo(number2);
+      //     } catch (e) {
+      //       print(e);
+      //     }
 
-          return 0;
-        },
-      );
+      //     return 0;
+      //   },
+      // );
       final description = json["description"] as String;
       final author = json["author"] as String;
 

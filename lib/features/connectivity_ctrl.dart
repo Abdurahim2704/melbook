@@ -6,6 +6,8 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:melbook/features/home/presentation/main_screen.dart';
 import 'package:melbook/features/home/presentation/saved/saved_pages.dart';
 
+import 'auth/data/service/local_service.dart';
+
 class ConnectivityController extends GetxController {
   final Connectivity _connectvity = Connectivity();
 
@@ -39,11 +41,15 @@ class ConnectivityController extends GetxController {
           style: TextStyle(fontSize: 20, color: Colors.white),
         ));
 
-        Navigator.push(
-            Get.context!,
-            MaterialPageRoute(
-              builder: (context) => const MainScreen(),
-            ));
+        LocalDBService.hasUser().then((value) {
+          if (value) {
+            Navigator.push(
+                Get.context!,
+                MaterialPageRoute(
+                  builder: (context) => const MainScreen(),
+                ));
+          }
+        });
       }
     }
   }
