@@ -31,11 +31,9 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
   Duration debounceDuration = const Duration(milliseconds: 300);
   Future<void> init() async {
     if (controller.hasClients) {
-      await getIt<SharedPreferenceService>()
-          .saveLastReadBook(1, pixel);
+      await getIt<SharedPreferenceService>().saveLastReadBook(1, pixel);
     }
   }
-
 
   @override
   void initState() {
@@ -60,10 +58,9 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
             pixel = controller.position.pixels;
             pixelStream.add(pixel);
           });
-          scrolling.add((controller.position.pixels -
-                      widget.initialPosition )
-                  .abs() >
-              200);
+          scrolling.add(
+              (controller.position.pixels - widget.initialPosition).abs() >
+                  200);
         });
       });
   }

@@ -41,7 +41,10 @@ class AutoLogInEvent extends AuthEvent {
   });
 }
 
-class LogOut extends AuthEvent {}
+class LogOut extends AuthEvent {
+  List<LocalBook> localBooks;
+  LogOut({required this.localBooks});
+}
 
 class EditProfile extends AuthEvent {
   final String? userName;

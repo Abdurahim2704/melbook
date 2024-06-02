@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:melbook/features/auth/domain/repositories/auth_repository.dart';
 import 'package:melbook/features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'package:melbook/features/auth/presentation/sign_up.dart';
+import 'package:melbook/features/home/presentation/bloc/local_storage/local_storage_bloc.dart';
 import 'package:melbook/features/home/presentation/views/book_tile.dart';
 import 'package:melbook/locator.dart';
 import 'package:melbook/shared/widgets/app_bar.dart';
@@ -40,7 +41,9 @@ class _HomePage1State extends State<HomePage1> {
   }
 
   void logOut() {
-    context.read<AuthBloc>().add(LogOut());
+    context
+        .read<AuthBloc>()
+        .add(LogOut(localBooks: context.read<LocalStorageBloc>().state.books));
     context.read<AuthBloc>().stream.listen((event) {
       if (event is LogOutSuccess) {
         Navigator.pushAndRemoveUntil(

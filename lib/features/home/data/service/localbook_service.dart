@@ -1,4 +1,5 @@
 import 'package:melbook/features/home/data/models/local_book.dart';
+import 'package:melbook/features/home/data/service/file_service.dart';
 import 'package:sqflite/sqflite.dart';
 
 class SqfliteService {
@@ -66,12 +67,13 @@ class SqfliteService {
   }
 
   // Delete a LocalBook from the database
-  Future<void> deleteBook(String name) async {
+  Future<void> deleteBook(LocalBook? book) async {
     var dbClient = await db;
-    await dbClient.delete(
-      'books',
-      where: 'name = ?',
-      whereArgs: [name],
-    );
+    if (book == null) {
+      return;
+    }
+    LocalService().deleteFile(book.audios.map((e) => e.location).toList());
+
+    await dbClient.execute('DROP TABLE IF EXISTS books');
   }
 }
