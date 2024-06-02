@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:draggable_scrollbar/draggable_scrollbar.dart';
 import 'package:flutter/material.dart';
 import 'package:melbook/features/home/data/service/local_audio_service.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/lesson_widget.dart';
@@ -103,36 +104,15 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-          // SafeArea(
-          //   child: Padding(
-          //     padding: EdgeInsets.symmetric(horizontal: horPadding),
-          //     child: ListView.separated(
-          //       controller: controller,
-          //       cacheExtent: 1000,
-
-          //       // physics: const PageScrollPhysics(),
-          //       itemBuilder: (context, index) {
-          //         final audio = widget.audios[index];
-          //         return LessonWidget(audio: audio);
-          //       },
-          //       separatorBuilder: (context, index) => const SizedBox(height: 5),
-          //       itemCount: widget.audios.length,
-          //     ),
-          //   ),
-          // ),
-          // if (viewport != 0.0)
-
           SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: horPadding),
-              child: Scrollbar(
+              child: DraggableScrollbar.rrect(
                 controller: controller,
-                thickness: 8.0,
-                radius: const Radius.circular(10.0),
-                scrollbarOrientation: ScrollbarOrientation.right,
                 child: ListView.separated(
                   controller: controller,
                   cacheExtent: 1000,
+                  physics: const ClampingScrollPhysics(),
                   itemBuilder: (context, index) {
                     final audio = widget.audios[index];
                     return LessonWidget(audio: audio);
@@ -144,30 +124,6 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
               ),
             ),
           ),
-          // StreamBuilder(
-          //   stream: pixelStream.stream,
-          //   builder: (context, snapshot) {
-          //     return Align(
-          //       alignment: Alignment.bottomCenter,
-          //       child: Padding(
-          //         padding: const EdgeInsets.symmetric(horizontal: 50),
-          //         child: SizedBox(
-          //           height: 40,
-          //           child: Slider.adaptive(
-          //             // min: 0,
-          //             // max: viewport + 1000,
-          //             value: snapshot.data ?? 0,
-          //             onChanged: (value) {
-          //               pixel = value;
-          //               controller.jumpTo(
-          //                   value * controller.position.maxScrollExtent);
-          //             },
-          //           ),
-          //         ),
-          //       ),
-          //     );
-          //   },
-          // ),
           Align(
             alignment: const Alignment(0.8, 0.9),
             child: StreamBuilder<bool>(
@@ -201,13 +157,6 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
       ),
     );
   }
-
-  // @override
-  // void dispose() {
-  //   init();
-  //   controller.dispose();
-  //   super.dispose();
-  // }
 
   @override
   void dispose() {

@@ -54,20 +54,14 @@ class _HomePage1State extends State<HomePage1> {
   }
 
   Future<void> checkLogin() async {
-    String route = "";
-    Timer.periodic(const Duration(seconds: 10), (timer) async {
+    Timer.periodic(const Duration(minutes: 1), (timer) async {
       try {
         final data = await BookService().methodGetAllBooks();
         print("Message: ${data}");
       } catch (e) {
         if (e is ExpiredTokenException) {
           print(e.toString());
-          print("Route1:$route");
-          if (mounted && (route.trim().isEmpty)) {
-            logOut();
-            route = ModalRoute.of(context)?.settings.name ?? "";
-            print("Route: $route");
-          }
+          logOut();
         }
       }
     });
