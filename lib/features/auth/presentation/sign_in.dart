@@ -56,7 +56,7 @@ class _SignInState extends State<SignIn> {
             const SizedBox(height: 30),
 
             /// #Header Logo
-             Center(
+            Center(
               child: Image(
                 image: const AssetImage("assets/images/img_logo_melbook.png"),
                 width: w * 0.5,
@@ -114,8 +114,8 @@ class _SignInState extends State<SignIn> {
               onPressed: () {
                 context.read<AuthBloc>().add(
                       SignInEvent(
-                        password: passwordCtrl.text,
-                        username: usernameCtrl.text,
+                        password: passwordCtrl.text.trim(),
+                        username: usernameCtrl.text.trim(),
                       ),
                     );
               },

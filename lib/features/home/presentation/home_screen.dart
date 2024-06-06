@@ -25,16 +25,15 @@ class _HomePage1State extends State<HomePage1> {
   @override
   void initState() {
     super.initState();
-    print(getIt<AuthRepository>().token);
     checkLogin();
     context.read<AuthBloc>().stream.listen((event) {
       if (event.message != null && mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: const Text(
+            content: Text(
                 "Ushbu akkountga boshqa qurilmadan kirganingiz uchun tizimdan chiqdingiz!"),
           ),
-        ); 
+        );
       }
     });
   }
@@ -60,10 +59,8 @@ class _HomePage1State extends State<HomePage1> {
     Timer.periodic(const Duration(minutes: 1), (timer) async {
       try {
         final data = await BookService().methodGetAllBooks();
-        print("Message: ${data}");
       } catch (e) {
         if (e is ExpiredTokenException) {
-          print(e.toString());
           logOut();
         }
       }

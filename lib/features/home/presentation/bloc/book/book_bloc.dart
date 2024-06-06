@@ -20,7 +20,6 @@ class BookBloc extends Bloc<BookEvent, BookState> {
     emit(BookLoading(books: state.books));
     try {
       final books = await BookService().methodGetAllBooks();
-      print("Books: $books");
       emit(BookFetchSuccess(books: books));
     } catch (e) {
       if (e is ExpiredTokenException) {

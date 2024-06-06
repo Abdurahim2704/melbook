@@ -18,7 +18,6 @@ class ConnectivityController extends GetxController {
   }
 
   void _updateConnectionStatus(List<ConnectivityResult> result) async {
-    print(result.first.name);
     bool connection = await InternetConnectionChecker().hasConnection;
     if (result.first == ConnectivityResult.none) {
       Get.rawSnackbar(

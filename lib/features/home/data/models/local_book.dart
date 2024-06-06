@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
 import '../service/local_audio_service.dart';
 
@@ -59,7 +60,7 @@ class LocalBook extends Equatable {
         author: author,
       );
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       throw Exception(e.toString());
     }
   }

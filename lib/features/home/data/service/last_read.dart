@@ -39,7 +39,6 @@ class SharedPreferenceService {
 
   Future<void> saveLastReadBook(int bookIndex, double pixel) async {
     final prefs = await SharedPreferences.getInstance();
-    print("Pixel received: $pixel");
     await prefs.setInt(_lastReadBookIndexKey, bookIndex);
     await prefs.setDouble(_lastReadPageNumberKey, pixel);
   }
@@ -47,8 +46,7 @@ class SharedPreferenceService {
   Future<double> getLastPage() async {
     final prefs = await SharedPreferences.getInstance();
     // final bookIndex = prefs.getInt(_lastReadBookIndexKey) ?? -1;
-    final pageNumber = prefs.getDouble(_lastReadPageNumberKey) ?? -1;
-    print("Pixel sent: $pageNumber");
+    final pageNumber = prefs.getDouble(_lastReadPageNumberKey) ?? 0;
 
     return pageNumber;
   }

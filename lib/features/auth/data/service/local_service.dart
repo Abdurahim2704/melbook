@@ -1,7 +1,6 @@
 import 'package:melbook/features/home/data/models/local_book.dart';
 import 'package:melbook/features/home/data/service/localbook_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sqflite/sqflite.dart';
 
 class LocalDBService {
   static const _usernameKey = 'username';

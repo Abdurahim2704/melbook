@@ -230,7 +230,6 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                                 : state.books.first,
                                           );
                                         }
-                                        print(state.books.length);
                                         return DownloadIcon(
                                           book: widget.book,
                                           localBook: state.books.first,

@@ -9,7 +9,6 @@ import '../../../data/models/audio.dart';
 import '../../../data/models/local_book.dart';
 
 part 'local_storage_event.dart';
-
 part 'local_storage_state.dart';
 
 class LocalStorageBloc extends Bloc<LocalStorageEvent, LocalStorageState> {
@@ -25,18 +24,7 @@ class LocalStorageBloc extends Bloc<LocalStorageEvent, LocalStorageState> {
       emit(const GetAllAudiosState(books: []));
       return;
     }
-    final audioNames = books.first.audios.map((e) => e.name).toList();
-    final audioNamesWithLesson = audioNames
-        .where(
-          (e) => e.contains(r"\"),
-        )
-        .toList();
-    for (var element in audioNamesWithLesson) {
-      final splitted = element.split(r"\");
-      final lesson = splitted[0];
-      final name = splitted[1];
-      print("Name: $name Lesson: $lesson");
-    }
+
     emit(GetAllAudiosState(books: books));
   }
 
@@ -47,9 +35,8 @@ class LocalStorageBloc extends Bloc<LocalStorageEvent, LocalStorageState> {
 
     try {
       await Future.forEach(event.audios, (element) async {
-        if (results >= 350) {
-          print("hello");
-        }
+        if (results >= 350) {}
+        emit(Progress(progress: results, books: state.books));
         if (element.audioUrl.contains(".json")) {
           await LocalAudioService.saveAudio(
               element.name, "no audio", event.book, element.content);
@@ -80,7 +67,6 @@ class LocalStorageBloc extends Bloc<LocalStorageEvent, LocalStorageState> {
       );
       return;
     }
-    print("Audio: ${audios.length}");
     await SqfliteService().insertBook(LocalBook(
       name: event.book,
       audios: audios,

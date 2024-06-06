@@ -51,7 +51,6 @@ class SqfliteService {
     final List<Map<String, Object?>> maps = await dbClient.query('books');
     // final List<Map<String, Object?>> data = jsonDecode(jsonEncode(maps));
     final books = maps.map((e) => LocalBook.fromJson(e)).toList();
-    print(books.runtimeType);
     return books;
   }
 
