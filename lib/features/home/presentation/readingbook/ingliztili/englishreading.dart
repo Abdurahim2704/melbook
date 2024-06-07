@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:draggable_scrollbar/draggable_scrollbar.dart';
 import 'package:flutter/material.dart';
 import 'package:melbook/features/home/data/service/local_audio_service.dart';
 import 'package:melbook/features/home/presentation/readingbook/ingliztili/lesson_widget.dart';
@@ -41,6 +40,9 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
     pixel = widget.initialPosition;
     controller = ScrollController(
       initialScrollOffset: widget.initialPosition,
+      onDetach: (position) {
+        init();
+      },
     )..addListener(() {
         if (controller.hasClients &&
             viewport < controller.position.maxScrollExtent) {
@@ -48,7 +50,6 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
             await Future.delayed(const Duration(seconds: 1));
             if (mounted) {
               viewport = controller.position.maxScrollExtent;
-              setState(() {});
             }
           });
         }
@@ -58,6 +59,7 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
             pixel = controller.position.pixels;
             pixelStream.add(pixel);
           });
+
           scrolling.add(
               (controller.position.pixels - widget.initialPosition).abs() >
                   200);
@@ -74,9 +76,10 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
           SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: horPadding),
-              child: DraggableScrollbar.rrect(
-                backgroundColor: Colors.black45,
-                alwaysVisibleScrollThumb: true,
+              child: Scrollbar(
+                // backgroundColor: Colors.black45,
+                // alwaysVisibleScrollThumb: true,
+                interactive: true,
                 controller: controller,
                 child: ListView.separated(
                   physics: const AlwaysScrollableScrollPhysics(),
@@ -110,10 +113,10 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
                         icon: const Icon(Icons.bookmark,
                             size: 30, color: Colors.white),
                         onPressed: () {
-                          controller.animateTo(
+                          controller.jumpTo(
                             widget.initialPosition,
-                            duration: const Duration(milliseconds: 200),
-                            curve: Curves.easeIn,
+                            // duration: const Duration(milliseconds: 200),
+                            // curve: Curves.easeIn,
                           );
                         },
                       ),
@@ -129,7 +132,6 @@ class _IngliztiliReadingState extends State<IngliztiliReading> {
 
   @override
   void dispose() {
-    init();
     controller.dispose();
     _debounce?.cancel();
     scrolling.close();

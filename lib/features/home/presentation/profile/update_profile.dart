@@ -41,8 +41,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
 
   @override
   Widget build(BuildContext context) {
-    final w = MediaQuery.sizeOf(context).width;
-    final h = MediaQuery.sizeOf(context).height;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size(double.infinity, 80),

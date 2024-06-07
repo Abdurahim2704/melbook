@@ -19,9 +19,6 @@ class _FinalViewState extends State<FinalView> {
 
   @override
   Widget build(BuildContext context) {
-    getIt<SharedPreferenceService>()
-        .getLastPage()
-        .then((value) => print("Last index:$value"));
     return Scaffold(
       body: BlocSelector<LocalStorageBloc, LocalStorageState, List<LocalBook>>(
         selector: (state) => state.books,

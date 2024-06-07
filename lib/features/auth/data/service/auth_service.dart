@@ -92,7 +92,6 @@ class AuthService extends AuthRepository {
           Uri.parse("${AppConstants.baseUrl}${AppConstants.apiLoginUser}"),
           body: jsonEncode(body),
           headers: {"Content-Type": "application/json"});
-      print("Status code: ${data.statusCode}");
 
       if (data.statusCode != 200) {
         return DataFailure(message: jsonDecode(data.body)["message"]);
@@ -172,7 +171,6 @@ class AuthService extends AuthRepository {
         Uri.parse("${AppConstants.baseUrl}${AppConstants.apiLoginUser}"),
         body: jsonEncode(body),
         headers: {"Content-Type": "application/json"});
-    print(data.body);
     if (data.statusCode != 200) {
       throw Exception("reset Token failed: ${data.statusCode}");
     }

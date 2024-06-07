@@ -15,11 +15,29 @@ class LessonWidget extends StatefulWidget {
 }
 
 class _LessonWidgetState extends State<LessonWidget> {
-  String filterAudioName(String title) {
-    if (title.contains(r"\")) {
-      return title.split(r"\")[1];
+  String filterUnitNumber(String title) {
+    RegExp regex = RegExp(r'(\d+)\.(\d+)');
+    // Find the match
+    Match? match = regex.firstMatch(title);
+
+    if (match != null) {
+      // Extract the unit number from the match
+      int unitNumber = int.parse(match.group(1)!);
+      // Check if the unit number is greater than 40
+      if (unitNumber > 40) {
+        // Remove the matched part from the string
+        final result = title.replaceFirst("$unitNumber.", '').trim();
+        return result;
+      }
     }
     return title;
+  }
+
+  String filterAudioName(String title) {
+    if (title.contains(r"\")) {
+      return filterUnitNumber(title.split(r"\")[1]);
+    }
+    return filterUnitNumber(title);
   }
 
   String filterLessonName(String title) {
@@ -55,15 +73,15 @@ class _LessonWidgetState extends State<LessonWidget> {
             ),
           widget.audio.location == "no audio"
               ? Text(
-                filterAudioName(widget.audio.name),
-                softWrap: true,
-                style: TextStyle(
-                  fontSize: h * 0.022,
-                  fontWeight: FontWeight.w700,
-                ),
-                overflow: TextOverflow.visible,
-                textAlign: TextAlign.start,
-              )
+                  filterAudioName(widget.audio.name),
+                  softWrap: true,
+                  style: TextStyle(
+                    fontSize: h * 0.022,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  overflow: TextOverflow.visible,
+                  textAlign: TextAlign.start,
+                )
               : Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

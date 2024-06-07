@@ -44,7 +44,6 @@ void main() {
 
       final user = User.fromJson(json["data"] as Map<String, Object>);
       final jsonString = user.toJson();
-      print("jsonString: $jsonString");
       expect(jsonString, const TypeMatcher<String>());
     });
   });

@@ -17,9 +17,6 @@ class DownloadIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("Local book: ${localBook?.audios.length}");
-    print("Book: ${book.audios?.length}");
-
     final h = MediaQuery.sizeOf(context).height;
     return BlocBuilder<LocalStorageBloc, LocalStorageState>(
       builder: (context, state) {
@@ -58,15 +55,6 @@ class DownloadIcon extends StatelessWidget {
                     size: h * 0.025,
                   );
                 }
-                final localBookNames = state.books.first.audios
-                    .map((e) => e.name)
-                    .toList()
-                    .toSet();
-                final bookNames =
-                    book.audios?.map((e) => e.name).toList().toSet();
-
-                print(localBookNames.length);
-                print(bookNames!.length);
 
                 return Icon(
                   state.books.first.audios.length == (book.audios ?? []).length

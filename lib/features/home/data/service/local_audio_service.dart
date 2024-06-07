@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -21,7 +22,7 @@ class LocalAudioService {
         );
       });
     } catch (e) {
-      print('Error initializing database: $e');
+      debugPrint('Error initializing database: $e');
     }
   }
 

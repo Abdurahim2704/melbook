@@ -215,28 +215,29 @@ class _IngliztilipageState extends State<Ingliztilipage> {
                                       ),
                                     ),
                                     const SizedBox(width: 12),
-                                    BlocBuilder<LocalStorageBloc,
-                                        LocalStorageState>(
-                                      builder: (context, state) {
-                                        final books = state.books.where(
-                                          (element) =>
-                                              widget.book.name == element.name,
-                                        );
-                                        if (books.isEmpty) {
+                                    if (widget.book.bought)
+                                      BlocBuilder<LocalStorageBloc,
+                                          LocalStorageState>(
+                                        builder: (context, state) {
+                                          final books = state.books.where(
+                                            (element) =>
+                                                widget.book.name ==
+                                                element.name,
+                                          );
+                                          if (books.isEmpty) {
+                                            return DownloadIcon(
+                                              book: widget.book,
+                                              localBook: state.books.isEmpty
+                                                  ? null
+                                                  : state.books.first,
+                                            );
+                                          }
                                           return DownloadIcon(
                                             book: widget.book,
-                                            localBook: state.books.isEmpty
-                                                ? null
-                                                : state.books.first,
+                                            localBook: state.books.first,
                                           );
-                                        }
-                                        print(state.books.length);
-                                        return DownloadIcon(
-                                          book: widget.book,
-                                          localBook: state.books.first,
-                                        );
-                                      },
-                                    ),
+                                        },
+                                      ),
                                     const SizedBox(width: 14),
                                     BlocBuilder<LocalStorageBloc,
                                         LocalStorageState>(

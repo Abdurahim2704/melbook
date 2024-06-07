@@ -10,9 +10,9 @@ void showClickSheet(BuildContext context, String bookId) {
       return AlertDialog(
         elevation: 0,
         clipBehavior: Clip.antiAlias,
-        titlePadding: const EdgeInsets.all(60),
+        titlePadding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         backgroundColor: Colors.white,
-        title: Text(
+        title: const Text(
           "Sotib olishni xohlaysizmi?",
           style: TextStyle(fontSize: 24),
           textAlign: TextAlign.center,
@@ -28,7 +28,7 @@ void showClickSheet(BuildContext context, String bookId) {
             child: const Text(
               "Bekor qilish",
               style: TextStyle(
-                fontSize: 23,
+                fontSize: 17,
                 color: Colors.red,
               ),
             ),
