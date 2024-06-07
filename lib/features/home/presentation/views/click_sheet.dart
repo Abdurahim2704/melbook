@@ -12,17 +12,15 @@ void showClickSheet(BuildContext context, String bookId) {
         clipBehavior: Clip.antiAlias,
         titlePadding: const EdgeInsets.all(60),
         backgroundColor: Colors.white,
-        title: const Center(
-          child: Text(
-            "Sotib olishni xohlaysizmi?",
-            style: TextStyle(fontSize: 32),
-            textAlign: TextAlign.center,
-          ),
+        title: Text(
+          "Sotib olishni xohlaysizmi?",
+          style: TextStyle(fontSize: 24),
+          textAlign: TextAlign.center,
         ),
         actions: [
           TextButton(
             style: TextButton.styleFrom(
-              fixedSize: const Size(200, 50),
+              padding: const EdgeInsets.all(12),
             ),
             onPressed: () {
               Navigator.pop(context);
@@ -37,7 +35,7 @@ void showClickSheet(BuildContext context, String bookId) {
           ),
           TextButton(
             style: TextButton.styleFrom(
-              fixedSize: const Size(200, 50),
+              padding: const EdgeInsets.all(12),
             ),
             onPressed: () {
               context.read<PaymentBloc>().add(
@@ -46,14 +44,10 @@ void showClickSheet(BuildContext context, String bookId) {
                     ),
                   );
             },
-            child: Transform.scale(
-              scaleX: 1.5,
-              scaleY: 1.5,
-              child: Image.asset(
-                "assets/images/img_click.png",
-              ),
+            child: Image.asset(
+              "assets/images/img_click.png",
             ),
-          )
+          ),
         ],
       );
     },

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:melbook/features/home/data/models/bookdata.dart';
 import 'package:melbook/features/home/presentation/ingliztilipage.dart';
@@ -40,6 +41,7 @@ class BookContainer extends StatelessWidget {
                 width: 170,
                 height: 190,
                 fit: BoxFit.fill,
+                progressIndicatorBuilder: (context, __, _) => const CupertinoActivityIndicator(),
               ),
             ),
             const SizedBox(width: 20),

@@ -30,7 +30,7 @@ class BookTile extends StatelessWidget {
       },
       child: Container(
         clipBehavior: Clip.antiAlias,
-        padding: EdgeInsets.symmetric(horizontal: w * 0.01, vertical: h * 0.01),
+        padding: EdgeInsets.symmetric(horizontal: w * 0.005, vertical: h * 0.005),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(16)),
           color: CupertinoColors.systemGroupedBackground,
@@ -42,12 +42,12 @@ class BookTile extends StatelessWidget {
               tag: book.id,
               child: Align(
                 alignment: Alignment.centerLeft,
-                child: CachedNetworkImage(
+                child: Image(
                   height: h * 0.18,
-                  imageUrl: imagePath,
-                  progressIndicatorBuilder: (context, url, progress) {
-                    return const CupertinoActivityIndicator();
-                  },
+                  fit: BoxFit.cover,
+                  image: const AssetImage(
+                    "assets/images/ingliztili.png",
+                  ),
                 ),
               ),
             ),

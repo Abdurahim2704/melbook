@@ -41,7 +41,7 @@ class AuthTextField extends StatelessWidget {
       style: style,
       inputFormatters: [...?inputFormatters, if (formatter != null) formatter!],
       maxLength: maxLength,
-      maxLines: null,
+      maxLines: 1,
       decoration: InputDecoration(
         counterText: "",
         prefixIcon: prefixIcon,
