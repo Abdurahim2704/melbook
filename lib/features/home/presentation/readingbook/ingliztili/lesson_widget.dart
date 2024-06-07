@@ -17,18 +17,16 @@ class LessonWidget extends StatefulWidget {
 class _LessonWidgetState extends State<LessonWidget> {
   String filterUnitNumber(String title) {
     RegExp regex = RegExp(r'(\d+)\.(\d+)');
-
     // Find the match
     Match? match = regex.firstMatch(title);
 
     if (match != null) {
       // Extract the unit number from the match
       int unitNumber = int.parse(match.group(1)!);
-
       // Check if the unit number is greater than 40
       if (unitNumber > 40) {
         // Remove the matched part from the string
-        final result = title.replaceFirst(regex, '').trim();
+        final result = title.replaceFirst("$unitNumber.", '').trim();
         return result;
       }
     }
@@ -39,7 +37,7 @@ class _LessonWidgetState extends State<LessonWidget> {
     if (title.contains(r"\")) {
       return filterUnitNumber(title.split(r"\")[1]);
     }
-    return title;
+    return filterUnitNumber(title);
   }
 
   String filterLessonName(String title) {

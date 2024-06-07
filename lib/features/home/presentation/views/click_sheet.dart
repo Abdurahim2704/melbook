@@ -10,12 +10,12 @@ void showClickSheet(BuildContext context, String bookId) {
       return AlertDialog(
         elevation: 0,
         clipBehavior: Clip.antiAlias,
-        titlePadding: const EdgeInsets.all(60),
+        titlePadding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
         backgroundColor: Colors.white,
         title: const Center(
           child: Text(
             "Sotib olishni xohlaysizmi?",
-            style: TextStyle(fontSize: 32),
+            style: TextStyle(fontSize: 25),
             textAlign: TextAlign.center,
           ),
         ),
@@ -30,7 +30,7 @@ void showClickSheet(BuildContext context, String bookId) {
             child: const Text(
               "Bekor qilish",
               style: TextStyle(
-                fontSize: 23,
+                fontSize: 17,
                 color: Colors.red,
               ),
             ),
@@ -46,12 +46,8 @@ void showClickSheet(BuildContext context, String bookId) {
                     ),
                   );
             },
-            child: Transform.scale(
-              scaleX: 1.5,
-              scaleY: 1.5,
-              child: Image.asset(
-                "assets/images/img_click.png",
-              ),
+            child: Image.asset(
+              "assets/images/img_click.png",
             ),
           )
         ],
